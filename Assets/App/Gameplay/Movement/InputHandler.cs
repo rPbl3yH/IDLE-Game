@@ -1,18 +1,21 @@
 using System;
 using SimpleInputNamespace;
 using UnityEngine;
+using VContainer;
+using VContainer.Unity;
 
 namespace App.Gameplay.Movement
 {
-    public class InputHandler : MonoBehaviour, IInputHandler
+    public class InputHandler : IInputHandler, ITickable
     {
         public event Action<Vector2> DirectionChanged;
-    
-        [SerializeField] private Joystick _joystick;
+
+        [Inject]
+        private Joystick _joystick;
 
         private Vector2 _currentDirection;
-    
-        private void Update()
+
+        public void Tick()
         {
             if (_currentDirection == _joystick.Value)
             {

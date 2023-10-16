@@ -532,7 +532,7 @@ GameObject:
   - component: {fileID: 1434099264}
   - component: {fileID: 1434099263}
   m_Layer: 0
-  m_Name: Scope
+  m_Name: ApplicationLifeScope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
