@@ -1,13 +1,11 @@
+using VContainer;
+
 namespace App.Core
 {
     public class ApplicationLoader
     {
+        [Inject]
         private readonly SceneLoader _sceneLoader;
-
-        public ApplicationLoader(SceneLoader sceneLoader)
-        {
-            _sceneLoader = sceneLoader;
-        }
 
         public void Run()
         {
