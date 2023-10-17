@@ -1,18 +1,23 @@
-using App.Core;
+using App.Gameplay.Character;
 using App.Gameplay.Movement;
 using SimpleInputNamespace;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-public class GameLifeScope : LifetimeScope
+namespace App.Core
 {
-    [SerializeField] private Joystick _joystick;
-
-    protected override void Configure(IContainerBuilder builder)
+    public class GameLifeScope : LifetimeScope
     {
-        builder.RegisterInstance(_joystick);
-        builder.RegisterEntryPoint<InputHandler>().As<IInputHandler>();
-        builder.Register<InputController>(Lifetime.Singleton);
+        [SerializeField] private Joystick _joystick;
+        [SerializeField] private PlayerModel _playerModel;
+
+        protected override void Configure(IContainerBuilder builder)
+        {
+            builder.RegisterInstance(_joystick);
+            builder.RegisterInstance(_playerModel);
+            builder.RegisterEntryPoint<InputHandler>().As<IInputHandler>();
+            builder.Register<InputController>(Lifetime.Singleton);
+        }
     }
 }

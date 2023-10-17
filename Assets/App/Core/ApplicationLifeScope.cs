@@ -8,8 +8,13 @@ namespace App.Core
     {
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.RegisterInstance(new SceneLoader());
+            builder.Register<SceneLoader>(Lifetime.Singleton);
             builder.Register<ApplicationLoader>(Lifetime.Singleton);
+        }
+
+        private void Start()
+        {
+            DontDestroyOnLoad(gameObject);
         }
     }
 }

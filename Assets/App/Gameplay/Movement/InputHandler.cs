@@ -22,6 +22,7 @@ namespace App.Gameplay.Movement
                 return;
             }
         
+            Debug.Log("Tick");
             _currentDirection = _joystick.Value;
             DirectionChanged?.Invoke(_currentDirection);
         }
