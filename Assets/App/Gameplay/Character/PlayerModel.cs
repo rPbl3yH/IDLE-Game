@@ -1,17 +1,12 @@
 using System;
-using App.Gameplay.Movement;
 using Atomic;
 using Declarative;
 using UnityEngine;
-using VContainer;
 
 namespace App.Gameplay.Character
 {
     public class PlayerModel : DeclarativeModel
     {
-        [Inject] 
-        private InputController _inputController;
-
         [Section]
         public MoveSection MoveSection;
     }

@@ -9,11 +9,10 @@ namespace App.Gameplay.Movement
     {
         private readonly IInputHandler _inputHandler;
 
-        private Vector3 _moveDirection;
-
-        private PlayerModel _playerModel;
+        private readonly PlayerModel _playerModel;
         
-        [Inject]
+        private Vector3 _moveDirection;
+        
         public InputController(IInputHandler inputHandler, PlayerModel playerModel)
         {
             _inputHandler = inputHandler;
