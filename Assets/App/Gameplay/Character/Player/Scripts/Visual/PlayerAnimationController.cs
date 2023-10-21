@@ -1,5 +1,4 @@
-﻿using System;
-using Atomic;
+﻿using Atomic;
 using UnityEngine;
 
 namespace App.Gameplay
@@ -7,8 +6,8 @@ namespace App.Gameplay
     public class PlayerAnimationController
     {
         private static readonly int MainState = Animator.StringToHash("MainState");
-        private const int Idle = 0;
-        private const int Run = 1;
+        private const int IDLE_STATE = 0;
+        private const int RUN_STATE = 1;
         
         private readonly AtomicVariable<Vector3> _moveDirection;
         private readonly Animator _animator;
@@ -21,14 +20,18 @@ namespace App.Gameplay
 
         public void Update()
         {
-            if (_moveDirection.Value.sqrMagnitude > 0)
+            int state = GetAnimatorState();
+            _animator.SetInteger(MainState, state);
+        }
+
+        private int GetAnimatorState()
+        {
+            if (_moveDirection.Value != Vector3.zero)
             {
-                _animator.SetInteger(MainState, Run);
+                return RUN_STATE;
             }
-            else
-            {
-                _animator.SetInteger(MainState, Idle);
-            }
+
+            return IDLE_STATE;
         }
     }
 }
