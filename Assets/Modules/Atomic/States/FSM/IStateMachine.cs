@@ -1,5 +1,4 @@
 using System;
-using Atomic;
 
 namespace Atomic
 {

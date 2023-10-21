@@ -46,7 +46,7 @@ namespace App.Gameplay
             var gatheringCount = Math.Min(amount, _gatheringCount.Value);
             var type = _targetResource.Value.ResourceType;
 
-            _targetResource.Value.GatheringSuccess?.Invoke(gatheringCount);
+            _targetResource.Value.Gathered?.Invoke(gatheringCount);
             
             _resourceStorage.Add(type, gatheringCount);
             Debug.Log($"Gathered {type} {gatheringCount} in player");

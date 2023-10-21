@@ -9,13 +9,13 @@ namespace App.Gameplay.Resource
         
         public AtomicVariable<int> Amount;
         public AtomicVariable<int> MaxAmount = new(10);
-        public AtomicEvent<int> GatheringSuccess;
+        public AtomicEvent<int> Gathered;
 
         private GatheringMechanics _gatheringMechanics;
 
         private void Awake()
         {
-            _gatheringMechanics = new GatheringMechanics(GatheringSuccess, Amount);
+            _gatheringMechanics = new GatheringMechanics(Gathered, Amount);
         }
 
         private void OnEnable()
