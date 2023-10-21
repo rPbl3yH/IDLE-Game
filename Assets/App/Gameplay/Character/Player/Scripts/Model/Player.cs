@@ -1,7 +1,7 @@
 using Atomic;
 using UnityEngine;
 
-namespace App.Gameplay.Character
+namespace App.Gameplay
 {
     public class Player : MonoBehaviour
     {

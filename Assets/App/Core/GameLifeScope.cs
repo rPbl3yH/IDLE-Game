@@ -1,4 +1,4 @@
-using App.Gameplay.Character;
+using App.Gameplay;
 using App.Gameplay.Movement;
 using SimpleInputNamespace;
 using UnityEngine;
