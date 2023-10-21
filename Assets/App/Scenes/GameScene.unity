@@ -190,7 +190,7 @@ MeshCollider:
   m_GameObject: {fileID: 51100656}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
@@ -271,7 +271,6 @@ GameObject:
   - component: {fileID: 234970029}
   - component: {fileID: 234970032}
   - component: {fileID: 234970031}
-  - component: {fileID: 234970030}
   m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
@@ -294,19 +293,6 @@ Transform:
   m_Father: {fileID: 2037099744}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &234970030
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 234970028}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &234970031
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1149,8 +1135,12 @@ MonoBehaviour:
     value: {x: 0, y: 0, z: 0}
   Speed:
     value: 5
+  DetectionRadius:
+    value: 2
   TargetResource:
     value: {fileID: 0}
+  CanGathering:
+    value: 0
   Root: {fileID: 1831075454}
   View: {fileID: 711619949}
 --- !u!1 &1956851506
@@ -1196,6 +1186,7 @@ GameObject:
   - component: {fileID: 2037099744}
   - component: {fileID: 2037099745}
   - component: {fileID: 2037099746}
+  - component: {fileID: 2037099747}
   m_Layer: 6
   m_Name: ResourceModel
   m_TagString: Untagged
@@ -1248,6 +1239,22 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &2037099747
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2037099743}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &2104810899 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3073494523203998079, guid: dba164be86cb4c84d9f406835a0b48d4,

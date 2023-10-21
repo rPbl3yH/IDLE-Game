@@ -33,6 +33,7 @@ namespace App.Gameplay
         {
             if (_moveDirection.Value != Vector3.zero)
             {
+                DisableGathering();
                 return;
             }
             
@@ -40,12 +41,20 @@ namespace App.Gameplay
 
             if (resources.Count == 0)
             {
+                DisableGathering();
                 return;
             }          
             
             var closetResource = GetClosetResource(resources);
 
             _targetResource.Value = closetResource;
+            _canGathering.Value = true;
+        }
+
+        private void DisableGathering()
+        {
+            _canGathering.Value = false;
+            _targetResource.Value = null;
         }
 
         private List<Collider> GetDetectionResources()
