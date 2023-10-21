@@ -29,7 +29,7 @@ namespace App.Gameplay
             _moveDirection = moveDirection;
         }
 
-        public void Update()
+        public void FixedUpdate()
         {
             if (_moveDirection.Value != Vector3.zero)
             {
@@ -37,7 +37,7 @@ namespace App.Gameplay
                 return;
             }
             
-            var resources = GetDetectionResources();
+            var resources = DetectionUtils.GetDetectionResources(_root.position, _detectionRadius.Value, _layerMask);
 
             if (resources.Count == 0)
             {
@@ -63,27 +63,6 @@ namespace App.Gameplay
             _targetResource.Value = null;
         }
 
-        private List<Collider> GetDetectionResources()
-        {
-            var result = new List<Collider>();
-            var resources = new Collider[3];
-            var size = Physics.OverlapSphereNonAlloc(_root.position, _detectionRadius.Value, resources, _layerMask);
-
-            if (size == 0)
-            {
-                _canGathering.Value = false;
-                _targetResource.Value = null;
-                return result;
-            }
-
-            for (int i = 0; i < size; i++)
-            {
-                result.Add(resources[i]);                
-            }
-            
-            return result;
-        }
-
         private ResourceModel GetClosetResource(List<Collider> resources)
         {
             var closetResource = resources[0];
@@ -106,6 +85,28 @@ namespace App.Gameplay
             }
             
             return closetResource.GetComponent<ResourceModel>();
+        }
+    }
+
+    public static class DetectionUtils
+    {
+        public static List<Collider> GetDetectionResources(Vector3 center, float detectionRadius, int layerMask)
+        {
+            var result = new List<Collider>();
+            var resources = new Collider[3];
+            var size = Physics.OverlapSphereNonAlloc(center, detectionRadius, resources, layerMask);
+
+            if (size == 0)
+            {
+                return result;
+            }
+
+            for (int i = 0; i < size; i++)
+            {
+                result.Add(resources[i]);                
+            }
+            
+            return result;
         }
     }
 }
