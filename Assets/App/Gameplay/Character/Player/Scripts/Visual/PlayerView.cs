@@ -11,7 +11,7 @@ namespace App.Gameplay
         
         private void Awake()
         {
-            _playerAnimationController = new PlayerAnimationController(_playerModel.MoveDirection, _animator);
+            _playerAnimationController = new PlayerAnimationController(_animator, _playerModel.MoveDirection, _playerModel.CanGathering);
         }
 
         private void Update()
