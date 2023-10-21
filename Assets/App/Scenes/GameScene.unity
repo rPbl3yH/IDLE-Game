@@ -1050,10 +1050,9 @@ MonoBehaviour:
     TypeName: 
   autoRun: 1
   autoInjectGameObjects:
-  - {fileID: 1831075453}
   - {fileID: 0}
   _joystick: {fileID: 566894260}
-  _playerModel: {fileID: 1831075455}
+  _player: {fileID: 1831075455}
 --- !u!4 &1466750464
 Transform:
   m_ObjectHideFlags: 0
@@ -1115,11 +1114,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 508e56417020e174baddef580b79db1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSection:
-    _speed: 2
-    _view: {fileID: 711619949}
-    MoveDirection:
-      value: {x: 0, y: 0, z: 0}
+  MoveDirection:
+    value: {x: 0, y: 0, z: 0}
+  Speed:
+    value: 5
+  Root: {fileID: 1831075454}
+  View: {fileID: 711619949}
 --- !u!1 &2129217981
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,12 +10,12 @@ namespace App.Core
     public class GameLifeScope : LifetimeScope
     {
         [SerializeField] private Joystick _joystick;
-        [SerializeField] private PlayerModel _playerModel;
+        [SerializeField] private Player _player;
 
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterInstance(_joystick);
-            builder.RegisterInstance(_playerModel);
+            builder.RegisterInstance(_player);
             builder.RegisterEntryPoint<InputHandler>().As<IInputHandler>();
             builder.RegisterEntryPoint<InputController>();
         }
