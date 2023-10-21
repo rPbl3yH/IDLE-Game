@@ -8,14 +8,14 @@ namespace App.Gameplay.Movement
     {
         private readonly IInputHandler _inputHandler;
 
-        private readonly Player _player;
+        private readonly PlayerModel _playerModel;
         
         private Vector3 _moveDirection;
         
-        public InputController(IInputHandler inputHandler, Player player)
+        public InputController(IInputHandler inputHandler, PlayerModel playerModel)
         {
             _inputHandler = inputHandler;
-            _player = player;
+            _playerModel = playerModel;
         }
         
         public void Start()
@@ -26,7 +26,7 @@ namespace App.Gameplay.Movement
         private void OnDirectionChanged(Vector2 inputDirection)
         {
             _moveDirection = new Vector3(inputDirection.x, 0f, inputDirection.y);
-            _player.MoveDirection.Value = _moveDirection;
+            _playerModel.MoveDirection.Value = _moveDirection;
         }
 
         public void Dispose()
