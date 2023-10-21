@@ -17,7 +17,7 @@ namespace App.Core
             builder.RegisterInstance(_joystick);
             builder.RegisterInstance(_playerModel);
             builder.RegisterEntryPoint<InputHandler>().As<IInputHandler>();
-            builder.Register<InputController>(Lifetime.Singleton).AsSelf();
+            builder.RegisterEntryPoint<InputController>();
         }
     }
 }

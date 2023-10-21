@@ -1,11 +1,11 @@
 ﻿using System;
 using App.Gameplay.Character;
 using UnityEngine;
-using VContainer;
+using VContainer.Unity;
 
 namespace App.Gameplay.Movement
 {
-    public class InputController
+    public class InputController : IStartable, IDisposable
     {
         private readonly IInputHandler _inputHandler;
 
@@ -17,14 +17,22 @@ namespace App.Gameplay.Movement
         {
             _inputHandler = inputHandler;
             _playerModel = playerModel;
-            _inputHandler.DirectionChanged += OnDirectionChanged;
-            Debug.Log("Print input controller");
         }
-
+        
+        public void Start()
+        {
+            _inputHandler.DirectionChanged += OnDirectionChanged;
+        }
+        
         private void OnDirectionChanged(Vector2 inputDirection)
         {
             _moveDirection = new Vector3(inputDirection.x, 0f, inputDirection.y);
             _playerModel.MoveSection.MoveDirection.Value = _moveDirection;
+        }
+
+        public void Dispose()
+        {
+            _inputHandler.DirectionChanged -= OnDirectionChanged;
         }
     }
 }
