@@ -33,7 +33,7 @@ namespace App.Gameplay
         {
             if (_moveDirection.Value != Vector3.zero)
             {
-                DisableGathering();
+                ClearTargetResource();
                 return;
             }
             
@@ -41,17 +41,23 @@ namespace App.Gameplay
 
             if (resources.Count == 0)
             {
-                DisableGathering();
+                ClearTargetResource();
                 return;
             }          
             
             var closetResource = GetClosetResource(resources);
 
+            if (closetResource.Amount.Value == 0)
+            {
+                ClearTargetResource();
+                return;
+            }
+
             _targetResource.Value = closetResource;
             _canGathering.Value = true;
         }
 
-        private void DisableGathering()
+        private void ClearTargetResource()
         {
             _canGathering.Value = false;
             _targetResource.Value = null;
