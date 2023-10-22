@@ -26,7 +26,7 @@ namespace App.Gameplay.AI
                 new MoveToPositionState(MoveToPositionData, _characterModel.MoveDirection, _characterModel.Root);
 
             _detectionResourceState =
-                new DetectionResourceState(DetectionResourceData, MoveToPositionData, _moveToPositionState);
+                new DetectionResourceState(DetectionResourceData, MoveToPositionData, _moveToPositionState, _characterModel);
             
             _stateMachine.SwitchState(_detectionResourceState);
         }
