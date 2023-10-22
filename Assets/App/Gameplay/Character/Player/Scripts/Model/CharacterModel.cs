@@ -13,28 +13,31 @@ namespace App.Gameplay
         public Transform Root;
         public Transform View;
         
+        [Header("Movement")]
         public AtomicVariable<Vector3> MoveDirection;
         public AtomicVariable<float> Speed;
 
-        public AtomicVariable<float> DetectionRadius;
+        [Header("Gathering")]
         public AtomicVariable<ResourceModel> TargetResource;
+        public AtomicVariable<float> GatheringDistance;
         public AtomicVariable<bool> CanGathering;
         public AtomicVariable<int> GatheringCount;
         public AtomicEvent Gathered;
 
+        [Header("Resources")]
+        public ResourceStorage ResourceStorage;
+        
+        [Header("Unload Resources")]
         public AtomicVariable<LevelStorageModel> LevelStorage;
         public AtomicVariable<float> Delay;
         public AtomicVariable<bool> CanUnloadResources;
 
-        public ResourceStorage ResourceStorage;
-
         [SerializeField] private ColliderSensor _barnSensor;
-        [SerializeField] private ColliderSensor _resourceSensor;
 
         //Логика
         private MovementMechanics _movementMechanics;
         private RotateMechanics _rotateMechanics;
-        private DetectionResourceMechanics _detectionResourceMechanics;
+        private DetectionAvailableResourceMechanics _detectionAvailableResourceMechanics;
         private DetectionBarnMechanics _detectionBarnMechanics;
         private GatheringResourceMechanics _gatheringResourceMechanics;
         private UnloadResourcesObserver _unloadResourcesObserver;
@@ -46,7 +49,8 @@ namespace App.Gameplay
             _movementMechanics = new MovementMechanics(Root, MoveDirection, Speed);
             _rotateMechanics = new RotateMechanics(View, MoveDirection);
             _detectionBarnMechanics = new DetectionBarnMechanics(LevelStorage, _barnSensor);
-            _detectionResourceMechanics = new DetectionResourceMechanics(Root, _resourceSensor, TargetResource, CanGathering, MoveDirection);
+            _detectionAvailableResourceMechanics =
+                new DetectionAvailableResourceMechanics(Root, TargetResource, GatheringDistance, CanGathering, MoveDirection);
             _gatheringResourceMechanics = new GatheringResourceMechanics(ResourceStorage, TargetResource, GatheringCount, Gathered);
             _unloadResourcesObserver = new UnloadResourcesObserver(MoveDirection, CanUnloadResources, LevelStorage);
             _unloadingResourcesMechanics = new UnloadingResourcesMechanics(LevelStorage, CanUnloadResources, Delay, ResourceStorage);
@@ -64,17 +68,13 @@ namespace App.Gameplay
             _detectionBarnMechanics.OnDisable();
         }
 
-        private void FixedUpdate()
-        {
-            _detectionResourceMechanics.FixedUpdate();
-        }
-
         private void Update()
         {
             var deltaTime = Time.deltaTime;
             
             _movementMechanics.Update(deltaTime);
             _rotateMechanics.Update();
+            _detectionAvailableResourceMechanics.Update();
             _unloadResourcesObserver.Update();
             _unloadingResourcesMechanics.Update(deltaTime);
         }
