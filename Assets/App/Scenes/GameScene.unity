@@ -2273,7 +2273,7 @@ MonoBehaviour:
   LevelStorage:
     value: {fileID: 0}
   Delay:
-    value: 1
+    value: 0.1
   CanUnloadResources:
     value: 0
   _barnSensor: {fileID: 1439740080}

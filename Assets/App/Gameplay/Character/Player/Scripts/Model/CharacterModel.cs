@@ -37,7 +37,7 @@ namespace App.Gameplay
         //Логика
         private MovementMechanics _movementMechanics;
         private RotateMechanics _rotateMechanics;
-        private DetectionAvailableResourceMechanics _detectionAvailableResourceMechanics;
+        private DetectionResourceMechanics _detectionResourceMechanics;
         private DetectionBarnMechanics _detectionBarnMechanics;
         private GatheringResourceMechanics _gatheringResourceMechanics;
         private UnloadResourcesObserver _unloadResourcesObserver;
@@ -49,8 +49,8 @@ namespace App.Gameplay
             _movementMechanics = new MovementMechanics(Root, MoveDirection, Speed);
             _rotateMechanics = new RotateMechanics(View, MoveDirection);
             _detectionBarnMechanics = new DetectionBarnMechanics(LevelStorage, _barnSensor);
-            _detectionAvailableResourceMechanics =
-                new DetectionAvailableResourceMechanics(Root, TargetResource, GatheringDistance, CanGathering, MoveDirection);
+            _detectionResourceMechanics =
+                new DetectionResourceMechanics(Root, TargetResource, GatheringDistance, CanGathering, MoveDirection);
             _gatheringResourceMechanics = new GatheringResourceMechanics(ResourceStorage, TargetResource, GatheringCount, Gathered);
             _unloadResourcesObserver = new UnloadResourcesObserver(MoveDirection, CanUnloadResources, LevelStorage);
             _unloadingResourcesMechanics = new UnloadingResourcesMechanics(LevelStorage, CanUnloadResources, Delay, ResourceStorage);
@@ -74,7 +74,7 @@ namespace App.Gameplay
             
             _movementMechanics.Update(deltaTime);
             _rotateMechanics.Update();
-            _detectionAvailableResourceMechanics.Update();
+            _detectionResourceMechanics.Update();
             _unloadResourcesObserver.Update();
             _unloadingResourcesMechanics.Update(deltaTime);
         }
