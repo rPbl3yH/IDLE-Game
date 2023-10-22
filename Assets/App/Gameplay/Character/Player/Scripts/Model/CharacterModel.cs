@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using App.Gameplay.LevelStorage;
 using App.Gameplay.Resource;
 using Atomic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace App.Gameplay
@@ -28,7 +29,9 @@ namespace App.Gameplay
         public AtomicVariable<ResourceType> ResourceType;
         public AtomicVariable<int> Amount;
         public AtomicVariable<int> MaxAmount;
-        
+        [ShowInInspector, ReadOnly]
+        public AtomicVariable<bool> IsFreeSpace;
+
         [Header("Unload Resources")]
         public AtomicVariable<LevelStorageModel> LevelStorage;
         public AtomicVariable<float> Delay;
@@ -44,6 +47,7 @@ namespace App.Gameplay
         private GatheringResourceMechanics _gatheringResourceMechanics;
         private UnloadResourcesObserver _unloadResourcesObserver;
         private UnloadingResourcesMechanics _unloadingResourcesMechanics;
+        private FreeSpaceResourceMechanic _freeSpaceResourceMechanic;
 
         private void Awake()
         {
@@ -51,28 +55,30 @@ namespace App.Gameplay
             _rotateMechanics = new RotateMechanics(View, MoveDirection);
             _detectionBarnMechanics = new DetectionBarnMechanics(LevelStorage, _barnSensor);
             _detectionResourceMechanics =
-                new DetectionResourceMechanics(Root, TargetResource, GatheringDistance, CanGathering, MoveDirection);
+                new DetectionResourceMechanics(Root, TargetResource, GatheringDistance, CanGathering, IsFreeSpace, MoveDirection);
             _gatheringResourceMechanics = new GatheringResourceMechanics(TargetResource, GatheringCount, Amount, MaxAmount, Gathered);
             _unloadResourcesObserver = new UnloadResourcesObserver(MoveDirection, CanUnloadResources, LevelStorage);
             _unloadingResourcesMechanics = new UnloadingResourcesMechanics(LevelStorage, CanUnloadResources, Delay, ResourceType, Amount);
+            _freeSpaceResourceMechanic = new FreeSpaceResourceMechanic(IsFreeSpace, Amount, MaxAmount);
         }
 
         private void OnEnable()
         {
             _gatheringResourceMechanics.OnEnable();
             _detectionBarnMechanics.OnEnable();
+            _freeSpaceResourceMechanic.OnEnable();
         }
 
         private void OnDisable()
         {
             _gatheringResourceMechanics.OnDisable();
             _detectionBarnMechanics.OnDisable();
+            _freeSpaceResourceMechanic.OnDisable();
         }
 
         private void Update()
         {
             var deltaTime = Time.deltaTime;
-            
             _movementMechanics.Update(deltaTime);
             _rotateMechanics.Update();
             _detectionResourceMechanics.Update();

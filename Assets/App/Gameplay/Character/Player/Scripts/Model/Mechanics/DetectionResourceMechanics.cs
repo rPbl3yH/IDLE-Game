@@ -10,6 +10,7 @@ namespace App.Gameplay
         private readonly AtomicVariable<bool> _canGathering;
         private readonly AtomicVariable<Vector3> _moveDirection;
         private readonly AtomicVariable<float> _gatheringDistance;
+        private readonly AtomicVariable<bool> _isFreeSpace; 
         private readonly Transform _root;
         
         public DetectionResourceMechanics(
@@ -17,12 +18,14 @@ namespace App.Gameplay
             AtomicVariable<ResourceModel> targetResource,
             AtomicVariable<float> gatheringDistance,
             AtomicVariable<bool> canGathering, 
+            AtomicVariable<bool> isFreeSpace,
             AtomicVariable<Vector3> moveDirection)
         {
             _root = root;
             _targetResource = targetResource;
             _gatheringDistance = gatheringDistance;
             _canGathering = canGathering;
+            _isFreeSpace = isFreeSpace;
             _moveDirection = moveDirection;
         }
 
@@ -35,6 +38,12 @@ namespace App.Gameplay
             }
 
             if (_targetResource.Value == null)
+            {
+                _canGathering.Value = false;
+                return;
+            }
+
+            if (!_isFreeSpace.Value)
             {
                 _canGathering.Value = false;
                 return;
