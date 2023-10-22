@@ -45,7 +45,7 @@ namespace App.Gameplay
                     return;
                 }
                 
-                var resource = resources.First(pair => pair.Value > 0);
+                var resource = resources.FirstOrDefault(pair => pair.Value > 0);
                 var resourceData = new ResourceData(resource.Key, 1);
                 _levelStorageModel.Value.ResourceAdded?.Invoke(resourceData);
                 _resourceStorage.TryRemove(resource.Key, 1);

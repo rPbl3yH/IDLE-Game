@@ -5,7 +5,7 @@ namespace App.Gameplay
 {
     public class PlayerView : MonoBehaviour
     {
-        [SerializeField] private PlayerModel _playerModel;
+        [SerializeField] private CharacterModel _characterModel;
         [SerializeField] private Animator _animator;
 
         [SerializeField]
@@ -16,8 +16,8 @@ namespace App.Gameplay
         
         private void Awake()
         {
-            _playerAnimationController = new PlayerAnimationController(_animator, _playerModel.MoveDirection, _playerModel.CanGathering);
-            _animationEventObserver = new AnimationEventObserver(_animationDispatcher, _playerModel);
+            _playerAnimationController = new PlayerAnimationController(_animator, _characterModel.MoveDirection, _characterModel.CanGathering);
+            _animationEventObserver = new AnimationEventObserver(_animationDispatcher, _characterModel);
         }
 
         private void OnEnable()

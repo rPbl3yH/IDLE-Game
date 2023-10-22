@@ -9,23 +9,21 @@ namespace App.Gameplay
     {
         private readonly AtomicVariable<ResourceModel> _targetResource;
         private readonly AtomicVariable<bool> _canGathering;
-        private readonly AtomicVariable<float> _detectionRadius;
         private readonly AtomicVariable<Vector3> _moveDirection;
+        private readonly ColliderSensor _colliderSensor;
         private readonly Transform _root;
-
-        private readonly int _layerMask = LayerMask.GetMask("Resource");
 
         public DetectionResourceMechanics(
             Transform root, 
+            ColliderSensor colliderSensor,
             AtomicVariable<ResourceModel> targetResource, 
             AtomicVariable<bool> canGathering, 
-            AtomicVariable<float> detectionRadius,
             AtomicVariable<Vector3> moveDirection)
         {
             _root = root;
+            _colliderSensor = colliderSensor;
             _targetResource = targetResource;
             _canGathering = canGathering;
-            _detectionRadius = detectionRadius;
             _moveDirection = moveDirection;
         }
 
@@ -37,9 +35,9 @@ namespace App.Gameplay
                 return;
             }
             
-            var resources = DetectionUtils.GetDetectionResources(_root.position, _detectionRadius.Value, _layerMask);
+            var resources = _colliderSensor.Targets;
 
-            if (resources.Count == 0)
+            if (resources[0] == null)
             {
                 ClearTargetResource();
                 return;
@@ -63,7 +61,7 @@ namespace App.Gameplay
             _targetResource.Value = null;
         }
 
-        private ResourceModel GetClosetResource(List<Collider> resources)
+        private ResourceModel GetClosetResource(Collider[] resources)
         {
             var closetResource = resources[0];
             var minDistance = Vector3.Distance(_root.position, closetResource.transform.position);
@@ -85,28 +83,6 @@ namespace App.Gameplay
             }
             
             return closetResource.GetComponent<ResourceModel>();
-        }
-    }
-
-    public static class DetectionUtils
-    {
-        public static List<Collider> GetDetectionResources(Vector3 center, float detectionRadius, int layerMask)
-        {
-            var result = new List<Collider>();
-            var resources = new Collider[3];
-            var size = Physics.OverlapSphereNonAlloc(center, detectionRadius, resources, layerMask);
-
-            if (size == 0)
-            {
-                return result;
-            }
-
-            for (int i = 0; i < size; i++)
-            {
-                result.Add(resources[i]);                
-            }
-            
-            return result;
         }
     }
 }

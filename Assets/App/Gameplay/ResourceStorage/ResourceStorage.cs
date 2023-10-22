@@ -37,6 +37,12 @@ namespace App.Gameplay
             }
 
             _storage[resourceType] -= count;
+            
+            if (_storage[resourceType] == 0)
+            {
+                _storage.Remove(resourceType);
+            }
+            
             return true;
         }
 

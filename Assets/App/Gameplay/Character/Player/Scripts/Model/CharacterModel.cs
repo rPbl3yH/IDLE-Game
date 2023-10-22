@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace App.Gameplay
 {
-    public class PlayerModel : MonoBehaviour
+    public class CharacterModel : MonoBehaviour
     {
         //Данные
         public Transform Root;
@@ -46,8 +46,7 @@ namespace App.Gameplay
             _movementMechanics = new MovementMechanics(Root, MoveDirection, Speed);
             _rotateMechanics = new RotateMechanics(View, MoveDirection);
             _detectionBarnMechanics = new DetectionBarnMechanics(LevelStorage, _barnSensor);
-            _detectionResourceMechanics =
-                new DetectionResourceMechanics(Root, TargetResource, CanGathering, DetectionRadius, MoveDirection);
+            _detectionResourceMechanics = new DetectionResourceMechanics(Root, _resourceSensor, TargetResource, CanGathering, MoveDirection);
             _gatheringResourceMechanics = new GatheringResourceMechanics(ResourceStorage, TargetResource, GatheringCount, Gathered);
             _unloadResourcesObserver = new UnloadResourcesObserver(MoveDirection, CanUnloadResources, LevelStorage);
             _unloadingResourcesMechanics = new UnloadingResourcesMechanics(LevelStorage, CanUnloadResources, Delay, ResourceStorage);

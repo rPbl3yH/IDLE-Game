@@ -8,10 +8,10 @@ namespace App.Gameplay
         private readonly AnimationDispatcher _animationDispatcher;
         private readonly AtomicEvent _gathered;
 
-        public AnimationEventObserver(AnimationDispatcher animationDispatcher, PlayerModel playerModel)
+        public AnimationEventObserver(AnimationDispatcher animationDispatcher, CharacterModel characterModel)
         {
             _animationDispatcher = animationDispatcher;
-            _gathered = playerModel.Gathered;
+            _gathered = characterModel.Gathered;
         }
 
         public void OnEnable()
