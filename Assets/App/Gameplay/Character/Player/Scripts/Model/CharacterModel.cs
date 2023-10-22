@@ -24,8 +24,10 @@ namespace App.Gameplay
         public AtomicVariable<int> GatheringCount;
         public AtomicEvent Gathered;
 
-        [Header("Resources")]
-        public ResourceStorage ResourceStorage;
+        [Header("Resources")] 
+        public AtomicVariable<ResourceType> ResourceType;
+        public AtomicVariable<int> Amount;
+        public AtomicVariable<int> MaxAmount;
         
         [Header("Unload Resources")]
         public AtomicVariable<LevelStorageModel> LevelStorage;
@@ -45,15 +47,14 @@ namespace App.Gameplay
 
         private void Awake()
         {
-            ResourceStorage = new ResourceStorage();
             _movementMechanics = new MovementMechanics(Root, MoveDirection, Speed);
             _rotateMechanics = new RotateMechanics(View, MoveDirection);
             _detectionBarnMechanics = new DetectionBarnMechanics(LevelStorage, _barnSensor);
             _detectionResourceMechanics =
                 new DetectionResourceMechanics(Root, TargetResource, GatheringDistance, CanGathering, MoveDirection);
-            _gatheringResourceMechanics = new GatheringResourceMechanics(ResourceStorage, TargetResource, GatheringCount, Gathered);
+            _gatheringResourceMechanics = new GatheringResourceMechanics(TargetResource, GatheringCount, Amount, MaxAmount, Gathered);
             _unloadResourcesObserver = new UnloadResourcesObserver(MoveDirection, CanUnloadResources, LevelStorage);
-            _unloadingResourcesMechanics = new UnloadingResourcesMechanics(LevelStorage, CanUnloadResources, Delay, ResourceStorage);
+            _unloadingResourcesMechanics = new UnloadingResourcesMechanics(LevelStorage, CanUnloadResources, Delay, ResourceType, Amount);
         }
 
         private void OnEnable()

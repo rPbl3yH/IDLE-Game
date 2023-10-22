@@ -10,7 +10,7 @@ namespace App.Gameplay
     {
         [ShowInInspector]
         private readonly Dictionary<ResourceType, int> _storage = new();
-
+        
         public void Add(ResourceType resourceType, int count)
         {
             if (_storage.ContainsKey(resourceType))

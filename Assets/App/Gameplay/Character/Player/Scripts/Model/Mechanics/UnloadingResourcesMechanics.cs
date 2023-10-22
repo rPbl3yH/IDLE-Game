@@ -9,8 +9,8 @@ namespace App.Gameplay
         private readonly AtomicVariable<LevelStorageModel> _levelStorageModel;
         private readonly AtomicVariable<bool> _canUnloadResources;
         private readonly AtomicVariable<float> _delay;
-
-        private readonly ResourceStorage _resourceStorage;
+        private readonly AtomicVariable<ResourceType> _resourceType;
+        private readonly AtomicVariable<int> _amount;
 
         private float _timer;
         
@@ -18,12 +18,14 @@ namespace App.Gameplay
             AtomicVariable<LevelStorageModel> levelStorageModel,
             AtomicVariable<bool> canUnloadResources,
             AtomicVariable<float> delay,
-            ResourceStorage resourceStorage)
+            AtomicVariable<ResourceType> resourceType,
+            AtomicVariable<int> amount)
         {
             _levelStorageModel = levelStorageModel;
             _canUnloadResources = canUnloadResources;
             _delay = delay;
-            _resourceStorage = resourceStorage;
+            _resourceType = resourceType;
+            _amount = amount;
         }
 
         public void Update(float deltaTime)
@@ -38,17 +40,16 @@ namespace App.Gameplay
             if (_timer >= _delay.Value)
             {
                 ResetTimer();
-                var resources = _resourceStorage.GetAllResources();
-                
-                if (resources.Count == 0)
+
+                if (_amount.Value == 0)
                 {
                     return;
                 }
-                
-                var resource = resources.FirstOrDefault(pair => pair.Value > 0);
-                var resourceData = new ResourceData(resource.Key, 1);
+
+                var unloadCount = 1;
+                var resourceData = new ResourceData(_resourceType.Value, unloadCount);
                 _levelStorageModel.Value.ResourceAdded?.Invoke(resourceData);
-                _resourceStorage.TryRemove(resource.Key, 1);
+                _amount.Value -= unloadCount;
             }
         }
 

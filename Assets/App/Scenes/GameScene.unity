@@ -475,6 +475,12 @@ MonoBehaviour:
     value: 0
   GatheringCount:
     value: 1
+  ResourceType:
+    value: 0
+  Amount:
+    value: 0
+  MaxAmount:
+    value: 2
   LevelStorage:
     value: {fileID: 0}
   Delay:
@@ -2270,6 +2276,12 @@ MonoBehaviour:
     value: 0
   GatheringCount:
     value: 1
+  ResourceType:
+    value: 0
+  Amount:
+    value: 0
+  MaxAmount:
+    value: 2
   LevelStorage:
     value: {fileID: 0}
   Delay:
