@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using App.Gameplay.LevelStorage;
 using Atomic;
+using IState = App.Gameplay.AI.States.IState;
 
 namespace App.Gameplay
 {

@@ -1,9 +1,10 @@
-﻿using App.Gameplay.LevelStorage;
+﻿using App.Gameplay.AI.Model;
+using App.Gameplay.LevelStorage;
 using Atomic;
 
 namespace App.Gameplay.AI.States
 {
-    public class UnloadingResourceState
+    public class UnloadingResourceState : StateMachine
     {
         private readonly AtomicVariable<LevelStorageModel> _levelStorageModel;
         private readonly AtomicVariable<bool> _canUnloadResources;
@@ -11,8 +12,12 @@ namespace App.Gameplay.AI.States
         private readonly AtomicVariable<ResourceType> _resourceType;
         private readonly AtomicVariable<int> _amount;
 
+        private readonly MoveToPositionData _moveData;
+        private readonly UnloadResourceData _unloadResourceData;
+        private readonly IState _moveState;
+
         private float _timer;
-        
+
         public UnloadingResourceState(
             AtomicVariable<LevelStorageModel> levelStorageModel,
             AtomicVariable<bool> canUnloadResources,
@@ -26,9 +31,16 @@ namespace App.Gameplay.AI.States
             _resourceType = resourceType;
             _amount = amount;
         }
-        
-        public UnloadingResourceState(CharacterModel characterModel)
+
+        public UnloadingResourceState(
+            UnloadResourceData unloadResourceData,
+            MoveToPositionData moveData,
+            CharacterModel characterModel,
+            IState moveState)
         {
+            _moveData = moveData;
+            _moveState = moveState;
+            _unloadResourceData = unloadResourceData;
             _levelStorageModel = characterModel.LevelStorage;
             _canUnloadResources = characterModel.CanUnloadResources;
             _delay = characterModel.Delay;
@@ -36,8 +48,24 @@ namespace App.Gameplay.AI.States
             _amount = characterModel.Amount;
         }
 
-        public void Update(float deltaTime)
+        public override void Enter()
         {
+            base.Enter();
+            _levelStorageModel.Value = _unloadResourceData.LevelStorageService.GetStorage();
+            _moveData.TargetPosition = _levelStorageModel.Value.transform.position;
+            _moveData.IsPositionReached = false;
+        }
+
+        public override void Update(float deltaTime)
+        {
+            base.Update(deltaTime);
+            
+            if (!_moveData.IsPositionReached)
+            {
+                SwitchState(_moveState);
+                return;
+            }
+            
             if (!_canUnloadResources.Value)
             {
                 return;

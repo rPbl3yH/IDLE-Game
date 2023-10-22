@@ -19,6 +19,7 @@ namespace App.Gameplay.AI.States
 
         public void Enter()
         {
+            _moveToPositionData.IsEnable = true;
         }
 
         public void Update(float deltaTime)
@@ -46,6 +47,7 @@ namespace App.Gameplay.AI.States
         public void Exit()
         {
             _moveDirection.Value = Vector3.zero;
+            _moveToPositionData.IsEnable = false;
         }
     }
 }

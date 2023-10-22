@@ -313,6 +313,9 @@ MonoBehaviour:
     IsEnable: 1
     ResourceService: {fileID: 527250525}
     Root: {fileID: 343023495}
+  UnloadResourceData:
+    IsEnable: 1
+    LevelStorageService: {fileID: 669750967}
   _characterModel: {fileID: 343023494}
 --- !u!1 &330585543
 GameObject:
@@ -481,6 +484,8 @@ MonoBehaviour:
     value: 0
   MaxAmount:
     value: 2
+  IsFreeSpace:
+    value: 0
   LevelStorage:
     value: {fileID: 0}
   Delay:
@@ -1292,6 +1297,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d278be3b45a440fda0f55e23f59417aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &669750965
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 669750966}
+  - component: {fileID: 669750967}
+  m_Layer: 0
+  m_Name: BarnService
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &669750966
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669750965}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1066841463}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &669750967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669750965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a599245ff910456bbf14eb9b2289c8e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _levelStorageModel: {fileID: 1143329563}
 --- !u!1 &711619947
 GameObject:
   m_ObjectHideFlags: 0
@@ -1689,6 +1739,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 527250524}
+  - {fileID: 669750966}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2282,6 +2333,8 @@ MonoBehaviour:
     value: 0
   MaxAmount:
     value: 2
+  IsFreeSpace:
+    value: 0
   LevelStorage:
     value: {fileID: 0}
   Delay:

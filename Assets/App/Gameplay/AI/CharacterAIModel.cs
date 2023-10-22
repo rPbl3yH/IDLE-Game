@@ -8,6 +8,7 @@ namespace App.Gameplay.AI
     {
         public MoveToPositionData MoveToPositionData;
         public DetectionResourceData DetectionResourceData;
+        public UnloadResourceData UnloadResourceData;
 
         [SerializeField] private CharacterModel _characterModel;
 
@@ -26,15 +27,27 @@ namespace App.Gameplay.AI
             _detectionResourceState =
                 new DetectionResourceState(DetectionResourceData, MoveToPositionData, _moveToPositionState, _characterModel);
 
-            _unloadingResourceState = new UnloadingResourceState(_characterModel);
+            _unloadingResourceState = new UnloadingResourceState(UnloadResourceData, MoveToPositionData, _characterModel, _moveToPositionState);
             
             _stateMachine.SwitchState(_detectionResourceState);
+            
         }
 
         private void Update()
         {
+            if (_characterModel.Amount.Value == 0)
+            {
+                _stateMachine.SwitchState(_detectionResourceState);
+            }
+            else
+            {
+                if (!_characterModel.IsFreeSpace.Value)
+                {
+                    _stateMachine.SwitchState(_unloadingResourceState);
+                }
+            }
+            
             _stateMachine.Update(Time.deltaTime);
-            _unloadingResourceState.Update(Time.deltaTime);
         }
     }
 }

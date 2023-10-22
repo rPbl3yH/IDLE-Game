@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace App.Gameplay.AI.States
 {
@@ -29,6 +30,7 @@ namespace App.Gameplay.AI.States
                 return;
             }
             
+            Debug.Log("Switch state " + state);
             CurrentState?.Exit();
             CurrentState = state;
             CurrentState?.Enter();

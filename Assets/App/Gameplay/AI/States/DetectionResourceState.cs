@@ -30,7 +30,7 @@ namespace App.Gameplay.AI.States
             _canGathering = characterModel.CanGathering;
             _gatheringDistance = characterModel.GatheringDistance;
         }
-        
+
         public DetectionResourceState(
             DetectionResourceData resourceData, 
             MoveToPositionData moveData, 
@@ -48,13 +48,24 @@ namespace App.Gameplay.AI.States
             _canGathering = canGathering;
             _gatheringDistance = gatheringDistance;
         }
-        
+
+        public override void Enter()
+        {
+            base.Enter();
+            if (_targetResource.Value != null)
+            {
+                Debug.Log("Set target position " + _targetResource.Value.transform.position);
+                _moveData.TargetPosition = _targetResource.Value.transform.position;
+                SwitchState(_moveState);
+            }
+        }
+
         public override void Exit()
         {
             ClearTargetResource();
             base.Exit();
         }
-        
+
         public override void Update(float deltaTime)
         {
             base.Update(deltaTime);
@@ -70,7 +81,7 @@ namespace App.Gameplay.AI.States
             }
 
             _targetResource.Value = _resourceData.ResourceService.GetClosetResources(_resourceData.Root);
-
+            
             if (_targetResource.Value == null)
             {
                 return;
@@ -83,6 +94,8 @@ namespace App.Gameplay.AI.States
                 SwitchState(_moveState);
                 return;
             }
+            
+            SwitchState(null);
 
             var delta = _targetResource.Value.transform.position - _resourceData.Root.transform.position;
             var distance = delta.magnitude;
