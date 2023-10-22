@@ -23,6 +23,8 @@ namespace App.Gameplay
         public AtomicEvent Gathered;
 
         public AtomicVariable<LevelStorageModel> LevelStorage;
+        public AtomicVariable<float> Delay;
+        public AtomicVariable<bool> CanUnloadResources;
 
         public ResourceStorage ResourceStorage;
 
@@ -35,6 +37,8 @@ namespace App.Gameplay
         private DetectionResourceMechanics _detectionResourceMechanics;
         private DetectionBarnMechanics _detectionBarnMechanics;
         private GatheringResourceMechanics _gatheringResourceMechanics;
+        private UnloadResourcesObserver _unloadResourcesObserver;
+        private UnloadingResourcesMechanics _unloadingResourcesMechanics;
 
         private void Awake()
         {
@@ -45,6 +49,8 @@ namespace App.Gameplay
             _detectionResourceMechanics =
                 new DetectionResourceMechanics(Root, TargetResource, CanGathering, DetectionRadius, MoveDirection);
             _gatheringResourceMechanics = new GatheringResourceMechanics(ResourceStorage, TargetResource, GatheringCount, Gathered);
+            _unloadResourcesObserver = new UnloadResourcesObserver(MoveDirection, CanUnloadResources, LevelStorage);
+            _unloadingResourcesMechanics = new UnloadingResourcesMechanics(LevelStorage, CanUnloadResources, Delay, ResourceStorage);
         }
 
         private void OnEnable()
@@ -66,8 +72,12 @@ namespace App.Gameplay
 
         private void Update()
         {
-            _movementMechanics.Update(Time.deltaTime);
+            var deltaTime = Time.deltaTime;
+            
+            _movementMechanics.Update(deltaTime);
             _rotateMechanics.Update();
+            _unloadResourcesObserver.Update();
+            _unloadingResourcesMechanics.Update(deltaTime);
         }
     }
 }

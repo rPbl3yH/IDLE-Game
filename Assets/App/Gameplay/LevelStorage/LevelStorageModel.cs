@@ -7,19 +7,19 @@ namespace App.Gameplay.LevelStorage
     [Serializable]
     public struct ResourceData
     {
-        public readonly int Count;
         public readonly ResourceType Type;
+        public readonly int Count;
 
-        public ResourceData(int count, ResourceType type)
+        public ResourceData(ResourceType type, int count)
         {
-            Count = count;
             Type = type;
+            Count = count;
         }
     }
     
     public class LevelStorageModel : MonoBehaviour
     {
-        private ResourceStorage _resourceStorage;
+        public ResourceStorage ResourceStorage;
 
         public AtomicEvent<ResourceData> ResourceAdded;
 
@@ -35,7 +35,8 @@ namespace App.Gameplay.LevelStorage
 
         private void OnResourceAdded(ResourceData resourceData)
         {
-            _resourceStorage.Add(resourceData.Type, resourceData.Count);
+            print($"Resources Added {resourceData.Type} {resourceData.Count}");
+            ResourceStorage.Add(resourceData.Type, resourceData.Count);
         }
     }
 }

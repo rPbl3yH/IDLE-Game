@@ -23,6 +23,11 @@ namespace App.Gameplay
             }
         }
 
+        public Dictionary<ResourceType, int> GetAllResources()
+        {
+            return _storage;
+        }
+        
         public bool TryRemove(ResourceType resourceType, int count)
         {
             if (!CanRemove(resourceType, count))

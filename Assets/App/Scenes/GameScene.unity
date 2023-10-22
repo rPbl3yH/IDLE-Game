@@ -1438,6 +1438,10 @@ MonoBehaviour:
     value: 1
   LevelStorage:
     value: {fileID: 0}
+  Delay:
+    value: 1
+  CanUnloadResources:
+    value: 0
   _barnSensor: {fileID: 1439740080}
   _resourceSensor: {fileID: 0}
 --- !u!1 &1956851506
