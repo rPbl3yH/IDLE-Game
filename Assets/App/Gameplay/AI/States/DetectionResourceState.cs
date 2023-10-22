@@ -1,19 +1,10 @@
-﻿using System;
-using App.Gameplay.AI.Model;
+﻿using App.Gameplay.AI.Model;
 using App.Gameplay.Resource;
 using Atomic;
 using UnityEngine;
 
 namespace App.Gameplay.AI.States
 {
-    [Serializable]
-    public class DetectionResourceData
-    {
-        public bool IsEnable;
-        public ResourceService ResourceService;
-        public Transform Root;
-    }
-    
     public class DetectionResourceState : StateMachine
     {
         private readonly DetectionResourceData _resourceData;
@@ -67,6 +58,11 @@ namespace App.Gameplay.AI.States
         public override void Update(float deltaTime)
         {
             base.Update(deltaTime);
+            
+            if (!_resourceData.IsEnable)
+            {
+                return;
+            }
             
             if (_moveDirection.Value != Vector3.zero)
             {

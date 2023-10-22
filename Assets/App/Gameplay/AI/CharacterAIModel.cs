@@ -1,8 +1,5 @@
-﻿using System;
-using App.Gameplay.AI.Model;
+﻿using App.Gameplay.AI.Model;
 using App.Gameplay.AI.States;
-using App.Gameplay.Resource;
-using Elementary;
 using UnityEngine;
 
 namespace App.Gameplay.AI
@@ -16,6 +13,7 @@ namespace App.Gameplay.AI
 
         private MoveToPositionState _moveToPositionState;
         private DetectionResourceState _detectionResourceState;
+        private UnloadingResourceState _unloadingResourceState;
         private StateMachine _stateMachine;
         
         private void Awake()
@@ -27,6 +25,8 @@ namespace App.Gameplay.AI
 
             _detectionResourceState =
                 new DetectionResourceState(DetectionResourceData, MoveToPositionData, _moveToPositionState, _characterModel);
+
+            _unloadingResourceState = new UnloadingResourceState(_characterModel);
             
             _stateMachine.SwitchState(_detectionResourceState);
         }
@@ -34,6 +34,7 @@ namespace App.Gameplay.AI
         private void Update()
         {
             _stateMachine.Update(Time.deltaTime);
+            _unloadingResourceState.Update(Time.deltaTime);
         }
     }
 }

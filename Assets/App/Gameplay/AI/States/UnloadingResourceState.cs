@@ -1,10 +1,9 @@
-﻿using System.Linq;
-using App.Gameplay.LevelStorage;
+﻿using App.Gameplay.LevelStorage;
 using Atomic;
 
-namespace App.Gameplay
+namespace App.Gameplay.AI.States
 {
-    public class UnloadingResourcesMechanics
+    public class UnloadingResourceState
     {
         private readonly AtomicVariable<LevelStorageModel> _levelStorageModel;
         private readonly AtomicVariable<bool> _canUnloadResources;
@@ -14,7 +13,7 @@ namespace App.Gameplay
 
         private float _timer;
         
-        public UnloadingResourcesMechanics(
+        public UnloadingResourceState(
             AtomicVariable<LevelStorageModel> levelStorageModel,
             AtomicVariable<bool> canUnloadResources,
             AtomicVariable<float> delay,
@@ -27,8 +26,8 @@ namespace App.Gameplay
             _resourceType = resourceType;
             _amount = amount;
         }
-
-        public UnloadingResourcesMechanics(CharacterModel characterModel)
+        
+        public UnloadingResourceState(CharacterModel characterModel)
         {
             _levelStorageModel = characterModel.LevelStorage;
             _canUnloadResources = characterModel.CanUnloadResources;
