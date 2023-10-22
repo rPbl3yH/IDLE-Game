@@ -62,6 +62,7 @@ namespace App.Gameplay.AI.States
             
             if (!_moveData.IsPositionReached)
             {
+                _canUnloadResources.Value = false;
                 SwitchState(_moveState);
                 return;
             }

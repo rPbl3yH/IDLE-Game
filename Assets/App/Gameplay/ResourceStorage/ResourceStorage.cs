@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using App.Gameplay.LevelStorage;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -8,6 +9,8 @@ namespace App.Gameplay
     [Serializable]
     public class ResourceStorage
     {
+        public event Action<Dictionary<ResourceType, int>> ResourceChanged;
+
         [ShowInInspector]
         private readonly Dictionary<ResourceType, int> _storage = new();
         
@@ -21,6 +24,8 @@ namespace App.Gameplay
             {
                 _storage.Add(resourceType, count);
             }
+            
+            ResourceChanged?.Invoke(_storage);
         }
 
         public Dictionary<ResourceType, int> GetAllResources()
@@ -43,6 +48,7 @@ namespace App.Gameplay
                 _storage.Remove(resourceType);
             }
             
+            ResourceChanged?.Invoke(_storage);
             return true;
         }
 

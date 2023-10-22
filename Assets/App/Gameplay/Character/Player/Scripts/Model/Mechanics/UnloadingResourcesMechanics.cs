@@ -1,10 +1,14 @@
 ﻿using System.Linq;
 using App.Gameplay.LevelStorage;
 using Atomic;
-using IState = App.Gameplay.AI.States.IState;
 
 namespace App.Gameplay
 {
+    public class UnloadAvailableMechanics
+    {
+        private readonly AtomicVariable<LevelStorageModel> _levelStorageModel;
+    }
+    
     public class UnloadingResourcesMechanics
     {
         private readonly AtomicVariable<LevelStorageModel> _levelStorageModel;

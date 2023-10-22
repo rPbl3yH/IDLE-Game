@@ -37,13 +37,10 @@ namespace App.Gameplay
         public AtomicVariable<float> Delay;
         public AtomicVariable<bool> CanUnloadResources;
 
-        [SerializeField] private ColliderSensor _barnSensor;
-
         //Логика
         private MovementMechanics _movementMechanics;
         private RotateMechanics _rotateMechanics;
         private DetectionResourceMechanics _detectionResourceMechanics;
-        private DetectionBarnMechanics _detectionBarnMechanics;
         private GatheringResourceMechanics _gatheringResourceMechanics;
         private UnloadResourcesObserver _unloadResourcesObserver;
         private UnloadingResourcesMechanics _unloadingResourcesMechanics;
@@ -53,7 +50,6 @@ namespace App.Gameplay
         {
             _movementMechanics = new MovementMechanics(Root, MoveDirection, Speed);
             _rotateMechanics = new RotateMechanics(View, MoveDirection);
-            _detectionBarnMechanics = new DetectionBarnMechanics(LevelStorage, _barnSensor);
             _detectionResourceMechanics =
                 new DetectionResourceMechanics(Root, TargetResource, GatheringDistance, CanGathering, IsFreeSpace, MoveDirection);
             _gatheringResourceMechanics = new GatheringResourceMechanics(TargetResource, GatheringCount, Amount, MaxAmount, Gathered);
@@ -65,14 +61,12 @@ namespace App.Gameplay
         private void OnEnable()
         {
             _gatheringResourceMechanics.OnEnable();
-            _detectionBarnMechanics.OnEnable();
             _freeSpaceResourceMechanic.OnEnable();
         }
 
         private void OnDisable()
         {
             _gatheringResourceMechanics.OnDisable();
-            _detectionBarnMechanics.OnDisable();
             _freeSpaceResourceMechanic.OnDisable();
         }
 
