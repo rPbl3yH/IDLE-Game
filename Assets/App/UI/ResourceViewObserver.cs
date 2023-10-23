@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using App.Gameplay;
 using App.Gameplay.LevelStorage;
 using Sirenix.OdinInspector;
+using TMPro;
 using UnityEngine;
 
 namespace App.UI
