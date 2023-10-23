@@ -5,114 +5,36 @@ using UnityEngine;
 
 namespace App.Gameplay.AI.States
 {
-    public class DetectionResourceState : StateMachine
+    public class DetectionResourceState : IState
     {
-        private readonly DetectionResourceData _resourceData;
+        private readonly DetectionResourceData _detectionData;
         private readonly MoveToPositionData _moveData;
-        
-        private readonly IState _moveState;
-        private readonly AtomicVariable<Vector3> _moveDirection;
         private readonly AtomicVariable<ResourceModel> _targetResource;
-        private readonly AtomicVariable<bool> _canGathering;
-        private readonly AtomicVariable<float> _gatheringDistance;
+        private readonly Transform _root;
 
-        public DetectionResourceState(
-            DetectionResourceData resourceData, 
-            MoveToPositionData moveData, 
-            IState moveState,
-            CharacterModel characterModel)
+        public DetectionResourceState(DetectionResourceData detectionData, MoveToPositionData moveData, AtomicVariable<ResourceModel> targetResource, Transform root)
         {
-            _resourceData = resourceData;
+            _detectionData = detectionData;
             _moveData = moveData;
-            _moveState = moveState;
-            _moveDirection = characterModel.MoveDirection;
-            _targetResource = characterModel.TargetResource;
-            _canGathering = characterModel.CanGathering;
-            _gatheringDistance = characterModel.GatheringDistance;
-        }
-
-        public DetectionResourceState(
-            DetectionResourceData resourceData, 
-            MoveToPositionData moveData, 
-            IState moveState,
-            AtomicVariable<Vector3> moveDirection, 
-            AtomicVariable<ResourceModel> targetResource,
-            AtomicVariable<bool> canGathering,
-            AtomicVariable<float> gatheringDistance)
-        {
-            _resourceData = resourceData;
-            _moveData = moveData;
-            _moveState = moveState;
-            _moveDirection = moveDirection;
             _targetResource = targetResource;
-            _canGathering = canGathering;
-            _gatheringDistance = gatheringDistance;
+            _root = root;
         }
 
-        public override void Enter()
+        public void Enter()
         {
-            base.Enter();
-            if (_targetResource.Value != null)
-            {
-                Debug.Log("Set target position " + _targetResource.Value.transform.position);
-                _moveData.TargetPosition = _targetResource.Value.transform.position;
-                SwitchState(_moveState);
-            }
-        }
-
-        public override void Exit()
-        {
-            ClearTargetResource();
-            base.Exit();
-        }
-
-        public override void Update(float deltaTime)
-        {
-            base.Update(deltaTime);
-            
-            if (!_resourceData.IsEnable)
-            {
-                return;
-            }
-            
-            if (_moveDirection.Value != Vector3.zero)
-            {
-                return;
-            }
-
-            _targetResource.Value = _resourceData.ResourceService.GetClosetResources(_resourceData.Root);
-            
-            if (_targetResource.Value == null)
-            {
-                return;
-            }
-
+            var resource = _detectionData.ResourceService.GetClosetResource(_root);
+            _targetResource.Value = resource;
             _moveData.TargetPosition = _targetResource.Value.transform.position;
-
-            if (!_moveData.IsPositionReached)
-            {
-                SwitchState(_moveState);
-                return;
-            }
-            
-            SwitchState(null);
-
-            var delta = _targetResource.Value.transform.position - _resourceData.Root.transform.position;
-            var distance = delta.magnitude;
-
-            if (distance <= _gatheringDistance.Value)
-            {
-                _canGathering.Value = true;
-            }
-            else
-            {
-                _canGathering.Value = false;
-            }
+            _moveData.IsPositionReached = false;
         }
 
-        private void ClearTargetResource()
+        public void Update(float deltaTime)
         {
-            _canGathering.Value = false;
+            
+        }
+
+        public void Exit()
+        {
         }
     }
 }

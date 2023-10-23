@@ -42,7 +42,6 @@ namespace App.Gameplay
         private RotateMechanics _rotateMechanics;
         private DetectionResourceMechanics _detectionResourceMechanics;
         private GatheringResourceMechanics _gatheringResourceMechanics;
-        private UnloadResourcesObserver _unloadResourcesObserver;
         private UnloadingResourcesMechanics _unloadingResourcesMechanics;
         private FreeSpaceResourceMechanic _freeSpaceResourceMechanic;
 
@@ -53,7 +52,6 @@ namespace App.Gameplay
             _detectionResourceMechanics =
                 new DetectionResourceMechanics(Root, TargetResource, GatheringDistance, CanGathering, IsFreeSpace, MoveDirection);
             _gatheringResourceMechanics = new GatheringResourceMechanics(TargetResource, GatheringCount, Amount, MaxAmount, Gathered);
-            _unloadResourcesObserver = new UnloadResourcesObserver(MoveDirection, CanUnloadResources, LevelStorage);
             _unloadingResourcesMechanics = new UnloadingResourcesMechanics(LevelStorage, CanUnloadResources, Delay, ResourceType, Amount);
             _freeSpaceResourceMechanic = new FreeSpaceResourceMechanic(IsFreeSpace, Amount, MaxAmount);
         }
@@ -76,7 +74,6 @@ namespace App.Gameplay
             _movementMechanics.Update(deltaTime);
             _rotateMechanics.Update();
             _detectionResourceMechanics.Update();
-            _unloadResourcesObserver.Update();
             _unloadingResourcesMechanics.Update(deltaTime);
         }
     }

@@ -54,7 +54,7 @@ namespace App.Gameplay
             _targetResource.Value.Gathered?.Invoke(gatheringCount);
 
             _amount.Value += gatheringCount;
-            Debug.Log($"Gathered {type} {gatheringCount} in player");
+            //Debug.Log($"Gathered {type} {gatheringCount} in player");
         }
     }
 }

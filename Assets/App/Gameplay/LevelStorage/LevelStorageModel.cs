@@ -22,6 +22,7 @@ namespace App.Gameplay.LevelStorage
         public ResourceStorage ResourceStorage;
 
         public AtomicEvent<ResourceData> ResourceAdded;
+        public Transform UnloadingPoint;
 
         private void OnEnable()
         {

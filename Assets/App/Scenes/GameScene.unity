@@ -304,17 +304,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 129b1638d06845488ec06ee7b4fc26c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DetectionResourceData:
+    ResourceService: {fileID: 527250525}
   MoveToPositionData:
-    IsEnable: 1
+    IsEnable: 0
     TargetPosition: {x: 0, y: 0, z: 0}
     StoppingDistance: 0.5
     IsPositionReached: 0
-  DetectionResourceData:
-    IsEnable: 1
-    ResourceService: {fileID: 527250525}
-    Root: {fileID: 343023495}
+  GatheringResourceData:
+    IsEnable: 0
   UnloadResourceData:
-    IsEnable: 1
+    IsEnable: 0
     LevelStorageService: {fileID: 669750967}
   _characterModel: {fileID: 343023494}
 --- !u!1 &330585543
@@ -733,6 +733,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1904531493}
     m_Modifications:
+    - target: {fileID: 5709057451580401474, guid: 2dafa3ebea247aa41aeb390ba1ef308b,
+        type: 3}
+      propertyPath: MaxAmount.value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5709057451580401475, guid: 2dafa3ebea247aa41aeb390ba1ef308b,
         type: 3}
       propertyPath: m_RootOrder
@@ -1794,6 +1799,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d703d95ad88e476bbbf9c968537e034a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UnloadingPoint: {fileID: 0}
 --- !u!54 &1143329564
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2518,6 +2524,7 @@ GameObject:
   - component: {fileID: 1831075454}
   - component: {fileID: 1831075455}
   - component: {fileID: 1831075456}
+  - component: {fileID: 1831075457}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -2597,6 +2604,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterModel: {fileID: 1831075455}
   _colliderSensor: {fileID: 2018979387}
+  _resourceService: {fileID: 527250525}
+--- !u!114 &1831075457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831075453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 978ddc2d2d73446c8bfff668a460b5a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _characterModel: {fileID: 1831075455}
+  _colliderSensor: {fileID: 1439740080}
 --- !u!1 &1904531492
 GameObject:
   m_ObjectHideFlags: 0

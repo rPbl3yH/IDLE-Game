@@ -1,6 +1,7 @@
 ﻿using App.Gameplay.AI.Model;
 using App.Gameplay.LevelStorage;
 using Atomic;
+using UnityEngine;
 
 namespace App.Gameplay.AI.States
 {
@@ -15,6 +16,7 @@ namespace App.Gameplay.AI.States
         private readonly MoveToPositionData _moveData;
         private readonly UnloadResourceData _unloadResourceData;
         private readonly IState _moveState;
+        private readonly Transform _root;
 
         private float _timer;
 
@@ -46,6 +48,7 @@ namespace App.Gameplay.AI.States
             _delay = characterModel.Delay;
             _resourceType = characterModel.ResourceType;
             _amount = characterModel.Amount;
+            _root = characterModel.Root;
         }
 
         public override void Enter()
@@ -53,6 +56,13 @@ namespace App.Gameplay.AI.States
             base.Enter();
             _levelStorageModel.Value = _unloadResourceData.LevelStorageService.GetStorage();
             _moveData.TargetPosition = _levelStorageModel.Value.transform.position;
+            _moveData.IsPositionReached = false;
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+            _canUnloadResources.Value = false;
             _moveData.IsPositionReached = false;
         }
 
@@ -66,33 +76,8 @@ namespace App.Gameplay.AI.States
                 SwitchState(_moveState);
                 return;
             }
-            
-            if (!_canUnloadResources.Value)
-            {
-                return;
-            }
-            
-            _timer += deltaTime;
-            
-            if (_timer >= _delay.Value)
-            {
-                ResetTimer();
 
-                if (_amount.Value == 0)
-                {
-                    return;
-                }
-
-                var unloadCount = 1;
-                var resourceData = new ResourceData(_resourceType.Value, unloadCount);
-                _levelStorageModel.Value.ResourceAdded?.Invoke(resourceData);
-                _amount.Value -= unloadCount;
-            }
-        }
-
-        private void ResetTimer()
-        {
-            _timer = 0f;
+            _canUnloadResources.Value = true;
         }
     }
 }

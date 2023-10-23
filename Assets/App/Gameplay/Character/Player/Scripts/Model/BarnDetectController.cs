@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using App.Gameplay.Resource;
+﻿using App.Gameplay.LevelStorage;
 using UnityEngine;
 
 namespace App.Gameplay
 {
-    public class ResourceDetectController : MonoBehaviour
+    public class BarnDetectController : MonoBehaviour
     {
         [SerializeField] private CharacterModel _characterModel;
         [SerializeField] private ColliderSensor _colliderSensor;
-        [SerializeField] private ResourceService _resourceService;
 
         private void OnEnable()
         {
@@ -21,15 +18,8 @@ namespace App.Gameplay
             _colliderSensor.ColliderUpdated -= OnColliderUpdated;
         }
 
-        private void Update()
-        {
-            _characterModel.TargetResource.Value = _resourceService.GetClosetResource(_characterModel.Root);
-        }
-
         private void OnColliderUpdated(Collider[] colliders)
         {
-            var result = new List<ResourceModel>();
-            
             foreach (var collider1 in colliders)
             {
                 if (collider1 == null)
@@ -37,13 +27,11 @@ namespace App.Gameplay
                     continue;
                 }
                 
-                if (collider1.TryGetComponent(out ResourceModel resourceModel))
+                if (collider1.TryGetComponent(out LevelStorageModel levelStorageModel))
                 {
-                    result.Add(resourceModel);
+                    _characterModel.LevelStorage.Value = levelStorageModel;
                 }
             }
-
-            
         }
     }
 }

@@ -15,6 +15,7 @@ namespace App.Gameplay.Resource
 
         private void Awake()
         {
+            Amount.Value = MaxAmount.Value;
             _gatheringMechanics = new GatheringMechanics(Gathered, Amount);
         }
 
@@ -26,11 +27,6 @@ namespace App.Gameplay.Resource
         private void OnDisable()
         {
             _gatheringMechanics.OnDisable();
-        }
-
-        private void Start()
-        {
-            Amount.Value = MaxAmount.Value;
         }
     }
 }

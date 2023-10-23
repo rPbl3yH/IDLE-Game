@@ -1,5 +1,4 @@
 ﻿using Atomic;
-using UnityEngine;
 
 namespace App.Gameplay.Resource
 {
@@ -27,7 +26,7 @@ namespace App.Gameplay.Resource
         private void OnGathered(int count)
         {
             _amount.Value -= count;
-            Debug.Log($"Gathered {count}");
+            //Debug.Log($"Gathered {count}");
         }
     }
 }

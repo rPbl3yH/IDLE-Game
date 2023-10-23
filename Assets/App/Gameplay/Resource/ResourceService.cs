@@ -9,9 +9,12 @@ namespace App.Gameplay.Resource
     {
         [SerializeField] private List<ResourceModel> _resources;
         
-        public ResourceModel GetClosetResources(Transform point)
+        public ResourceModel GetClosetResource(Transform point)
         {
-            return ResourceDetectionUtils.GetClosetAvailableResource(_resources.ToArray(), point);
+            var list = _resources.OrderBy(model => Vector3.Distance(model.transform.position, point.position));
+            var resource = list.FirstOrDefault(model => model.Amount.Value > 0);
+            
+            return resource;
         }
     }
 }

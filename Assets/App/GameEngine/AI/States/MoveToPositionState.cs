@@ -21,7 +21,7 @@ namespace App.Gameplay.AI.States
         {
             _moveToPositionData.IsEnable = true;
         }
-
+        
         public void Update(float deltaTime)
         {
             if (!_moveToPositionData.IsEnable)
