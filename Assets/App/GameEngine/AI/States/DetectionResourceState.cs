@@ -24,8 +24,15 @@ namespace App.Gameplay.AI.States
         {
             var resource = _detectionData.ResourceService.GetClosetResource(_root);
             _targetResource.Value = resource;
-            _moveData.TargetPosition = _targetResource.Value.transform.position;
-            _moveData.IsPositionReached = false;
+            if (_targetResource.Value == null)
+            {
+                _moveData.IsPositionReached = true;
+            }
+            else
+            {
+                _moveData.TargetPosition = _targetResource.Value.transform.position;
+                _moveData.IsPositionReached = false;
+            }
         }
 
         public void Update(float deltaTime)

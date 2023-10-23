@@ -34,6 +34,7 @@ namespace App.Gameplay
 
         [Header("Unload Resources")]
         public AtomicVariable<LevelStorageModel> LevelStorage;
+        public AtomicVariable<float> UnloadingDistance;
         public AtomicVariable<float> Delay;
         public AtomicVariable<bool> CanUnloadResources;
 

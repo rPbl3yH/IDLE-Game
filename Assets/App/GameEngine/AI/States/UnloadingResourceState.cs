@@ -55,7 +55,7 @@ namespace App.Gameplay.AI.States
         {
             base.Enter();
             _levelStorageModel.Value = _unloadResourceData.LevelStorageService.GetStorage();
-            _moveData.TargetPosition = _levelStorageModel.Value.transform.position;
+            _moveData.TargetPosition = _levelStorageModel.Value.UnloadingPoint.position;
             _moveData.IsPositionReached = false;
         }
 
