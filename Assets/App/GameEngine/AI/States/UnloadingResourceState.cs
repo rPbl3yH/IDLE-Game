@@ -9,29 +9,20 @@ namespace App.Gameplay.AI.States
     {
         private readonly AtomicVariable<LevelStorageModel> _levelStorageModel;
         private readonly AtomicVariable<bool> _canUnloadResources;
-        private readonly AtomicVariable<float> _delay;
-        private readonly AtomicVariable<ResourceType> _resourceType;
-        private readonly AtomicVariable<int> _amount;
-
+        private readonly AtomicVariable<float> _unloadingDistance;
+ 
         private readonly MoveToPositionData _moveData;
         private readonly UnloadResourceData _unloadResourceData;
         private readonly IState _moveState;
-        private readonly Transform _root;
 
         private float _timer;
 
         public UnloadingResourceState(
             AtomicVariable<LevelStorageModel> levelStorageModel,
-            AtomicVariable<bool> canUnloadResources,
-            AtomicVariable<float> delay,
-            AtomicVariable<ResourceType> resourceType,
-            AtomicVariable<int> amount)
+            AtomicVariable<bool> canUnloadResources)
         {
             _levelStorageModel = levelStorageModel;
             _canUnloadResources = canUnloadResources;
-            _delay = delay;
-            _resourceType = resourceType;
-            _amount = amount;
         }
 
         public UnloadingResourceState(
@@ -45,16 +36,14 @@ namespace App.Gameplay.AI.States
             _unloadResourceData = unloadResourceData;
             _levelStorageModel = characterModel.LevelStorage;
             _canUnloadResources = characterModel.CanUnloadResources;
-            _delay = characterModel.Delay;
-            _resourceType = characterModel.ResourceType;
-            _amount = characterModel.Amount;
-            _root = characterModel.Root;
+            _unloadingDistance = characterModel.UnloadingDistance;
         }
 
         public override void Enter()
         {
             base.Enter();
             _levelStorageModel.Value = _unloadResourceData.LevelStorageService.GetStorage();
+            _moveData.StoppingDistance = _unloadingDistance.Value;
             _moveData.TargetPosition = _levelStorageModel.Value.UnloadingPoint.position;
             _moveData.IsPositionReached = false;
         }

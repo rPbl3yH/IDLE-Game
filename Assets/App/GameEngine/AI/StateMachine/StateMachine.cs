@@ -30,7 +30,7 @@ namespace App.Gameplay.AI.States
                 return;
             }
             
-            Debug.Log("Switch state to " + state);
+            //Debug.Log("Switch state to " + state);
             CurrentState?.Exit();
             CurrentState = state;
             CurrentState?.Enter();

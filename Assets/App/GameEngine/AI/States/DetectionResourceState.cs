@@ -12,7 +12,11 @@ namespace App.Gameplay.AI.States
         private readonly AtomicVariable<ResourceModel> _targetResource;
         private readonly Transform _root;
 
-        public DetectionResourceState(DetectionResourceData detectionData, MoveToPositionData moveData, AtomicVariable<ResourceModel> targetResource, Transform root)
+        public DetectionResourceState(
+            DetectionResourceData detectionData, 
+            MoveToPositionData moveData, 
+            AtomicVariable<ResourceModel> targetResource, 
+            Transform root)
         {
             _detectionData = detectionData;
             _moveData = moveData;
@@ -24,6 +28,7 @@ namespace App.Gameplay.AI.States
         {
             var resource = _detectionData.ResourceService.GetClosetResource(_root);
             _targetResource.Value = resource;
+            
             if (_targetResource.Value == null)
             {
                 _moveData.IsPositionReached = true;

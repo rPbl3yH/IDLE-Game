@@ -16,6 +16,7 @@ namespace App.Gameplay.AI.States
         private readonly AtomicVariable<ResourceModel> _targetResource;
         private readonly AtomicVariable<bool> _canGathering;
         private readonly AtomicVariable<float> _gatheringDistance;
+        private readonly AtomicVariable<float> _stoppingDistance;
         private readonly Transform _root;
 
         public GatheringResourceState(
@@ -34,6 +35,7 @@ namespace App.Gameplay.AI.States
             _canGathering = characterModel.CanGathering;
             _gatheringDistance = characterModel.GatheringDistance;
             _root = characterModel.Root;
+            _stoppingDistance = characterModel.GatheringDistance;
         }
 
         public GatheringResourceState(
@@ -59,6 +61,7 @@ namespace App.Gameplay.AI.States
         public override void Enter()
         {
             base.Enter();
+            _moveData.StoppingDistance = _stoppingDistance.Value;
             _gatheringData.IsEnable = true;
             SwitchState(_detectionState);
         }
