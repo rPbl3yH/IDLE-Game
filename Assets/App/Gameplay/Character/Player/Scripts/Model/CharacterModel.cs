@@ -54,14 +54,14 @@ namespace App.Gameplay
 
         private void Awake()
         {
-            DetectionResourceAction = new DetectionResourceAction(TargetResource, Root, ResourceService);
+            DetectionResourceAction = new DetectionResourceAction(TargetResource, ResourceType, Root, ResourceService);
             DetectionBarnAction = new DetectionBarnAction(LevelStorage, BarnService);
             
             _movementMechanics = new MovementMechanics(Root, MoveDirection, Speed);
             _rotateMechanics = new RotateMechanics(View, MoveDirection);
             _detectionResourceMechanics =
                 new DetectionResourceMechanics(Root, TargetResource, GatheringDistance, CanGathering, IsFreeSpace, MoveDirection);
-            _gatheringResourceMechanics = new GatheringResourceMechanics(TargetResource, GatheringCount, Amount, MaxAmount, Gathered);
+            _gatheringResourceMechanics = new GatheringResourceMechanics(TargetResource, ResourceType, GatheringCount, Amount, MaxAmount, Gathered);
             _unloadingResourcesMechanics = new UnloadingResourcesMechanics(LevelStorage, CanUnloadResources, Delay, ResourceType, Amount);
             _freeSpaceResourceMechanic = new FreeSpaceResourceMechanic(IsFreeSpace, Amount, MaxAmount);
         }

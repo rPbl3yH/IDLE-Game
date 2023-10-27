@@ -13,14 +13,18 @@ namespace App.Gameplay
         private readonly AtomicVariable<int> _amount;
         private readonly AtomicVariable<int> _maxAmount;
 
+        private readonly AtomicVariable<ResourceType> _resourceType;
+
         public GatheringResourceMechanics(
             AtomicVariable<ResourceModel> targetResource,
+            AtomicVariable<ResourceType> resourceType,
             AtomicVariable<int> gatheringCount,
             AtomicVariable<int> amount,
             AtomicVariable<int> maxAmount,
             AtomicEvent gathered)
         {
             _targetResource = targetResource;
+            _resourceType = resourceType;
             _gatheringCount = gatheringCount;
             _gathered = gathered;
             _amount = amount;
@@ -49,8 +53,14 @@ namespace App.Gameplay
             var gatheringCount = Math.Min(amount, _gatheringCount.Value);
             var availableAmount = _maxAmount.Value - _amount.Value;
             gatheringCount = Math.Min(gatheringCount, availableAmount);
-            var type = _targetResource.Value.ResourceType;
 
+            var targetResourceType = _targetResource.Value.ResourceType;
+            
+            if (_resourceType.Value != targetResourceType)
+            {
+                _resourceType.Value = targetResourceType;
+            }
+            
             _targetResource.Value.Gathered?.Invoke(gatheringCount);
 
             _amount.Value += gatheringCount;

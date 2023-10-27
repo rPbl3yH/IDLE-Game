@@ -11,14 +11,17 @@ namespace App.Gameplay.AI.States
     {
         private readonly ResourceService _resourceService;
         private readonly IAtomicVariable<ResourceModel> _targetResource;
+        private readonly IAtomicValue<ResourceType> _resourceType;
         private readonly Transform _root;
 
         public DetectionResourceAction(
             IAtomicVariable<ResourceModel> targetResource,
+            IAtomicValue<ResourceType> resourceType,
             Transform root,
             ResourceService resourceService)
         {
             _targetResource = targetResource;
+            _resourceType = resourceType;
             _root = root;
             _resourceService = resourceService;
         }
@@ -26,7 +29,8 @@ namespace App.Gameplay.AI.States
         [Button]
         public void Invoke()
         {
-            var resource = _resourceService.GetClosetResource(_root);
+            
+            var resource = _resourceService.GetClosetResource(_root, _resourceType.Value);
             _targetResource.Value = resource;
         }
     }
