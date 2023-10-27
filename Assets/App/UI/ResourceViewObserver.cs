@@ -42,11 +42,10 @@ namespace App.UI
         {
             HideAll();
 
-            for (int i = 0; i < resources.Count; i++)
+            foreach (var resource in resources)
             {
-                var resourceType = (ResourceType)i;
-                var text = $"{resourceType} {resources[resourceType]}";
-                _resourceViews[i].Show(text);
+                var text = $"{resource.Key} {resource.Value}";
+                _resourceViews[(int)resource.Key].Show(text);
             }
         }
 

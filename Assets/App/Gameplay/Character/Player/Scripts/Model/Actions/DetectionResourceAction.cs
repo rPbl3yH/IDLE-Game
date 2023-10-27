@@ -11,26 +11,36 @@ namespace App.Gameplay.AI.States
     {
         private readonly ResourceService _resourceService;
         private readonly IAtomicVariable<ResourceModel> _targetResource;
-        private readonly IAtomicValue<ResourceType> _resourceType;
+        private readonly IAtomicVariable<ResourceType> _resourceType;
+        private readonly IAtomicValue<int> _amount;
         private readonly Transform _root;
 
         public DetectionResourceAction(
-            IAtomicVariable<ResourceModel> targetResource,
-            IAtomicValue<ResourceType> resourceType,
-            Transform root,
+            CharacterModel characterModel,
             ResourceService resourceService)
         {
-            _targetResource = targetResource;
-            _resourceType = resourceType;
-            _root = root;
+            _targetResource = characterModel.TargetResource;
+            _resourceType = characterModel.ResourceType;
+            _amount = characterModel.Amount;
+            _root = characterModel.Root;
             _resourceService = resourceService;
         }
 
         [Button]
         public void Invoke()
         {
+            ResourceModel resource;
             
-            var resource = _resourceService.GetClosetResource(_root, _resourceType.Value);
+            if (_amount.Value == 0)
+            {
+                resource = _resourceService.GetClosetResource(_root);
+                _resourceType.Value = resource.ResourceType;
+            }
+            else
+            {
+                resource = _resourceService.GetClosetResource(_root, _resourceType.Value);
+            }
+
             _targetResource.Value = resource;
         }
     }

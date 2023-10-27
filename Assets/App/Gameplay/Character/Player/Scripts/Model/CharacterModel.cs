@@ -54,7 +54,7 @@ namespace App.Gameplay
 
         private void Awake()
         {
-            DetectionResourceAction = new DetectionResourceAction(TargetResource, ResourceType, Root, ResourceService);
+            DetectionResourceAction = new DetectionResourceAction(this, ResourceService);
             DetectionBarnAction = new DetectionBarnAction(LevelStorage, BarnService);
             
             _movementMechanics = new MovementMechanics(Root, MoveDirection, Speed);
