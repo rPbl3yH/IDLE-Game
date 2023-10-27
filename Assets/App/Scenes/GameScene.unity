@@ -304,8 +304,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 129b1638d06845488ec06ee7b4fc26c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DetectionResourceData:
-    ResourceService: {fileID: 527250525}
   MoveToPositionData:
     IsEnable: 0
     TargetPosition: {x: 0, y: 0, z: 0}
@@ -526,6 +524,7 @@ MonoBehaviour:
     value: 0.2
   CanUnloadResources:
     value: 0
+  ResourceService: {fileID: 527250525}
 --- !u!4 &343023495
 Transform:
   m_ObjectHideFlags: 0
@@ -703,8 +702,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 129b1638d06845488ec06ee7b4fc26c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DetectionResourceData:
-    ResourceService: {fileID: 527250525}
   MoveToPositionData:
     IsEnable: 0
     TargetPosition: {x: 0, y: 0, z: 0}
@@ -3078,6 +3075,7 @@ MonoBehaviour:
     value: 0.2
   CanUnloadResources:
     value: 0
+  ResourceService: {fileID: 527250525}
 --- !u!4 &1481721759
 Transform:
   m_ObjectHideFlags: 0
@@ -3296,6 +3294,7 @@ MonoBehaviour:
     value: 0.1
   CanUnloadResources:
     value: 0
+  ResourceService: {fileID: 527250525}
 --- !u!114 &1831075456
 MonoBehaviour:
   m_ObjectHideFlags: 0

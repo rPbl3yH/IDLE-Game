@@ -6,14 +6,13 @@ namespace App.Gameplay.AI
 {
     public class CharacterAIModel : MonoBehaviour
     {
-        public DetectionResourceData DetectionResourceData;
         public MoveToPositionData MoveToPositionData;
         public GatheringResourceData GatheringResourceData;
         public UnloadResourceData UnloadResourceData;
 
         [SerializeField] private CharacterModel _characterModel;
 
-        private DetectionResourceState _detectionResourceState;
+        private DetectionResourceAction _detectionResourceAction;
         private MoveToPositionState _moveToPositionState;
         private GatheringResourceState _gatheringResourceState;
         private UnloadingResourceState _unloadingResourceState;
@@ -23,13 +22,11 @@ namespace App.Gameplay.AI
         {
             _stateMachine = new StateMachine();
 
-            _detectionResourceState = new DetectionResourceState(DetectionResourceData, MoveToPositionData, _characterModel.TargetResource, _characterModel.Root);
-            
             _moveToPositionState =
                 new MoveToPositionState(MoveToPositionData, _characterModel.MoveDirection, _characterModel.Root);
 
             _gatheringResourceState =
-                new GatheringResourceState(GatheringResourceData, MoveToPositionData, _moveToPositionState, _detectionResourceState, _characterModel);
+                new GatheringResourceState(GatheringResourceData, MoveToPositionData, _moveToPositionState, _characterModel);
 
             _unloadingResourceState = new UnloadingResourceState(UnloadResourceData, MoveToPositionData, _characterModel, _moveToPositionState);
             

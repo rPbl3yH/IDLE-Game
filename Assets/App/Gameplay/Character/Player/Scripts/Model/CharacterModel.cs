@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using App.Gameplay.AI.States;
 using App.Gameplay.LevelStorage;
 using App.Gameplay.Resource;
 using Atomic;
@@ -38,6 +39,9 @@ namespace App.Gameplay
         public AtomicVariable<float> Delay;
         public AtomicVariable<bool> CanUnloadResources;
 
+        public ResourceService ResourceService;
+        public DetectionResourceAction DetectionResourceAction;
+
         //Логика
         private MovementMechanics _movementMechanics;
         private RotateMechanics _rotateMechanics;
@@ -48,6 +52,8 @@ namespace App.Gameplay
 
         private void Awake()
         {
+            DetectionResourceAction = new DetectionResourceAction(TargetResource, Root, ResourceService);
+            
             _movementMechanics = new MovementMechanics(Root, MoveDirection, Speed);
             _rotateMechanics = new RotateMechanics(View, MoveDirection);
             _detectionResourceMechanics =

@@ -11,7 +11,7 @@ namespace App.Gameplay.AI.States
         private readonly MoveToPositionData _moveData;
         
         private readonly IState _moveState;
-        private readonly IState _detectionState;
+        private readonly IAtomicAction _detectionAction;
         private readonly AtomicVariable<Vector3> _moveDirection;
         private readonly AtomicVariable<ResourceModel> _targetResource;
         private readonly AtomicVariable<bool> _canGathering;
@@ -23,13 +23,12 @@ namespace App.Gameplay.AI.States
             GatheringResourceData gatheringData, 
             MoveToPositionData moveData, 
             IState moveState,
-            IState detectionState,
             CharacterModel characterModel)
         {
             _gatheringData = gatheringData;
             _moveData = moveData;
             _moveState = moveState;
-            _detectionState = detectionState;
+            _detectionAction = characterModel.DetectionResourceAction;
             _moveDirection = characterModel.MoveDirection;
             _targetResource = characterModel.TargetResource;
             _canGathering = characterModel.CanGathering;
@@ -42,7 +41,7 @@ namespace App.Gameplay.AI.States
             GatheringResourceData gatheringData, 
             MoveToPositionData moveData, 
             IState moveState,
-            IState detectionState,
+            IAtomicAction detectionAction,
             AtomicVariable<Vector3> moveDirection, 
             AtomicVariable<ResourceModel> targetResource,
             AtomicVariable<bool> canGathering,
@@ -51,7 +50,7 @@ namespace App.Gameplay.AI.States
             _gatheringData = gatheringData;
             _moveData = moveData;
             _moveState = moveState;
-            _detectionState = detectionState;
+            _detectionAction = detectionAction;
             _moveDirection = moveDirection;
             _targetResource = targetResource;
             _canGathering = canGathering;
@@ -63,7 +62,7 @@ namespace App.Gameplay.AI.States
             base.Enter();
             _moveData.StoppingDistance = _stoppingDistance.Value;
             _gatheringData.IsEnable = true;
-            SwitchState(_detectionState);
+            FindResource();
         }
 
         public override void Exit()
@@ -84,7 +83,7 @@ namespace App.Gameplay.AI.States
             
             if (_targetResource.Value == null || _targetResource.Value.Amount.Value == 0)
             {
-                SwitchState(_detectionState);
+                FindResource();
                 return;
             }
             
@@ -111,6 +110,17 @@ namespace App.Gameplay.AI.States
             else
             {
                 _canGathering.Value = false;
+            }
+        }
+
+        private void FindResource()
+        {
+            _detectionAction?.Invoke();
+            
+            if (_targetResource.Value != null)
+            {
+                _moveData.TargetPosition = _targetResource.Value.transform.position;
+                _moveData.IsPositionReached = false;
             }
         }
 
