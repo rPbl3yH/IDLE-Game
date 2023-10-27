@@ -36,27 +36,7 @@ namespace App.Gameplay.AI.States
             _root = characterModel.Root;
             _stoppingDistance = characterModel.GatheringDistance;
         }
-
-        public GatheringResourceState(
-            GatheringResourceData gatheringData, 
-            MoveToPositionData moveData, 
-            IState moveState,
-            IAtomicAction detectionAction,
-            AtomicVariable<Vector3> moveDirection, 
-            AtomicVariable<ResourceModel> targetResource,
-            AtomicVariable<bool> canGathering,
-            AtomicVariable<float> gatheringDistance)
-        {
-            _gatheringData = gatheringData;
-            _moveData = moveData;
-            _moveState = moveState;
-            _detectionAction = detectionAction;
-            _moveDirection = moveDirection;
-            _targetResource = targetResource;
-            _canGathering = canGathering;
-            _gatheringDistance = gatheringDistance;
-        }
-
+        
         public override void Enter()
         {
             base.Enter();
@@ -115,6 +95,7 @@ namespace App.Gameplay.AI.States
 
         private void FindResource()
         {
+            //TODO: не нравится мне, что здесь неявное присвоение в _targetResource
             _detectionAction?.Invoke();
             
             if (_targetResource.Value != null)

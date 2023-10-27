@@ -20,6 +20,7 @@ namespace App.Gameplay.AI.States
         public void Enter()
         {
             _moveToPositionData.IsEnable = true;
+            CheckDistance(GetDirection());
         }
         
         public void Update(float deltaTime)
@@ -29,10 +30,8 @@ namespace App.Gameplay.AI.States
                 return;
             }
 
-            var delta = _moveToPositionData.TargetPosition - _root.position;
-            var distance = delta.magnitude;
-
-            _moveToPositionData.IsPositionReached = distance <= _moveToPositionData.StoppingDistance;
+            var delta = GetDirection();
+            CheckDistance(delta);
 
             if (_moveToPositionData.IsPositionReached)
             {
@@ -42,6 +41,16 @@ namespace App.Gameplay.AI.States
             {
                 _moveDirection.Value = delta.normalized;
             }
+        }
+
+        private Vector3 GetDirection()
+        {
+            return _moveToPositionData.TargetPosition - _root.position;
+        }
+
+        private void CheckDistance(Vector3 delta)
+        {
+            _moveToPositionData.IsPositionReached = delta.magnitude <= _moveToPositionData.StoppingDistance;
         }
 
         public void Exit()
