@@ -34,13 +34,15 @@ namespace App.Gameplay
         public AtomicVariable<bool> IsFreeSpace;
 
         [Header("Unload Resources")]
-        public AtomicVariable<LevelStorageModel> LevelStorage;
+        public AtomicVariable<BarnModel> LevelStorage;
         public AtomicVariable<float> UnloadingDistance;
         public AtomicVariable<float> Delay;
         public AtomicVariable<bool> CanUnloadResources;
 
         public ResourceService ResourceService;
+        public BarnService BarnService;
         public DetectionResourceAction DetectionResourceAction;
+        public DetectionBarnAction DetectionBarnAction;
 
         //Логика
         private MovementMechanics _movementMechanics;
@@ -53,6 +55,7 @@ namespace App.Gameplay
         private void Awake()
         {
             DetectionResourceAction = new DetectionResourceAction(TargetResource, Root, ResourceService);
+            DetectionBarnAction = new DetectionBarnAction(LevelStorage, BarnService);
             
             _movementMechanics = new MovementMechanics(Root, MoveDirection, Speed);
             _rotateMechanics = new RotateMechanics(View, MoveDirection);

@@ -7,21 +7,22 @@ namespace App.Gameplay.AI.States
 {
     public class UnloadingResourceState : StateMachine
     {
-        private readonly AtomicVariable<LevelStorageModel> _levelStorageModel;
+        private readonly AtomicVariable<BarnModel> _barnModel;
         private readonly AtomicVariable<bool> _canUnloadResources;
         private readonly AtomicVariable<float> _unloadingDistance;
  
         private readonly MoveToPositionData _moveData;
         private readonly UnloadResourceData _unloadResourceData;
+        private readonly IAtomicAction _detectionBarnAction;
         private readonly IState _moveState;
 
         private float _timer;
 
         public UnloadingResourceState(
-            AtomicVariable<LevelStorageModel> levelStorageModel,
+            AtomicVariable<BarnModel> barnModel,
             AtomicVariable<bool> canUnloadResources)
         {
-            _levelStorageModel = levelStorageModel;
+            _barnModel = barnModel;
             _canUnloadResources = canUnloadResources;
         }
 
@@ -34,18 +35,30 @@ namespace App.Gameplay.AI.States
             _moveData = moveData;
             _moveState = moveState;
             _unloadResourceData = unloadResourceData;
-            _levelStorageModel = characterModel.LevelStorage;
+            _barnModel = characterModel.LevelStorage;
             _canUnloadResources = characterModel.CanUnloadResources;
             _unloadingDistance = characterModel.UnloadingDistance;
+            _detectionBarnAction = characterModel.DetectionBarnAction;
         }
 
         public override void Enter()
         {
             base.Enter();
-            _levelStorageModel.Value = _unloadResourceData.LevelStorageService.GetStorage();
+            _barnModel.Value = _unloadResourceData.BarnService.GetStorage();
             _moveData.StoppingDistance = _unloadingDistance.Value;
-            _moveData.TargetPosition = _levelStorageModel.Value.UnloadingPoint.position;
-            _moveData.IsPositionReached = false;
+            
+            DetectBarn();
+        }
+
+        private void DetectBarn()
+        {
+            _detectionBarnAction?.Invoke();
+            
+            if (_barnModel.Value != null)
+            {
+                _moveData.TargetPosition = _barnModel.Value.UnloadingPoint.position;
+                _moveData.IsPositionReached = false;
+            }
         }
 
         public override void Exit()

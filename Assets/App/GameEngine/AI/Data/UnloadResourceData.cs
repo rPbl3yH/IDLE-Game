@@ -7,6 +7,6 @@ namespace App.Gameplay.AI
     public class UnloadResourceData
     {
         public bool IsEnable;
-        public LevelStorageService LevelStorageService;
+        public BarnService BarnService;
     }
 }

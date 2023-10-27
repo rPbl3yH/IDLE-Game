@@ -3,14 +3,20 @@ using UnityEngine;
 
 namespace App.Gameplay
 {
-    public class UnloadResourceController : MonoBehaviour
+    public class UnloadResourceMechanics
     {
-        [SerializeField] private LevelStorageService _levelStorageService;
-        [SerializeField] private CharacterModel _characterModel;
-        
-        private void Update()
+        private readonly CharacterModel _characterModel;
+        private readonly BarnService _barnService;
+
+        public UnloadResourceMechanics(CharacterModel characterModel, BarnService barnService)
         {
-            var barn = _levelStorageService.GetStorage();
+            _barnService = barnService;
+            _characterModel = characterModel;
+        }
+
+        public void Update()
+        {
+            var barn = _barnService.GetStorage();
             var distance = Vector3.Distance(_characterModel.Root.position, barn.UnloadingPoint.position);
 
             if (distance <= _characterModel.UnloadingDistance.Value)

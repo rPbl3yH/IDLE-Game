@@ -313,7 +313,7 @@ MonoBehaviour:
     IsEnable: 0
   UnloadResourceData:
     IsEnable: 0
-    LevelStorageService: {fileID: 669750967}
+    BarnService: {fileID: 669750967}
   _characterModel: {fileID: 343023494}
 --- !u!1 &279525972
 GameObject:
@@ -517,7 +517,7 @@ MonoBehaviour:
   IsFreeSpace:
     value: 0
   LevelStorage:
-    value: {fileID: 1143329563}
+    value: {fileID: 0}
   UnloadingDistance:
     value: 0.3
   Delay:
@@ -525,6 +525,7 @@ MonoBehaviour:
   CanUnloadResources:
     value: 0
   ResourceService: {fileID: 527250525}
+  BarnService: {fileID: 669750967}
 --- !u!4 &343023495
 Transform:
   m_ObjectHideFlags: 0
@@ -711,7 +712,7 @@ MonoBehaviour:
     IsEnable: 0
   UnloadResourceData:
     IsEnable: 0
-    LevelStorageService: {fileID: 669750967}
+    BarnService: {fileID: 669750967}
   _characterModel: {fileID: 1481721758}
 --- !u!1001 &487787008
 PrefabInstance:
@@ -1519,7 +1520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a599245ff910456bbf14eb9b2289c8e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelStorageModel: {fileID: 1143329563}
+  _barnModel: {fileID: 1143329563}
 --- !u!1 &711619947
 GameObject:
   m_ObjectHideFlags: 0
@@ -2514,7 +2515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60fb3fac7aea132429b77638ae26e8d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelStorageModel: {fileID: 1143329563}
+  _barnModel: {fileID: 1143329563}
   _resourceViewPrefab: {fileID: 2070033593455600028, guid: b9d2bf75e2f1fac4fb402e9b9deb26a8,
     type: 3}
 --- !u!1 &1215509841
@@ -3068,7 +3069,7 @@ MonoBehaviour:
   IsFreeSpace:
     value: 0
   LevelStorage:
-    value: {fileID: 1143329563}
+    value: {fileID: 0}
   UnloadingDistance:
     value: 0.3
   Delay:
@@ -3076,6 +3077,7 @@ MonoBehaviour:
   CanUnloadResources:
     value: 0
   ResourceService: {fileID: 527250525}
+  BarnService: {fileID: 669750967}
 --- !u!4 &1481721759
 Transform:
   m_ObjectHideFlags: 0
@@ -3224,9 +3226,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1831075454}
   - component: {fileID: 1831075455}
-  - component: {fileID: 1831075456}
-  - component: {fileID: 1831075457}
-  - component: {fileID: 1831075458}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -3295,49 +3294,7 @@ MonoBehaviour:
   CanUnloadResources:
     value: 0
   ResourceService: {fileID: 527250525}
---- !u!114 &1831075456
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1831075453}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e64911cd925c485aaf116d37a93d53bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _characterModel: {fileID: 1831075455}
-  _colliderSensor: {fileID: 2018979387}
-  _resourceService: {fileID: 527250525}
---- !u!114 &1831075457
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1831075453}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 978ddc2d2d73446c8bfff668a460b5a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _characterModel: {fileID: 1831075455}
-  _levelStorageService: {fileID: 669750967}
---- !u!114 &1831075458
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1831075453}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ac9d8da0b78412d8c0aa3f2791c823c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _levelStorageService: {fileID: 669750967}
-  _characterModel: {fileID: 1831075455}
+  BarnService: {fileID: 669750967}
 --- !u!1 &1904531492
 GameObject:
   m_ObjectHideFlags: 0

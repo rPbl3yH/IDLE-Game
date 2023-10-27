@@ -1,23 +1,9 @@
-﻿using System;
-using Atomic;
+﻿using Atomic;
 using UnityEngine;
 
 namespace App.Gameplay.LevelStorage
 {
-    [Serializable]
-    public struct ResourceData
-    {
-        public readonly ResourceType Type;
-        public readonly int Count;
-
-        public ResourceData(ResourceType type, int count)
-        {
-            Type = type;
-            Count = count;
-        }
-    }
-    
-    public class LevelStorageModel : MonoBehaviour
+    public class BarnModel : MonoBehaviour
     {
         public ResourceStorage ResourceStorage;
 

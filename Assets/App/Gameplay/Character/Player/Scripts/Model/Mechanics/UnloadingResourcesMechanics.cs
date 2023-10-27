@@ -6,12 +6,12 @@ namespace App.Gameplay
 {
     public class UnloadAvailableMechanics
     {
-        private readonly AtomicVariable<LevelStorageModel> _levelStorageModel;
+        private readonly AtomicVariable<BarnModel> _levelStorageModel;
     }
     
     public class UnloadingResourcesMechanics
     {
-        private readonly AtomicVariable<LevelStorageModel> _levelStorageModel;
+        private readonly AtomicVariable<BarnModel> _levelStorageModel;
         private readonly AtomicVariable<bool> _canUnloadResources;
         private readonly AtomicVariable<float> _delay;
         private readonly AtomicVariable<ResourceType> _resourceType;
@@ -20,7 +20,7 @@ namespace App.Gameplay
         private float _timer;
         
         public UnloadingResourcesMechanics(
-            AtomicVariable<LevelStorageModel> levelStorageModel,
+            AtomicVariable<BarnModel> levelStorageModel,
             AtomicVariable<bool> canUnloadResources,
             AtomicVariable<float> delay,
             AtomicVariable<ResourceType> resourceType,

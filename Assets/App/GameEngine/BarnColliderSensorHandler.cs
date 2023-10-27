@@ -6,13 +6,13 @@ namespace App.Gameplay
 {
     public class BarnColliderSensorHandler : IColliderSensorHandler
     {
-        public AtomicVariable<LevelStorageModel> LevelStorageModel;
+        public AtomicVariable<BarnModel> LevelStorageModel;
 
         public void OnColliderUpdated(Collider[] colliders)
         {
             foreach (var collider in colliders)
             {
-                if (collider.TryGetComponent<LevelStorageModel>(out var levelStorageModel))
+                if (collider.TryGetComponent<BarnModel>(out var levelStorageModel))
                 {
                     LevelStorageModel.Value = levelStorageModel;
                     break;

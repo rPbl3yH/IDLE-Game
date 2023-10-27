@@ -7,10 +7,10 @@ namespace App.Gameplay
 {
     public class DetectionBarnMechanics
     {
-        private readonly AtomicVariable<LevelStorageModel> _levelStorageModel;
+        private readonly AtomicVariable<BarnModel> _levelStorageModel;
         private readonly ColliderSensor _colliderSensor;
         
-        public DetectionBarnMechanics(AtomicVariable<LevelStorageModel> levelStorageModel, ColliderSensor colliderSensor)
+        public DetectionBarnMechanics(AtomicVariable<BarnModel> levelStorageModel, ColliderSensor colliderSensor)
         {
             _levelStorageModel = levelStorageModel;
             _colliderSensor = colliderSensor;
@@ -28,7 +28,7 @@ namespace App.Gameplay
 
         private void OnColliderUpdated(Collider[] colliders)
         {
-            var value = colliders.FirstOrDefault()?.GetComponent<LevelStorageModel>();
+            var value = colliders.FirstOrDefault()?.GetComponent<BarnModel>();
             _levelStorageModel.Value = value;
         }
     }
