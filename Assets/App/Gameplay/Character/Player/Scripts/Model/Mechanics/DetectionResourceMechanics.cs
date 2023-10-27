@@ -6,20 +6,21 @@ namespace App.Gameplay
 {
     public class DetectionResourceMechanics
     {
-        private readonly AtomicVariable<ResourceModel> _targetResource;
-        private readonly AtomicVariable<bool> _canGathering;
-        private readonly AtomicVariable<Vector3> _moveDirection;
-        private readonly AtomicVariable<float> _gatheringDistance;
-        private readonly AtomicVariable<bool> _isFreeSpace; 
+        private readonly IAtomicVariable<bool> _canGathering;
+        
+        private readonly IAtomicValue<ResourceModel> _targetResource;
+        private readonly IAtomicValue<Vector3> _moveDirection;
+        private readonly IAtomicValue<float> _gatheringDistance;
+        private readonly IAtomicValue<bool> _isFreeSpace; 
         private readonly Transform _root;
         
         public DetectionResourceMechanics(
             Transform root, 
-            AtomicVariable<ResourceModel> targetResource,
-            AtomicVariable<float> gatheringDistance,
-            AtomicVariable<bool> canGathering, 
-            AtomicVariable<bool> isFreeSpace,
-            AtomicVariable<Vector3> moveDirection)
+            IAtomicValue<ResourceModel> targetResource,
+            IAtomicValue<float> gatheringDistance,
+            IAtomicVariable<bool> canGathering, 
+            IAtomicValue<bool> isFreeSpace,
+            IAtomicValue<Vector3> moveDirection)
         {
             _root = root;
             _targetResource = targetResource;

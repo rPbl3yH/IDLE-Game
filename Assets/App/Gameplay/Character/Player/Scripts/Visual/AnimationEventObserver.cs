@@ -6,7 +6,7 @@ namespace App.Gameplay
     public class AnimationEventObserver
     {
         private readonly AnimationDispatcher _animationDispatcher;
-        private readonly AtomicEvent _gathered;
+        private readonly IAtomicAction _gathered;
 
         public AnimationEventObserver(AnimationDispatcher animationDispatcher, CharacterModel characterModel)
         {

@@ -10,6 +10,7 @@ namespace App.Gameplay
         private readonly AtomicVariable<Vector3> _moveDirection;
 
         private readonly AtomicVariable<float> _speed;
+        private readonly IAtomicValue<bool> _canMove;
 
         public MovementMechanics(
             Transform model,
