@@ -10,7 +10,6 @@ namespace App.Gameplay.Player
         [SerializeField] private BarnService _barnService;
         [SerializeField] private ResourceStorageModelService _resourceStorageModelService; 
         
-        private PlayerDetectionBarnMechanics _playerDetectionBarnMechanics;
         private PlayerDetectionResourceMechanics _playerDetectionResourceMechanics;
         private PlayerUnloadResourceMechanics _playerUnloadResourceMechanics;
 
@@ -19,7 +18,6 @@ namespace App.Gameplay.Player
         
         private void Start()
         {
-            _playerDetectionBarnMechanics = new PlayerDetectionBarnMechanics(_characterModel, _barnService);
             _playerDetectionResourceMechanics = new PlayerDetectionResourceMechanics(_characterModel);
             _playerUnloadResourceMechanics = new PlayerUnloadResourceMechanics(_characterModel, _resourceStorageModelService);
         }
@@ -28,7 +26,6 @@ namespace App.Gameplay.Player
         {
             var deltaTime = Time.deltaTime;
             
-            _playerDetectionBarnMechanics.Update();
             _playerDetectionResourceMechanics.Update();
             _playerUnloadResourceMechanics.Update();
             _cameraFollowingMechanics.Update(deltaTime);

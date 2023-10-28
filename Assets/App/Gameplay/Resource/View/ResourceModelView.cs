@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace App.Gameplay.Resource.View
 {
-    public class ResourceView : MonoBehaviour
+    public class ResourceModelView : MonoBehaviour
     {
         [SerializeField] private GameObject _view;
         [SerializeField] private ResourceModel _resourceModel;

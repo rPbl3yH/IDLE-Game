@@ -1,6 +1,7 @@
 using App.GameEngine.Input;
 using App.GameEngine.Input.Handlers;
 using App.Gameplay.Character.Scripts.Model;
+using App.UI;
 using SimpleInputNamespace;
 using UnityEngine;
 using VContainer;
@@ -12,6 +13,8 @@ namespace App.Core
     {
         [SerializeField] private Joystick _joystick;
         [SerializeField] private CharacterModel _characterModel;
+        [SerializeField] private ResourceView _resourceView;
+        [SerializeField] private ResourceViewFactory _resourceViewFactory;
 
         protected override void Configure(IContainerBuilder builder)
         {
@@ -19,6 +22,9 @@ namespace App.Core
             builder.RegisterInstance(_characterModel);
             builder.RegisterEntryPoint<InputHandler>().As<IInputHandler>();
             builder.RegisterEntryPoint<InputController>();
+
+            builder.RegisterInstance(_resourceView);
+            builder.RegisterInstance(_resourceViewFactory);
         }
     }
 }

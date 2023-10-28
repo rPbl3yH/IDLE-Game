@@ -1,44 +1,46 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
-using App.Gameplay;
-using VContainer;
-using VContainer.Unity;
+using App.UI;
+using Sirenix.OdinInspector;
+using UnityEngine;
 
-namespace App.UI
+namespace App.Gameplay.LevelStorage
 {
-    public class ResourceViewObserver : IInitializable, IDisposable
+    public class BuildingViewObserver : MonoBehaviour
     {
-        private readonly ResourceViewFactory _resourceViewFactory;
-        private readonly ResourceStorage _resourceStorage;
+        [SerializeField] private ResourceStorageModel _resourceStorageModel;
+        [SerializeField] private ResourceView _resourceModelViewPrefab;
 
-        private readonly List<ResourceView> _resourceViews = new();
-
-        [Inject]
-        public ResourceViewObserver(ResourceViewFactory resourceViewFactory, ResourceStorage resourceStorage)
-        {
-            _resourceViewFactory = resourceViewFactory;
-            _resourceStorage = resourceStorage;
-        }
+        private ResourceStorage _resourceStorage;
         
-        public void Initialize()
+        [ShowInInspector, ReadOnly]
+        private List<ResourceView> _resourceViews = new();
+        
+        private void Awake()
+        {
+            if (_resourceStorageModel != null)
+            {
+                _resourceStorage = _resourceStorageModel.ResourceStorage;
+            }
+        }
+
+        private void OnEnable()
         {
             _resourceStorage.ResourcesChanged += OnResourcesChanged;
-            InitViews();
         }
 
-        public void Dispose()
+        private void OnDisable()
         {
             _resourceStorage.ResourcesChanged -= OnResourcesChanged;
         }
-        
-        private void InitViews()
+
+        private void Start()
         {
             var resourceTypes = Enum.GetValues(typeof(ResourceType));
             
             for (int i = 0; i < resourceTypes.Length; i++)
             {
-                var view = _resourceViewFactory.Create();
-                _resourceViews.Add(view);    
+                _resourceViews.Add(Instantiate(_resourceModelViewPrefab, transform));    
             }
             
             HideAll();
