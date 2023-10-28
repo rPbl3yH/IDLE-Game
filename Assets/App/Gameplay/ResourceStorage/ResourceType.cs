@@ -1,4 +1,4 @@
-﻿namespace App.Gameplay.ResourceStorage
+﻿namespace App.Gameplay
 {
     public enum ResourceType
     {

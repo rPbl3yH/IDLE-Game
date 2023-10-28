@@ -3,7 +3,6 @@ using App.Gameplay.Character.Scripts.Model.Mechanics;
 using App.Gameplay.LevelStorage;
 using App.Gameplay.Resource;
 using App.Gameplay.Resource.Model;
-using App.Gameplay.ResourceStorage;
 using Modules.Atomic.Actions;
 using Modules.Atomic.Values;
 using Sirenix.OdinInspector;
@@ -36,7 +35,7 @@ namespace App.Gameplay.Character.Scripts.Model
         public AtomicVariable<bool> IsFreeSpace;
 
         [Header("Unload Resources")]
-        public AtomicVariable<BarnModel> LevelStorage;
+        public AtomicVariable<ResourceStorage> ResourceStorage;
         public AtomicVariable<float> UnloadingDistance;
         public AtomicVariable<float> Delay;
         public AtomicVariable<bool> CanUnloadResources;
@@ -57,14 +56,14 @@ namespace App.Gameplay.Character.Scripts.Model
         private void Awake()
         {
             DetectionResourceAction = new DetectionResourceAction(this, ResourceService);
-            DetectionBarnAction = new DetectionBarnAction(LevelStorage, BarnService);
+            DetectionBarnAction = new DetectionBarnAction(ResourceStorage, BarnService);
             
             _movementMechanics = new MovementMechanics(Root, MoveDirection, Speed);
             _rotateMechanics = new RotateMechanics(View, MoveDirection);
             _detectionResourceMechanics =
                 new DetectionResourceMechanics(Root, TargetResource, GatheringDistance, CanGathering, IsFreeSpace, MoveDirection);
             _gatheringResourceMechanics = new GatheringResourceMechanics(TargetResource, ResourceType, GatheringCount, Amount, MaxAmount, Gathered);
-            _unloadResourcesMechanics = new UnloadResourcesMechanics(LevelStorage, CanUnloadResources, Delay, ResourceType, Amount);
+            _unloadResourcesMechanics = new UnloadResourcesMechanics(ResourceStorage, CanUnloadResources, Delay, ResourceType, Amount);
             _freeSpaceResourceMechanic = new FreeSpaceResourceMechanic(IsFreeSpace, Amount, MaxAmount);
         }
 

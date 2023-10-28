@@ -1,5 +1,4 @@
-﻿using App.Gameplay;
-using App.Gameplay.Character.Scripts.Model;
+﻿using App.Gameplay.Character.Scripts.Model;
 using UnityEngine;
 
 namespace App.UI

@@ -2,9 +2,7 @@ using System;
 using System.Collections.Generic;
 using App.Gameplay;
 using App.Gameplay.LevelStorage;
-using App.Gameplay.ResourceStorage;
 using Sirenix.OdinInspector;
-using TMPro;
 using UnityEngine;
 
 namespace App.UI

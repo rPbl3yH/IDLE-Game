@@ -1,12 +1,11 @@
 ﻿using App.Gameplay.LevelStorage;
-using App.Gameplay.ResourceStorage;
 using Modules.Atomic.Values;
 
 namespace App.Gameplay.Character.Scripts.Model.Mechanics
 {
     public class UnloadResourcesMechanics
     {
-        private readonly AtomicVariable<BarnModel> _barnModel;
+        private readonly AtomicVariable<ResourceStorage> _storage;
         private readonly AtomicVariable<bool> _canUnloadResources;
         private readonly AtomicVariable<float> _delay;
         private readonly AtomicVariable<ResourceType> _resourceType;
@@ -15,13 +14,13 @@ namespace App.Gameplay.Character.Scripts.Model.Mechanics
         private float _timer;
         
         public UnloadResourcesMechanics(
-            AtomicVariable<BarnModel> barnModel,
+            AtomicVariable<ResourceStorage> storage,
             AtomicVariable<bool> canUnloadResources,
             AtomicVariable<float> delay,
             AtomicVariable<ResourceType> resourceType,
             AtomicVariable<int> amount)
         {
-            _barnModel = barnModel;
+            _storage = storage;
             _canUnloadResources = canUnloadResources;
             _delay = delay;
             _resourceType = resourceType;
@@ -30,7 +29,7 @@ namespace App.Gameplay.Character.Scripts.Model.Mechanics
 
         public UnloadResourcesMechanics(CharacterModel characterModel)
         {
-            _barnModel = characterModel.LevelStorage;
+            _storage = characterModel.ResourceStorage;
             _canUnloadResources = characterModel.CanUnloadResources;
             _delay = characterModel.Delay;
             _resourceType = characterModel.ResourceType;
@@ -56,11 +55,10 @@ namespace App.Gameplay.Character.Scripts.Model.Mechanics
                 }
 
                 var unloadCount = 1;
-                var resourceData = new ResourceData(_resourceType.Value, unloadCount);
-                //TODO: проверку на возможность передать ресурсы
-                
-                _barnModel.Value.ResourceAdded?.Invoke(resourceData);
-                _amount.Value -= unloadCount;
+                if (_storage.Value.TryAdd(_resourceType.Value, unloadCount))
+                {
+                    _amount.Value -= unloadCount;
+                }
             }
         }
 

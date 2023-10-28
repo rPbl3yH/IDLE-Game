@@ -1,25 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using App.Gameplay.LevelStorage;
 using App.Gameplay.Player;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace App.Gameplay.ResourceStorage
+namespace App.Gameplay
 {
-    [Serializable]
-    public class ResourceValue
-    {
-        public int Amount;
-        public int MaxAmount;
-
-        public ResourceValue(int amount, int maxAmount)
-        {
-            Amount = amount;
-            MaxAmount = maxAmount;
-        }
-    }
-    
     [Serializable]
     public class ResourceStorage
     {

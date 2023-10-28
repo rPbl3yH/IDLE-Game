@@ -1,4 +1,5 @@
 ﻿using App.GameEngine.AI.StateMachine.Data;
+using App.Gameplay;
 using App.Gameplay.Character.Scripts.Model;
 using App.Gameplay.LevelStorage;
 using Modules.Atomic.Actions;
@@ -8,6 +9,7 @@ namespace App.GameEngine.AI.StateMachine.States
 {
     public class UnloadingResourceState : StateMachine
     {
+        private readonly AtomicVariable<ResourceStorage> _resourceStorage;
         private readonly AtomicVariable<BarnModel> _barnModel;
         private readonly AtomicVariable<bool> _canUnloadResources;
         private readonly AtomicVariable<float> _unloadingDistance;
@@ -20,14 +22,6 @@ namespace App.GameEngine.AI.StateMachine.States
         private float _timer;
 
         public UnloadingResourceState(
-            AtomicVariable<BarnModel> barnModel,
-            AtomicVariable<bool> canUnloadResources)
-        {
-            _barnModel = barnModel;
-            _canUnloadResources = canUnloadResources;
-        }
-
-        public UnloadingResourceState(
             UnloadResourceData unloadResourceData,
             MoveToPositionData moveData,
             CharacterModel characterModel,
@@ -36,7 +30,7 @@ namespace App.GameEngine.AI.StateMachine.States
             _moveData = moveData;
             _moveState = moveState;
             _unloadResourceData = unloadResourceData;
-            _barnModel = characterModel.LevelStorage;
+            _resourceStorage = characterModel.ResourceStorage;
             _canUnloadResources = characterModel.CanUnloadResources;
             _unloadingDistance = characterModel.UnloadingDistance;
             _detectionBarnAction = characterModel.DetectionBarnAction;
@@ -46,6 +40,7 @@ namespace App.GameEngine.AI.StateMachine.States
         {
             base.Enter();
             _barnModel.Value = _unloadResourceData.BarnService.GetStorage();
+            _resourceStorage.Value = _barnModel.Value.ResourceStorage;
             _moveData.StoppingDistance = _unloadingDistance.Value;
             
             DetectBarn();
@@ -55,7 +50,7 @@ namespace App.GameEngine.AI.StateMachine.States
         {
             _detectionBarnAction?.Invoke();
             
-            if (_barnModel.Value != null)
+            if (_resourceStorage.Value != null)
             {
                 _moveData.TargetPosition = _barnModel.Value.UnloadingPoint.position;
                 _moveData.IsPositionReached = false;

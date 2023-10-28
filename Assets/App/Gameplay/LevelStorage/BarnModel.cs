@@ -5,7 +5,7 @@ namespace App.Gameplay.LevelStorage
 {
     public class BarnModel : MonoBehaviour
     {
-        public ResourceStorage.ResourceStorage ResourceStorage;
+        public ResourceStorage ResourceStorage;
 
         public AtomicEvent<ResourceData> ResourceAdded;
         public Transform UnloadingPoint;
