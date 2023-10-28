@@ -37,7 +37,10 @@ namespace App.Gameplay.Character.Scripts.Model.Actions
             if (_amount.Value == 0)
             {
                 resource = _resourceService.GetClosetResource(_root);
-                _resourceType.Value = resource.ResourceType;
+                if (resource != null)
+                {
+                    _resourceType.Value = resource.ResourceType;
+                }
             }
             else
             {
