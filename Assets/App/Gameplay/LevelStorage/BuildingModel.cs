@@ -9,7 +9,7 @@ namespace App.Gameplay.LevelStorage
         public AtomicEvent<Building> Built = new();
         public GameObject SpawnPoint;
         public Building Building;
-
+        public GameObject BuildingUI;
         public ResourceStorageModelService ResourceStorageModelService;
 
         private BuildMechanics _buildMechanics;
@@ -19,7 +19,7 @@ namespace App.Gameplay.LevelStorage
         {
             var parent = ResourceStorageModelService.transform;
             _buildMechanics = new BuildMechanics(ResourceStorage, Built, Building, SpawnPoint.transform, parent);
-            _buildObserverMechanics = new BuildObserverMechanics(this, Built, ResourceStorageModelService, SpawnPoint);
+            _buildObserverMechanics = new BuildObserverMechanics(this, Built, ResourceStorageModelService, SpawnPoint, BuildingUI);
         }
 
         private void OnEnable()
