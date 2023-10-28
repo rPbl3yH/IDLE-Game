@@ -1,37 +1,104 @@
 ﻿using System;
 using System.Collections.Generic;
+using App.Gameplay.LevelStorage;
+using App.Gameplay.Player;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace App.Gameplay.ResourceStorage
 {
     [Serializable]
+    public class ResourceValue
+    {
+        public int Amount;
+        public int MaxAmount;
+
+        public ResourceValue(int amount, int maxAmount)
+        {
+            Amount = amount;
+            MaxAmount = maxAmount;
+        }
+    }
+    
+    [Serializable]
     public class ResourceStorage
     {
-        public event Action<Dictionary<ResourceType, int>> ResourceChanged;
+        public event Action<Dictionary<ResourceType, ResourceValue>> ResourceChanged;
 
         [ShowInInspector]
-        private readonly Dictionary<ResourceType, int> _storage = new();
+        private readonly Dictionary<ResourceType, ResourceValue> _storage = new();
+
+        [SerializeField] private ResourceStorageConfig _resourceStorageConfig;
         
-        public void Add(ResourceType resourceType, int count)
+        [Button]
+        public bool TryAdd(ResourceType resourceType, int count)
         {
             if (_storage.ContainsKey(resourceType))
             {
-                _storage[resourceType] += count;
+                if (_storage[resourceType].MaxAmount == -1)
+                {
+                    AddResource(resourceType, count);
+                    return true;
+                }
+                
+                var availableCount = _storage[resourceType].MaxAmount - _storage[resourceType].Amount;
+                
+                if ( availableCount >= count)
+                {
+                    AddResource(resourceType, count);
+                    return true;
+                }
+
+                return false;
             }
-            else
+
+            var maxAmount = -1;
+                
+            if(_resourceStorageConfig.Resources.TryGetValue(resourceType, out var value))
             {
-                _storage.Add(resourceType, count);
+                maxAmount = value;
             }
             
+            if (maxAmount == -1 || maxAmount >= count)
+            {
+                CreateResource(resourceType, count, maxAmount);
+                return true;
+            }
+
+            return false;
+        }
+
+        private void AddResource(ResourceType resourceType, int count)
+        {
+            _storage[resourceType].Amount += count;
+            ResourceChanged?.Invoke(_storage);
+        }
+        
+        private void CreateResource(ResourceType resourceType, int count, int maxAmount)
+        {
+            var resourceValue = new ResourceValue(count, maxAmount);
+            _storage.Add(resourceType, resourceValue);
             ResourceChanged?.Invoke(_storage);
         }
 
-        public Dictionary<ResourceType, int> GetAllResources()
+        public Dictionary<ResourceType, ResourceValue> GetAllResources()
         {
             return _storage;
         }
+
+        public bool TryGetResource(ResourceType resourceType, out int resource)
+        {
+            if (_storage.TryGetValue(resourceType, out var value))
+            {
+                resource = value.Amount;
+                return true;
+            }
+
+            resource = 0;
+            return false;
+        }
         
+        [Button]
         public bool TryRemove(ResourceType resourceType, int count)
         {
             if (!CanRemove(resourceType, count))
@@ -40,9 +107,9 @@ namespace App.Gameplay.ResourceStorage
                 return false;
             }
 
-            _storage[resourceType] -= count;
+            _storage[resourceType].Amount -= count;
             
-            if (_storage[resourceType] == 0)
+            if (_storage[resourceType].Amount == 0)
             {
                 _storage.Remove(resourceType);
             }
@@ -58,7 +125,7 @@ namespace App.Gameplay.ResourceStorage
                 return false;
             }
 
-            return _storage[resourceType] >= count;
+            return _storage[resourceType].Amount >= count;
         }
     }
 }

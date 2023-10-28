@@ -6,7 +6,7 @@ namespace App.Gameplay.Character.Scripts.Model.Mechanics
 {
     public class UnloadResourcesMechanics
     {
-        private readonly AtomicVariable<BarnModel> _levelStorageModel;
+        private readonly AtomicVariable<BarnModel> _barnModel;
         private readonly AtomicVariable<bool> _canUnloadResources;
         private readonly AtomicVariable<float> _delay;
         private readonly AtomicVariable<ResourceType> _resourceType;
@@ -15,13 +15,13 @@ namespace App.Gameplay.Character.Scripts.Model.Mechanics
         private float _timer;
         
         public UnloadResourcesMechanics(
-            AtomicVariable<BarnModel> levelStorageModel,
+            AtomicVariable<BarnModel> barnModel,
             AtomicVariable<bool> canUnloadResources,
             AtomicVariable<float> delay,
             AtomicVariable<ResourceType> resourceType,
             AtomicVariable<int> amount)
         {
-            _levelStorageModel = levelStorageModel;
+            _barnModel = barnModel;
             _canUnloadResources = canUnloadResources;
             _delay = delay;
             _resourceType = resourceType;
@@ -30,7 +30,7 @@ namespace App.Gameplay.Character.Scripts.Model.Mechanics
 
         public UnloadResourcesMechanics(CharacterModel characterModel)
         {
-            _levelStorageModel = characterModel.LevelStorage;
+            _barnModel = characterModel.LevelStorage;
             _canUnloadResources = characterModel.CanUnloadResources;
             _delay = characterModel.Delay;
             _resourceType = characterModel.ResourceType;
@@ -57,7 +57,9 @@ namespace App.Gameplay.Character.Scripts.Model.Mechanics
 
                 var unloadCount = 1;
                 var resourceData = new ResourceData(_resourceType.Value, unloadCount);
-                _levelStorageModel.Value.ResourceAdded?.Invoke(resourceData);
+                //TODO: проверку на возможность передать ресурсы
+                
+                _barnModel.Value.ResourceAdded?.Invoke(resourceData);
                 _amount.Value -= unloadCount;
             }
         }

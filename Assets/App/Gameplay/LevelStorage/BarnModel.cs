@@ -23,7 +23,7 @@ namespace App.Gameplay.LevelStorage
         private void OnResourceAdded(ResourceData resourceData)
         {
             print($"Resources Added {resourceData.Type} {resourceData.Count}");
-            ResourceStorage.Add(resourceData.Type, resourceData.Count);
+            ResourceStorage.TryAdd(resourceData.Type, resourceData.Count);
         }
     }
 }

@@ -39,13 +39,13 @@ namespace App.UI
             HideAll();
         }
 
-        private void OnResourceChanged(Dictionary<ResourceType, int> resources)
+        private void OnResourceChanged(Dictionary<ResourceType, ResourceValue> resources)
         {
             HideAll();
 
             foreach (var resource in resources)
             {
-                var text = $"{resource.Key} {resource.Value}";
+                var text = $"{resource.Key} {resource.Value.Amount}";
                 _resourceViews[(int)resource.Key].Show(text);
             }
         }
