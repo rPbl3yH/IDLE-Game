@@ -6,29 +6,32 @@ namespace App.Gameplay.LevelStorage
 {
     public class BuildingModel : ResourceStorageModel
     {
-        public AtomicEvent Built;
-        public Transform SpawnPoint;
-        public GameObject Prefab;
+        public AtomicEvent<Building> Built = new();
+        public GameObject SpawnPoint;
+        public Building Building;
+
+        public ResourceStorageModelService ResourceStorageModelService;
 
         private BuildMechanics _buildMechanics;
-        private BuildObjectMechanics _buildObjectMechanics;
-
+        private BuildObserverMechanics _buildObserverMechanics;
+        
         private void Awake()
         {
-            _buildMechanics = new BuildMechanics(ResourceStorage, Built);
-            _buildObjectMechanics = new BuildObjectMechanics(Built, Prefab, SpawnPoint);
+            var parent = ResourceStorageModelService.transform;
+            _buildMechanics = new BuildMechanics(ResourceStorage, Built, Building, SpawnPoint.transform, parent);
+            _buildObserverMechanics = new BuildObserverMechanics(this, Built, ResourceStorageModelService, SpawnPoint);
         }
 
         private void OnEnable()
         {
             _buildMechanics.OnEnable();
-            _buildObjectMechanics.OnEnable();
+            _buildObserverMechanics.OnEnable();
         }
 
         private void OnDisable()
         {
             _buildMechanics.OnDisable();
-            _buildObjectMechanics.OnDisable();
+            _buildObserverMechanics.OnDisable();
         }
     }
 }

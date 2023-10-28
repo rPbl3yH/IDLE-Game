@@ -1747,6 +1747,12 @@ Transform:
   m_Father: {fileID: 1904531493}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &878749548 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8219124526189317207, guid: 44f8d002ff1aa5b49aefdf7cce1f852a,
+    type: 3}
+  m_PrefabInstance: {fileID: 452395671}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1066841462
 GameObject:
   m_ObjectHideFlags: 0
@@ -2568,8 +2574,10 @@ MonoBehaviour:
     _resourceStorageConfig: {fileID: 11400000, guid: 404e51b594d9df142bcecc6e77fd46c8,
       type: 2}
   UnloadingPoint: {fileID: 452395672}
-  SpawnPoint: {fileID: 1859538017}
-  Prefab: {fileID: 7941782744118843776, guid: b4044102550362846a6e976a8c5e11db, type: 3}
+  SpawnPoint: {fileID: 878749548}
+  Building: {fileID: 7941782744118843781, guid: b4044102550362846a6e976a8c5e11db,
+    type: 3}
+  ResourceStorageModelService: {fileID: 1921575748}
 --- !u!1 &1861250100
 GameObject:
   m_ObjectHideFlags: 0

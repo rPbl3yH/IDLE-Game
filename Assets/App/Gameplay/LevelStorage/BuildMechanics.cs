@@ -7,12 +7,18 @@ namespace App.Gameplay.LevelStorage
     public class BuildMechanics
     {
         private readonly ResourceStorage _resourceStorage;
-        private readonly IAtomicAction _built;
-
-        public BuildMechanics(ResourceStorage resourceStorage, IAtomicAction built)
+        private readonly Transform _spawnPoint;
+        private readonly Transform _parent;
+        private readonly IAtomicAction<Building> _built;
+        private readonly Building _building;
+        
+        public BuildMechanics(ResourceStorage resourceStorage, IAtomicAction<Building> built, Building building, Transform spawnPoint, Transform parent)
         {
             _resourceStorage = resourceStorage;
             _built = built;
+            _building = building;
+            _spawnPoint = spawnPoint;
+            _parent = parent;
         }
 
         public void OnEnable()
@@ -35,7 +41,8 @@ namespace App.Gameplay.LevelStorage
 
         private void Build()
         {
-            _built?.Invoke();
+            var building = Object.Instantiate(_building, _spawnPoint.position, _spawnPoint.rotation, _parent);
+            _built?.Invoke(building);
         }
     }
 }

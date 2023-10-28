@@ -15,5 +15,18 @@ namespace App.Gameplay.LevelStorage
 
             return closetModels.FirstOrDefault(model => model.isActiveAndEnabled);
         }
+
+        public void AddStorage(ResourceStorageModel resourceStorageModel)
+        {
+            _resourceStorageModels.Add(resourceStorageModel);
+        }
+
+        public void RemoveStorage(ResourceStorageModel resourceStorageModel)
+        {
+            if (_resourceStorageModels.Contains(resourceStorageModel))
+            {
+                _resourceStorageModels.Remove(resourceStorageModel);
+            }
+        }
     }
 }
