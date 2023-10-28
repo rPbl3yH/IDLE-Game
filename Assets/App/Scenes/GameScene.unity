@@ -2568,6 +2568,8 @@ MonoBehaviour:
     _resourceStorageConfig: {fileID: 11400000, guid: 404e51b594d9df142bcecc6e77fd46c8,
       type: 2}
   UnloadingPoint: {fileID: 452395672}
+  SpawnPoint: {fileID: 1859538017}
+  Prefab: {fileID: 7941782744118843776, guid: b4044102550362846a6e976a8c5e11db, type: 3}
 --- !u!1 &1861250100
 GameObject:
   m_ObjectHideFlags: 0
