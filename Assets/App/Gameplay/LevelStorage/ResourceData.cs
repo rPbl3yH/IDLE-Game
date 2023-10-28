@@ -4,7 +4,7 @@ using UnityEngine;
 namespace App.Gameplay.LevelStorage
 {
     [Serializable]
-    public struct ResourceData
+    public class ResourceData
     {
         public ResourceType Type => _resourceType;
         public int Count => _count;

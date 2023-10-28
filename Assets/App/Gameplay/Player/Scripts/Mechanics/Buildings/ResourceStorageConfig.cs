@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using App.Gameplay.LevelStorage;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -8,6 +9,6 @@ namespace App.Gameplay.Player
     public class ResourceStorageConfig : ScriptableObject
     {
         [ShowInInspector, SerializeReference]
-        public Dictionary<ResourceType, int> Resources = new();
+        public List<ResourceData> Resources = new();
     }
 }

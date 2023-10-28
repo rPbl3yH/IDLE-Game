@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using App.Gameplay.LevelStorage;
 using App.Gameplay.Player;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -41,10 +42,11 @@ namespace App.Gameplay
             }
 
             var maxAmount = -1;
-                
-            if(_resourceStorageConfig.Resources.TryGetValue(resourceType, out var value))
+            ResourceData resource = _resourceStorageConfig.Resources.FirstOrDefault(data => data.Type == resourceType);
+            
+            if (resource != null)
             {
-                maxAmount = value;
+                maxAmount = resource.Count;
             }
             
             if (maxAmount == -1 || maxAmount >= count)

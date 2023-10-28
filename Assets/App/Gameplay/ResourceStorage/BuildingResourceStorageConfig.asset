@@ -12,3 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca9c491ea8fd463daa65508eb0b87dba, type: 3}
   m_Name: BuildingResourceStorageConfig
   m_EditorClassIdentifier: 
+  Resources:
+  - rid: 6750036670474092544
+  references:
+    version: 2
+    RefIds:
+    - rid: 6750036670474092544
+      type: {class: ResourceData, ns: App.Gameplay.LevelStorage, asm: Assembly-CSharp}
+      data:
+        _resourceType: 0
+        _count: 5

@@ -8,6 +8,7 @@ namespace App.Gameplay.Player
     {
         [SerializeField] private CharacterModel _characterModel;
         [SerializeField] private BarnService _barnService;
+        [SerializeField] private ResourceStorageModelService _resourceStorageModelService; 
         
         private PlayerDetectionBarnMechanics _playerDetectionBarnMechanics;
         private PlayerDetectionResourceMechanics _playerDetectionResourceMechanics;
@@ -20,7 +21,7 @@ namespace App.Gameplay.Player
         {
             _playerDetectionBarnMechanics = new PlayerDetectionBarnMechanics(_characterModel, _barnService);
             _playerDetectionResourceMechanics = new PlayerDetectionResourceMechanics(_characterModel);
-            _playerUnloadResourceMechanics = new PlayerUnloadResourceMechanics(_characterModel, _barnService);
+            _playerUnloadResourceMechanics = new PlayerUnloadResourceMechanics(_characterModel, _resourceStorageModelService);
         }
 
         private void Update()

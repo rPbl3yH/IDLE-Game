@@ -7,18 +7,20 @@ namespace App.Gameplay.Player
     public class PlayerUnloadResourceMechanics
     {
         private readonly CharacterModel _characterModel;
-        private readonly BarnService _barnService;
+        private readonly ResourceStorageModelService _storagesService;
 
-        public PlayerUnloadResourceMechanics(CharacterModel characterModel, BarnService barnService)
+        public PlayerUnloadResourceMechanics(CharacterModel characterModel, ResourceStorageModelService storagesService)
         {
-            _barnService = barnService;
+            _storagesService = storagesService;
             _characterModel = characterModel;
         }
 
         public void Update()
         {
-            var barn = _barnService.GetStorage();
-            var distance = Vector3.Distance(_characterModel.Root.position, barn.UnloadingPoint.position);
+            var storageModel = _storagesService.GetClosetModel(_characterModel.Root);
+            _characterModel.ResourceStorage.Value = storageModel;
+            
+            var distance = Vector3.Distance(_characterModel.Root.position, storageModel.UnloadingPoint.position);
 
             if (distance <= _characterModel.UnloadingDistance.Value)
             {
