@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using App.Gameplay.Player;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -9,12 +10,13 @@ namespace App.Gameplay
     [Serializable]
     public class ResourceStorage
     {
-        public event Action<Dictionary<ResourceType, ResourceValue>> ResourceChanged;
+        public event Action<Dictionary<ResourceType, ResourceValue>> ResourcesChanged;
 
         [ShowInInspector]
         private readonly Dictionary<ResourceType, ResourceValue> _storage = new();
 
-        [SerializeField] private ResourceStorageConfig _resourceStorageConfig;
+        [SerializeField] 
+        private ResourceStorageConfig _resourceStorageConfig;
         
         [Button]
         public bool TryAdd(ResourceType resourceType, int count)
@@ -54,17 +56,14 @@ namespace App.Gameplay
             return false;
         }
 
-        private void AddResource(ResourceType resourceType, int count)
+        public bool IsFull()
         {
-            _storage[resourceType].Amount += count;
-            ResourceChanged?.Invoke(_storage);
+            return _storage.Any(resource => resource.Value.Amount == resource.Value.MaxAmount);
         }
-        
-        private void CreateResource(ResourceType resourceType, int count, int maxAmount)
+
+        public void Clear()
         {
-            var resourceValue = new ResourceValue(count, maxAmount);
-            _storage.Add(resourceType, resourceValue);
-            ResourceChanged?.Invoke(_storage);
+            _storage.Clear();
         }
 
         public Dictionary<ResourceType, ResourceValue> GetAllResources()
@@ -83,7 +82,7 @@ namespace App.Gameplay
             resource = 0;
             return false;
         }
-        
+
         [Button]
         public bool TryRemove(ResourceType resourceType, int count)
         {
@@ -100,8 +99,21 @@ namespace App.Gameplay
                 _storage.Remove(resourceType);
             }
             
-            ResourceChanged?.Invoke(_storage);
+            ResourcesChanged?.Invoke(_storage);
             return true;
+        }
+
+        private void CreateResource(ResourceType resourceType, int count, int maxAmount)
+        {
+            var resourceValue = new ResourceValue(count, maxAmount);
+            _storage.Add(resourceType, resourceValue);
+            ResourcesChanged?.Invoke(_storage);
+        }
+
+        private void AddResource(ResourceType resourceType, int count)
+        {
+            _storage[resourceType].Amount += count;
+            ResourcesChanged?.Invoke(_storage);
         }
 
         private bool CanRemove(ResourceType resourceType, int count)

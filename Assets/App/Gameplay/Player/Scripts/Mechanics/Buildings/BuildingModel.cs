@@ -1,4 +1,6 @@
-﻿using App.Gameplay.LevelStorage;
+﻿using System;
+using System.Collections.Generic;
+using App.Gameplay.LevelStorage;
 using Modules.Atomic.Actions;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -11,28 +13,32 @@ namespace App.Gameplay.Player
         public AtomicEvent<ResourceData> ResourceAdded;
         public Transform UnloadingPoint;
 
-        [Button]
-        public bool CanAdd(ResourceType resourceType)
-        {
-            
-
-            return false;
-        }
-        
         private void OnEnable()
         {
-            ResourceAdded.AddListener(OnResourceAdded);
+            ResourceStorage.ResourcesChanged += OnResourcesChanged;   
         }
 
         private void OnDisable()
         {
-            ResourceAdded.RemoveListener(OnResourceAdded);
+            ResourceStorage.ResourcesChanged -= OnResourcesChanged;
         }
 
-        private void OnResourceAdded(ResourceData resourceData)
+        private void OnResourcesChanged(Dictionary<ResourceType, ResourceValue> value)
         {
-            print($"Resources Added {resourceData.Type} {resourceData.Count}");
-            ResourceStorage.TryAdd(resourceData.Type, resourceData.Count);
+            if (ResourceStorage.IsFull())
+            {
+                
+                Build();
+            }
+            else
+            {
+                print("Not full");
+            }
+        }
+
+        private void Build()
+        {
+            print("Build");
         }
     }
 }

@@ -2753,8 +2753,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ResourceStorage:
-    _resourceStorageConfig: {fileID: 0}
-  ResourceStorageConfig: {fileID: 0}
+    _resourceStorageConfig: {fileID: 11400000, guid: 404e51b594d9df142bcecc6e77fd46c8,
+      type: 2}
   UnloadingPoint: {fileID: 0}
 --- !u!1 &1861250100
 GameObject:

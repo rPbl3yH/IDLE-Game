@@ -17,12 +17,12 @@ namespace App.UI
 
         private void OnEnable()
         {
-            _barnModel.ResourceStorage.ResourceChanged += OnResourceChanged;
+            _barnModel.ResourceStorage.ResourcesChanged += OnResourcesChanged;
         }
 
         private void OnDisable()
         {
-            _barnModel.ResourceStorage.ResourceChanged -= OnResourceChanged;
+            _barnModel.ResourceStorage.ResourcesChanged -= OnResourcesChanged;
         }
 
         private void Start()
@@ -37,7 +37,7 @@ namespace App.UI
             HideAll();
         }
 
-        private void OnResourceChanged(Dictionary<ResourceType, ResourceValue> resources)
+        private void OnResourcesChanged(Dictionary<ResourceType, ResourceValue> resources)
         {
             HideAll();
 
