@@ -42,8 +42,8 @@ namespace App.Gameplay.Character.Scripts.Model
 
         public ResourceService ResourceService;
         public BarnService BarnService;
-        public DetectionResourceAction DetectionResourceAction;
-        public DetectionBarnAction DetectionBarnAction;
+        public DetectionResourceFunction DetectionResourceFunction;
+        public DetectionBarnFunction DetectionBarnFunction;
 
         //Логика
         private MovementMechanics _movementMechanics;
@@ -55,8 +55,8 @@ namespace App.Gameplay.Character.Scripts.Model
 
         private void Awake()
         {
-            DetectionResourceAction = new DetectionResourceAction(this, ResourceService);
-            DetectionBarnAction = new DetectionBarnAction(ResourceStorage, BarnService);
+            DetectionResourceFunction = new DetectionResourceFunction(this, ResourceService);
+            DetectionBarnFunction = new DetectionBarnFunction(BarnService);
             
             _movementMechanics = new MovementMechanics(Root, MoveDirection, Speed);
             _rotateMechanics = new RotateMechanics(View, MoveDirection);

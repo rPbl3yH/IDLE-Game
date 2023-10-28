@@ -17,7 +17,7 @@ namespace App.Gameplay.Player
         [SerializeField] 
         private CameraFollowingMechanics _cameraFollowingMechanics;
         
-        private void Awake()
+        private void Start()
         {
             _playerDetectionBarnMechanics = new PlayerDetectionBarnMechanics(_characterModel, _barnService);
             _playerDetectionResourceMechanics = new PlayerDetectionResourceMechanics(_characterModel);

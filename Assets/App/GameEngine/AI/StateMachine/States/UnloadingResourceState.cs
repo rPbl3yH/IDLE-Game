@@ -15,7 +15,7 @@ namespace App.GameEngine.AI.StateMachine.States
  
         private readonly MoveToPositionData _moveData;
         private readonly UnloadResourceData _unloadResourceData;
-        private readonly IAtomicAction _detectionBarnAction;
+        private readonly IAtomicFunction<ResourceStorageModel> _detectionBarnAction;
         private readonly IState _moveState;
 
         private float _timer;
@@ -32,7 +32,7 @@ namespace App.GameEngine.AI.StateMachine.States
             _resourceStorageModel = characterModel.ResourceStorage;
             _canUnloadResources = characterModel.CanUnloadResources;
             _unloadingDistance = characterModel.UnloadingDistance;
-            _detectionBarnAction = characterModel.DetectionBarnAction;
+            _detectionBarnAction = characterModel.DetectionBarnFunction;
         }
 
         public override void Enter()
@@ -46,7 +46,7 @@ namespace App.GameEngine.AI.StateMachine.States
 
         private void DetectBarn()
         {
-            _detectionBarnAction?.Invoke();
+            _resourceStorageModel.Value = _detectionBarnAction?.GetResult();
             
             if (_resourceStorageModel.Value != null)
             {

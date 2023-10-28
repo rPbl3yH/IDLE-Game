@@ -13,7 +13,7 @@ namespace App.GameEngine.AI.StateMachine.States
         private readonly MoveToPositionData _moveData;
         
         private readonly IState _moveState;
-        private readonly IAtomicAction _detectionAction;
+        private readonly IAtomicFunction<ResourceModel> _detectResourceFunction;
         private readonly AtomicVariable<Vector3> _moveDirection;
         private readonly AtomicVariable<ResourceModel> _targetResource;
         private readonly AtomicVariable<bool> _canGathering;
@@ -30,7 +30,7 @@ namespace App.GameEngine.AI.StateMachine.States
             _gatheringData = gatheringData;
             _moveData = moveData;
             _moveState = moveState;
-            _detectionAction = characterModel.DetectionResourceAction;
+            _detectResourceFunction = characterModel.DetectionResourceFunction;
             _moveDirection = characterModel.MoveDirection;
             _targetResource = characterModel.TargetResource;
             _canGathering = characterModel.CanGathering;
@@ -97,8 +97,7 @@ namespace App.GameEngine.AI.StateMachine.States
 
         private void FindResource()
         {
-            //TODO: не нравится мне, что здесь неявное присвоение в _targetResource
-            _detectionAction?.Invoke();
+            _targetResource.Value = _detectResourceFunction.GetResult();
             
             if (_targetResource.Value != null)
             {

@@ -14,7 +14,7 @@ namespace App.GameEngine.AI
 
         [SerializeField] private CharacterModel _characterModel;
 
-        private DetectionResourceAction _detectionResourceAction;
+        private DetectionResourceFunction _detectionResourceFunction;
         private MoveToPositionState _moveToPositionState;
         private GatheringResourceState _gatheringResourceState;
         private UnloadingResourceState _unloadingResourceState;

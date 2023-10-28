@@ -9,19 +9,17 @@ using UnityEngine;
 namespace App.Gameplay.Character.Scripts.Model.Actions
 {
     [Serializable]
-    public class DetectionResourceAction : IAtomicAction
+    public class DetectionResourceFunction : IAtomicFunction<ResourceModel>
     {
         private readonly ResourceService _resourceService;
-        private readonly IAtomicVariable<ResourceModel> _targetResource;
         private readonly IAtomicVariable<ResourceType> _resourceType;
         private readonly IAtomicValue<int> _amount;
         private readonly Transform _root;
 
-        public DetectionResourceAction(
+        public DetectionResourceFunction(
             CharacterModel characterModel,
             ResourceService resourceService)
         {
-            _targetResource = characterModel.TargetResource;
             _resourceType = characterModel.ResourceType;
             _amount = characterModel.Amount;
             _root = characterModel.Root;
@@ -29,7 +27,7 @@ namespace App.Gameplay.Character.Scripts.Model.Actions
         }
 
         [Button]
-        public void Invoke()
+        public ResourceModel GetResult()
         {
             ResourceModel resource;
             
@@ -46,7 +44,7 @@ namespace App.Gameplay.Character.Scripts.Model.Actions
                 resource = _resourceService.GetClosetResource(_root, _resourceType.Value);
             }
 
-            _targetResource.Value = resource;
+            return resource;
         }
     }
 }
