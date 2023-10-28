@@ -12,6 +12,9 @@ namespace App.Gameplay.Player
         private PlayerDetectionBarnMechanics _playerDetectionBarnMechanics;
         private PlayerDetectionResourceMechanics _playerDetectionResourceMechanics;
         private PlayerUnloadResourceMechanics _playerUnloadResourceMechanics;
+
+        [SerializeField] 
+        private CameraFollowingMechanics _cameraFollowingMechanics;
         
         private void Awake()
         {
@@ -22,9 +25,12 @@ namespace App.Gameplay.Player
 
         private void Update()
         {
+            var deltaTime = Time.deltaTime;
+            
             _playerDetectionBarnMechanics.Update();
             _playerDetectionResourceMechanics.Update();
             _playerUnloadResourceMechanics.Update();
+            _cameraFollowingMechanics.Update(deltaTime);
         }
     }
 }
