@@ -4,7 +4,7 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace App.Gameplay.Movement
+namespace App.GameEngine.Input.Handlers
 {
     public class InputHandler : IInputHandler, ITickable
     {

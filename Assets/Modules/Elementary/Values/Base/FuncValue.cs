@@ -1,6 +1,6 @@
 using System;
 
-namespace Elementary
+namespace Modules.Elementary.Values.Base
 {
     public sealed class FuncValue<T> : IValue<T>
     {

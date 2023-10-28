@@ -1,7 +1,10 @@
-﻿using Atomic;
+﻿using App.Gameplay.Resource.Model.Mechanics;
+using App.Gameplay.ResourceStorage;
+using Modules.Atomic.Actions;
+using Modules.Atomic.Values;
 using UnityEngine;
 
-namespace App.Gameplay.Resource
+namespace App.Gameplay.Resource.Model
 {
     public class ResourceModel : MonoBehaviour
     {

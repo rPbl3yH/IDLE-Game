@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Elementary
+namespace Modules.Elementary.Actions.MonoBehaviours
 {
     public abstract class MonoAction : MonoBehaviour, IAction
     {

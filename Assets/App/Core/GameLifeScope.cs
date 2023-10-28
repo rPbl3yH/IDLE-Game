@@ -1,5 +1,7 @@
+using App.GameEngine.Input;
+using App.GameEngine.Input.Handlers;
 using App.Gameplay;
-using App.Gameplay.Movement;
+using App.Gameplay.Character.Scripts.Model;
 using SimpleInputNamespace;
 using UnityEngine;
 using VContainer;

@@ -1,4 +1,4 @@
-namespace Atomic
+namespace Modules.Atomic.Values
 {
     public interface IAtomicValue<out T>
     {

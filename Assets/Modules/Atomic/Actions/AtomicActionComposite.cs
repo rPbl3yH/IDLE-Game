@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 
-namespace Atomic
+namespace Modules.Atomic.Actions
 {
     [Serializable]
     public class AtomicActionComposite : IAtomicAction

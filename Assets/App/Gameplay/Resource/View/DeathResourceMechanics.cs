@@ -1,7 +1,7 @@
-﻿using Atomic;
+﻿using Modules.Atomic.Values;
 using UnityEngine;
 
-namespace App.Gameplay.Resource
+namespace App.Gameplay.Resource.View
 {
     public class DeathResourceMechanics
     {

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Elementary
+namespace Modules.Elementary.Actions.Base
 {
     public class ActionComposite : IAction
     {

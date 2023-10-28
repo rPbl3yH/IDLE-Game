@@ -1,6 +1,6 @@
 using Sirenix.OdinInspector;
 
-namespace Elementary
+namespace Modules.Elementary.Values.Base
 {
     public sealed class Value<T> : IValue<T>
     {

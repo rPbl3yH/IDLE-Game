@@ -1,8 +1,8 @@
 using App.Gameplay.LevelStorage;
-using Atomic;
+using Modules.Atomic.Values;
 using UnityEngine;
 
-namespace App.Gameplay
+namespace App.GameEngine
 {
     public class BarnColliderSensorHandler : IColliderSensorHandler
     {

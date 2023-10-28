@@ -1,4 +1,4 @@
-namespace Elementary
+namespace Modules.Elementary.Values
 {
     public interface IValue<out T>
     {

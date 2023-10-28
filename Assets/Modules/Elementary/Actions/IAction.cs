@@ -1,4 +1,4 @@
-namespace Elementary
+namespace Modules.Elementary.Actions
 {
     public interface IAction
     {

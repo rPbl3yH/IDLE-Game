@@ -1,6 +1,6 @@
 using System;
 
-namespace Atomic
+namespace Modules.Atomic.States
 {
     [Serializable]
     public class State : IState

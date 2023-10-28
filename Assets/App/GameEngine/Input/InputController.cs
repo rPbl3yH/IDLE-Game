@@ -1,8 +1,10 @@
 ﻿using System;
+using App.GameEngine.Input.Handlers;
+using App.Gameplay.Character.Scripts.Model;
 using UnityEngine;
 using VContainer.Unity;
 
-namespace App.Gameplay.Movement
+namespace App.GameEngine.Input
 {
     public class InputController : IStartable, IDisposable
     {

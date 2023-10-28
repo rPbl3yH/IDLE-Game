@@ -1,8 +1,4 @@
-﻿using System.Linq;
-using App.Gameplay.Resource;
-using UnityEngine;
-
-namespace App.Gameplay
+﻿namespace App.Gameplay.Resource.Utils
 {
     public static class ResourceDetectionUtils
     {

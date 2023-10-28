@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using App.Gameplay.LevelStorage;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace App.Gameplay
+namespace App.Gameplay.ResourceStorage
 {
     [Serializable]
     public class ResourceStorage

@@ -1,6 +1,6 @@
 using Declarative;
 
-namespace Atomic
+namespace Modules.Atomic.States
 {
     public abstract class FixedUpdateState : IState, IFixedUpdateListener
     {

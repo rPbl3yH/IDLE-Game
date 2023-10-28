@@ -2,7 +2,7 @@ using System;
 using Declarative;
 using Sirenix.OdinInspector;
 
-namespace Atomic
+namespace Modules.Atomic.Actions
 {
     [Serializable]
     public sealed class AtomicEvent : IAtomicAction, IDisposable

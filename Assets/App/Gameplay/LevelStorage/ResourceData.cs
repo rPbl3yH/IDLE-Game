@@ -1,4 +1,5 @@
 ﻿using System;
+using App.Gameplay.ResourceStorage;
 
 namespace App.Gameplay.LevelStorage
 {

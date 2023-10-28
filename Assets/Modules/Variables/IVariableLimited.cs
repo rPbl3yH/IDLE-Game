@@ -1,6 +1,6 @@
 using System;
 
-namespace Elementary
+namespace Modules.Variables
 {
     public interface IVariableLimited<T> : IVariable<T>
     {

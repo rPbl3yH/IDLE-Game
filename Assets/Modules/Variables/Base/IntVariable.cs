@@ -1,8 +1,10 @@
 using System;
+using Modules.Elementary.Actions;
+using Modules.Elementary.Actions.Base;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Elementary
+namespace Modules.Variables.Base
 {
     [Serializable]
     public sealed class IntVariable : IVariable<int>

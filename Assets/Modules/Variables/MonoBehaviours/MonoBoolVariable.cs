@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
+using Modules.Elementary.Actions;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Elementary
+namespace Modules.Variables.MonoBehaviours
 {
     [AddComponentMenu("Elementary/Variables/Variable «Bool»")]
     public sealed class MonoBoolVariable : MonoBehaviour, IVariable<bool>

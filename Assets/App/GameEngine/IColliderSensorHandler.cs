@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace App.Gameplay
+namespace App.GameEngine
 {
     public interface IColliderSensorHandler
     {

@@ -1,9 +1,10 @@
 using System;
 using System.Runtime.Serialization;
+using Modules.Elementary.Values.ScriptableObjects;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Elementary
+namespace Modules.Elementary.Values.Adapters
 {
     [Serializable]
     public sealed class StringAdapter : IValue<string>

@@ -1,6 +1,7 @@
 using System;
+using Modules.Elementary.Values;
 
-namespace Elementary
+namespace Modules.Variables
 {
     public interface IVariable<T> : IValue<T>
     {

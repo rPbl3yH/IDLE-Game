@@ -1,9 +1,11 @@
 using System;
 using System.Runtime.Serialization;
+using Modules.Elementary.Values.ScriptableObjects;
+using Modules.Variables.MonoBehaviours;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Elementary
+namespace Modules.Elementary.Values.Adapters
 {
     [Serializable]
     public sealed class BoolAdapter : IValue<bool>

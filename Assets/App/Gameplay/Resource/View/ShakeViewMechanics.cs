@@ -1,8 +1,8 @@
-﻿using Atomic;
-using DG.Tweening;
+﻿using DG.Tweening;
+using Modules.Atomic.Actions;
 using UnityEngine;
 
-namespace App.Gameplay.Resource
+namespace App.Gameplay.Resource.View
 {
     public class ShakeViewMechanics
     {

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using App.Gameplay.Resource.Model;
+using App.Gameplay.ResourceStorage;
 using UnityEngine;
 
 namespace App.Gameplay.Resource

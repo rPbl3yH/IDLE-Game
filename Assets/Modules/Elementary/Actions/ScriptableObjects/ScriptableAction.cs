@@ -1,4 +1,4 @@
-namespace Elementary
+namespace Modules.Elementary.Actions.ScriptableObjects
 {
     public abstract class ScriptableAction : IAction
     {

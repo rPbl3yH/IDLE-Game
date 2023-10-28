@@ -3,7 +3,7 @@ using System.Collections;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Elementary
+namespace Modules.Elementary.Time.MonoBehaviours
 {
     [AddComponentMenu("Elementary/Time/Countdown")]
     public sealed class MonoCountdown : MonoBehaviour, ICountdown
@@ -95,7 +95,7 @@ namespace Elementary
             while (this.remainingTime > 0)
             {
                 yield return null;
-                this.remainingTime -= Time.deltaTime;
+                this.remainingTime -= UnityEngine.Time.deltaTime;
                 this.OnTimeChanged?.Invoke();
             }
 

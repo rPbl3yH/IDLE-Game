@@ -1,11 +1,11 @@
-﻿using Atomic;
+﻿using Modules.Atomic.Actions;
 using UnityEngine;
 
 namespace App.Gameplay.LevelStorage
 {
     public class BarnModel : MonoBehaviour
     {
-        public ResourceStorage ResourceStorage;
+        public ResourceStorage.ResourceStorage ResourceStorage;
 
         public AtomicEvent<ResourceData> ResourceAdded;
         public Transform UnloadingPoint;

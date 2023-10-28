@@ -1,4 +1,4 @@
-namespace Elementary
+namespace Modules.Elementary.Values.Base
 {
     public sealed class DecoratorValue<T> : IValue<T>
     {

@@ -1,7 +1,9 @@
 using System;
+using Modules.Elementary.Actions;
+using Modules.Elementary.Actions.Base;
 using Sirenix.OdinInspector;
 
-namespace Elementary
+namespace Modules.Variables.Base
 {
     public sealed class Variable<T> : IVariable<T>
     {

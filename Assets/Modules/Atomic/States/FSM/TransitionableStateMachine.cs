@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Declarative;
 
-namespace Atomic
+namespace Modules.Atomic.States.FSM
 {
     [Serializable]
     public class TransitionableStateMachine<TKey> : StateMachine<TKey>, IUpdateListener

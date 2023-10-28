@@ -1,6 +1,6 @@
 using System;
 
-namespace Elementary
+namespace Modules.Elementary.Actions.Base
 {
     public sealed class ActionDelegate : IAction
     {

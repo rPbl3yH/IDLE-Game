@@ -1,6 +1,6 @@
 using Sirenix.OdinInspector;
 
-namespace Atomic
+namespace Modules.Atomic.Actions
 {
     public sealed class AtomicAction : IAtomicAction
     {

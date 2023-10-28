@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Elementary
+namespace Modules.Elementary.Values.Base
 {
     [Serializable]
     public sealed class StringValue : IValue<string>

@@ -1,7 +1,9 @@
 using System;
+using Modules.Elementary.Actions;
+using Modules.Variables.Base;
 using UnityEngine;
 
-namespace Elementary
+namespace Modules.Variables.MonoBehaviours
 {
     [AddComponentMenu("Elementary/Variables/Variable «Int Limited»")]
     public sealed class MonoIntVariableLimited : MonoBehaviour, IVariableLimited<int>

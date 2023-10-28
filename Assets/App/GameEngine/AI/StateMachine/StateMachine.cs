@@ -1,7 +1,6 @@
 ﻿using System;
-using UnityEngine;
 
-namespace App.Gameplay.AI.States
+namespace App.GameEngine.AI.StateMachine
 {
     [Serializable]
     public class StateMachine : IState

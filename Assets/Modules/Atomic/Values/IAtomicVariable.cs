@@ -1,6 +1,6 @@
 using System;
 
-namespace Atomic
+namespace Modules.Atomic.Values
 {
     public interface IAtomicVariable<T> : IAtomicValue<T>
     {

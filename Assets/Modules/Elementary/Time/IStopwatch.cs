@@ -1,6 +1,6 @@
 using System;
 
-namespace Elementary
+namespace Modules.Elementary.Time
 {
     public interface IStopwatch
     {

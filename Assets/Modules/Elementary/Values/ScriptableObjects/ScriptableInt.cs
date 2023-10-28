@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Elementary
+namespace Modules.Elementary.Values.ScriptableObjects
 {
     [CreateAssetMenu(
         fileName = "Scriptable Int",

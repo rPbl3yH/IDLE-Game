@@ -1,8 +1,10 @@
-﻿using App.Gameplay.AI.Model;
-using App.Gameplay.AI.States;
+﻿using App.GameEngine.AI.StateMachine.Data;
+using App.GameEngine.AI.StateMachine.States;
+using App.Gameplay.Character.Scripts.Model;
+using App.Gameplay.Character.Scripts.Model.Actions;
 using UnityEngine;
 
-namespace App.Gameplay.AI
+namespace App.GameEngine.AI
 {
     public class CharacterAIModel : MonoBehaviour
     {
@@ -16,11 +18,11 @@ namespace App.Gameplay.AI
         private MoveToPositionState _moveToPositionState;
         private GatheringResourceState _gatheringResourceState;
         private UnloadingResourceState _unloadingResourceState;
-        private StateMachine _stateMachine;
+        private StateMachine.StateMachine _stateMachine;
         
         private void Start()
         {
-            _stateMachine = new StateMachine();
+            _stateMachine = new StateMachine.StateMachine();
 
             _moveToPositionState =
                 new MoveToPositionState(MoveToPositionData, _characterModel.MoveDirection, _characterModel.Root);

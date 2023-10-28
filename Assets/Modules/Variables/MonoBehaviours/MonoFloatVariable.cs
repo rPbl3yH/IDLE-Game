@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
+using Modules.Elementary.Actions;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Elementary
+namespace Modules.Variables.MonoBehaviours
 {
     [AddComponentMenu("Elementary/Variables/Variable «Float»")]
     public sealed class MonoFloatVariable : MonoBehaviour, IVariable<float>

@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using App.Gameplay.Resource.Model;
+using UnityEngine;
 
-namespace App.Gameplay.Resource
+namespace App.Gameplay.Resource.View
 {
     public class ResourceView : MonoBehaviour
     {

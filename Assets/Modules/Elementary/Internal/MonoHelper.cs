@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Elementary
+namespace Modules.Elementary.Internal
 {
     internal sealed class MonoHelper : MonoBehaviour
     {

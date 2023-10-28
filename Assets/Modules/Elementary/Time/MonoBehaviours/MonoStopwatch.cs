@@ -3,7 +3,7 @@ using System.Collections;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Elementary
+namespace Modules.Elementary.Time.MonoBehaviours
 {
     [AddComponentMenu("Elementary/Time/Stopwatch")]
     public sealed class MonoStopwatch : MonoBehaviour, IStopwatch
@@ -72,7 +72,7 @@ namespace Elementary
             while (true)
             {
                 yield return null;
-                this.currentTime += Time.deltaTime;
+                this.currentTime += UnityEngine.Time.deltaTime;
                 this.OnTimeChanged?.Invoke();
             }
         }

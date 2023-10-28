@@ -1,9 +1,11 @@
 using System;
+using Modules.Elementary.Actions;
+using Modules.Elementary.Actions.Base;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Elementary
+namespace Modules.Variables.MonoBehaviours
 {
     public abstract class MonoVariable<T> : MonoBehaviour, IVariable<T>
     {

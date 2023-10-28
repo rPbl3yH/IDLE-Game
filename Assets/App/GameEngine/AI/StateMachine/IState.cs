@@ -1,4 +1,4 @@
-﻿namespace App.Gameplay.AI.States
+﻿namespace App.GameEngine.AI.StateMachine
 {
     public interface IState
     {

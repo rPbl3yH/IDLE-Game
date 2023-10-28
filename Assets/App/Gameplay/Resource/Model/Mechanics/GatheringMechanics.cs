@@ -1,6 +1,7 @@
-﻿using Atomic;
+﻿using Modules.Atomic.Actions;
+using Modules.Atomic.Values;
 
-namespace App.Gameplay.Resource
+namespace App.Gameplay.Resource.Model.Mechanics
 {
     public class GatheringMechanics
     {

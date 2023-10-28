@@ -1,6 +1,6 @@
 using System;
 
-namespace Atomic
+namespace Modules.Atomic.Process
 {
     public interface IAtomicProcess
     {

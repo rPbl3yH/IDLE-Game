@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
+using Modules.Elementary.Internal;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Elementary
+namespace Modules.Elementary.Time.Base
 {
     [Serializable]
     public sealed class Stopwatch : IStopwatch
@@ -72,7 +73,7 @@ namespace Elementary
             while (true)
             {
                 yield return null;
-                this.currentTime += Time.deltaTime;
+                this.currentTime += UnityEngine.Time.deltaTime;
                 this.OnTimeChanged?.Invoke();
             }
         }

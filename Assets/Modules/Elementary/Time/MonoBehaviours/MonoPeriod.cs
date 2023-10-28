@@ -3,7 +3,7 @@ using System.Collections;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Elementary
+namespace Modules.Elementary.Time.MonoBehaviours
 {
     [AddComponentMenu("Elementary/Time/Period")]
     public sealed class MonoPeriod : MonoBehaviour, IPeriod

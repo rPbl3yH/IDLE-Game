@@ -3,7 +3,7 @@ using System.Collections;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Elementary
+namespace Modules.Elementary.Time.MonoBehaviours
 {
     [AddComponentMenu("Elementary/Time/Timer")]
     public sealed class MonoTimer : MonoBehaviour, ITimer
@@ -100,7 +100,7 @@ namespace Elementary
             while (this.currentTime < this.duration)
             {
                 yield return null;
-                this.currentTime += Time.deltaTime;
+                this.currentTime += UnityEngine.Time.deltaTime;
                 this.OnTimeChanged?.Invoke();
             }
 
