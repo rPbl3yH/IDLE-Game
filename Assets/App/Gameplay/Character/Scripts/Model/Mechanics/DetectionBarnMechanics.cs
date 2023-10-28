@@ -8,10 +8,10 @@ namespace App.Gameplay.Character.Scripts.Model.Mechanics
 {
     public class DetectionBarnMechanics
     {
-        private readonly AtomicVariable<BarnModel> _levelStorageModel;
+        private readonly AtomicVariable<ResourceStorageModel> _levelStorageModel;
         private readonly ColliderSensor _colliderSensor;
         
-        public DetectionBarnMechanics(AtomicVariable<BarnModel> levelStorageModel, ColliderSensor colliderSensor)
+        public DetectionBarnMechanics(AtomicVariable<ResourceStorageModel> levelStorageModel, ColliderSensor colliderSensor)
         {
             _levelStorageModel = levelStorageModel;
             _colliderSensor = colliderSensor;
@@ -29,7 +29,7 @@ namespace App.Gameplay.Character.Scripts.Model.Mechanics
 
         private void OnColliderUpdated(Collider[] colliders)
         {
-            var value = colliders.FirstOrDefault()?.GetComponent<BarnModel>();
+            var value = colliders.FirstOrDefault()?.GetComponent<ResourceStorageModel>();
             _levelStorageModel.Value = value;
         }
     }

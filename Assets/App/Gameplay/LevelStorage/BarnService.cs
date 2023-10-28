@@ -4,11 +4,11 @@ namespace App.Gameplay.LevelStorage
 {
     public class BarnService : MonoBehaviour
     {
-        [SerializeField] private BarnModel _barnModel;
+        [SerializeField] private ResourceStorageModel _resourceStorageModel;
 
-        public BarnModel GetStorage()
+        public ResourceStorageModel GetStorage()
         {
-            return _barnModel;
+            return _resourceStorageModel;
         }
     }
 }

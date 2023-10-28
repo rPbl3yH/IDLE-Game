@@ -1,6 +1,6 @@
 ﻿namespace App.Gameplay.LevelStorage
 {
-    public class BarnModel : ResourceStorageModel
+    public class BuildingModel : ResourceStorageModel
     {
         
     }

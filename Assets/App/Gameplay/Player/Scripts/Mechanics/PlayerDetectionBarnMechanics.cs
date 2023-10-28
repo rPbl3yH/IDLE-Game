@@ -16,7 +16,7 @@ namespace App.Gameplay.Player
 
         public void Update()
         {
-            _characterModel.ResourceStorage.Value = _barnService.GetStorage().ResourceStorage;
+            _characterModel.ResourceStorage.Value = _barnService.GetStorage();
         }
     }
 }

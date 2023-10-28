@@ -35,7 +35,7 @@ namespace App.Gameplay.Character.Scripts.Model
         public AtomicVariable<bool> IsFreeSpace;
 
         [Header("Unload Resources")]
-        public AtomicVariable<ResourceStorage> ResourceStorage;
+        public AtomicVariable<ResourceStorageModel> ResourceStorage;
         public AtomicVariable<float> UnloadingDistance;
         public AtomicVariable<float> Delay;
         public AtomicVariable<bool> CanUnloadResources;

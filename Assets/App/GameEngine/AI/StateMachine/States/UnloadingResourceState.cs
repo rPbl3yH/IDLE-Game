@@ -9,8 +9,7 @@ namespace App.GameEngine.AI.StateMachine.States
 {
     public class UnloadingResourceState : StateMachine
     {
-        private readonly AtomicVariable<ResourceStorage> _resourceStorage;
-        private readonly AtomicVariable<BarnModel> _barnModel;
+        private readonly AtomicVariable<ResourceStorageModel> _resourceStorageModel;
         private readonly AtomicVariable<bool> _canUnloadResources;
         private readonly AtomicVariable<float> _unloadingDistance;
  
@@ -30,7 +29,7 @@ namespace App.GameEngine.AI.StateMachine.States
             _moveData = moveData;
             _moveState = moveState;
             _unloadResourceData = unloadResourceData;
-            _resourceStorage = characterModel.ResourceStorage;
+            _resourceStorageModel = characterModel.ResourceStorage;
             _canUnloadResources = characterModel.CanUnloadResources;
             _unloadingDistance = characterModel.UnloadingDistance;
             _detectionBarnAction = characterModel.DetectionBarnAction;
@@ -39,8 +38,7 @@ namespace App.GameEngine.AI.StateMachine.States
         public override void Enter()
         {
             base.Enter();
-            _barnModel.Value = _unloadResourceData.BarnService.GetStorage();
-            _resourceStorage.Value = _barnModel.Value.ResourceStorage;
+            _resourceStorageModel.Value =  _unloadResourceData.BarnService.GetStorage();
             _moveData.StoppingDistance = _unloadingDistance.Value;
             
             DetectBarn();
@@ -50,9 +48,9 @@ namespace App.GameEngine.AI.StateMachine.States
         {
             _detectionBarnAction?.Invoke();
             
-            if (_resourceStorage.Value != null)
+            if (_resourceStorageModel.Value != null)
             {
-                _moveData.TargetPosition = _barnModel.Value.UnloadingPoint.position;
+                _moveData.TargetPosition = _resourceStorageModel.Value.UnloadingPoint.position;
                 _moveData.IsPositionReached = false;
             }
         }

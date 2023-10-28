@@ -10,20 +10,20 @@ namespace App.Gameplay.Character.Scripts.Model.Actions
     public class DetectionBarnAction : IAtomicAction
     {
         private readonly BarnService _resourceService;
-        private readonly IAtomicVariable<ResourceStorage> _barnModel;
+        private readonly IAtomicVariable<ResourceStorageModel> _resourceStorageModel;
 
         public DetectionBarnAction(
-            IAtomicVariable<ResourceStorage> barnModel,
+            IAtomicVariable<ResourceStorageModel> resourceStorageModel,
             BarnService resourceService)
         {
-            _barnModel = barnModel;
+            _resourceStorageModel = resourceStorageModel;
             _resourceService = resourceService;
         }
 
         [Button]
         public void Invoke()
         {
-            _barnModel.Value = _resourceService.GetStorage().ResourceStorage;
+            _resourceStorageModel.Value = _resourceService.GetStorage();
         }
     }
 }

@@ -9,7 +9,7 @@ namespace App.UI
 {
     public class ResourceViewObserver : MonoBehaviour
     {
-        [SerializeField] private BarnModel _barnModel;
+        [SerializeField] private ResourceStorageModel _resourceStorageModel;
         [SerializeField] private ResourceView _resourceViewPrefab;
         
         [ShowInInspector, ReadOnly]
@@ -17,12 +17,12 @@ namespace App.UI
 
         private void OnEnable()
         {
-            _barnModel.ResourceStorage.ResourcesChanged += OnResourcesChanged;
+            _resourceStorageModel.ResourceStorage.ResourcesChanged += OnResourcesChanged;
         }
 
         private void OnDisable()
         {
-            _barnModel.ResourceStorage.ResourcesChanged -= OnResourcesChanged;
+            _resourceStorageModel.ResourceStorage.ResourcesChanged -= OnResourcesChanged;
         }
 
         private void Start()

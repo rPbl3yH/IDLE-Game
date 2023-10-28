@@ -5,7 +5,7 @@ namespace App.Gameplay.Character.Scripts.Model.Mechanics
 {
     public class UnloadResourcesMechanics
     {
-        private readonly AtomicVariable<ResourceStorage> _storage;
+        private readonly AtomicVariable<ResourceStorageModel> _storage;
         private readonly AtomicVariable<bool> _canUnloadResources;
         private readonly AtomicVariable<float> _delay;
         private readonly AtomicVariable<ResourceType> _resourceType;
@@ -14,7 +14,7 @@ namespace App.Gameplay.Character.Scripts.Model.Mechanics
         private float _timer;
         
         public UnloadResourcesMechanics(
-            AtomicVariable<ResourceStorage> storage,
+            AtomicVariable<ResourceStorageModel> storage,
             AtomicVariable<bool> canUnloadResources,
             AtomicVariable<float> delay,
             AtomicVariable<ResourceType> resourceType,
@@ -55,7 +55,7 @@ namespace App.Gameplay.Character.Scripts.Model.Mechanics
                 }
 
                 var unloadCount = 1;
-                if (_storage.Value.TryAdd(_resourceType.Value, unloadCount))
+                if (_storage.Value.ResourceStorage.TryAdd(_resourceType.Value, unloadCount))
                 {
                     _amount.Value -= unloadCount;
                 }
