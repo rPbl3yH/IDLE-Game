@@ -47,7 +47,7 @@ namespace App.Gameplay.Player
         public PlayerLoadResourceAvailableMechanics(PlayerModel playerModel)
         {
             _canShowLoadResources = playerModel.IsShowLoadResources;
-            _loadResourceType = playerModel.CharacterModel.ResourceType;
+            _loadResourceType = playerModel.CharacterModel.LoadResourceType;
             _resourceSelected = playerModel.LoadResourceSelected;
             _isFreeSpace = playerModel.CharacterModel.IsFreeSpace;
             _resourceStorage = playerModel.CharacterModel.ResourceStorage;
@@ -100,6 +100,7 @@ namespace App.Gameplay.Player
 
         private void OnLoadResourceSelected(ResourceType resourceType)
         {
+            Debug.Log(resourceType);
             _loadResourceType.Value = resourceType;
             _canUnload.Value = false;
             _canLoad.Value = true;

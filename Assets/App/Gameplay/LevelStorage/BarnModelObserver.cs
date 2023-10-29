@@ -24,7 +24,7 @@ namespace App.Gameplay.LevelStorage
                 return;
             }
             
-            if (_barnModel.ResourceStorage.GetAllResources().Count > 0)
+            if (_barnModel.ResourceStorage.Resources.Count > 0)
             {
                 _viewController.Show();
             }

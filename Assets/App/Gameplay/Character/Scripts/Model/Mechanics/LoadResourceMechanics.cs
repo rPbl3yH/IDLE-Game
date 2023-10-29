@@ -9,7 +9,7 @@ namespace App.Gameplay.Character.Scripts.Model.Mechanics
     {
         private readonly AtomicEvent<ResourceType> _resourceLoaded;
         private readonly AtomicVariable<ResourceType> _resourceType;
-        private readonly AtomicVariable<ResourceType> _transferResourceType;
+        private readonly AtomicVariable<ResourceType> _loadResourceType;
         private readonly AtomicVariable<bool> _isFreeSpace;
         private readonly AtomicVariable<int> _amount;
         private readonly AtomicVariable<bool> _canLoadResources;
@@ -21,7 +21,7 @@ namespace App.Gameplay.Character.Scripts.Model.Mechanics
         public LoadResourceMechanics(CharacterModel characterModel)
         {
             _resourceLoaded = characterModel.ResourceLoaded;
-            _transferResourceType = characterModel.LoadResourceType;
+            _loadResourceType = characterModel.LoadResourceType;
             _isFreeSpace = characterModel.IsFreeSpace;
             _resourceType = characterModel.ResourceType;
             _amount = characterModel.ResourceAmount;
@@ -48,15 +48,15 @@ namespace App.Gameplay.Character.Scripts.Model.Mechanics
                     return;
                 }
                 
-                if(!_resourceStorage.Value.ResourceStorage.TryRemove(_transferResourceType.Value, 1))
+                if(!_resourceStorage.Value.ResourceStorage.Resources.ContainsKey(_loadResourceType.Value))
                 {
                     return;
                 }
                 
                 Debug.Log("Resource loaded");
-                _resourceType.Value = _transferResourceType.Value;
+                _resourceType.Value = _loadResourceType.Value;
                 _amount.Value++;
-                _resourceLoaded?.Invoke(_transferResourceType.Value);
+                _resourceLoaded?.Invoke(_loadResourceType.Value);
             }
         }
 

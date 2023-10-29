@@ -13,6 +13,8 @@ namespace App.Gameplay
     {
         public event Action<Dictionary<ResourceType, ResourceValue>> ResourcesChanged;
 
+        public Dictionary<ResourceType, ResourceValue> Resources => _storage;
+
         [ShowInInspector]
         private readonly Dictionary<ResourceType, ResourceValue> _storage = new();
 
@@ -66,11 +68,6 @@ namespace App.Gameplay
         public void Clear()
         {
             _storage.Clear();
-        }
-
-        public Dictionary<ResourceType, ResourceValue> GetAllResources()
-        {
-            return _storage;
         }
 
         public bool TryGetResource(ResourceType resourceType, out int resource)

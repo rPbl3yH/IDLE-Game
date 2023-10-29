@@ -12,6 +12,7 @@ namespace App.Gameplay.LevelStorage
         
         [SerializeField] private LoadResourceView _prefab;
         [SerializeField] private Transform _parent;
+        [SerializeField] private ResourceStorageModel _resourceStorage;
         
         [ShowInInspector]
         private Dictionary<ResourceType, LoadResourceView> _views = new();
@@ -32,8 +33,11 @@ namespace App.Gameplay.LevelStorage
         {
             foreach (var view in _views)
             {
-                view.Value.ResourceSelected += ValueOnResourceSelected;
-                view.Value.Show(view.Key.ToString());
+                if (_resourceStorage.ResourceStorage.Resources.ContainsKey(view.Key))
+                {
+                    view.Value.ResourceSelected += ValueOnResourceSelected;
+                    view.Value.Show(view.Key.ToString());
+                }
             }
         }
 
@@ -41,6 +45,10 @@ namespace App.Gameplay.LevelStorage
         {
             foreach (var view in _views)
             {
+                if (!view.Value.isActiveAndEnabled)
+                {
+                    continue;
+                }
                 view.Value.ResourceSelected -= ValueOnResourceSelected;
                 view.Value.Hide();
             }
