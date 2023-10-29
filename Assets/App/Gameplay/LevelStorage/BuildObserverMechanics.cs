@@ -40,7 +40,7 @@ namespace App.Gameplay.LevelStorage
             _resourceStorageModelService.RemoveStorage(_buildingModel);
             _buildingUI.SetActive(false);
             _spawnPoint.SetActive(false);
-
+            
             if (building is ResourceStorageModel storageModel)
             {
                 _resourceStorageModelService.AddStorage(storageModel);

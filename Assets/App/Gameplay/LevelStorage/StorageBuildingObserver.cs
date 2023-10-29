@@ -2,16 +2,19 @@
 using App.UI;
 using UnityEngine;
 using VContainer;
+using VContainer.Unity;
 
 namespace App.Gameplay.LevelStorage
 {
     public class StorageBuildingObserver : MonoBehaviour
     {
-        private ResourceViewObserver _resourceViewObserver;
-        
-        [SerializeField] private Transform _parent;
-        [SerializeField] private ResourceView _resourceView;
+        [Inject] private IObjectResolver _container;
+        [Inject] private ResourceViewFactory _resourceViewFactory;
+
         [SerializeField] private BuildingModel _buildingModel;
+        [SerializeField] private BarnService _barnService;
+
+        private ResourceViewObserver _resourceViewObserver;
 
         private void OnEnable()
         {
@@ -27,6 +30,12 @@ namespace App.Gameplay.LevelStorage
         {
             if (building is ResourceStorageModel resourceStorageModel)
             {
+                _barnService.RegisterBarn(resourceStorageModel);
+                var resourceViewObserver =
+                    new ResourceViewObserver(_resourceViewFactory, resourceStorageModel.ResourceStorage);
+                
+                _container.Inject(resourceViewObserver);
+                print("Create resource view observer");
                 
             } 
         }

@@ -40,6 +40,13 @@ namespace App.Gameplay.Character.Scripts.Model
         public AtomicVariable<float> Delay;
         public AtomicVariable<bool> CanUnloadResources;
 
+        [Header("Load Resources")] 
+        public AtomicVariable<float> LoadingDistance;
+        public AtomicVariable<bool> CanLoadResources;
+        public AtomicVariable<bool> CanTransferResources;
+        public AtomicVariable<ResourceType> LoadResourceType;
+        public AtomicEvent<ResourceType> ResourceLoaded;
+
         public ResourceService ResourceService;
         public BarnService BarnService;
         public DetectionResourceFunction DetectionResourceFunction;
@@ -52,7 +59,8 @@ namespace App.Gameplay.Character.Scripts.Model
         private GatheringResourceMechanics _gatheringResourceMechanics;
         private UnloadResourcesMechanics _unloadResourcesMechanics;
         private FreeSpaceResourceMechanic _freeSpaceResourceMechanic;
-
+        private LoadResourceMechanics _loadResourceMechanics;
+        
         private void Awake()
         {
             DetectionResourceFunction = new DetectionResourceFunction(this, ResourceService);
@@ -65,6 +73,7 @@ namespace App.Gameplay.Character.Scripts.Model
             _gatheringResourceMechanics = new GatheringResourceMechanics(TargetResource, ResourceType, GatheringCount, Amount, MaxAmount, Gathered);
             _unloadResourcesMechanics = new UnloadResourcesMechanics(ResourceStorage, CanUnloadResources, Delay, ResourceType, Amount);
             _freeSpaceResourceMechanic = new FreeSpaceResourceMechanic(IsFreeSpace, Amount, MaxAmount);
+            _loadResourceMechanics = new LoadResourceMechanics(this);
         }
 
         private void OnEnable()
@@ -86,6 +95,7 @@ namespace App.Gameplay.Character.Scripts.Model
             _rotateMechanics.Update();
             _detectionResourceMechanics.Update();
             _unloadResourcesMechanics.Update(deltaTime);
+            _loadResourceMechanics.Update(deltaTime);
         }
     }
 }

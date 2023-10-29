@@ -1,34 +1,45 @@
-﻿using App.Gameplay.Character.Scripts.Model;
+﻿using System;
+using App.Gameplay.Character.Scripts.Model;
 using App.Gameplay.LevelStorage;
+using Modules.Atomic.Actions;
+using Modules.Atomic.Values;
 using UnityEngine;
+using VContainer.Unity;
 
 namespace App.Gameplay.Player
 {
     public class PlayerModel : MonoBehaviour
     {
-        [SerializeField] private CharacterModel _characterModel;
-        [SerializeField] private BarnService _barnService;
-        [SerializeField] private ResourceStorageModelService _resourceStorageModelService; 
-        
+        public CharacterModel CharacterModel;
+        public ResourceStorageModelService ResourceStorageModelService;
+
+        public AtomicEvent<ResourceType> LoadResourceSelected;
+        public AtomicVariable<bool> IsShowLoadResources;
+
         private PlayerDetectionResourceMechanics _playerDetectionResourceMechanics;
         private PlayerUnloadResourceMechanics _playerUnloadResourceMechanics;
-
+        private PlayerLoadResourceMechanics _playerLoadResourceMechanics;
+        
         [SerializeField] 
         private CameraFollowingMechanics _cameraFollowingMechanics;
-        
-        private void Start()
-        {
-            _playerDetectionResourceMechanics = new PlayerDetectionResourceMechanics(_characterModel);
-            _playerUnloadResourceMechanics = new PlayerUnloadResourceMechanics(_characterModel, _resourceStorageModelService);
-        }
 
+        public void Start()
+        {
+            _playerDetectionResourceMechanics = new PlayerDetectionResourceMechanics(CharacterModel);
+            _playerUnloadResourceMechanics = new PlayerUnloadResourceMechanics(CharacterModel, ResourceStorageModelService);
+            _playerLoadResourceMechanics = new PlayerLoadResourceMechanics(this, ResourceStorageModelService);
+        }
+        
         private void Update()
         {
             var deltaTime = Time.deltaTime;
             
             _playerDetectionResourceMechanics.Update();
             _playerUnloadResourceMechanics.Update();
+            _playerLoadResourceMechanics.Update();
             _cameraFollowingMechanics.Update(deltaTime);
         }
+
+        
     }
 }

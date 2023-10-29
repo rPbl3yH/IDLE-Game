@@ -6,7 +6,7 @@ using VContainer.Unity;
 
 namespace App.UI
 {
-    public class ResourceViewObserver : IInitializable, IDisposable
+    public class ResourceViewObserver : IDisposable
     {
         private readonly ResourceViewFactory _resourceViewFactory;
         private readonly ResourceStorage _resourceStorage;
@@ -18,14 +18,10 @@ namespace App.UI
         {
             _resourceViewFactory = resourceViewFactory;
             _resourceStorage = resourceStorage;
-        }
-        
-        public void Initialize()
-        {
             _resourceStorage.ResourcesChanged += OnResourcesChanged;
             InitViews();
         }
-
+        
         public void Dispose()
         {
             _resourceStorage.ResourcesChanged -= OnResourcesChanged;
