@@ -7,44 +7,54 @@ namespace App.Gameplay.Player
 {
     public class PlayerUnloadResourceMechanics
     {
-        private readonly CharacterModel _characterModel;
-        private readonly IAtomicValue<ResourceStorageModel> _resourceStorageModel;
+        private readonly IAtomicVariable<bool> _canUnloadResources;
+        private readonly IAtomicVariable<ResourceStorageModel> _resourceStorageModel;
+        private readonly Transform _root;
         private readonly DistanceSensor _distanceSensor;
 
-        public PlayerUnloadResourceMechanics(CharacterModel characterModel)
+        public PlayerUnloadResourceMechanics(
+            IAtomicValue<float> unloadingDistance, 
+            IAtomicVariable<bool> canUnloadResources, 
+            IAtomicVariable<ResourceStorageModel> resourceStorageModel, 
+            Transform root)
         {
-            _characterModel = characterModel;
-            _resourceStorageModel = characterModel.ResourceStorage;
-            _distanceSensor = new DistanceSensor(_characterModel.UnloadingDistance);
+            _canUnloadResources = canUnloadResources;
+            _resourceStorageModel = resourceStorageModel;
+            _root = root;
+            _distanceSensor = new DistanceSensor(unloadingDistance);
         }
 
         public void OnEnable()
         {
+            _resourceStorageModel.OnChanged += ResourceStorageModelOnChanged;
             _distanceSensor.Entered += DistanceSensorOnEntered;
             _distanceSensor.Exited += DistanceSensorOnExited;
         }
 
         public void OnDisable()
         {
+            _resourceStorageModel.OnChanged -= ResourceStorageModelOnChanged;
             _distanceSensor.Entered -= DistanceSensorOnEntered;
             _distanceSensor.Exited -= DistanceSensorOnExited;
         }
 
+        private void ResourceStorageModelOnChanged(ResourceStorageModel resourceStorage)
+        {
+            _distanceSensor.SetPoints(_root, resourceStorage.UnloadingPoint);
+        }
+
         private void DistanceSensorOnExited()
         {
-            Debug.Log("exited unload");
-            _characterModel.CanUnloadResources.Value = false;
+            _canUnloadResources.Value = false;
         }
 
         private void DistanceSensorOnEntered()
         {
-            Debug.Log("entered unload");
-            _characterModel.CanUnloadResources.Value = true;
+            _canUnloadResources.Value = true;
         }
 
         public void Update()
         {
-            _distanceSensor.SetPoints(_characterModel.Root, _resourceStorageModel.Value.UnloadingPoint);
             _distanceSensor.Update();
         }
     }

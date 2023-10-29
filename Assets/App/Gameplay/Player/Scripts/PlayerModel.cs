@@ -1,10 +1,8 @@
-﻿using System;
-using App.Gameplay.Character.Scripts.Model;
+﻿using App.Gameplay.Character.Scripts.Model;
 using App.Gameplay.LevelStorage;
 using Modules.Atomic.Actions;
 using Modules.Atomic.Values;
 using UnityEngine;
-using VContainer.Unity;
 
 namespace App.Gameplay.Player
 {
@@ -19,6 +17,7 @@ namespace App.Gameplay.Player
         private PlayerDetectStorageMechanics _playerDetectStorageMechanics;
         private PlayerDetectionResourceMechanics _playerDetectionResourceMechanics;
         private PlayerUnloadResourceMechanics _playerUnloadResourceMechanics;
+        private PlayerLoadResourceMechanics _playerLoadResourceMechanics;
         private PlayerLoadResourceAvailableMechanics _playerLoadResourceAvailableMechanics;
         
         [SerializeField] 
@@ -30,8 +29,14 @@ namespace App.Gameplay.Player
             _playerDetectionResourceMechanics = new PlayerDetectionResourceMechanics(CharacterModel);
             
             //TODO: заменить с VContainer
-            _playerUnloadResourceMechanics = new PlayerUnloadResourceMechanics(CharacterModel);
+            _playerUnloadResourceMechanics = new PlayerUnloadResourceMechanics(CharacterModel.UnloadingDistance,
+                CharacterModel.CanUnloadResources, CharacterModel.ResourceStorage, CharacterModel.Root);
             _playerUnloadResourceMechanics.OnEnable();
+
+            _playerLoadResourceMechanics = new PlayerLoadResourceMechanics(LoadResourceSelected,
+                CharacterModel.IsFreeSpace, CharacterModel.CanUnloadResources, CharacterModel.LoadResourceType,
+                CharacterModel.CanLoadResources);
+            _playerLoadResourceMechanics.OnEnable();
             
             _playerLoadResourceAvailableMechanics = new PlayerLoadResourceAvailableMechanics(this);
             _playerLoadResourceAvailableMechanics.OnEnable();
