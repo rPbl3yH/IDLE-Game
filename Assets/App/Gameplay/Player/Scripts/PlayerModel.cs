@@ -16,6 +16,7 @@ namespace App.Gameplay.Player
         public AtomicEvent<ResourceType> LoadResourceSelected;
         public AtomicVariable<bool> IsShowLoadResources;
 
+        private PlayerDetectStorageMechanics _playerDetectStorageMechanics;
         private PlayerDetectionResourceMechanics _playerDetectionResourceMechanics;
         private PlayerUnloadResourceMechanics _playerUnloadResourceMechanics;
         private PlayerLoadResourceAvailableMechanics _playerLoadResourceAvailableMechanics;
@@ -25,15 +26,16 @@ namespace App.Gameplay.Player
 
         public void Start()
         {
+            _playerDetectStorageMechanics = new PlayerDetectStorageMechanics(ResourceStorageModelService, CharacterModel.ResourceStorage, CharacterModel.Root);
             _playerDetectionResourceMechanics = new PlayerDetectionResourceMechanics(CharacterModel);
-            _playerUnloadResourceMechanics = new PlayerUnloadResourceMechanics(CharacterModel, ResourceStorageModelService);
-            _playerLoadResourceAvailableMechanics = new PlayerLoadResourceAvailableMechanics(this, ResourceStorageModelService);
+            _playerUnloadResourceMechanics = new PlayerUnloadResourceMechanics(CharacterModel);
+            _playerLoadResourceAvailableMechanics = new PlayerLoadResourceAvailableMechanics(this);
         }
         
         private void Update()
         {
             var deltaTime = Time.deltaTime;
-            
+            _playerDetectStorageMechanics.Update();
             _playerDetectionResourceMechanics.Update();
             _playerUnloadResourceMechanics.Update();
             _playerLoadResourceAvailableMechanics.Update();
