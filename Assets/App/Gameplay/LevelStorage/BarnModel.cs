@@ -8,6 +8,7 @@ namespace App.Gameplay.LevelStorage
 {
     public class BarnModel : ResourceStorageModel
     {
+        public AtomicEvent<ResourceType> ResourceLoaded;
         public AtomicEvent<ResourceType> ResourceSelected;
 
         [Button]
@@ -15,5 +16,7 @@ namespace App.Gameplay.LevelStorage
         {
             ResourceSelected?.Invoke(resourceType);
         }
+        
+        
     }
 }

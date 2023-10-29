@@ -18,7 +18,7 @@ namespace App.Gameplay.Player
 
         private PlayerDetectionResourceMechanics _playerDetectionResourceMechanics;
         private PlayerUnloadResourceMechanics _playerUnloadResourceMechanics;
-        private PlayerLoadResourceMechanics _playerLoadResourceMechanics;
+        private PlayerLoadResourceAvailableMechanics _playerLoadResourceAvailableMechanics;
         
         [SerializeField] 
         private CameraFollowingMechanics _cameraFollowingMechanics;
@@ -27,7 +27,7 @@ namespace App.Gameplay.Player
         {
             _playerDetectionResourceMechanics = new PlayerDetectionResourceMechanics(CharacterModel);
             _playerUnloadResourceMechanics = new PlayerUnloadResourceMechanics(CharacterModel, ResourceStorageModelService);
-            _playerLoadResourceMechanics = new PlayerLoadResourceMechanics(this, ResourceStorageModelService);
+            _playerLoadResourceAvailableMechanics = new PlayerLoadResourceAvailableMechanics(this, ResourceStorageModelService);
         }
         
         private void Update()
@@ -36,7 +36,7 @@ namespace App.Gameplay.Player
             
             _playerDetectionResourceMechanics.Update();
             _playerUnloadResourceMechanics.Update();
-            _playerLoadResourceMechanics.Update();
+            _playerLoadResourceAvailableMechanics.Update();
             _cameraFollowingMechanics.Update(deltaTime);
         }
 

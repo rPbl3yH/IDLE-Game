@@ -9,13 +9,13 @@ namespace App.Gameplay.LevelStorage
     {
         public event Action<ResourceType> ResourceSelected;
         
-        [SerializeField] private ResourceType _resourceType;
+        public ResourceType ResourceType;
         [SerializeField] private Button _button;
         [SerializeField] private TMP_Text _text;
 
         private void Start()
         {
-            _text.text = _resourceType.ToString();
+            _text.text = ResourceType.ToString();
         }
 
         private void OnEnable()
@@ -30,7 +30,7 @@ namespace App.Gameplay.LevelStorage
 
         private void OnClick()
         {
-            ResourceSelected?.Invoke(_resourceType);
+            ResourceSelected?.Invoke(ResourceType);
         }
     }
 }

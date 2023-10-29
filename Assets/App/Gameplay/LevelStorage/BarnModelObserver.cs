@@ -18,7 +18,20 @@ namespace App.Gameplay.LevelStorage
 
         private void OnChangedShowLoadResources(bool value)
         {
-            _view.gameObject.SetActive(value);
+            if (!value)
+            {
+                _view.gameObject.SetActive(false);
+                return;
+            }
+            
+            if (_barnModel.ResourceStorage.TryGetResource(_view.ResourceType, out var resource))
+            {
+                _view.gameObject.SetActive(true);
+            }
+            else
+            {
+                print("No resources");
+            }
         }
 
         private void OnResourceSelected(ResourceType resourceType)
