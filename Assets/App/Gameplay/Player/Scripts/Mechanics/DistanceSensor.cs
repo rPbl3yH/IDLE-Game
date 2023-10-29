@@ -14,15 +14,21 @@ namespace App.Gameplay.Player
 
         private readonly IAtomicValue<float> _distance;
 
-        private readonly Transform _firstPoint;
+        private Transform _firstPoint;
 
-        private readonly Transform _secondPoint;
+        private Transform _secondPoint;
 
-        public DistanceSensor(Transform firstPoint, Transform secondPoint, IAtomicValue<float> distance)
+        public DistanceSensor(IAtomicValue<float> distance, Transform firstPoint = null, Transform secondPoint = null)
         {
             _firstPoint = firstPoint;
             _secondPoint = secondPoint;
             _distance = distance;
+        }
+
+        public void SetPoints(Transform firstPoint, Transform secondPoint)
+        {
+            _firstPoint = firstPoint;
+            _secondPoint = secondPoint;
         }
 
         public void Update()
