@@ -6,11 +6,19 @@ namespace App.Gameplay.LevelStorage
     public class BarnModelObserver : MonoBehaviour
     {
         [SerializeField] private BarnModel _barnModel;
-        [SerializeField] private PlayerModel _playerModel; 
-            
+        [SerializeField] private LoadResourceView _view;
+
+        [SerializeField] private PlayerModel _playerModel;
+
         private void OnEnable()
         {
-            _barnModel.ResourceSelected.AddListener(OnResourceSelected);
+            _view.ResourceSelected += OnResourceSelected;
+            _playerModel.IsShowLoadResources.OnChanged += OnChangedShowLoadResources;
+        }
+
+        private void OnChangedShowLoadResources(bool value)
+        {
+            _view.gameObject.SetActive(value);
         }
 
         private void OnResourceSelected(ResourceType resourceType)

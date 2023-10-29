@@ -3,12 +3,18 @@ using UnityEngine;
 
 namespace App.UI
 {
+    [RequireComponent(typeof(RectTransform))]
     public class BaseGameView : MonoBehaviour
     {
         [SerializeField] private Transform _worldTarget;
-        [SerializeField] private RectTransform _rectTransform;
         [SerializeField] private float _offsetY;
-        
+        private RectTransform _rectTransform;
+
+        private void Start()
+        {
+            _rectTransform = GetComponent<RectTransform>();
+        }
+
         private void Update()
         {
             if (Camera.main != null)
