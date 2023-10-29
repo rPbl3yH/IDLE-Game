@@ -1,4 +1,5 @@
 ﻿using App.Gameplay.LevelStorage;
+using Modules.Atomic.Actions;
 using Modules.Atomic.Values;
 
 namespace App.Gameplay.Character.Scripts.Model.Mechanics
@@ -10,16 +11,19 @@ namespace App.Gameplay.Character.Scripts.Model.Mechanics
         private readonly AtomicVariable<float> _delay;
         private readonly AtomicVariable<ResourceType> _resourceType;
         private readonly AtomicVariable<int> _amount;
+        private readonly AtomicEvent<ResourceType> _resourceUnloaded;
 
         private float _timer;
         
         public UnloadResourcesMechanics(
+            AtomicEvent<ResourceType> resourceUnloaded,
             AtomicVariable<ResourceStorageModel> storage,
             AtomicVariable<bool> canUnloadResources,
             AtomicVariable<float> delay,
             AtomicVariable<ResourceType> resourceType,
             AtomicVariable<int> amount)
         {
+            _resourceUnloaded = resourceUnloaded;
             _storage = storage;
             _canUnloadResources = canUnloadResources;
             _delay = delay;
@@ -34,6 +38,7 @@ namespace App.Gameplay.Character.Scripts.Model.Mechanics
             _delay = characterModel.Delay;
             _resourceType = characterModel.ResourceType;
             _amount = characterModel.ResourceAmount;
+            _resourceUnloaded = characterModel.ResourceUnloaded;
         }
 
         public void Update(float deltaTime)
@@ -58,6 +63,7 @@ namespace App.Gameplay.Character.Scripts.Model.Mechanics
                 if (_storage.Value.ResourceStorage.TryAdd(_resourceType.Value, unloadCount))
                 {
                     _amount.Value -= unloadCount;
+                    _resourceUnloaded?.Invoke(_resourceType.Value);
                 }
             }
         }

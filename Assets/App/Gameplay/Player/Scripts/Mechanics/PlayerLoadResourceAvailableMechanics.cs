@@ -16,6 +16,7 @@ namespace App.Gameplay.Player
         private readonly IAtomicVariable<bool> _canLoad;
         private readonly IAtomicVariable<bool> _canUnload;
         private readonly IAtomicValue<int> _amount;
+        private readonly AtomicEvent<ResourceType> _resourceUnloaded;
         private readonly Transform _root;
         
         private readonly DistanceSensor _distanceSensor;
@@ -55,11 +56,13 @@ namespace App.Gameplay.Player
             _canUnload = playerModel.CharacterModel.CanUnloadResources;
             _amount = playerModel.CharacterModel.ResourceAmount;
             _root = playerModel.CharacterModel.Root;
+            _resourceUnloaded = playerModel.CharacterModel.ResourceUnloaded;
             _distanceSensor = new DistanceSensor(playerModel.CharacterModel.LoadingDistance);
         }
 
         public void OnEnable()
         {
+            _resourceUnloaded.AddListener(OnResourceUnloaded);
             _resourceSelected.AddListener(OnLoadResourceSelected);
             _isFreeSpace.OnChanged += IsFreeSpaceOnChanged;
             _distanceSensor.Entered += DistanceSensorOnEntered;
@@ -78,6 +81,11 @@ namespace App.Gameplay.Player
         {
             _canLoad.Value = false;
             _canShowLoadResources.Value = false;
+        }
+
+        private void OnResourceUnloaded(ResourceType type)
+        {
+            DistanceSensorOnEntered();
         }
 
         private void DistanceSensorOnEntered()

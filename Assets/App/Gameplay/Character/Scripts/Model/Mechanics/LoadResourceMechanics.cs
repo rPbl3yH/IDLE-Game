@@ -48,8 +48,9 @@ namespace App.Gameplay.Character.Scripts.Model.Mechanics
                     return;
                 }
                 
-                if(!_resourceStorage.Value.ResourceStorage.Resources.ContainsKey(_loadResourceType.Value))
+                if(!_resourceStorage.Value.ResourceStorage.TryRemove(_loadResourceType.Value, 1))
                 {
+                    _canLoadResources.Value = false;
                     return;
                 }
                 

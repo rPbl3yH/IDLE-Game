@@ -35,17 +35,17 @@ namespace App.Gameplay.Character.Scripts.Model
         public AtomicVariable<bool> IsFreeSpace;
 
         [Header("Unload Resources")]
+        public AtomicVariable<bool> CanUnloadResources;
         public AtomicVariable<ResourceStorageModel> ResourceStorage;
+        public AtomicEvent<ResourceType> ResourceUnloaded;
         public AtomicVariable<float> UnloadingDistance;
         public AtomicVariable<float> Delay;
-        public AtomicVariable<bool> CanUnloadResources;
 
         [Header("Load Resources")] 
-        public AtomicVariable<float> LoadingDistance;
         public AtomicVariable<bool> CanLoadResources;
-        public AtomicVariable<bool> CanTransferResources;
-        public AtomicVariable<ResourceType> LoadResourceType;
         public AtomicEvent<ResourceType> ResourceLoaded;
+        public AtomicVariable<ResourceType> LoadResourceType;
+        public AtomicVariable<float> LoadingDistance;
 
         public ResourceService ResourceService;
         public BarnService BarnService;
@@ -71,7 +71,7 @@ namespace App.Gameplay.Character.Scripts.Model
             _detectionResourceMechanics =
                 new DetectionResourceMechanics(Root, TargetResource, GatheringDistance, CanGathering, IsFreeSpace, MoveDirection);
             _gatheringResourceMechanics = new GatheringResourceMechanics(TargetResource, ResourceType, GatheringCount, ResourceAmount, MaxResourceAmount, Gathered);
-            _unloadResourcesMechanics = new UnloadResourcesMechanics(ResourceStorage, CanUnloadResources, Delay, ResourceType, ResourceAmount);
+            _unloadResourcesMechanics = new UnloadResourcesMechanics(ResourceUnloaded, ResourceStorage, CanUnloadResources, Delay, ResourceType, ResourceAmount);
             _freeSpaceResourceMechanic = new FreeSpaceResourceMechanic(IsFreeSpace, ResourceAmount, MaxResourceAmount);
             _loadResourceMechanics = new LoadResourceMechanics(this);
         }
