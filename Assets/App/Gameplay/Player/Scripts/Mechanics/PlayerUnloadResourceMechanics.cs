@@ -10,16 +10,24 @@ namespace App.Gameplay.Player
         private readonly CharacterModel _characterModel;
         private readonly IAtomicValue<ResourceStorageModel> _resourceStorageModel;
         private readonly DistanceSensor _distanceSensor;
-        private Transform _unloadingPoint;
 
         public PlayerUnloadResourceMechanics(CharacterModel characterModel)
         {
             _characterModel = characterModel;
             _resourceStorageModel = characterModel.ResourceStorage;
-            _unloadingPoint = _characterModel.Root;
             _distanceSensor = new DistanceSensor(_characterModel.UnloadingDistance);
+        }
+
+        public void OnEnable()
+        {
             _distanceSensor.Entered += DistanceSensorOnEntered;
             _distanceSensor.Exited += DistanceSensorOnExited;
+        }
+
+        public void OnDisable()
+        {
+            _distanceSensor.Entered -= DistanceSensorOnEntered;
+            _distanceSensor.Exited -= DistanceSensorOnExited;
         }
 
         private void DistanceSensorOnExited()

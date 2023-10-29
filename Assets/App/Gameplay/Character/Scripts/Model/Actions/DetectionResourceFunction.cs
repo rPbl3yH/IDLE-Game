@@ -21,7 +21,7 @@ namespace App.Gameplay.Character.Scripts.Model.Actions
             ResourceService resourceService)
         {
             _resourceType = characterModel.ResourceType;
-            _amount = characterModel.Amount;
+            _amount = characterModel.ResourceAmount;
             _root = characterModel.Root;
             _resourceService = resourceService;
         }

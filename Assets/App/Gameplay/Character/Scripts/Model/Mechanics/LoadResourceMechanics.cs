@@ -24,7 +24,7 @@ namespace App.Gameplay.Character.Scripts.Model.Mechanics
             _transferResourceType = characterModel.LoadResourceType;
             _isFreeSpace = characterModel.IsFreeSpace;
             _resourceType = characterModel.ResourceType;
-            _amount = characterModel.Amount;
+            _amount = characterModel.ResourceAmount;
             _canLoadResources = characterModel.CanLoadResources;
             _loadDelay = characterModel.Delay;
             _resourceStorage = characterModel.ResourceStorage;

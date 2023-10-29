@@ -37,7 +37,7 @@ namespace App.GameEngine.AI
 
         private void Update()
         {
-            if (_characterModel.Amount.Value == 0)
+            if (_characterModel.ResourceAmount.Value == 0)
             {
                 _stateMachine.SwitchState(_gatheringResourceState);
             }

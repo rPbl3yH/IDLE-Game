@@ -5,18 +5,25 @@ using UnityEngine.UI;
 
 namespace App.Gameplay.LevelStorage
 {
-    public class LoadResourceView : MonoBehaviour
+    public abstract class BaseView : MonoBehaviour
     {
-        public event Action<ResourceType> ResourceSelected;
-        
-        public ResourceType ResourceType;
+        public virtual void Show()
+        {
+            gameObject.SetActive(true);
+        }
+
+        public virtual void Hide()
+        {
+            gameObject.SetActive(false);
+        }
+    } 
+    
+    public class LoadResourceView : BaseView
+    {
+        public event Action<LoadResourceView> ResourceSelected;
+
         [SerializeField] private Button _button;
         [SerializeField] private TMP_Text _text;
-
-        private void Start()
-        {
-            _text.text = ResourceType.ToString();
-        }
 
         private void OnEnable()
         {
@@ -28,9 +35,15 @@ namespace App.Gameplay.LevelStorage
             _button.onClick.RemoveListener(OnClick);
         }
 
+        public void Show(string text)
+        {
+            _text.text = text;
+            base.Show();
+        }
+        
         private void OnClick()
         {
-            ResourceSelected?.Invoke(ResourceType);
+            ResourceSelected?.Invoke(this);
         }
     }
 }

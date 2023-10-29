@@ -33,7 +33,7 @@ namespace App.Gameplay.Character.Scripts.Model.Mechanics
             _canUnloadResources = characterModel.CanUnloadResources;
             _delay = characterModel.Delay;
             _resourceType = characterModel.ResourceType;
-            _amount = characterModel.Amount;
+            _amount = characterModel.ResourceAmount;
         }
 
         public void Update(float deltaTime)

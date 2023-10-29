@@ -29,8 +29,8 @@ namespace App.Gameplay.Character.Scripts.Model
 
         [Header("Resources")] 
         public AtomicVariable<ResourceType> ResourceType;
-        public AtomicVariable<int> Amount;
-        public AtomicVariable<int> MaxAmount;
+        public AtomicVariable<int> ResourceAmount;
+        public AtomicVariable<int> MaxResourceAmount;
         [ShowInInspector, ReadOnly]
         public AtomicVariable<bool> IsFreeSpace;
 
@@ -70,9 +70,9 @@ namespace App.Gameplay.Character.Scripts.Model
             _rotateMechanics = new RotateMechanics(View, MoveDirection);
             _detectionResourceMechanics =
                 new DetectionResourceMechanics(Root, TargetResource, GatheringDistance, CanGathering, IsFreeSpace, MoveDirection);
-            _gatheringResourceMechanics = new GatheringResourceMechanics(TargetResource, ResourceType, GatheringCount, Amount, MaxAmount, Gathered);
-            _unloadResourcesMechanics = new UnloadResourcesMechanics(ResourceStorage, CanUnloadResources, Delay, ResourceType, Amount);
-            _freeSpaceResourceMechanic = new FreeSpaceResourceMechanic(IsFreeSpace, Amount, MaxAmount);
+            _gatheringResourceMechanics = new GatheringResourceMechanics(TargetResource, ResourceType, GatheringCount, ResourceAmount, MaxResourceAmount, Gathered);
+            _unloadResourcesMechanics = new UnloadResourcesMechanics(ResourceStorage, CanUnloadResources, Delay, ResourceType, ResourceAmount);
+            _freeSpaceResourceMechanic = new FreeSpaceResourceMechanic(IsFreeSpace, ResourceAmount, MaxResourceAmount);
             _loadResourceMechanics = new LoadResourceMechanics(this);
         }
 

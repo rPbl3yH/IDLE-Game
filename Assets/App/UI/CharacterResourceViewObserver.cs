@@ -13,20 +13,20 @@ namespace App.UI
         private void Start()
         {
             _resourceView = Instantiate(_resourceViewPrefab, transform);
-            OnAmountChanged(_characterModel.Amount.Value);
+            OnResourceAmountChanged(_characterModel.ResourceAmount.Value);
         }
 
         private void OnEnable()
         {
-            _characterModel.Amount.OnChanged += OnAmountChanged;
+            _characterModel.ResourceAmount.OnChanged += OnResourceAmountChanged;
         }
 
         private void OnDisable()
         {
-            _characterModel.Amount.OnChanged -= OnAmountChanged;
+            _characterModel.ResourceAmount.OnChanged -= OnResourceAmountChanged;
         }
 
-        private void OnAmountChanged(int value)
+        private void OnResourceAmountChanged(int value)
         {
             if (value > 0)
             {

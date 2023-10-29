@@ -28,10 +28,15 @@ namespace App.Gameplay.Player
         {
             _playerDetectStorageMechanics = new PlayerDetectStorageMechanics(ResourceStorageModelService, CharacterModel.ResourceStorage, CharacterModel.Root);
             _playerDetectionResourceMechanics = new PlayerDetectionResourceMechanics(CharacterModel);
+            
+            //TODO: заменить с VContainer
             _playerUnloadResourceMechanics = new PlayerUnloadResourceMechanics(CharacterModel);
+            _playerUnloadResourceMechanics.OnEnable();
+            
             _playerLoadResourceAvailableMechanics = new PlayerLoadResourceAvailableMechanics(this);
+            _playerLoadResourceAvailableMechanics.OnEnable();
         }
-        
+
         private void Update()
         {
             var deltaTime = Time.deltaTime;
@@ -41,7 +46,5 @@ namespace App.Gameplay.Player
             _playerLoadResourceAvailableMechanics.Update();
             _cameraFollowingMechanics.Update(deltaTime);
         }
-
-        
     }
 }
