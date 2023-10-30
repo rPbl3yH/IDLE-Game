@@ -23,6 +23,7 @@ namespace App.GameEngine.AI.StateMachine.States
         public UnloadingResourceState(
             UnloadResourceData unloadResourceData,
             MoveToPositionData moveData,
+            IAtomicFunction<ResourceStorageModel> detectionBarnAction,
             CharacterModel characterModel,
             IState moveState)
         {
@@ -32,7 +33,7 @@ namespace App.GameEngine.AI.StateMachine.States
             _resourceStorageModel = characterModel.ResourceStorage;
             _canUnloadResources = characterModel.CanUnloadResources;
             _unloadingDistance = characterModel.UnloadingDistance;
-            _detectionBarnAction = characterModel.DetectionBarnFunction;
+            _detectionBarnAction = detectionBarnAction;
         }
 
         public override void Enter()

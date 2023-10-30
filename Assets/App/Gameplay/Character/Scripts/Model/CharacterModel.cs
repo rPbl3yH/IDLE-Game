@@ -48,9 +48,7 @@ namespace App.Gameplay.Character.Scripts.Model
         public AtomicVariable<float> LoadingDistance;
 
         public ResourceService ResourceService;
-        public BarnService BarnService;
         public DetectionResourceFunction DetectionResourceFunction;
-        public DetectionBarnFunction DetectionBarnFunction;
 
         //Логика
         private MovementMechanics _movementMechanics;
@@ -60,11 +58,10 @@ namespace App.Gameplay.Character.Scripts.Model
         private UnloadResourcesMechanics _unloadResourcesMechanics;
         private FreeSpaceResourceMechanic _freeSpaceResourceMechanic;
         private LoadResourceMechanics _loadResourceMechanics;
-        
-        private void Awake()
+
+        public void Construct(ResourceService resourceService)
         {
-            DetectionResourceFunction = new DetectionResourceFunction(this, ResourceService);
-            DetectionBarnFunction = new DetectionBarnFunction(BarnService);
+            DetectionResourceFunction = new DetectionResourceFunction(this, resourceService);
             
             _movementMechanics = new MovementMechanics(Root, MoveDirection, Speed);
             _rotateMechanics = new RotateMechanics(View, MoveDirection);
@@ -74,12 +71,14 @@ namespace App.Gameplay.Character.Scripts.Model
             _unloadResourcesMechanics = new UnloadResourcesMechanics(ResourceUnloaded, ResourceStorage, CanUnloadResources, Delay, ResourceType, ResourceAmount);
             _freeSpaceResourceMechanic = new FreeSpaceResourceMechanic(IsFreeSpace, ResourceAmount, MaxResourceAmount);
             _loadResourceMechanics = new LoadResourceMechanics(this);
+            _gatheringResourceMechanics.OnEnable();
+            _freeSpaceResourceMechanic.OnEnable();
         }
 
         private void OnEnable()
         {
-            _gatheringResourceMechanics.OnEnable();
-            _freeSpaceResourceMechanic.OnEnable();
+            // _gatheringResourceMechanics.OnEnable();
+            // _freeSpaceResourceMechanic.OnEnable();
         }
 
         private void OnDisable()
