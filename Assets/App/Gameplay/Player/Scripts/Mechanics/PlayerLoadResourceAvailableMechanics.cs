@@ -62,6 +62,11 @@ namespace App.Gameplay.Player
 
         private void ResourceStorageOnChanged(ResourceStorageModel value)
         {
+            if (value == null)
+            {
+                return;
+            }
+            
             _distanceSensor.SetPoints(_root, value.UnloadingPoint);
         }
 

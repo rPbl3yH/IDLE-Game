@@ -7,9 +7,16 @@ namespace App.Gameplay.Player
     [Serializable]
     public class CameraFollowingMechanics
     {
-        [SerializeField] private Transform _camera;
-        [SerializeField] private Transform _target;
-        [SerializeField] private AtomicVariable<float> _speedRate;
+        private Transform _camera;
+        private Transform _target;
+        private float _speedRate;
+
+        public CameraFollowingMechanics(Transform camera, Transform target, float speedRate)
+        {
+            _camera = camera;
+            _target = target;
+            _speedRate = speedRate;
+        }
 
         public void Update(float deltaTime)
         {
@@ -19,7 +26,7 @@ namespace App.Gameplay.Player
             }
 
             var targetPosition = new Vector3(_target.position.x, 0f, _target.position.z);
-            _camera.position = Vector3.Lerp(_camera.position, targetPosition, _speedRate.Value * deltaTime);
+            _camera.position = Vector3.Lerp(_camera.position, targetPosition, _speedRate * deltaTime);
         }
     }
 }

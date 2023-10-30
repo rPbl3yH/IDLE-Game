@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using App.Gameplay;
 using VContainer;
-using VContainer.Unity;
 
 namespace App.UI
 {

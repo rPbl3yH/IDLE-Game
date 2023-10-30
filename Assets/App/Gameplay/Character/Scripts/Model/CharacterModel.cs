@@ -47,7 +47,6 @@ namespace App.Gameplay.Character.Scripts.Model
         public AtomicVariable<ResourceType> LoadResourceType;
         public AtomicVariable<float> LoadingDistance;
 
-        public ResourceService ResourceService;
         public DetectionResourceFunction DetectionResourceFunction;
 
         //Логика
@@ -62,7 +61,6 @@ namespace App.Gameplay.Character.Scripts.Model
         public void Construct(ResourceService resourceService)
         {
             DetectionResourceFunction = new DetectionResourceFunction(this, resourceService);
-            
             _movementMechanics = new MovementMechanics(Root, MoveDirection, Speed);
             _rotateMechanics = new RotateMechanics(View, MoveDirection);
             _detectionResourceMechanics =
@@ -73,12 +71,6 @@ namespace App.Gameplay.Character.Scripts.Model
             _loadResourceMechanics = new LoadResourceMechanics(this);
             _gatheringResourceMechanics.OnEnable();
             _freeSpaceResourceMechanic.OnEnable();
-        }
-
-        private void OnEnable()
-        {
-            // _gatheringResourceMechanics.OnEnable();
-            // _freeSpaceResourceMechanic.OnEnable();
         }
 
         private void OnDisable()

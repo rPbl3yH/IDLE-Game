@@ -1,4 +1,4 @@
-﻿using App.GameEngine.Input.Handlers;
+﻿using System;
 using App.Gameplay.Character.Scripts.Model;
 using App.Gameplay.LevelStorage;
 using App.Gameplay.Resource;
@@ -16,6 +16,9 @@ namespace App.Gameplay.Player
         [Inject]
         public ResourceStorageModelService ResourceStorageModelService;
 
+        [Inject] 
+        public ResourceService ResourceService;
+        
         public AtomicEvent<ResourceType> LoadResourceSelected;
         public AtomicVariable<bool> IsShowLoadResources;
 
@@ -24,16 +27,11 @@ namespace App.Gameplay.Player
         private PlayerUnloadResourceMechanics _playerUnloadResourceMechanics;
         private PlayerLoadResourceMechanics _playerLoadResourceMechanics;
         private PlayerLoadResourceAvailableMechanics _playerLoadResourceAvailableMechanics;
-        
-        [Inject] private IInputHandler _inputHandler;
-        [Inject] private ResourceService _resourceService;
-        
-        [SerializeField] 
-        private CameraFollowingMechanics _cameraFollowingMechanics;
+
 
         public void Construct()
         {
-            CharacterModel.Construct(_resourceService);
+            CharacterModel.Construct(ResourceService);
             
             _playerDetectStorageMechanics = new PlayerDetectStorageMechanics(ResourceStorageModelService, CharacterModel.ResourceStorage, CharacterModel.Root);
             _playerDetectionResourceMechanics = new PlayerDetectionResourceMechanics(CharacterModel);
@@ -50,23 +48,14 @@ namespace App.Gameplay.Player
             
             _playerLoadResourceAvailableMechanics = new PlayerLoadResourceAvailableMechanics(this);
             _playerLoadResourceAvailableMechanics.OnEnable();
-            
-            _inputHandler.DirectionChanged += OnDirectionChanged;
-        }
-
-        private void OnDirectionChanged(Vector3 modeDirection)
-        {
-            CharacterModel.MoveDirection.Value = modeDirection;
         }
 
         private void Update()
         {
-            var deltaTime = Time.deltaTime;
             _playerDetectStorageMechanics.Update();
             _playerDetectionResourceMechanics.Update();
             _playerUnloadResourceMechanics.Update();
             _playerLoadResourceAvailableMechanics.Update();
-            _cameraFollowingMechanics.Update(deltaTime);
         }
     }
 }

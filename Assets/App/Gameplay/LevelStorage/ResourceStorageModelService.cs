@@ -10,10 +10,16 @@ namespace App.Gameplay.LevelStorage
 
         public ResourceStorageModel GetClosetModel(Transform root)
         {
+            if (_resourceStorageModels.Count == 0)
+            {
+                return null;
+            }
+            
             var closetModels =
                 _resourceStorageModels.OrderBy(model => Vector3.Distance(model.UnloadingPoint.position, root.position));
 
-            return closetModels.FirstOrDefault(model => model.isActiveAndEnabled);
+            var model = closetModels.FirstOrDefault(model => model.isActiveAndEnabled);
+            return model;
         }
 
         public void AddStorage(ResourceStorageModel resourceStorageModel)
