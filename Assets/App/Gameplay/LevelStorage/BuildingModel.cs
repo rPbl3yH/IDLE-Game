@@ -1,36 +1,36 @@
-﻿using Modules.Atomic.Actions;
+﻿using System;
+using Modules.Atomic.Actions;
 using UnityEngine;
+using VContainer;
 
 namespace App.Gameplay.LevelStorage
 {
-    public class BuildingModel : ResourceStorageModel
+    public class BuildingModel : ResourceStorageModel, IDisposable
     {
         public AtomicEvent<Building> Built = new();
         public GameObject SpawnPoint;
         public Building Building;
-        public GameObject BuildingUI;
+        
         public ResourceStorageModelService ResourceStorageModelService;
 
         private BuildMechanics _buildMechanics;
         private BuildObserverMechanics _buildObserverMechanics;
-        
-        private void Awake()
+
+        [Inject]
+        public void Construct(ResourceStorageModelService resourceStorageModelService)
         {
+            ResourceStorageModelService = resourceStorageModelService;
             var parent = ResourceStorageModelService.transform;
             _buildMechanics = new BuildMechanics(ResourceStorage, Built, Building, SpawnPoint.transform, parent);
-            _buildObserverMechanics = new BuildObserverMechanics(this, Built, ResourceStorageModelService, SpawnPoint, BuildingUI);
-        }
-
-        private void OnEnable()
-        {
+            _buildObserverMechanics = new BuildObserverMechanics(this, Built, ResourceStorageModelService, SpawnPoint);
+            
             _buildMechanics.OnEnable();
             _buildObserverMechanics.OnEnable();
         }
 
-        private void OnDisable()
+        public void Dispose()
         {
-            _buildMechanics.OnDisable();
-            _buildObserverMechanics.OnDisable();
+            throw new NotImplementedException();
         }
     }
 }

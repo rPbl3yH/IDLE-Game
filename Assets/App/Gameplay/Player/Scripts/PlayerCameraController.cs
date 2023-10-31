@@ -9,6 +9,7 @@ namespace App.Gameplay.Player
     {
         [SerializeField] private Transform _cameraPoint;
         [SerializeField] private float _speedRate;
+        [SerializeField] private Camera _camera;
         
         private PlayerSpawner _playerSpawner;
         private CameraFollowingMechanics _cameraFollowingMechanics;

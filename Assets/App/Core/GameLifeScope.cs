@@ -21,9 +21,12 @@ namespace App.Core
         [SerializeField] private ResourceStorageModelService _resourceStorageModelService;
         [SerializeField] private PlayerSpawner _playerSpawner;
         [SerializeField] private UISpawnService _uiSpawnService;
+        [SerializeField] private BuildingViewObserver _buildingViewObserver;
         
         protected override void Configure(IContainerBuilder builder)
         {
+            builder.RegisterInstance(_buildingViewObserver);
+            
             builder.RegisterInstance(_joystick);
             builder.RegisterEntryPoint<JoystickInputHandler>().As<IInputHandler>();
             builder.Register<PlayerResourceViewObserver>(Lifetime.Singleton);

@@ -1,46 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
 using App.UI;
+using App.UI.UIManager;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using VContainer;
 
 namespace App.Gameplay.LevelStorage
 {
-    public class BuildingViewObserver : MonoBehaviour
+    public class BuildingViewObserver : BaseGameView, IDisposable
     {
-        [SerializeField] private ResourceStorageModel _resourceStorageModel;
-        [SerializeField] private ResourceView _resourceModelViewPrefab;
-
-        private ResourceStorage _resourceStorage;
-        
         [ShowInInspector, ReadOnly]
         private List<ResourceView> _resourceViews = new();
         
-        private void Awake()
+        [Inject] 
+        private ResourceView _resourceViewPrefab;
+        
+        private ResourceStorage _resourceStorage;
+        
+        public void Construct(BuildingModel buildingModel)
         {
-            if (_resourceStorageModel != null)
-            {
-                _resourceStorage = _resourceStorageModel.ResourceStorage;
-            }
-        }
-
-        private void OnEnable()
-        {
+            _resourceStorage = buildingModel.ResourceStorage;
             _resourceStorage.ResourcesChanged += OnResourcesChanged;
+            buildingModel.Built.AddListener(OnBuilt);
+            SetTarget(buildingModel.UnloadingPoint);
+            Init();
         }
 
-        private void OnDisable()
+        private void OnBuilt(Building obj)
         {
-            _resourceStorage.ResourcesChanged -= OnResourcesChanged;
+            Destroy(gameObject);
         }
 
-        private void Start()
+        private void Init()
         {
             var resourceTypes = Enum.GetValues(typeof(ResourceType));
             
             for (int i = 0; i < resourceTypes.Length; i++)
             {
-                _resourceViews.Add(Instantiate(_resourceModelViewPrefab, transform));    
+                var view = Instantiate(_resourceViewPrefab, transform);
+                _resourceViews.Add(view);    
             }
             
             HideAll();
@@ -63,6 +62,11 @@ namespace App.Gameplay.LevelStorage
             {
                 resourceView.Hide();
             }
+        }
+
+        public void Dispose()
+        {
+            _resourceStorage.ResourcesChanged -= OnResourcesChanged;
         }
     }
 }
