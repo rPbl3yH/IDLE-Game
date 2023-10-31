@@ -35,6 +35,7 @@ namespace App.Core
             builder.RegisterInstance(_resourceService);
             builder.RegisterInstance(_resourceStorageModelService);
             builder.RegisterInstance(_playerSpawner);
+            builder.RegisterEntryPoint<GameManager>();
         }
     }
 }
