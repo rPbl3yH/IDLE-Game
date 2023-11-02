@@ -1,30 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
 using App.UI;
-using App.UI.UIManager;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using VContainer;
 
 namespace App.Gameplay.LevelStorage
 {
-    public class BuildingViewObserver : BaseGameView, IDisposable
+    public class BuildingViewObserver : MonoBehaviour, IDisposable
     {
+        [SerializeField] 
+        private BuildingModel _buildingModel;
+        
+        [SerializeField] 
+        private ResourceView _resourceViewPrefab;
+        
         [ShowInInspector, ReadOnly]
         private List<ResourceView> _resourceViews = new();
         
-        [Inject] 
-        private ResourceView _resourceViewPrefab;
-        
         private ResourceStorage _resourceStorage;
         
-        public void Construct(BuildingModel buildingModel)
+        [Inject]
+        public void Construct()
         {
-            _resourceStorage = buildingModel.ResourceStorage;
+            _resourceStorage = _buildingModel.ResourceStorage;
             _resourceStorage.ResourcesChanged += OnResourcesChanged;
-            buildingModel.Built.AddListener(OnBuilt);
-            SetTarget(buildingModel.UnloadingPoint);
-            Init();
+            _buildingModel.Built.AddListener(OnBuilt);
+            InitViews();
         }
 
         private void OnBuilt(Building obj)
@@ -32,7 +34,7 @@ namespace App.Gameplay.LevelStorage
             Destroy(gameObject);
         }
 
-        private void Init()
+        private void InitViews()
         {
             var resourceTypes = Enum.GetValues(typeof(ResourceType));
             
