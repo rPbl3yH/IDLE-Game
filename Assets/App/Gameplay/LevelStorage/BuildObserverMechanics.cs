@@ -9,6 +9,7 @@ namespace App.Gameplay.LevelStorage
         private readonly ResourceStorageModelService _resourceStorageModelService;
         private readonly GameObject _spawnPoint;
         private readonly BuildingModel _buildingModel;
+        private readonly GameObject _root;
 
         public BuildObserverMechanics(
             BuildingModel buildingModel,

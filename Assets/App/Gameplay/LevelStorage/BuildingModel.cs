@@ -24,8 +24,15 @@ namespace App.Gameplay.LevelStorage
             _buildMechanics = new BuildMechanics(ResourceStorage, Built, buildingSpawner, Building, SpawnPoint.transform);
             _buildObserverMechanics = new BuildObserverMechanics(this, Built, ResourceStorageModelService, SpawnPoint);
             
+            Built.AddListener(OnBuilt);            
+            
             _buildMechanics.OnEnable();
             _buildObserverMechanics.OnEnable();
+        }
+
+        private void OnBuilt(Building obj)
+        {
+            Destroy(gameObject);
         }
 
         public void Dispose()
