@@ -164,9 +164,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2682188803102571773}
-  - component: {fileID: 172272234814553452}
   - component: {fileID: 7327047656556562541}
   - component: {fileID: 8626601242719860226}
+  - component: {fileID: 8654775396135677386}
   m_Layer: 0
   m_Name: BuildingViewObserver
   m_TagString: Untagged
@@ -194,21 +194,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &172272234814553452
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8016045980805342448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fd8c8c4464a47d89aa70deece961fb2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _buildingModel: {fileID: 5565038750525472650}
-  _resourceViewPrefab: {fileID: 2070033593455600028, guid: b9d2bf75e2f1fac4fb402e9b9deb26a8,
-    type: 3}
 --- !u!114 &7327047656556562541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,6 +234,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!114 &8654775396135677386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8016045980805342448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbd91dc8e4fe4daf80b832ecb96c1b5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _model: {fileID: 5565038750525472650}
+  _prefab: {fileID: 2070033593455600028, guid: b9d2bf75e2f1fac4fb402e9b9deb26a8, type: 3}
 --- !u!1001 &5565038750728974719
 PrefabInstance:
   m_ObjectHideFlags: 0
