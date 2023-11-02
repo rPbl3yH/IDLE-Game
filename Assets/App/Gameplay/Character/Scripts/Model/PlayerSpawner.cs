@@ -19,6 +19,7 @@ namespace App.Gameplay.Character.Scripts.Model
         [Inject] private ResourceService _resourceService;
         [Inject] private ResourceStorageModelService _resourceStorageModelService;
         [Inject] private IObjectResolver _objectResolver;
+        [Inject] private PlayerService _playerService;
 
         private InputController _inputController;
         private PlayerModel _player;
@@ -27,6 +28,7 @@ namespace App.Gameplay.Character.Scripts.Model
         public void Spawn()
         {
             _player = _objectResolver.Instantiate(_playerModelPrefab, _spawnPosition);
+            _playerService.SetPlayer(_player);
             Spawned?.Invoke(_player);
         }
     }

@@ -8,10 +8,11 @@ namespace App.Gameplay.LevelStorage
         [SerializeField] private BarnModel _barnModel;
         [SerializeField] private LoadResourceViewController _viewController;
 
-        [SerializeField] private PlayerModel _playerModel;
+        private PlayerModel _playerModel;
 
-        private void OnEnable()
+        public void Construct(PlayerModel playerModel)
         {
+            _playerModel = playerModel;
             _viewController.ResourceSelected += OnResourceSelected;
             _playerModel.IsShowLoadResources.OnChanged += OnChangedShowLoadResources;
         }

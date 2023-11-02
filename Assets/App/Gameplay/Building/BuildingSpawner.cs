@@ -1,34 +1,19 @@
-using System;
-using App.Gameplay.LevelStorage;
-using App.UI.UIManager;
+﻿    using App.Gameplay.LevelStorage;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
 namespace App.Gameplay.Building
 {
-    [Serializable]
-    public class BuildingSpawnPointDictionary : UnitySerializedDictionary<Transform, BuildingModel>{}
-    
-
     public class BuildingSpawner : MonoBehaviour
     {
-        [SerializeField]
-        private BuildingSpawnPointDictionary _buildings = new();
-
-        [Inject] 
-        private IObjectResolver _objectResolver;
-
-        [Inject] 
-        private ResourceStorageModelService _resourceStorageModelService;
+        [SerializeField] private Transform _parent;
+        [Inject] private IObjectResolver _objectResolver;
         
-        private void Start()
+        
+        public LevelStorage.Building Spawn(LevelStorage.Building buildingModel, Transform point)
         {
-            foreach (var pair in _buildings)
-            {
-                var buildingModel = _objectResolver.Instantiate(pair.Value, pair.Key);
-                _resourceStorageModelService.AddStorage(buildingModel);
-            }
+            return _objectResolver.Instantiate(buildingModel, point.position, point.rotation, _parent);
         }
     }
 }

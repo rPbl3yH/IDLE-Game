@@ -1,4 +1,5 @@
 ﻿using System;
+using App.Gameplay.Building;
 using Modules.Atomic.Actions;
 using UnityEngine;
 using VContainer;
@@ -15,13 +16,12 @@ namespace App.Gameplay.LevelStorage
 
         private BuildMechanics _buildMechanics;
         private BuildObserverMechanics _buildObserverMechanics;
-
+        
         [Inject]
-        public void Construct(ResourceStorageModelService resourceStorageModelService)
+        public void Construct(ResourceStorageModelService resourceStorageModelService, BuildingSpawner buildingSpawner)
         {
             ResourceStorageModelService = resourceStorageModelService;
-            var parent = ResourceStorageModelService.transform;
-            _buildMechanics = new BuildMechanics(ResourceStorage, Built, Building, SpawnPoint.transform, parent);
+            _buildMechanics = new BuildMechanics(ResourceStorage, Built, buildingSpawner, Building, SpawnPoint.transform);
             _buildObserverMechanics = new BuildObserverMechanics(this, Built, ResourceStorageModelService, SpawnPoint);
             
             _buildMechanics.OnEnable();
@@ -30,7 +30,8 @@ namespace App.Gameplay.LevelStorage
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            _buildMechanics.OnDisable();
+            _buildObserverMechanics.OnDisable();
         }
     }
 }

@@ -1,5 +1,6 @@
 using App.GameEngine.Input;
 using App.GameEngine.Input.Handlers;
+using App.Gameplay.Building;
 using App.Gameplay.Character.Scripts.Model;
 using App.Gameplay.LevelStorage;
 using App.Gameplay.Resource;
@@ -22,6 +23,7 @@ namespace App.Core
         [SerializeField] private PlayerSpawner _playerSpawner;
         [SerializeField] private UISpawnService _uiSpawnService;
         [SerializeField] private BuildingViewObserver _buildingViewObserver;
+        [SerializeField] private BuildingSpawner _buildingSpawner;
         
         protected override void Configure(IContainerBuilder builder)
         {
@@ -29,10 +31,11 @@ namespace App.Core
             
             builder.RegisterInstance(_joystick);
             builder.RegisterEntryPoint<JoystickInputHandler>().As<IInputHandler>();
+            builder.Register<PlayerService>(Lifetime.Scoped);
             builder.Register<PlayerResourceViewObserver>(Lifetime.Singleton);
 
             builder.RegisterInstance(_uiSpawnService);
-            
+            builder.RegisterInstance(_buildingSpawner);
             builder.RegisterInstance(_resourceView);
             builder.RegisterInstance(_resourceViewFactory);
             builder.RegisterInstance(_resourceService);
