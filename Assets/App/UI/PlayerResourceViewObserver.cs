@@ -9,29 +9,18 @@ namespace App.UI
 {
     public class PlayerResourceViewObserver : MonoBehaviour, IDisposable
     {
+        [SerializeField]
         private CharacterModel _characterModel;
-        private ResourceView _resourceViewPrefab;
+
+        [SerializeField]
+        private ResourceView _resourceView;
 
         private PlayerSpawner _playerSpawner;
-        private ResourceView _resourceView;
         private UISpawnService _uiSpawnService;
 
-        [Inject]
-        public void Construct(PlayerSpawner playerSpawner, ResourceView resourceView, UISpawnService spawnService)
+        public void Construct(CharacterModel characterModel)
         {
-            Debug.Log("spawn player resource observer");
-            _uiSpawnService = spawnService;
-            _playerSpawner = playerSpawner;
-            _playerSpawner.Spawned += PlayerSpawnerOnSpawned;
-            _resourceViewPrefab = resourceView;
-        }
-
-        private void PlayerSpawnerOnSpawned(PlayerModel playerModel)
-        {
-            _playerSpawner.Spawned -= PlayerSpawnerOnSpawned;
-            
-            _characterModel = playerModel.CharacterModel;
-            _resourceView = _uiSpawnService.Spawn(_resourceViewPrefab);
+            _characterModel = characterModel;
             
             OnResourceAmountChanged(_characterModel.ResourceAmount.Value);
             _characterModel.ResourceAmount.OnChanged += OnResourceAmountChanged;

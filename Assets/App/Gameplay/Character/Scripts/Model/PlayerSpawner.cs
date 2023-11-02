@@ -27,7 +27,6 @@ namespace App.Gameplay.Character.Scripts.Model
         public void Spawn()
         {
             _player = _objectResolver.Instantiate(_playerModelPrefab, _spawnPosition);
-            _player.Construct();
             Spawned?.Invoke(_player);
         }
     }
