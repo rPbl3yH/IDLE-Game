@@ -1,38 +1,43 @@
 using System;
 using System.Collections.Generic;
 using App.Gameplay;
-using VContainer;
+using App.Gameplay.LevelStorage;
+using UnityEngine;
 
 namespace App.UI
 {
-    public class ResourceViewObserver : IDisposable
+    public class ResourceViewObserver : MonoBehaviour
     {
-        private readonly ResourceViewFactory _resourceViewFactory;
-        private readonly ResourceStorage _resourceStorage;
+        [SerializeField]
+        private ResourceStorageModel _model;
+
+        [SerializeField] 
+        private ResourceView _prefab;
 
         private readonly List<ResourceView> _resourceViews = new();
 
-        [Inject]
-        public ResourceViewObserver(ResourceViewFactory resourceViewFactory, ResourceStorage resourceStorage)
+        private void Awake()
         {
-            _resourceViewFactory = resourceViewFactory;
-            _resourceStorage = resourceStorage;
-            _resourceStorage.ResourcesChanged += OnResourcesChanged;
             InitViews();
         }
-        
-        public void Dispose()
+
+        private void OnEnable()
         {
-            _resourceStorage.ResourcesChanged -= OnResourcesChanged;
+            _model.ResourceStorage.ResourcesChanged += OnResourcesChanged;
         }
-        
+
+        private void OnDisable()
+        {
+            _model.ResourceStorage.ResourcesChanged -= OnResourcesChanged;
+        }
+
         private void InitViews()
         {
             var resourceTypes = Enum.GetValues(typeof(ResourceType));
             
             for (int i = 0; i < resourceTypes.Length; i++)
             {
-                var view = _resourceViewFactory.Create();
+                var view = Instantiate(_prefab, transform);
                 _resourceViews.Add(view);    
             }
             

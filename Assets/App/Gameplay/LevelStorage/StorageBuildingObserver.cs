@@ -31,12 +31,7 @@ namespace App.Gameplay.LevelStorage
             if (building is ResourceStorageModel resourceStorageModel)
             {
                 _barnService.RegisterBarn(resourceStorageModel);
-                var resourceViewObserver =
-                    new ResourceViewObserver(_resourceViewFactory, resourceStorageModel.ResourceStorage);
-                
-                _container.Inject(resourceViewObserver);
                 print("Create resource view observer");
-                
             } 
         }
     }
