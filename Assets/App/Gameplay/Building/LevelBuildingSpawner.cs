@@ -1,19 +1,20 @@
-using System;
+using System.Collections.Generic;
 using App.Gameplay.LevelStorage;
-using App.UI.UIManager;
+using Sirenix.OdinInspector;
+using Sirenix.Serialization;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
 namespace App.Gameplay.Building
 {
-    [Serializable]
-    public class BuildingSpawnPointDictionary : UnitySerializedDictionary<Transform, BuildingModel>{}
-
-    public class LevelBuildingSpawner : MonoBehaviour
+    public class LevelBuildingSpawner : SerializedMonoBehaviour
     {
-        [SerializeField]
-        private BuildingSpawnPointDictionary _buildings = new();
+        [SerializeField] 
+        private BuildingModel _buildingModelPrefab;
+
+        [OdinSerialize]
+        private Dictionary<Transform, LevelStorage.Building> _buildings = new();
 
         [Inject] 
         private IObjectResolver _objectResolver;
@@ -25,7 +26,8 @@ namespace App.Gameplay.Building
         {
             foreach (var pair in _buildings)
             {
-                var buildingModel = _objectResolver.Instantiate(pair.Value, pair.Key);
+                _buildingModelPrefab.Building = pair.Value;
+                var buildingModel = _objectResolver.Instantiate(_buildingModelPrefab, pair.Key);
                 _resourceStorageModelService.AddStorage(buildingModel);
             }
         }

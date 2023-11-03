@@ -3,7 +3,9 @@ using App.GameEngine.AI.StateMachine.States;
 using App.Gameplay.Character.Scripts.Model;
 using App.Gameplay.Character.Scripts.Model.Actions;
 using App.Gameplay.LevelStorage;
+using App.Gameplay.Resource;
 using UnityEngine;
+using VContainer;
 
 namespace App.GameEngine.AI
 {
@@ -21,6 +23,13 @@ namespace App.GameEngine.AI
         private UnloadingResourceState _unloadingResourceState;
         private StateMachine.StateMachine _stateMachine;
         public DetectionBarnFunction DetectionBarnFunction;
+
+        [Inject]
+        public void Construct(BarnService barnService, ResourceService resourceService)
+        {
+            UnloadResourceData.BarnService = barnService;
+            _characterModel.Construct(resourceService);
+        }
         
         private void Start()
         {

@@ -8,12 +8,20 @@ namespace App.Gameplay.Building
     public class BuildingSpawner : MonoBehaviour
     {
         [SerializeField] private Transform _parent;
-        [Inject] private IObjectResolver _objectResolver;
         
+        [Inject] private IObjectResolver _objectResolver;
+        [Inject] private BarnService _barnService;
         
         public LevelStorage.Building Spawn(LevelStorage.Building buildingModel, Transform point)
         {
-            return _objectResolver.Instantiate(buildingModel, point.position, point.rotation, _parent);
+            var spawnedModel = _objectResolver.Instantiate(buildingModel, point.position, point.rotation, _parent);
+            
+            if (spawnedModel is ResourceStorageModel resourceStorageModel)
+            {
+                _barnService.RegisterBarn(resourceStorageModel);
+            }
+
+            return spawnedModel;
         }
     }
 }

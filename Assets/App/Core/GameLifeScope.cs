@@ -1,3 +1,4 @@
+using App.GameEngine.AI.Spawner;
 using App.GameEngine.Input;
 using App.GameEngine.Input.Handlers;
 using App.Gameplay.Building;
@@ -24,6 +25,8 @@ namespace App.Core
         [SerializeField] private UISpawnService _uiSpawnService;
         [SerializeField] private BuildingViewObserver _buildingViewObserver;
         [SerializeField] private BuildingSpawner _buildingSpawner;
+        [SerializeField] private AICharacterSpawner _aiCharacterSpawner;
+        [SerializeField] private BarnService _barnService;
         
         protected override void Configure(IContainerBuilder builder)
         {
@@ -34,14 +37,17 @@ namespace App.Core
             builder.Register<PlayerService>(Lifetime.Scoped);
             builder.Register<PlayerResourceViewObserver>(Lifetime.Singleton);
 
+            builder.RegisterInstance(_barnService);
             builder.RegisterInstance(_uiSpawnService);
+            builder.RegisterInstance(_resourceService);
+            
             builder.RegisterInstance(_buildingSpawner);
             builder.RegisterInstance(_resourceView);
             builder.RegisterInstance(_resourceViewFactory);
-            builder.RegisterInstance(_resourceService);
             builder.RegisterInstance(_resourceStorageModelService);
             builder.RegisterInstance(_playerSpawner);
             builder.RegisterEntryPoint<GameManager>();
+            builder.RegisterInstance(_aiCharacterSpawner);
         }
     }
 }

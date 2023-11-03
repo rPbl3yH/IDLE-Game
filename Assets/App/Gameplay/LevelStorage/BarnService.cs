@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using VContainer;
 
 namespace App.Gameplay.LevelStorage
 {
