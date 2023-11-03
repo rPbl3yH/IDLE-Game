@@ -21,4 +21,4 @@ MonoBehaviour:
       type: {class: ResourceData, ns: App.Gameplay.LevelStorage, asm: Assembly-CSharp}
       data:
         _resourceType: 0
-        _count: 5
+        _count: 1

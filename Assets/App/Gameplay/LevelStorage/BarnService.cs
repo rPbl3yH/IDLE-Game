@@ -1,11 +1,8 @@
-﻿using UnityEngine;
-using VContainer;
-
-namespace App.Gameplay.LevelStorage
+﻿namespace App.Gameplay.LevelStorage
 {
-    public class BarnService : MonoBehaviour
+    public class BarnService
     {
-        [SerializeField] private ResourceStorageModel _resourceStorageModel;
+        private ResourceStorageModel _resourceStorageModel;
 
         public void RegisterBarn(ResourceStorageModel resourceStorageModel)
         {

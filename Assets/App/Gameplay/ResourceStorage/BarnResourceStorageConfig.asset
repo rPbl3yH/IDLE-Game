@@ -12,3 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca9c491ea8fd463daa65508eb0b87dba, type: 3}
   m_Name: BarnResourceStorageConfig
   m_EditorClassIdentifier: 
+  Resources: []
+  references:
+    version: 2
+    RefIds: []

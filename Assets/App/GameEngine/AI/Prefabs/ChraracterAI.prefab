@@ -70,13 +70,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 430652606563599336, guid: 952939cb9ca2e3d4bbddc9f7b84e80a8,
         type: 3}
+      propertyPath: Speed.value
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 430652606563599336, guid: 952939cb9ca2e3d4bbddc9f7b84e80a8,
+        type: 3}
       propertyPath: ResourceService
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 430652606563599336, guid: 952939cb9ca2e3d4bbddc9f7b84e80a8,
         type: 3}
       propertyPath: MaxResourceAmount.value
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 430652606563599337, guid: 952939cb9ca2e3d4bbddc9f7b84e80a8,
         type: 3}
