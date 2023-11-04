@@ -6,7 +6,6 @@ using App.Gameplay.LevelStorage;
 
 namespace App.Core.SaveSystem.Mediators.Content
 {
-
     public class BuildingConstructionData
     {
         public List<Dictionary<ResourceType, ResourceValue>> Resources;

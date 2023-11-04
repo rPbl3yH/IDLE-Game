@@ -1,4 +1,5 @@
 ﻿using System;
+using App.Core.SaveSystem.Mediators.Content;
 using App.Gameplay.Building;
 using Modules.Atomic.Actions;
 using UnityEngine;
@@ -16,18 +17,21 @@ namespace App.Gameplay.LevelStorage
 
         private BuildConstructionMechanics _buildConstructionMechanics;
         private BuildObserverMechanics _buildObserverMechanics;
+        private BarnRegisterMechanics _barnRegisterMechanics;
         
         [Inject]
-        public void Construct(ResourceStorageModelService resourceStorageModelService, BuildingSpawner buildingSpawner)
+        public void Construct(ResourceStorageModelService resourceStorageModelService, BuildingSpawner buildingSpawner, BarnModelService barnModelService)
         {
             ResourceStorageModelService = resourceStorageModelService;
             _buildConstructionMechanics = new BuildConstructionMechanics(ResourceStorage, Built, buildingSpawner, BuildingModel, SpawnPoint.transform);
             _buildObserverMechanics = new BuildObserverMechanics(this, Built, ResourceStorageModelService, SpawnPoint);
+            _barnRegisterMechanics = new BarnRegisterMechanics(Built, barnModelService);
             
             Built.AddListener(OnBuilt);            
             
             _buildConstructionMechanics.OnEnable();
             _buildObserverMechanics.OnEnable();
+            _barnRegisterMechanics.OnEnable();
         }
 
         private void OnBuilt(BuildingModel obj)
@@ -39,6 +43,7 @@ namespace App.Gameplay.LevelStorage
         {
             _buildConstructionMechanics.OnDisable();
             _buildObserverMechanics.OnDisable();
+            _barnRegisterMechanics.OnDisable();
         }
     }
 }

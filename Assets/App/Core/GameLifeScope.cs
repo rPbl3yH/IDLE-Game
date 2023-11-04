@@ -38,6 +38,7 @@ namespace App.Core
             builder.Register<BarnService>(Lifetime.Scoped);
             builder.RegisterInstance(_resourceService);
             builder.Register<BuildingConstructionService>(Lifetime.Scoped);
+            builder.Register<BarnModelService>(Lifetime.Scoped);
             ConfigureSaveSystem();
 
             builder.RegisterInstance(_buildingViewObserver);
@@ -68,6 +69,7 @@ namespace App.Core
             _builder.Register<GameRepository>(Lifetime.Singleton);
             _builder.Register<IGameMediator, ResourceMediator>(Lifetime.Singleton);
             _builder.Register<IGameMediator, BuildingConstructionMediator>(Lifetime.Singleton);
+            _builder.Register<IGameMediator, BarnModelMediator>(Lifetime.Singleton);
             
             _builder.Register<GameSaver>(Lifetime.Singleton);
         }
