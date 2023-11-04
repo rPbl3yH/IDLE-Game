@@ -1846,8 +1846,10 @@ MonoBehaviour:
     ReferencedUnityObjects:
     - {fileID: 697529953}
     - {fileID: 7941782744118843781, guid: b4044102550362846a6e976a8c5e11db, type: 3}
+    - {fileID: 11400000, guid: 404e51b594d9df142bcecc6e77fd46c8, type: 2}
     - {fileID: 861657232}
     - {fileID: 6733138021520475530, guid: bc245837a14f77a4484cb553ed5ae154, type: 3}
+    - {fileID: 11400000, guid: dd70342cbfde4e24e90905fad48483de, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -1855,7 +1857,7 @@ MonoBehaviour:
     SerializationNodes:
     - Name: _buildings
       Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[UnityEngine.Transform, UnityEngine.CoreModule],[App.Gameplay.LevelStorage.Building,
+      Data: 0|System.Collections.Generic.Dictionary`2[[UnityEngine.Transform, UnityEngine.CoreModule],[App.Gameplay.Building.BuildingData,
         Assembly-CSharp]], mscorlib
     - Name: comparer
       Entry: 7
@@ -1874,8 +1876,17 @@ MonoBehaviour:
       Entry: 10
       Data: 0
     - Name: $v
+      Entry: 7
+      Data: 2|App.Gameplay.Building.BuildingData, Assembly-CSharp
+    - Name: Building
       Entry: 10
       Data: 1
+    - Name: BuildConfig
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -1884,10 +1895,19 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 10
-      Data: 2
-    - Name: $v
-      Entry: 10
       Data: 3
+    - Name: $v
+      Entry: 7
+      Data: 3|App.Gameplay.Building.BuildingData, Assembly-CSharp
+    - Name: Building
+      Entry: 10
+      Data: 4
+    - Name: BuildConfig
+      Entry: 10
+      Data: 5
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 8
       Data: 

@@ -14,7 +14,11 @@ namespace App.Gameplay
         public event Action<Dictionary<ResourceType, ResourceValue>> ResourcesChanged;
 
         public Dictionary<ResourceType, ResourceValue> Resources => _storage;
-        public ResourceStorageConfig StorageConfig => _resourceStorageConfig;
+        public ResourceStorageConfig StorageConfig
+        {
+            get => _resourceStorageConfig;
+            set => _resourceStorageConfig = value;
+        }
 
         [ShowInInspector]
         private readonly Dictionary<ResourceType, ResourceValue> _storage = new();

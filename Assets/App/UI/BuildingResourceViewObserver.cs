@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using App.Gameplay;
 using App.Gameplay.LevelStorage;
@@ -19,7 +20,7 @@ namespace App.UI
 
         private readonly List<ResourceView> _resourceViews = new();
 
-        private void Awake()
+        private void Start()
         {
             _resourceStorageConfig = _model.ResourceStorage.StorageConfig;
             InitViews();
