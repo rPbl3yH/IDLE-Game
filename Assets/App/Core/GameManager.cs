@@ -15,7 +15,6 @@ namespace App.Core
         public void Start()
         {
             _playerSpawner.Spawn();
-            _gameSaver.Load();
         }
     }
 }
