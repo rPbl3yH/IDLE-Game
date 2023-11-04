@@ -70,6 +70,7 @@ namespace App.Core
             _builder.Register<IGameMediator, ResourceMediator>(Lifetime.Singleton);
             _builder.Register<IGameMediator, BuildingConstructionMediator>(Lifetime.Singleton);
             _builder.Register<IGameMediator, BarnModelMediator>(Lifetime.Singleton);
+            _builder.Register<IGameMediator, PlayerMediator>(Lifetime.Singleton);
             
             _builder.Register<GameSaver>(Lifetime.Singleton);
         }
