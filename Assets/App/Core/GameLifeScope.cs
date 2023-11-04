@@ -1,3 +1,7 @@
+using System.Collections.Generic;
+using System.Linq;
+using App.Core.SaveSystem;
+using App.Core.SaveSystem.Mediators.Content;
 using App.GameEngine.AI.Spawner;
 using App.GameEngine.Input;
 using App.GameEngine.Input.Handlers;
@@ -26,27 +30,49 @@ namespace App.Core
         [SerializeField] private BuildingViewObserver _buildingViewObserver;
         [SerializeField] private BuildingSpawner _buildingSpawner;
         [SerializeField] private AICharacterSpawner _aiCharacterSpawner;
+
+        private IContainerBuilder _builder;
         
         protected override void Configure(IContainerBuilder builder)
         {
+            _builder = builder;
+            builder.Register<PlayerService>(Lifetime.Scoped);
+            builder.Register<BarnService>(Lifetime.Scoped);
+            builder.RegisterInstance(_resourceService);
+            ConfigureSaveSystem();
+
             builder.RegisterInstance(_buildingViewObserver);
-            
+
             builder.RegisterInstance(_joystick);
             builder.RegisterEntryPoint<JoystickInputHandler>().As<IInputHandler>();
-            builder.Register<PlayerService>(Lifetime.Scoped);
             builder.Register<PlayerResourceViewObserver>(Lifetime.Singleton);
 
-            builder.Register<BarnService>(Lifetime.Scoped);
-            // builder.RegisterInstance(_uiSpawnService);
-            builder.RegisterInstance(_resourceService);
-            
             builder.RegisterInstance(_buildingSpawner);
             builder.RegisterInstance(_resourceView);
-            // builder.RegisterInstance(_resourceViewFactory);
             builder.RegisterInstance(_resourceStorageModelService);
             builder.RegisterInstance(_playerSpawner);
             builder.RegisterEntryPoint<GameManager>();
             builder.RegisterInstance(_aiCharacterSpawner);
+            
+            builder.RegisterBuildCallback(OnRegisterCallback);
+        }
+
+        private void OnRegisterCallback(IObjectResolver resolver)
+        {
+            
+            //resolver.Inject(_saveController);
+        }
+
+        private void ConfigureSaveSystem()
+        {
+            _builder.Register<GameRepository>(Lifetime.Singleton);
+            _builder.Register<IGameMediator, ResourceMediator>(Lifetime.Singleton);
+            
+            var list = ServiceLocator.GetServices<IGameMediator>();
+            
+            _builder.RegisterInstance<IGameMediator[]>(list.ToArray());
+            _builder.Register<GameSaver>(Lifetime.Singleton);
         }
     }
 }
+

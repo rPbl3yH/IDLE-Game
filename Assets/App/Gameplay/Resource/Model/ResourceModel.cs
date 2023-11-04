@@ -1,4 +1,5 @@
-﻿using App.Gameplay.Resource.Model.Mechanics;
+﻿using System;
+using App.Gameplay.Resource.Model.Mechanics;
 using Modules.Atomic.Actions;
 using Modules.Atomic.Values;
 using UnityEngine;
@@ -8,6 +9,7 @@ namespace App.Gameplay.Resource.Model
 {
     public class ResourceModel : MonoBehaviour
     {
+        public Guid Guid = Guid.NewGuid();
         public ResourceType ResourceType;
         
         public AtomicVariable<int> Amount;
