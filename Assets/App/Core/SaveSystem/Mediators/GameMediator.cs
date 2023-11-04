@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using VContainer;
 
-namespace App.Core.SaveSystem
+namespace App.Core
 {
     public abstract class GameMediator<TData, TGameService> : IGameMediator
     {

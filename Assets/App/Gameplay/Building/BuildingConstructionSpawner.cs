@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using App.Gameplay.LevelStorage;
-using App.Gameplay.Player;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using UnityEngine;

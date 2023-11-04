@@ -1,4 +1,4 @@
-﻿namespace App.Core.SaveSystem
+﻿namespace App.Core
 {
     public interface IGameMediator
     {

@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using VContainer;
 
-namespace App.Core.SaveSystem
+namespace App.Core
 {
     [Serializable]
     public class GameSaver
@@ -16,9 +15,10 @@ namespace App.Core.SaveSystem
         public GameSaver(IEnumerable<IGameMediator> gameMediators, GameRepository gameRepository)
         {
             _gameMediators = gameMediators;
+            
             foreach (var gameMediator in _gameMediators)
             {
-                Debug.Log(gameMediator.GetType().Name);
+                // Debug.Log(gameMediator.GetType().Name);
             }
             _gameRepository = gameRepository;
         }
@@ -26,7 +26,7 @@ namespace App.Core.SaveSystem
         [ShowInInspector]
         public void Save()
         {
-            Debug.Log("Game mediators = " + _gameMediators.Count());
+            // Debug.Log("Game mediators = " + _gameMediators.Count());
             foreach (var gameMediator in _gameMediators)
             {
                 gameMediator.SaveData(_gameRepository);

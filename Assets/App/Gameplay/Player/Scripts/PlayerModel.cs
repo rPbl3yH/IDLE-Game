@@ -1,5 +1,4 @@
-﻿using System;
-using App.Gameplay.Character.Scripts.Model;
+﻿using App.Gameplay.Character.Scripts.Model;
 using App.Gameplay.LevelStorage;
 using App.Gameplay.Resource;
 using App.UI;

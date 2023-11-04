@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using App.Gameplay.LevelStorage;
-using App.Gameplay.Player;
 using Sirenix.OdinInspector;
 using UnityEngine;
 

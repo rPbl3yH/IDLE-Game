@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using App.Gameplay.LevelStorage;
 using App.Gameplay.Resource;
-using App.Gameplay.Resource.Model;
 
-namespace App.Core.SaveSystem.Mediators.Content
+namespace App.Core
 {
     public class ResourceMediator : GameMediator<List<ResourceData>,ResourceService>
     {

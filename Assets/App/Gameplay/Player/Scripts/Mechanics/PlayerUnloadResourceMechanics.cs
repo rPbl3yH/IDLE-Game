@@ -1,5 +1,4 @@
-﻿using App.Gameplay.Character.Scripts.Model;
-using App.Gameplay.LevelStorage;
+﻿using App.Gameplay.LevelStorage;
 using Modules.Atomic.Values;
 using UnityEngine;
 

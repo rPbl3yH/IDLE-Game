@@ -8,10 +8,14 @@ namespace App.Core
     {
         [Inject] 
         private PlayerSpawner _playerSpawner;
+
+        [Inject] 
+        private GameSaver _gameSaver;
         
         public void Start()
         {
             _playerSpawner.Spawn();
+            _gameSaver.Load();
         }
     }
 }

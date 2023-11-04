@@ -1,21 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using App.Gameplay;
+﻿using System.Linq;
 using App.Gameplay.Building;
-using App.Gameplay.LevelStorage;
 
 namespace App.Core.SaveSystem.Mediators.Content
 {
-    public class BuildingConstructionData
-    {
-        public List<Dictionary<ResourceType, ResourceValue>> Resources;
-
-        public BuildingConstructionData()
-        {
-            Resources = new List<Dictionary<ResourceType, ResourceValue>>();
-        }
-    }
-    
     public class BuildingConstructionMediator : GameMediator<BuildingConstructionData, BuildingConstructionService>
     {
         protected override void SetupFromData(BuildingConstructionService service, BuildingConstructionData data)

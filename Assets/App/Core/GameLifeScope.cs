@@ -1,16 +1,12 @@
-using System.Collections.Generic;
-using System.Linq;
 using App.Core.SaveSystem;
 using App.Core.SaveSystem.Mediators.Content;
 using App.GameEngine.AI.Spawner;
-using App.GameEngine.Input;
 using App.GameEngine.Input.Handlers;
 using App.Gameplay.Building;
 using App.Gameplay.Character.Scripts.Model;
 using App.Gameplay.LevelStorage;
 using App.Gameplay.Resource;
 using App.UI;
-using App.UI.UIManager;
 using SimpleInputNamespace;
 using UnityEngine;
 using VContainer;
@@ -39,10 +35,10 @@ namespace App.Core
             builder.RegisterInstance(_resourceService);
             builder.Register<BuildingConstructionService>(Lifetime.Scoped);
             builder.Register<BarnModelService>(Lifetime.Scoped);
+            
             ConfigureSaveSystem();
 
             builder.RegisterInstance(_buildingViewObserver);
-
             builder.RegisterInstance(_joystick);
             builder.RegisterEntryPoint<JoystickInputHandler>().As<IInputHandler>();
             builder.Register<PlayerResourceViewObserver>(Lifetime.Singleton);
@@ -54,13 +50,11 @@ namespace App.Core
             builder.RegisterInstance(_aiCharacterSpawner);
             
             builder.RegisterEntryPoint<GameManager>();
-
             builder.RegisterBuildCallback(OnRegisterCallback);
         }
 
         private void OnRegisterCallback(IObjectResolver resolver)
         {
-            
             //resolver.Inject(_saveController);
         }
 

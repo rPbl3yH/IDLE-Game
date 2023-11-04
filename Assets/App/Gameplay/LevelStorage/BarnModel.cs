@@ -1,6 +1,4 @@
-﻿using System;
-using App.Gameplay.Character.Scripts.Model;
-using App.Gameplay.Player;
+﻿using App.Gameplay.Character.Scripts.Model;
 using Modules.Atomic.Actions;
 using Sirenix.OdinInspector;
 using UnityEngine;

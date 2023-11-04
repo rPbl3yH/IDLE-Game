@@ -1,9 +1,7 @@
 ﻿using System;
 using App.Gameplay.Character.Scripts.Model;
-using App.Gameplay.Player;
 using App.UI.UIManager;
 using UnityEngine;
-using VContainer;
 
 namespace App.UI
 {

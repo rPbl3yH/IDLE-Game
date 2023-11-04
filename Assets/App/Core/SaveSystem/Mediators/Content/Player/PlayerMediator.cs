@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using App.Gameplay;
+﻿using App.Gameplay;
 using App.Gameplay.Character.Scripts.Model;
 using App.Gameplay.LevelStorage;
 
 namespace App.Core.SaveSystem.Mediators.Content
 {
-    [Serializable]
-    public class CharacterData
-    {
-        public ResourceData ResourceData;
-    }
-    
     public class PlayerMediator : GameMediator<CharacterData, PlayerService>
     {
         protected override void SetupFromData(PlayerService service, CharacterData data)
