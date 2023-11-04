@@ -7,6 +7,7 @@ using Modules.Atomic.Actions;
 using Modules.Atomic.Values;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace App.Gameplay.Character.Scripts.Model
 {
@@ -15,6 +16,7 @@ namespace App.Gameplay.Character.Scripts.Model
         //Данные
         public Transform Root;
         public Transform View;
+        public NavMeshAgent Agent;
         
         [Header("Movement")]
         public AtomicVariable<Vector3> MoveDirection;
@@ -50,7 +52,7 @@ namespace App.Gameplay.Character.Scripts.Model
         public DetectionResourceFunction DetectionResourceFunction;
 
         //Логика
-        private MovementMechanics _movementMechanics;
+        private NavMeshMovementMechanics _movementMechanics;
         private RotateMechanics _rotateMechanics;
         private DetectionResourceMechanics _detectionResourceMechanics;
         private GatheringResourceMechanics _gatheringResourceMechanics;
@@ -61,7 +63,7 @@ namespace App.Gameplay.Character.Scripts.Model
         public void Construct(ResourceService resourceService)
         {
             DetectionResourceFunction = new DetectionResourceFunction(this, resourceService);
-            _movementMechanics = new MovementMechanics(Root, MoveDirection, Speed);
+            _movementMechanics = new NavMeshMovementMechanics(Agent, MoveDirection, Speed);
             _rotateMechanics = new RotateMechanics(View, MoveDirection);
             _detectionResourceMechanics =
                 new DetectionResourceMechanics(Root, TargetResource, GatheringDistance, CanGathering, IsFreeSpace, MoveDirection);
