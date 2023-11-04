@@ -5,7 +5,7 @@ using VContainer;
 
 namespace App.Gameplay.Building.House
 {
-    public class HouseBuilding : LevelStorage.Building
+    public class HouseBuildingModel : BuildingModel
     {
         [SerializeField] private Transform _spawnPoint;
         

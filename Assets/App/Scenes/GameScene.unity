@@ -1879,7 +1879,7 @@ MonoBehaviour:
     - Name: $v
       Entry: 7
       Data: 2|App.Gameplay.Building.BuildingData, Assembly-CSharp
-    - Name: Building
+    - Name: BuildingModel
       Entry: 10
       Data: 1
     - Name: BuildConfig
@@ -1900,7 +1900,7 @@ MonoBehaviour:
     - Name: $v
       Entry: 7
       Data: 3|App.Gameplay.Building.BuildingData, Assembly-CSharp
-    - Name: Building
+    - Name: BuildingModel
       Entry: 10
       Data: 4
     - Name: BuildConfig
@@ -1918,7 +1918,7 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  _buildingModelPrefab: {fileID: 5565038750525472650, guid: 5a61355a3a3c10b48a9e38b8511afdc2,
+  _buildingConstructionModelPrefab: {fileID: 5565038750525472650, guid: 5a61355a3a3c10b48a9e38b8511afdc2,
     type: 3}
 --- !u!1 &1129121446
 GameObject:

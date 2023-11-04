@@ -22,11 +22,9 @@ namespace App.Core
     {
         [SerializeField] private Joystick _joystick;
         [SerializeField] private ResourceView _resourceView;
-        // [SerializeField] private ResourceViewFactory _resourceViewFactory;
         [SerializeField] private ResourceService _resourceService;
         [SerializeField] private ResourceStorageModelService _resourceStorageModelService;
         [SerializeField] private PlayerSpawner _playerSpawner;
-        // [SerializeField] private UISpawnService _uiSpawnService;
         [SerializeField] private BuildingViewObserver _buildingViewObserver;
         [SerializeField] private BuildingSpawner _buildingSpawner;
         [SerializeField] private AICharacterSpawner _aiCharacterSpawner;
@@ -39,6 +37,7 @@ namespace App.Core
             builder.Register<PlayerService>(Lifetime.Scoped);
             builder.Register<BarnService>(Lifetime.Scoped);
             builder.RegisterInstance(_resourceService);
+            builder.Register<BuildingConstructionService>(Lifetime.Scoped);
             ConfigureSaveSystem();
 
             builder.RegisterInstance(_buildingViewObserver);
@@ -51,9 +50,10 @@ namespace App.Core
             builder.RegisterInstance(_resourceView);
             builder.RegisterInstance(_resourceStorageModelService);
             builder.RegisterInstance(_playerSpawner);
-            builder.RegisterEntryPoint<GameManager>();
             builder.RegisterInstance(_aiCharacterSpawner);
             
+            builder.RegisterEntryPoint<GameManager>();
+
             builder.RegisterBuildCallback(OnRegisterCallback);
         }
 
@@ -67,10 +67,8 @@ namespace App.Core
         {
             _builder.Register<GameRepository>(Lifetime.Singleton);
             _builder.Register<IGameMediator, ResourceMediator>(Lifetime.Singleton);
+            _builder.Register<IGameMediator, BuildingConstructionMediator>(Lifetime.Singleton);
             
-            var list = ServiceLocator.GetServices<IGameMediator>();
-            
-            _builder.RegisterInstance<IGameMediator[]>(list.ToArray());
             _builder.Register<GameSaver>(Lifetime.Singleton);
         }
     }

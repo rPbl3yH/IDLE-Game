@@ -10,7 +10,7 @@ namespace App.Gameplay.LevelStorage
     public class BuildingViewObserver : MonoBehaviour, IDisposable
     {
         [SerializeField] 
-        private BuildingModel _buildingModel;
+        private BuildingConstructionModel _buildingConstructionModel;
         
         [SerializeField] 
         private ResourceView _resourceViewPrefab;
@@ -23,13 +23,13 @@ namespace App.Gameplay.LevelStorage
         [Inject]
         public void Construct()
         {
-            _resourceStorage = _buildingModel.ResourceStorage;
+            _resourceStorage = _buildingConstructionModel.ResourceStorage;
             _resourceStorage.ResourcesChanged += OnResourcesChanged;
-            _buildingModel.Built.AddListener(OnBuilt);
+            _buildingConstructionModel.Built.AddListener(OnBuilt);
             InitViews();
         }
 
-        private void OnBuilt(Building obj)
+        private void OnBuilt(BuildingModel obj)
         {
             Destroy(gameObject);
         }

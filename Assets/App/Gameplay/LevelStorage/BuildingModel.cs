@@ -1,44 +1,9 @@
-﻿using System;
-using App.Gameplay.Building;
-using Modules.Atomic.Actions;
-using UnityEngine;
-using VContainer;
+﻿using UnityEngine;
 
-namespace App.Gameplay.LevelStorage
+namespace App.Gameplay
 {
-    public class BuildingModel : ResourceStorageModel, IDisposable
+    public abstract class BuildingModel : MonoBehaviour
     {
-        public AtomicEvent<Building> Built = new();
-        public GameObject SpawnPoint;
-        public Building Building;
         
-        public ResourceStorageModelService ResourceStorageModelService;
-
-        private BuildMechanics _buildMechanics;
-        private BuildObserverMechanics _buildObserverMechanics;
-        
-        [Inject]
-        public void Construct(ResourceStorageModelService resourceStorageModelService, BuildingSpawner buildingSpawner)
-        {
-            ResourceStorageModelService = resourceStorageModelService;
-            _buildMechanics = new BuildMechanics(ResourceStorage, Built, buildingSpawner, Building, SpawnPoint.transform);
-            _buildObserverMechanics = new BuildObserverMechanics(this, Built, ResourceStorageModelService, SpawnPoint);
-            
-            Built.AddListener(OnBuilt);            
-            
-            _buildMechanics.OnEnable();
-            _buildObserverMechanics.OnEnable();
-        }
-
-        private void OnBuilt(Building obj)
-        {
-            Destroy(gameObject);
-        }
-
-        public void Dispose()
-        {
-            _buildMechanics.OnDisable();
-            _buildObserverMechanics.OnDisable();
-        }
     }
 }

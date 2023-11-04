@@ -12,9 +12,9 @@ namespace App.Gameplay.Building
         [Inject] private IObjectResolver _objectResolver;
         [Inject] private BarnService _barnService;
         
-        public LevelStorage.Building Spawn(LevelStorage.Building buildingModel, Transform point)
+        public BuildingModel Spawn(BuildingModel buildingModelModel, Transform point)
         {
-            var spawnedModel = _objectResolver.Instantiate(buildingModel, point.position, point.rotation, _parent);
+            var spawnedModel = _objectResolver.Instantiate(buildingModelModel, point.position, point.rotation, _parent);
             
             if (spawnedModel is ResourceStorageModel resourceStorageModel)
             {

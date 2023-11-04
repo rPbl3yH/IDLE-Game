@@ -5,19 +5,19 @@ namespace App.Gameplay.LevelStorage
 {
     public class BuildObserverMechanics
     {
-        private readonly AtomicEvent<Building> _built;
+        private readonly AtomicEvent<BuildingModel> _built;
         private readonly ResourceStorageModelService _resourceStorageModelService;
         private readonly GameObject _spawnPoint;
-        private readonly BuildingModel _buildingModel;
+        private readonly BuildingConstructionModel _buildingConstructionModel;
         private readonly GameObject _root;
 
         public BuildObserverMechanics(
-            BuildingModel buildingModel,
-            AtomicEvent<Building> built,
+            BuildingConstructionModel buildingConstructionModel,
+            AtomicEvent<BuildingModel> built,
             ResourceStorageModelService resourceStorageModelService,
             GameObject spawnPoint)
         {
-            _buildingModel = buildingModel;
+            _buildingConstructionModel = buildingConstructionModel;
             _built = built;
             _resourceStorageModelService = resourceStorageModelService;
             _spawnPoint = spawnPoint;
@@ -33,12 +33,12 @@ namespace App.Gameplay.LevelStorage
             _built.RemoveListener(OnBuilt);
         }
 
-        private void OnBuilt(Building building)
+        private void OnBuilt(BuildingModel buildingModel)
         {
-            _resourceStorageModelService.RemoveStorage(_buildingModel);
+            _resourceStorageModelService.RemoveStorage(_buildingConstructionModel);
             _spawnPoint.SetActive(false);
             
-            if (building is ResourceStorageModel storageModel)
+            if (buildingModel is ResourceStorageModel storageModel)
             {
                 _resourceStorageModelService.AddStorage(storageModel);
             }

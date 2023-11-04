@@ -25,7 +25,7 @@ namespace App.Gameplay
 
         [SerializeField] 
         private ResourceStorageConfig _resourceStorageConfig;
-        
+
         [Button]
         public bool TryAdd(ResourceType resourceType, int count)
         {
