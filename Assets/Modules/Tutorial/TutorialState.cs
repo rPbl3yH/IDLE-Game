@@ -23,7 +23,7 @@ namespace Modules.Tutorial
             }
             else
             {
-                Debug.Log("Next step started");
+                Debug.Log("Step started " + CurrentStep);
                 StepStarted?.Invoke(CurrentStep);
             }
         }

@@ -7,6 +7,7 @@ using App.Gameplay.Character.Scripts.Model;
 using App.Gameplay.LevelStorage;
 using App.Gameplay.Resource;
 using App.UI;
+using App.UI.UIManager;
 using Modules.Tutorial;
 using Modules.Tutorial.Content;
 using SimpleInputNamespace;
@@ -32,11 +33,9 @@ namespace App.Core
             builder.Register<BarnModelService>(Lifetime.Scoped);
             
             ConfigureSaveSystem();
-
-            builder.RegisterComponentInHierarchy<Joystick>();
-            builder.RegisterEntryPoint<JoystickInputHandler>().As<IInputHandler>();
+            ConfigureUI();
+            
             builder.Register<PlayerResourceViewObserver>(Lifetime.Singleton);
-
             builder.RegisterComponentInHierarchy<BuildingSpawner>();
             builder.RegisterInstance(_resourceView);
             builder.RegisterComponentInHierarchy<ResourceStorageModelService>();
@@ -52,6 +51,13 @@ namespace App.Core
         private void OnRegisterCallback(IObjectResolver resolver)
         {
             //resolver.Inject(_saveController);
+        }
+
+        private void ConfigureUI()
+        {
+            _builder.RegisterComponentInHierarchy<UIPanelManager>();
+            _builder.RegisterComponentInHierarchy<Joystick>();
+            _builder.RegisterEntryPoint<JoystickInputHandler>().As<IInputHandler>();
         }
 
         private void ConfigureTutorialStep()
