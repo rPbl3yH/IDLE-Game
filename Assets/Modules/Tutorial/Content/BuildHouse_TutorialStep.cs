@@ -3,6 +3,7 @@ using App.Gameplay;
 using App.Gameplay.Building;
 using App.Gameplay.Building.House;
 using App.Gameplay.Resource;
+using UnityEngine;
 using VContainer.Unity;
 
 namespace Modules.Tutorial.Content
@@ -37,17 +38,17 @@ namespace Modules.Tutorial.Content
             
             _resourceService.SetActiveResourceType(ResourceType.Stone, true);
             
-            var model = _buildingConstructionService.GetServices()
+            var buildingConstructionModel = _buildingConstructionService.GetServices()
                 .FirstOrDefault(model => model.BuildingModel is HouseBuildingModel);
                 
-            if (model != null)
+            if (buildingConstructionModel != null)
             {
-                model.IsEnable.Value = true;
-                model.Built.AddListener(OnBuilt);
+                buildingConstructionModel.IsEnable.Value = true;
+                buildingConstructionModel.Built.AddListener(OnBuilt);
             }
         }
 
-        private void OnBuilt(BuildingModel obj)
+        private void OnBuilt(BuildingModel buildingModel)
         {
             _tutorialState.NextStep();
         }

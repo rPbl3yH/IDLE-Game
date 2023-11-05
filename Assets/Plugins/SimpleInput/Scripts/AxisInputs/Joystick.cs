@@ -112,7 +112,7 @@ namespace SimpleInputNamespace
 			eventReceiver.Listener = this;
 		}
 
-		public void OnEnable()
+		private void OnEnable()
 		{
 			xAxis.StartTracking();
 			yAxis.StartTracking();
@@ -120,7 +120,7 @@ namespace SimpleInputNamespace
 			SimpleInput.OnUpdate += OnUpdate;
 		}
 
-		public void OnDisable()
+		private void OnDisable()
 		{
 			OnPointerUp( null );
 

@@ -2,6 +2,7 @@
 {
     public enum UIPanelType
     {
-        Welcome
+        TutorialWelcome,
+        TutorialEnd
     }
 }

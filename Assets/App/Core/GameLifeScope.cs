@@ -67,6 +67,7 @@ namespace App.Core
             _builder.RegisterEntryPoint<GatheringWood_TutorialStep>(Lifetime.Scoped);
             _builder.RegisterEntryPoint<BuildBarn_TutorialStep>(Lifetime.Scoped);
             _builder.RegisterEntryPoint<BuildHouse_TutorialStep>(Lifetime.Scoped);
+            _builder.RegisterEntryPoint<Congratulation_TutorialStep>(Lifetime.Scoped);
         }
 
         private void ConfigureSaveSystem()

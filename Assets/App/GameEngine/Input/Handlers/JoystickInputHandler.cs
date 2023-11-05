@@ -36,13 +36,13 @@ namespace App.GameEngine.Input.Handlers
         public void Enable()
         {
             IsEnabled = true;
-            _joystick.OnEnable();
+            _joystick.gameObject.SetActive(true);
         }
 
         public void Disable()
         {
             IsEnabled = false;
-            _joystick.OnDisable();
+            _joystick.gameObject.SetActive(false);
         }
     }
 }

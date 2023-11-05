@@ -16,12 +16,13 @@ namespace Modules.Tutorial.Content
         {
             _tutorialState = tutorialState;
             _inputHandler = inputHandler;
-            _panel = uiPanelManager.GetPanel(UIPanelType.Welcome);
+            _panel = uiPanelManager.GetPanel(UIPanelType.TutorialWelcome);
             _panel.Hide();    
         }
 
         void IInitializable.Initialize()
         {
+            _inputHandler.Disable();
             _tutorialState.StepStarted += TutorialStateOnStepStarted;
         }
 
