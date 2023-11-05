@@ -11,25 +11,25 @@ namespace App.Gameplay.Resource.View
 
         public AtomicVariable<float> ActivateShowTime;
 
-        private ActivateViewResourceMechanics _activateViewResourceMechanics;
+        private ActivateModelViewMechanics _activateModelViewMechanics;
         private ShakeViewMechanics _shakeViewMechanics;
 
         private void Awake()
         {
             _shakeViewMechanics = new ShakeViewMechanics(_view.transform, _resourceModel.Gathered);
-            _activateViewResourceMechanics = new ActivateViewResourceMechanics(_view, _resourceModel.IsEnable, ActivateShowTime);
+            _activateModelViewMechanics = new ActivateModelViewMechanics(_view, _resourceModel.IsEnable, ActivateShowTime);
         }
 
         private void OnEnable()
         {
             _shakeViewMechanics.OnEnable();
-            _activateViewResourceMechanics.OnEnable();
+            _activateModelViewMechanics.OnEnable();
         }
 
         private void OnDisable()
         {
             _shakeViewMechanics.OnDisable();
-            _activateViewResourceMechanics.OnDisable();
+            _activateModelViewMechanics.OnDisable();
         }
     }
 }

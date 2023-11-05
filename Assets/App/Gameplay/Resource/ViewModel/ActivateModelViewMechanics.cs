@@ -4,13 +4,13 @@ using UnityEngine;
 
 namespace App.Gameplay.Resource.View
 {
-    public class ActivateViewResourceMechanics
+    public class ActivateModelViewMechanics
     {
         private readonly GameObject _view;
         private readonly IAtomicVariable<bool> _isEnabled;
         private readonly IAtomicValue<float> _activateShowTime;
 
-        public ActivateViewResourceMechanics(GameObject view, IAtomicVariable<bool> isEnabled, IAtomicValue<float> activateShowTime)
+        public ActivateModelViewMechanics(GameObject view, IAtomicVariable<bool> isEnabled, IAtomicValue<float> activateShowTime)
         {
             _view = view;
             _isEnabled = isEnabled;

@@ -63,7 +63,8 @@ namespace App.Core
         private void ConfigureTutorialStep()
         {
             _builder.Register<TutorialState>(Lifetime.Scoped);
-            _builder.RegisterEntryPoint<WelcomeTutorialStep>(Lifetime.Scoped);
+            _builder.RegisterEntryPoint<Welcome_TutorialStep>(Lifetime.Scoped);
+            _builder.RegisterEntryPoint<GatheringWood_TutorialStep>(Lifetime.Scoped);
         }
 
         private void ConfigureSaveSystem()

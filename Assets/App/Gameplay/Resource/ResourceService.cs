@@ -14,6 +14,17 @@ namespace App.Gameplay.Resource
             get => _resources;
             set => _resources = value;
         }
+
+        public void SetActiveResourceType(ResourceType resourceType, bool value)
+        {
+            foreach (var resource in _resources)
+            {
+                if (resource.ResourceType == resourceType)
+                {
+                    resource.IsEnable.Value = value;
+                }
+            }
+        }
         
         public ResourceModel GetClosetResource(Transform point, ResourceType resourceType)
         {

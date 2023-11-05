@@ -6,13 +6,13 @@ using VContainer.Unity;
 
 namespace Modules.Tutorial.Content
 {
-    public class WelcomeTutorialStep : IInitializable
+    public class Welcome_TutorialStep : IInitializable
     {
         private readonly TutorialState _tutorialState;
         private readonly BaseUIView _panel;
         private readonly IInputHandler _inputHandler;
 
-        public WelcomeTutorialStep(TutorialState tutorialState, UIPanelManager uiPanelManager, IInputHandler inputHandler)
+        public Welcome_TutorialStep(TutorialState tutorialState, UIPanelManager uiPanelManager, IInputHandler inputHandler)
         {
             _tutorialState = tutorialState;
             _inputHandler = inputHandler;

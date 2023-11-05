@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using App.Gameplay.LevelStorage;
 using Sirenix.OdinInspector;
@@ -9,15 +8,6 @@ using VContainer.Unity;
 
 namespace App.Gameplay.Building
 {
-    [Serializable]
-    public class BuildingData
-    {
-        public BuildingModel BuildingModel;
-        public ResourceStorageConfig BuildConfig;
-    }
-
-    public class BuildingConstructionService : GameService<BuildingConstructionModel>{}
-
     public class BuildingConstructionSpawner : SerializedMonoBehaviour
     {
         [SerializeField] 
