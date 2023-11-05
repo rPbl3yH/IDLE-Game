@@ -14,7 +14,7 @@ namespace Modules.Tutorial
 
         protected override void SetupByDefault(TutorialState service)
         {
-            service.CurrentStep = TutorialStep.Start;
+            service.NextStep();
         }
 
         protected override int ConvertToData(TutorialState service)

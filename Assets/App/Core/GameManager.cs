@@ -33,7 +33,7 @@ namespace App.Core
         public void Start()
         {
             InitPlayer();
-            InitTutorial();
+            //InitTutorial();
             _gameSaver.Load();
         }
     }
