@@ -37,6 +37,7 @@ namespace App.Core
             
             builder.Register<PlayerResourceViewObserver>(Lifetime.Singleton);
             builder.RegisterComponentInHierarchy<BuildingSpawner>();
+            builder.RegisterComponentInHierarchy<BuildingConstructionSpawner>();
             builder.RegisterInstance(_resourceView);
             builder.RegisterComponentInHierarchy<ResourceStorageModelService>();
             builder.RegisterComponentInHierarchy<PlayerSpawner>();
