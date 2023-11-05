@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace App.GameEngine.AI.StateMachine
 {
@@ -29,7 +30,7 @@ namespace App.GameEngine.AI.StateMachine
                 return;
             }
             
-            //Debug.Log("Switch state to " + state);
+            // Debug.Log("Switch state to " + state);
             CurrentState?.Exit();
             CurrentState = state;
             CurrentState?.Enter();

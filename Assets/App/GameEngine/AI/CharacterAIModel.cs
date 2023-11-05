@@ -56,7 +56,9 @@ namespace App.GameEngine.AI
             }
             else
             {
-                if (!_characterModel.IsFreeSpace.Value)
+                _characterModel.ResourceStorage.Value = DetectionBarnFunction?.GetResult();
+                
+                if (!_characterModel.IsFreeSpace.Value && _characterModel.ResourceStorage.Value != null)
                 {
                     _stateMachine.SwitchState(_unloadingResourceState);
                 }

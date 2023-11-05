@@ -38,23 +38,21 @@ namespace App.GameEngine.AI.StateMachine.States
         public override void Enter()
         {
             base.Enter();
-            _resourceStorageModel.Value =  _unloadResourceData.BarnService.GetStorage();
+            _moveData.StoppingDistance = _unloadingDistance.Value;
+            _unloadResourceData.IsEnable = true;
             
+            DetectTargetPosition();
+        }
+
+        private void DetectTargetPosition()
+        {
             if (_resourceStorageModel.Value == null)
             {
                 _unloadResourceData.IsEnable = false;
+                return;
             }
             
-            _moveData.StoppingDistance = _unloadingDistance.Value;
-            
-            DetectBarn();
-        }
-
-        private void DetectBarn()
-        {
-            _resourceStorageModel.Value = _detectionBarnAction?.GetResult();
-            
-            if (_resourceStorageModel.Value != null)
+            if (_moveData.TargetPosition != _resourceStorageModel.Value.UnloadingPoint.position)
             {
                 _moveData.TargetPosition = _resourceStorageModel.Value.UnloadingPoint.position;
                 _moveData.IsPositionReached = false;
@@ -66,6 +64,7 @@ namespace App.GameEngine.AI.StateMachine.States
             base.Exit();
             _canUnloadResources.Value = false;
             _moveData.IsPositionReached = false;
+            _unloadResourceData.IsEnable = false;
         }
 
         public override void Update(float deltaTime)
@@ -77,9 +76,9 @@ namespace App.GameEngine.AI.StateMachine.States
                 return;
             }
             
-            _canUnloadResources.Value = true;
+            DetectTargetPosition();
             
-            if (_moveData.IsPositionReached)
+            if (!_moveData.IsPositionReached)
             {
                 _canUnloadResources.Value = false;
                 SwitchState(_moveState);
