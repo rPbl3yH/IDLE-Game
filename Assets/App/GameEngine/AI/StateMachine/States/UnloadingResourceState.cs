@@ -39,6 +39,12 @@ namespace App.GameEngine.AI.StateMachine.States
         {
             base.Enter();
             _resourceStorageModel.Value =  _unloadResourceData.BarnService.GetStorage();
+            
+            if (_resourceStorageModel.Value == null)
+            {
+                _unloadResourceData.IsEnable = false;
+            }
+            
             _moveData.StoppingDistance = _unloadingDistance.Value;
             
             DetectBarn();
@@ -65,14 +71,21 @@ namespace App.GameEngine.AI.StateMachine.States
         public override void Update(float deltaTime)
         {
             base.Update(deltaTime);
+
+            if (!_unloadResourceData.IsEnable)
+            {
+                return;
+            }
             
-            if (!_moveData.IsPositionReached)
+            _canUnloadResources.Value = true;
+            
+            if (_moveData.IsPositionReached)
             {
                 _canUnloadResources.Value = false;
                 SwitchState(_moveState);
                 return;
             }
-
+            
             _canUnloadResources.Value = true;
         }
     }

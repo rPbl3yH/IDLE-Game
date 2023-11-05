@@ -6,27 +6,27 @@ namespace App.Gameplay.Resource.Model
     public class NavMeshDestroyMechanics
     {
         private readonly NavMeshObstacle _obstacle;
-        private readonly IAtomicVariable<bool> _isHide;
+        private readonly IAtomicVariable<bool> _isEnable;
 
-        public NavMeshDestroyMechanics(NavMeshObstacle obstacle, IAtomicVariable<bool> isHide)
+        public NavMeshDestroyMechanics(NavMeshObstacle obstacle, IAtomicVariable<bool> isEnable)
         {
             _obstacle = obstacle;
-            _isHide = isHide;
+            _isEnable = isEnable;
         }
 
         public void OnEnable()
         {
-            _isHide.OnChanged += IsHideOnChanged;
+            _isEnable.OnChanged += IsEnableOnChanged;
         }
 
         public void OnDisable()
         {
-            _isHide.OnChanged -= IsHideOnChanged;
+            _isEnable.OnChanged -= IsEnableOnChanged;
         }
 
-        private void IsHideOnChanged(bool isHide)
+        private void IsEnableOnChanged(bool isEnable)
         {
-            _obstacle.enabled = !isHide;
+            _obstacle.enabled = isEnable;
         }
     }
 }

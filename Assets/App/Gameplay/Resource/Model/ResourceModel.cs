@@ -9,26 +9,28 @@ namespace App.Gameplay.Resource.Model
 {
     public class ResourceModel : MonoBehaviour
     {
-        public Guid Guid = Guid.NewGuid();
         public ResourceType ResourceType;
         
         public AtomicVariable<int> Amount;
         public AtomicVariable<int> MaxAmount = new(10);
         public AtomicEvent<int> Gathered;
-        public AtomicVariable<bool> IsHide;
+        public AtomicVariable<float> UpdateTime;
+        public AtomicVariable<bool> IsEnable;
 
         public NavMeshObstacle Obstacle;
 
         private GatheringMechanics _gatheringMechanics;
         private HideResourceMechanics _hideResourceMechanics;
         private NavMeshDestroyMechanics _destroyMechanics;
+        private ResourceUpdateMechanics _resourceUpdateMechanics;
         
         private void Awake()
         {
             Amount.Value = MaxAmount.Value;
             _gatheringMechanics = new GatheringMechanics(Gathered, Amount);
-            _hideResourceMechanics = new HideResourceMechanics(IsHide, Amount);
-            _destroyMechanics = new NavMeshDestroyMechanics(Obstacle, IsHide);
+            _hideResourceMechanics = new HideResourceMechanics(IsEnable, Amount);
+            _destroyMechanics = new NavMeshDestroyMechanics(Obstacle, IsEnable);
+            _resourceUpdateMechanics = new ResourceUpdateMechanics(MaxAmount, Amount, UpdateTime, IsEnable);
         }
 
         private void OnEnable()
@@ -36,6 +38,7 @@ namespace App.Gameplay.Resource.Model
             _gatheringMechanics.OnEnable();
             _hideResourceMechanics.OnEnable();
             _destroyMechanics.OnEnable();
+            _resourceUpdateMechanics.OnEnable();
         }
 
         private void OnDisable()
@@ -43,6 +46,7 @@ namespace App.Gameplay.Resource.Model
             _gatheringMechanics.OnDisable();
             _hideResourceMechanics.OnDisable();
             _destroyMechanics.OnDisable();
+            _resourceUpdateMechanics.OnDisable();
         }
     }
 }
