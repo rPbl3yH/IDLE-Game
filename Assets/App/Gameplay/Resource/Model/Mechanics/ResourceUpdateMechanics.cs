@@ -27,14 +27,31 @@ namespace App.Gameplay.Resource.Model
 
         public void OnEnable()
         {
+            _amount.OnChanged += AmountOnOnChanged;
             _updateTime.OnChanged += UpdateTimeOnOnChanged;
-            _isEnable.OnChanged += IsEnableOnOnChanged;
+        }
+
+        private void AmountOnOnChanged(int value)
+        {
+            if (value == 0)
+            {
+                if (_isEnable.Value)
+                {
+                    Run();
+                    return;
+                }
+            }
+            
+            if (_timer.IsPlaying)
+            {
+                _timer.Stop();
+                _timer.ResetTime();
+            }
         }
 
         public void OnDisable()
         {
             _updateTime.OnChanged -= UpdateTimeOnOnChanged;
-            _isEnable.OnChanged -= IsEnableOnOnChanged;
         }
 
         private void Run()
@@ -42,22 +59,6 @@ namespace App.Gameplay.Resource.Model
             _timer.ResetTime();
             _timer.Play();
             _timer.OnFinished += TimerOnFinished;
-        }
-
-        private void IsEnableOnOnChanged(bool isEnable)
-        {
-            if (!isEnable)
-            {
-                Run();
-            }
-            else
-            {
-                if (_timer.IsPlaying)
-                {
-                    _timer.Stop();
-                    _timer.ResetTime();
-                }
-            }
         }
 
         private void UpdateTimeOnOnChanged(float value)

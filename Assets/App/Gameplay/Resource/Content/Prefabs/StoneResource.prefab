@@ -52,7 +52,7 @@ MonoBehaviour:
   MaxAmount:
     value: 3
   UpdateTime:
-    value: 10
+    value: 3
   IsEnable:
     value: 0
   Obstacle: {fileID: 8414573497904671635}
