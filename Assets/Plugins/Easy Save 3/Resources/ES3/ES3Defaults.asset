@@ -29,17 +29,17 @@ MonoBehaviour:
     referenceMode: 2
     serializationDepthLimit: 64
     assemblyNames:
-    - Entities
-    - VContainer
     - Assembly-CSharp
     - Assembly-CSharp-firstpass
+    - VContainer
     - SimpleInput.Runtime
     - Declarative
-    - Sirenix.OdinInspector.CompatibilityLayer
+    - Entities
     - VContainer.EnableCodeGen
-    - Sirenix.OdinInspector.CompatibilityLayer.Editor
+    - Sirenix.OdinInspector.CompatibilityLayer
     - PPv2URPConverters
     - SimpleInput.Editor
+    - Sirenix.OdinInspector.CompatibilityLayer.Editor
     - VContainer.Editor
     - Sirenix.OdinInspector.Modules.UnityMathematics
     showAdvancedSettings: 1

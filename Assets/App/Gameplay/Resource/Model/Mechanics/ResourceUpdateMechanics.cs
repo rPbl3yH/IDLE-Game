@@ -35,11 +35,8 @@ namespace App.Gameplay.Resource.Model
         {
             if (value == 0)
             {
-                if (_isEnable.Value)
-                {
-                    Run();
-                    return;
-                }
+                Run();
+                return;
             }
             
             if (_timer.IsPlaying)
