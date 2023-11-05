@@ -1,4 +1,5 @@
-﻿using App.Gameplay.LevelStorage;
+﻿using System.Linq;
+using App.Gameplay.LevelStorage;
 
 namespace App.Gameplay.Building
 {
@@ -11,6 +12,5 @@ namespace App.Gameplay.Building
                 constructionModel.IsEnable.Value = false;
             }
         }
-        
     }
 }
