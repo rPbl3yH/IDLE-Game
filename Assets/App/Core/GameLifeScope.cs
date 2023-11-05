@@ -7,6 +7,8 @@ using App.Gameplay.Character.Scripts.Model;
 using App.Gameplay.LevelStorage;
 using App.Gameplay.Resource;
 using App.UI;
+using Modules.Tutorial;
+using Modules.Tutorial.Content;
 using SimpleInputNamespace;
 using UnityEngine;
 using VContainer;
@@ -16,14 +18,7 @@ namespace App.Core
 {
     public class GameLifeScope : LifetimeScope
     {
-        [SerializeField] private Joystick _joystick;
         [SerializeField] private ResourceView _resourceView;
-        [SerializeField] private ResourceService _resourceService;
-        [SerializeField] private ResourceStorageModelService _resourceStorageModelService;
-        [SerializeField] private PlayerSpawner _playerSpawner;
-        [SerializeField] private BuildingViewObserver _buildingViewObserver;
-        [SerializeField] private BuildingSpawner _buildingSpawner;
-        [SerializeField] private AICharacterSpawner _aiCharacterSpawner;
 
         private IContainerBuilder _builder;
         
@@ -32,30 +27,37 @@ namespace App.Core
             _builder = builder;
             builder.Register<PlayerService>(Lifetime.Scoped);
             builder.Register<BarnService>(Lifetime.Scoped);
-            builder.RegisterInstance(_resourceService);
+            builder.RegisterComponentInHierarchy<ResourceService>();
             builder.Register<BuildingConstructionService>(Lifetime.Scoped);
             builder.Register<BarnModelService>(Lifetime.Scoped);
             
             ConfigureSaveSystem();
 
-            builder.RegisterInstance(_buildingViewObserver);
-            builder.RegisterInstance(_joystick);
+            builder.RegisterComponentInHierarchy<Joystick>();
             builder.RegisterEntryPoint<JoystickInputHandler>().As<IInputHandler>();
             builder.Register<PlayerResourceViewObserver>(Lifetime.Singleton);
 
-            builder.RegisterInstance(_buildingSpawner);
+            builder.RegisterComponentInHierarchy<BuildingSpawner>();
             builder.RegisterInstance(_resourceView);
-            builder.RegisterInstance(_resourceStorageModelService);
-            builder.RegisterInstance(_playerSpawner);
-            builder.RegisterInstance(_aiCharacterSpawner);
+            builder.RegisterComponentInHierarchy<ResourceStorageModelService>();
+            builder.RegisterComponentInHierarchy<PlayerSpawner>();
+            builder.RegisterComponentInHierarchy<AICharacterSpawner>();
             
-            builder.RegisterEntryPoint<GameManager>();
+            ConfigureTutorialStep();
+            
+            builder.RegisterComponentInHierarchy<GameManager>();
             builder.RegisterBuildCallback(OnRegisterCallback);
         }
 
         private void OnRegisterCallback(IObjectResolver resolver)
         {
             //resolver.Inject(_saveController);
+        }
+
+        private void ConfigureTutorialStep()
+        {
+            _builder.Register<TutorialState>(Lifetime.Scoped);
+            _builder.RegisterEntryPoint<WelcomeTutorialStep>(Lifetime.Scoped);
         }
 
         private void ConfigureSaveSystem()
