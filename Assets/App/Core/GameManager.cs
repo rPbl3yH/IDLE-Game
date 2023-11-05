@@ -19,21 +19,22 @@ namespace App.Core
         private TutorialState _tutorialState;
 
         [Button]
-        public void SpawnPlayer()
+        public void InitPlayer()
         {
             _playerSpawner.Spawn();
         }
 
         [Button]
-        public void StartTutorial()
+        public void InitTutorial()
         {
             _tutorialState.NextStep();    
         }
 
         public void Start()
         {
-            SpawnPlayer();
-            StartTutorial();
+            InitPlayer();
+            InitTutorial();
+            _gameSaver.Load();
         }
     }
 }

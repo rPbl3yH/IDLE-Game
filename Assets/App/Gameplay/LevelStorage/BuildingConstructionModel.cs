@@ -28,13 +28,18 @@ namespace App.Gameplay.LevelStorage
             _buildConstructionMechanics = new BuildConstructionMechanics(ResourceStorage, Built, buildingSpawner, BuildingModel, SpawnPoint.transform);
             _buildObserverMechanics = new BuildObserverMechanics(this, Built, ResourceStorageModelService, SpawnPoint);
             _barnRegisterMechanics = new BarnRegisterMechanics(Built, barnModelService);
-            
+            IsEnable.OnChanged += IsEnableOnOnChanged;
             
             Built.AddListener(OnBuilt);            
             
             _buildConstructionMechanics.OnEnable();
             _buildObserverMechanics.OnEnable();
             _barnRegisterMechanics.OnEnable();
+        }
+
+        private void IsEnableOnOnChanged(bool obj)
+        {
+            print("Changed");
         }
 
         private void OnBuilt(BuildingModel obj)

@@ -16,8 +16,8 @@ namespace App.UI.UIManager
         public virtual void Show()
         {
             gameObject.SetActive(true);
-            transform.DOScale(Vector3.one, _appearanceDuration).From(0.5f);
-            _image.DOFade(1f, _appearanceDuration).From(0.5f);
+            transform.DOScale(Vector3.one, _appearanceDuration).From(0.5f).SetLink(gameObject);
+            _image.DOFade(1f, _appearanceDuration).From(0.5f).SetLink(_image.gameObject);
             Showed?.Invoke();
         }
 

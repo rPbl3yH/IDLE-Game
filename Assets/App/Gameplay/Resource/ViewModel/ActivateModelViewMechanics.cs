@@ -10,6 +10,8 @@ namespace App.Gameplay.Resource.View
         private readonly IAtomicVariable<bool> _isEnabled;
         private readonly IAtomicValue<float> _activateShowTime;
 
+        private Tween _tween;
+
         public ActivateModelViewMechanics(GameObject view, IAtomicVariable<bool> isEnabled, IAtomicValue<float> activateShowTime)
         {
             _view = view;
@@ -32,16 +34,21 @@ namespace App.Gameplay.Resource.View
             if (value)
             {
                 _view.SetActive(true);
-                _view.transform
+                
+                _tween?.Kill();
+                _tween = _view.transform
                     .DOScale(Vector3.one, _activateShowTime.Value)
                     .From(0f)
-                    .SetEase(Ease.OutBack);
+                    .SetEase(Ease.OutBack)
+                    .SetLink(_view.gameObject);
             }
             else
             {
-                _view.transform
+                _tween?.Kill();
+                _tween = _view.transform
                     .DOScale(Vector3.zero, _activateShowTime.Value)
                     .SetEase(Ease.InBack)
+                    .SetLink(_view.gameObject)
                     .OnComplete(() => _view.SetActive(false));
             }
         }

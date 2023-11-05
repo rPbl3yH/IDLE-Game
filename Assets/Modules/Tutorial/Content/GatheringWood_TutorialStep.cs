@@ -33,12 +33,15 @@ namespace Modules.Tutorial.Content
         {
             _playerSpawner.Spawned += PlayerSpawnerOnSpawned;
             _tutorialState.StepStarted += TutorialStateOnStepStarted;
+            _tutorialState.StepFinished += TutorialStateOnStepFinished;
+            
+            _buildingConstructionService.HideAllConstruction();
+            _resourceService.SetActiveResourceType(ResourceType.Stone, false);
         }
 
         void IPostStartable.PostStart()
         {
-            _buildingConstructionService.HideAllConstruction();
-            _resourceService.SetActiveResourceType(ResourceType.Stone, false);
+            
         }
 
         private void TutorialStateOnStepStarted(TutorialStep tutorialStep)
@@ -49,16 +52,23 @@ namespace Modules.Tutorial.Content
             }
         }
 
+        private void TutorialStateOnStepFinished(TutorialStep tutorialStep)
+        {
+            if (tutorialStep == TutorialStep.GatheringWood)
+            {
+                _playerModel.CharacterModel.Gathered.RemoveListener(OnGathered);
+            }
+        }
+
         private void PlayerSpawnerOnSpawned(PlayerModel player)
         {
+            _playerSpawner.Spawned -= PlayerSpawnerOnSpawned;
             _playerModel = player;
         }
 
         private void OnGathered()
         {
-            _playerSpawner.Spawned -= PlayerSpawnerOnSpawned;
-            _playerModel.CharacterModel.Gathered.RemoveListener(OnGathered);
-            _tutorialState.NextStep();            
+            _tutorialState.FinishStep();     
         }
     }
 }

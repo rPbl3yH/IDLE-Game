@@ -9,7 +9,7 @@ namespace App.Core.SaveSystem.Mediators.Content
         {
             var services = service.GetServices().ToList();
             
-            for (int i = 0; i < services.Count; i++)
+            for (int i = 0; i < data.Resources.Count; i++)
             {
                 var resourceStorage = services[i].ResourceStorage;
                 resourceStorage.Clear();

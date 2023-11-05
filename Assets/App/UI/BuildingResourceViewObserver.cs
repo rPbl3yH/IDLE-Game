@@ -14,13 +14,13 @@ namespace App.UI
         [SerializeField] 
         private ResourceView _prefab;
 
-        private ResourceStorageConfig _resourceStorageConfig;
+        private ResourceStorageConfig _resourceStorageConfig => _model.ResourceStorage.StorageConfig;
 
         private readonly List<ResourceView> _resourceViews = new();
 
-        private void Start()
+        private void Awake()
         {
-            _resourceStorageConfig = _model.ResourceStorage.StorageConfig;
+            // _resourceStorageConfig = _model.ResourceStorage.StorageConfig;
             InitViews();
         }
 

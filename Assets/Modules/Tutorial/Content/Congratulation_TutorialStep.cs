@@ -18,6 +18,13 @@ namespace Modules.Tutorial.Content
         public void Initialize()
         {
             _tutorialState.StepStarted += TutorialStateOnStepStarted;
+            _tutorialState.StepFinished += TutorialStateOnStepFinished;
+        }
+
+        private void TutorialStateOnStepFinished(TutorialStep tutorialStep)
+        {
+            _endPanel.Hidden -= EndPanelOnHidden;
+            _endPanel.Hide();
         }
 
         private void TutorialStateOnStepStarted(TutorialStep tutorialStep)
@@ -33,7 +40,7 @@ namespace Modules.Tutorial.Content
 
         private void EndPanelOnHidden()
         {
-            _tutorialState.NextStep();
+            _tutorialState.FinishStep();
         }
     }
 }

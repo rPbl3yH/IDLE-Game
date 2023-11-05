@@ -24,25 +24,39 @@ namespace Modules.Tutorial.Content
         {
             _inputHandler.Disable();
             _tutorialState.StepStarted += TutorialStateOnStepStarted;
+            _tutorialState.StepFinished += TutorialStateOnStepFinished;
+        }
+
+        private void TutorialStateOnStepFinished(TutorialStep tutorialStep)
+        {
+            if (tutorialStep != TutorialStep.Welcome)
+            {
+                return;
+            }
+            
+            _tutorialState.StepFinished -= TutorialStateOnStepFinished;
+            _panel.Hidden -= PanelOnHidden;
+            _inputHandler.Enable();
+            _panel.Hide();
         }
 
         private void TutorialStateOnStepStarted(TutorialStep tutorialStep)
         {
             _tutorialState.StepStarted -= TutorialStateOnStepStarted;
-            
-            if (tutorialStep == TutorialStep.Welcome)
+
+            if (tutorialStep != TutorialStep.Welcome)
             {
-                _inputHandler.Disable();
-                _panel.Show();
-                _panel.Hidden += PanelOnHidden;
+                return;
             }
+            
+            _inputHandler.Disable();
+            _panel.Show();
+            _panel.Hidden += PanelOnHidden;
         }
 
         private void PanelOnHidden()
         {
-            _panel.Hidden -= PanelOnHidden;
-            _inputHandler.Enable();
-            _tutorialState.NextStep();
+            _tutorialState.FinishStep();  
         }
     }
 }

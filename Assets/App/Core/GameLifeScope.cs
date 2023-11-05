@@ -37,7 +37,7 @@ namespace App.Core
             
             builder.Register<PlayerResourceViewObserver>(Lifetime.Singleton);
             builder.RegisterComponentInHierarchy<BuildingSpawner>();
-            builder.RegisterComponentInHierarchy<BuildingConstructionSpawner>();
+            builder.RegisterComponentInHierarchy<BuildingConstructionSpawner>().AsImplementedInterfaces();
             builder.RegisterInstance(_resourceView);
             builder.RegisterComponentInHierarchy<ResourceStorageModelService>();
             builder.RegisterComponentInHierarchy<PlayerSpawner>();
@@ -78,6 +78,7 @@ namespace App.Core
             _builder.Register<IGameMediator, BuildingConstructionMediator>(Lifetime.Singleton);
             _builder.Register<IGameMediator, BarnModelMediator>(Lifetime.Singleton);
             _builder.Register<IGameMediator, PlayerMediator>(Lifetime.Singleton);
+            _builder.Register<IGameMediator, TutorialSaveMediator>(Lifetime.Scoped);
             
             _builder.Register<GameSaver>(Lifetime.Singleton);
         }

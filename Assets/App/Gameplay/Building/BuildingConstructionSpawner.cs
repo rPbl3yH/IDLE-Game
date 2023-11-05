@@ -8,7 +8,7 @@ using VContainer.Unity;
 
 namespace App.Gameplay.Building
 {
-    public class BuildingConstructionSpawner : SerializedMonoBehaviour, IStartable
+    public class BuildingConstructionSpawner : SerializedMonoBehaviour, IInitializable
     {
         [SerializeField] 
         private BuildingConstructionModel _buildingConstructionModelPrefab;
@@ -24,8 +24,8 @@ namespace App.Gameplay.Building
 
         [Inject] 
         private BuildingConstructionService _buildingConstructionService;
-        
-        public void Start()
+
+        public void Initialize()
         {
             foreach (var pair in _buildings)
             {

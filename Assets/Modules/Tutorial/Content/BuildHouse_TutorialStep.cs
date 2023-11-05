@@ -24,7 +24,7 @@ namespace Modules.Tutorial.Content
             _buildingConstructionService = buildingConstructionService;
         }
 
-        public void Initialize()
+        void IInitializable.Initialize()
         {
             _tutorialState.StepStarted += TutorialStateOnStepStarted;
         }
@@ -50,7 +50,7 @@ namespace Modules.Tutorial.Content
 
         private void OnBuilt(BuildingModel buildingModel)
         {
-            _tutorialState.NextStep();
+            _tutorialState.FinishStep();
         }
     }
 }
