@@ -2,12 +2,12 @@
     
 namespace App.Gameplay.Resource.Model
 {
-    public class HideResourceMechanics
+    public class EnableResourceMechanics
     {
         private readonly IAtomicVariable<bool> _isEnabled;
         private readonly IAtomicVariable<int> _amount;
 
-        public HideResourceMechanics(IAtomicVariable<bool> isEnabled, IAtomicVariable<int> amount)
+        public EnableResourceMechanics(IAtomicVariable<bool> isEnabled, IAtomicVariable<int> amount)
         {
             _isEnabled = isEnabled;
             _amount = amount;
@@ -23,9 +23,16 @@ namespace App.Gameplay.Resource.Model
             _amount.OnChanged -= AmountOnChanged;
         }
 
-        private void AmountOnChanged(int obj)
+        private void AmountOnChanged(int amount)
         {
-            _isEnabled.Value = obj != 0;
+            if (amount == 0 && _isEnabled.Value)
+            {
+                _isEnabled.Value = false;
+            }
+            else if(amount > 0 && !_isEnabled.Value)
+            {
+                _isEnabled.Value = true;
+            }
         }
     }
 }

@@ -119,6 +119,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _view: {fileID: 7112690495988553938}
   _resourceModel: {fileID: 5709057451580401474}
+  ActivateShowTime:
+    value: 0.3
 --- !u!1 &7112690495988553938
 GameObject:
   m_ObjectHideFlags: 0

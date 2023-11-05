@@ -20,15 +20,16 @@ namespace App.Gameplay.Resource.Model
         public NavMeshObstacle Obstacle;
 
         private GatheringMechanics _gatheringMechanics;
-        private HideResourceMechanics _hideResourceMechanics;
+        private EnableResourceMechanics _enableResourceMechanics;
         private NavMeshDestroyMechanics _destroyMechanics;
         private ResourceUpdateMechanics _resourceUpdateMechanics;
         
         private void Awake()
         {
             Amount.Value = MaxAmount.Value;
+            
             _gatheringMechanics = new GatheringMechanics(Gathered, Amount);
-            _hideResourceMechanics = new HideResourceMechanics(IsEnable, Amount);
+            _enableResourceMechanics = new EnableResourceMechanics(IsEnable, Amount);
             _destroyMechanics = new NavMeshDestroyMechanics(Obstacle, IsEnable);
             _resourceUpdateMechanics = new ResourceUpdateMechanics(MaxAmount, Amount, UpdateTime, IsEnable);
         }
@@ -36,7 +37,7 @@ namespace App.Gameplay.Resource.Model
         private void OnEnable()
         {
             _gatheringMechanics.OnEnable();
-            _hideResourceMechanics.OnEnable();
+            _enableResourceMechanics.OnEnable();
             _destroyMechanics.OnEnable();
             _resourceUpdateMechanics.OnEnable();
         }
@@ -44,7 +45,7 @@ namespace App.Gameplay.Resource.Model
         private void OnDisable()
         {
             _gatheringMechanics.OnDisable();
-            _hideResourceMechanics.OnDisable();
+            _enableResourceMechanics.OnDisable();
             _destroyMechanics.OnDisable();
             _resourceUpdateMechanics.OnDisable();
         }

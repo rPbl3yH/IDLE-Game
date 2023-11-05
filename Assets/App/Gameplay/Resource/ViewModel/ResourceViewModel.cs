@@ -1,12 +1,15 @@
 ﻿using App.Gameplay.Resource.Model;
+using Modules.Atomic.Values;
 using UnityEngine;
 
 namespace App.Gameplay.Resource.View
 {
-    public class ResourceModelView : MonoBehaviour
+    public class ResourceViewModel : MonoBehaviour
     {
         [SerializeField] private GameObject _view;
         [SerializeField] private ResourceModel _resourceModel;
+
+        public AtomicVariable<float> ActivateShowTime;
 
         private ActivateViewResourceMechanics _activateViewResourceMechanics;
         private ShakeViewMechanics _shakeViewMechanics;
@@ -14,7 +17,7 @@ namespace App.Gameplay.Resource.View
         private void Awake()
         {
             _shakeViewMechanics = new ShakeViewMechanics(_view.transform, _resourceModel.Gathered);
-            _activateViewResourceMechanics = new ActivateViewResourceMechanics(_view, _resourceModel.IsEnable);
+            _activateViewResourceMechanics = new ActivateViewResourceMechanics(_view, _resourceModel.IsEnable, ActivateShowTime);
         }
 
         private void OnEnable()

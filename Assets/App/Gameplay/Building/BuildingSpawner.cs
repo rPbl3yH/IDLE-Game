@@ -17,7 +17,6 @@ namespace App.Gameplay.Building
         public BuildingModel Spawn(BuildingModel buildingModelModel, Transform point)
         {
             var spawnedModel = _objectResolver.Instantiate(buildingModelModel, point.position, point.rotation, _parent);
-            
             spawnedModel.transform.DOScale(Vector3.one, _spawnDuration).From(0f).SetEase(Ease.OutBack);
             
             if (spawnedModel is ResourceStorageModel resourceStorageModel)
