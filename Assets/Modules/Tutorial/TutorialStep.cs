@@ -7,6 +7,7 @@
         GatheringWood = 1,
         BuildBarn = 2,
         BuildHouse = 3,
-        End = 4
+        Congratulation = 4,
+        End = 5
     }
 }

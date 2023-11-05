@@ -7,8 +7,6 @@ namespace App.GameEngine.Input.Handlers
     {
         event Action<Vector2> DirectionChanged;
         
-        bool IsEnabled { get; }
-
         public void Enable();
         public void Disable();
     }

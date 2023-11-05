@@ -3,12 +3,12 @@ using VContainer.Unity;
 
 namespace Modules.Tutorial.Content
 {
-    public class End_TutorialStep : IInitializable
+    public class Congratulation_TutorialStep : IInitializable
     {
         private readonly TutorialState _tutorialState;
         private readonly BaseUIView _endPanel;
 
-        public End_TutorialStep(TutorialState tutorialState, UIPanelManager uiPanelManager)
+        public Congratulation_TutorialStep(TutorialState tutorialState, UIPanelManager uiPanelManager)
         {
             _tutorialState = tutorialState;
             _endPanel = uiPanelManager.GetPanel(UIPanelType.TutorialEnd);
@@ -22,7 +22,7 @@ namespace Modules.Tutorial.Content
 
         private void TutorialStateOnStepStarted(TutorialStep tutorialStep)
         {
-            if (tutorialStep != TutorialStep.End)
+            if (tutorialStep != TutorialStep.Congratulation)
             {
                 return;
             }
