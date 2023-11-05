@@ -29,17 +29,21 @@ namespace App.Gameplay.Resource
         public ResourceModel GetClosetResource(Transform point, ResourceType resourceType)
         {
             var list = _resources.OrderBy(model => Vector3.Distance(model.transform.position, point.position));
-            var resource = list.FirstOrDefault(model => model.ResourceType == resourceType && model.Amount.Value > 0);
+            var resource = list.FirstOrDefault(model => CheckCondition(model, resourceType));
             
             return resource;
         }
         
         public ResourceModel GetClosetResource(Transform point)
         {
-            var list = _resources.OrderBy(model => Vector3.Distance(model.transform.position, point.position));
-            var resource = list.FirstOrDefault(model => model.Amount.Value > 0);
-            
+            IOrderedEnumerable<ResourceModel> list = _resources.OrderBy(model => Vector3.Distance(model.transform.position, point.position));
+            var resource = GetClosetResource(point, list.ElementAtOrDefault(0)!.ResourceType);
             return resource;
+        }
+
+        private bool CheckCondition(ResourceModel model, ResourceType resourceType)
+        {
+            return model.ResourceType == resourceType && model.Amount.Value > 0 && model.IsEnable.Value;
         }
     }
 }
