@@ -32,8 +32,8 @@ MonoBehaviour:
     - Entities
     - VContainer
     - Assembly-CSharp
-    - SimpleInput.Runtime
     - Assembly-CSharp-firstpass
+    - SimpleInput.Runtime
     - Declarative
     - Sirenix.OdinInspector.CompatibilityLayer
     - VContainer.EnableCodeGen
