@@ -10,6 +10,8 @@ namespace App.GameEngine.Input.Handlers
     {
         public event Action<Vector2> DirectionChanged;
 
+        public bool IsEnabled { private set; get; }
+
         [Inject]
         private Joystick _joystick;
 
@@ -17,6 +19,11 @@ namespace App.GameEngine.Input.Handlers
 
         public void Tick()
         {
+            if (!IsEnabled)
+            {
+                return;
+            }
+            
             if (_currentDirection == _joystick.Value)
             {
                 return;
@@ -24,6 +31,18 @@ namespace App.GameEngine.Input.Handlers
         
             _currentDirection = _joystick.Value;
             DirectionChanged?.Invoke(_currentDirection);
+        }
+
+        public void Enable()
+        {
+            IsEnabled = true;
+            _joystick.OnEnable();
+        }
+
+        public void Disable()
+        {
+            IsEnabled = false;
+            _joystick.OnDisable();
         }
     }
 }

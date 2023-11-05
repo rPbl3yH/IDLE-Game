@@ -1,4 +1,6 @@
-﻿using App.UI.UIManager;
+﻿using App.GameEngine.Input.Handlers;
+using App.UI.UIManager;
+using SimpleInputNamespace;
 using UnityEngine;
 using VContainer.Unity;
 
@@ -8,12 +10,19 @@ namespace Modules.Tutorial.Content
     {
         private readonly TutorialState _tutorialState;
         private readonly BaseUIView _panel;
-        
-        public WelcomeTutorialStep(TutorialState tutorialState, UIPanelManager uiPanelManager)
+        private readonly IInputHandler _inputHandler;
+
+        public WelcomeTutorialStep(TutorialState tutorialState, UIPanelManager uiPanelManager, IInputHandler inputHandler)
         {
             _tutorialState = tutorialState;
+            _inputHandler = inputHandler;
             _panel = uiPanelManager.GetPanel(UIPanelType.Welcome);
             _panel.Hide();    
+        }
+
+        void IInitializable.Initialize()
+        {
+            _tutorialState.StepStarted += TutorialStateOnStepStarted;
         }
 
         private void TutorialStateOnStepStarted(TutorialStep tutorialStep)
@@ -22,6 +31,7 @@ namespace Modules.Tutorial.Content
             
             if (tutorialStep == TutorialStep.Welcome)
             {
+                _inputHandler.Disable();
                 _panel.Show();
                 _panel.Hidden += PanelOnHidden;
             }
@@ -30,12 +40,8 @@ namespace Modules.Tutorial.Content
         private void PanelOnHidden()
         {
             _panel.Hidden -= PanelOnHidden;
+            _inputHandler.Enable();
             _tutorialState.NextStep();
-        }
-
-        void IInitializable.Initialize()
-        {
-            _tutorialState.StepStarted += TutorialStateOnStepStarted;
         }
     }
 }
