@@ -50,6 +50,7 @@ namespace App.Meta
                 return;
             }
 
+            _pointer.gameObject.SetActive(true);
             _targetPosition = point.position;
             _isEnable = true;
         }

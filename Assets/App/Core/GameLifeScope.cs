@@ -1,4 +1,3 @@
-using App.Core.SaveSystem;
 using App.Core.SaveSystem.Mediators.Content;
 using App.GameEngine.AI.Spawner;
 using App.GameEngine.Input.Handlers;
@@ -8,9 +7,10 @@ using App.Gameplay.Character.Scripts.Model;
 using App.Gameplay.LevelStorage;
 using App.Gameplay.Resource;
 using App.Meta;
-using App.Meta.HintTextService;
 using App.UI;
 using App.UI.UIManager;
+using Modules.AudioSystem;
+using Modules.AudioSystem.Content;
 using Modules.Tutorial;
 using Modules.Tutorial.Content;
 using SimpleInputNamespace;
@@ -29,6 +29,7 @@ namespace App.Core
             ConfigureServices(builder);
 
             ConfigureSaveSystem(builder);
+            ConfigureAudioSystem(builder);
             ConfigureUI(builder);
             
             builder.Register<PlayerResourceViewObserver>(Lifetime.Singleton);
@@ -79,6 +80,7 @@ namespace App.Core
             builder.RegisterEntryPoint<ObjectPointerController>(Lifetime.Scoped).AsSelf();
             builder.RegisterComponentInHierarchy<HintTextView>();
             builder.RegisterEntryPoint<HintTextObserver>(Lifetime.Scoped).AsSelf();
+            builder.Register<TutorialViewSystem>(Lifetime.Scoped);
         }
 
         private void ConfigureSaveSystem(IContainerBuilder builder)
@@ -90,6 +92,12 @@ namespace App.Core
             builder.Register<IGameMediator, TutorialSaveMediator>(Lifetime.Scoped);
             
             builder.Register<GameSaver>(Lifetime.Singleton);
+        }
+        
+        private void ConfigureAudioSystem(IContainerBuilder builder)
+        {
+            builder.RegisterComponentInHierarchy<GameSoundManager>();
+            builder.RegisterEntryPoint<PlayerResourceAudioObserver>().AsSelf();
         }
     }
 }

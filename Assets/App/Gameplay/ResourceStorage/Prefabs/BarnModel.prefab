@@ -517,8 +517,7 @@ MonoBehaviour:
   IsEnable:
     value: 0
   ResourceStorage:
-    _resourceStorageConfig: {fileID: 11400000, guid: 3a64065e19f2e7b4cb8bee8cd3c86d03,
-      type: 2}
+    _resourceConfig: {fileID: 11400000, guid: 3a64065e19f2e7b4cb8bee8cd3c86d03, type: 2}
   UnloadingPoint: {fileID: 7941782744983089357}
   _barnModelObserver: {fileID: 2004579888342967408}
 --- !u!114 &2004579888342967408

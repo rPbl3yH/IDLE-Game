@@ -3,6 +3,7 @@ using App.Gameplay;
 using App.Gameplay.Building;
 using App.Gameplay.Building.House;
 using App.Gameplay.Resource;
+using App.Meta;
 using UnityEngine;
 using VContainer.Unity;
 
@@ -10,23 +11,40 @@ namespace Modules.Tutorial.Content
 {
     public class BuildHouse_TutorialStep : IInitializable
     {
+        private const string HINT_TEXT = "Build house";
+        
         private readonly TutorialState _tutorialState;
         private readonly ResourceService _resourceService;
         private readonly BuildingConstructionService _buildingConstructionService;
+        private readonly TutorialViewSystem _tutorialViewSystem;
 
         public BuildHouse_TutorialStep(
             TutorialState tutorialState, 
             ResourceService resourceService, 
-            BuildingConstructionService buildingConstructionService)
+            BuildingConstructionService buildingConstructionService,
+            TutorialViewSystem tutorialViewSystem
+            )
         {
             _tutorialState = tutorialState;
             _resourceService = resourceService;
             _buildingConstructionService = buildingConstructionService;
+            _tutorialViewSystem = tutorialViewSystem;
         }
 
         void IInitializable.Initialize()
         {
             _tutorialState.StepStarted += TutorialStateOnStepStarted;
+            _tutorialState.StepFinished += TutorialStateOnStepFinished;
+        }
+
+        private void TutorialStateOnStepFinished(TutorialStep tutorialStep)
+        {
+            if (tutorialStep != TutorialStep.BuildHouse)
+            {
+                return;
+            }
+            
+            _tutorialViewSystem.Hide();
         }
 
         private void TutorialStateOnStepStarted(TutorialStep tutorialStep)
@@ -38,13 +56,15 @@ namespace Modules.Tutorial.Content
             
             _resourceService.SetActiveResourceType(ResourceType.Stone, true);
             
-            var buildingConstructionModel = _buildingConstructionService.GetServices()
+            var constructionModel = _buildingConstructionService.GetServices()
                 .FirstOrDefault(model => model.BuildingModel is HouseBuildingModel);
                 
-            if (buildingConstructionModel != null)
+            if (constructionModel != null)
             {
-                buildingConstructionModel.IsEnable.Value = true;
-                buildingConstructionModel.Built.AddListener(OnBuilt);
+                constructionModel.IsEnable.Value = true;
+                constructionModel.Built.AddListener(OnBuilt);
+                
+                _tutorialViewSystem.Show(constructionModel.UnloadingPoint, HINT_TEXT);
             }
         }
 

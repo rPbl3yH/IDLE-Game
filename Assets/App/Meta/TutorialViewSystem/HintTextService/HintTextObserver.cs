@@ -1,6 +1,6 @@
 ﻿using VContainer;
 
-namespace App.Meta.HintTextService
+namespace App.Meta
 {
     public class HintTextObserver
     {
