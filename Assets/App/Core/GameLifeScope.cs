@@ -7,6 +7,7 @@ using App.Gameplay.Building.Barn;
 using App.Gameplay.Character.Scripts.Model;
 using App.Gameplay.LevelStorage;
 using App.Gameplay.Resource;
+using App.Meta;
 using App.UI;
 using App.UI.UIManager;
 using Modules.Tutorial;
@@ -36,7 +37,10 @@ namespace App.Core
             builder.RegisterComponentInHierarchy<ResourceStorageModelService>();
             builder.RegisterComponentInHierarchy<PlayerSpawner>();
             builder.RegisterComponentInHierarchy<AICharacterSpawner>();
-            
+
+            builder.RegisterComponentInHierarchy<PlayerArrow>();
+            builder.RegisterEntryPoint<PlayerArrowController>(Lifetime.Scoped).AsSelf();
+
             ConfigureTutorialStep(builder);
             
             builder.RegisterComponentInHierarchy<GameManager>();

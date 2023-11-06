@@ -3,16 +3,18 @@ using App.Gameplay.Building;
 using App.Gameplay.Character.Scripts.Model;
 using App.Gameplay.Player;
 using App.Gameplay.Resource;
+using App.Meta;
 using VContainer.Unity;
 
 namespace Modules.Tutorial.Content
 {
-    public class GatheringWood_TutorialStep : IInitializable, IPostStartable
+    public class GatheringWood_TutorialStep : IInitializable
     {
         private readonly TutorialState _tutorialState;
         private readonly ResourceService _resourceService;
         private readonly BuildingConstructionService _buildingConstructionService;
         private readonly PlayerSpawner _playerSpawner;
+        private readonly PlayerArrowController _playerArrowController;
 
         private PlayerModel _playerModel;
 
@@ -20,13 +22,15 @@ namespace Modules.Tutorial.Content
             ResourceService resourceService, 
             BuildingConstructionService buildingConstructionService, 
             PlayerSpawner playerSpawner,
-            TutorialState tutorialState
+            TutorialState tutorialState,
+            PlayerArrowController playerArrowController
             )
         {
             _resourceService = resourceService;
             _buildingConstructionService = buildingConstructionService;
             _playerSpawner = playerSpawner;
             _tutorialState = tutorialState;
+            _playerArrowController = playerArrowController;
         }
 
         void IInitializable.Initialize()
@@ -39,25 +43,27 @@ namespace Modules.Tutorial.Content
             _resourceService.SetActiveResourceType(ResourceType.Stone, false);
         }
 
-        void IPostStartable.PostStart()
-        {
-            
-        }
-
         private void TutorialStateOnStepStarted(TutorialStep tutorialStep)
         {
-            if (tutorialStep == TutorialStep.GatheringWood)
+            if (tutorialStep != TutorialStep.GatheringWood)
             {
-                _playerModel.CharacterModel.Gathered.AddListener(OnGathered);
+                return;
             }
+            
+            _playerModel.CharacterModel.Gathered.AddListener(OnGathered);
+            var resource = _resourceService.GetClosetResource(_playerModel.CharacterModel.Root, ResourceType.Wood);
+            _playerArrowController.SetTarget(resource.transform);
         }
 
         private void TutorialStateOnStepFinished(TutorialStep tutorialStep)
         {
-            if (tutorialStep == TutorialStep.GatheringWood)
+            if (tutorialStep != TutorialStep.GatheringWood)
             {
-                _playerModel.CharacterModel.Gathered.RemoveListener(OnGathered);
+                return;
             }
+            
+            _playerModel.CharacterModel.Gathered.RemoveListener(OnGathered);
+            _playerArrowController.SetTarget(null);  
         }
 
         private void PlayerSpawnerOnSpawned(PlayerModel player)
