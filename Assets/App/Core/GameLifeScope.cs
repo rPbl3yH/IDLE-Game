@@ -11,6 +11,7 @@ using App.UI;
 using App.UI.UIManager;
 using Modules.AudioSystem;
 using Modules.AudioSystem.Content;
+using Modules.AudioSystem.UISystem;
 using Modules.Tutorial;
 using Modules.Tutorial.Content;
 using SimpleInputNamespace;
@@ -98,6 +99,7 @@ namespace App.Core
         {
             builder.RegisterComponentInHierarchy<GameSoundManager>();
             builder.RegisterEntryPoint<PlayerResourceAudioObserver>().AsSelf();
+            builder.RegisterComponentInHierarchy<UISoundManager>();
         }
     }
 }
