@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace App.Gameplay.LevelStorage
 {
@@ -11,7 +12,7 @@ namespace App.Gameplay.LevelStorage
         public event Action<ResourceType> ResourceSelected;
         
         [SerializeField] private LoadResourceView _prefab;
-        [SerializeField] private Transform _parent;
+        [SerializeField] private RectTransform _parent;
         [SerializeField] private ResourceStorageModel _resourceStorage;
         
         [ShowInInspector]
@@ -36,9 +37,11 @@ namespace App.Gameplay.LevelStorage
                 if (_resourceStorage.ResourceStorage.Resources.ContainsKey(view.Key))
                 {
                     view.Value.ResourceSelected += ValueOnResourceSelected;
-                    view.Value.Show(view.Key.ToString());
+                    view.Value.Show();
                 }
             }
+            
+            LayoutRebuilder.ForceRebuildLayoutImmediate(_parent);
         }
 
         public void Hide()

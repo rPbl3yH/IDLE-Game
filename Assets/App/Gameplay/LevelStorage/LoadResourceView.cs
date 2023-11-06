@@ -1,5 +1,4 @@
 ﻿using System;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +9,6 @@ namespace App.Gameplay.LevelStorage
         public event Action<LoadResourceView> ResourceSelected;
 
         [SerializeField] private Button _button;
-        [SerializeField] private TMP_Text _text;
 
         private void OnEnable()
         {
@@ -20,12 +18,6 @@ namespace App.Gameplay.LevelStorage
         private void OnDisable()
         {
             _button.onClick.RemoveListener(OnClick);
-        }
-
-        public void Show(string text)
-        {
-            _text.text = text;
-            base.Show();
         }
         
         private void OnClick()
