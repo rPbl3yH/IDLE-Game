@@ -14,13 +14,10 @@ namespace App.UI
         [SerializeField] 
         private ResourceView _prefab;
 
-        private ResourceStorageConfig _resourceStorageConfig => _model.ResourceStorage.StorageConfig;
-
         private readonly List<ResourceView> _resourceViews = new();
 
-        private void Awake()
+        private void Start()
         {
-            // _resourceStorageConfig = _model.ResourceStorage.StorageConfig;
             InitViews();
         }
 
@@ -28,7 +25,7 @@ namespace App.UI
         {
             _model.ResourceStorage.ResourcesChanged += OnResourcesChanged;
         }
-
+        
         private void OnDisable()
         {
             _model.ResourceStorage.ResourcesChanged -= OnResourcesChanged;
@@ -36,7 +33,7 @@ namespace App.UI
 
         private void InitViews()
         {
-            foreach (var resource in _resourceStorageConfig.Resources)
+            foreach (var resource in _model.ResourceStorage.Config.Resources)
             {
                 var view = Instantiate(_prefab, transform);
                 var text = $"{resource.Type} {0}/{resource.Count}";
@@ -47,7 +44,7 @@ namespace App.UI
 
         private void OnResourcesChanged(Dictionary<ResourceType, ResourceValue> resources)
         {
-            foreach (var resource in _resourceStorageConfig.Resources)
+            foreach (var resource in _model.ResourceStorage.Config.Resources)
             {
                 if (!resources.ContainsKey(resource.Type))
                 {

@@ -13,17 +13,18 @@ namespace App.Gameplay
         public event Action<Dictionary<ResourceType, ResourceValue>> ResourcesChanged;
 
         public Dictionary<ResourceType, ResourceValue> Resources => _storage;
-        public ResourceStorageConfig StorageConfig
+        
+        public ResourceStorageConfig Config
         {
-            get => _resourceStorageConfig;
-            set => _resourceStorageConfig = value;
+            get => _resourceConfig;
+            set => _resourceConfig = value;
         }
 
         [ShowInInspector]
         private readonly Dictionary<ResourceType, ResourceValue> _storage = new();
 
         [SerializeField] 
-        private ResourceStorageConfig _resourceStorageConfig;
+        private ResourceStorageConfig _resourceConfig;
 
         [Button]
         public bool TryAdd(ResourceType resourceType, int count)
@@ -48,7 +49,7 @@ namespace App.Gameplay
             }
 
             var maxAmount = -1;
-            ResourceData resource = _resourceStorageConfig.Resources.FirstOrDefault(data => data.Type == resourceType);
+            ResourceData resource = _resourceConfig.Resources.FirstOrDefault(data => data.Type == resourceType);
             
             if (resource != null)
             {

@@ -8,7 +8,7 @@ namespace App.Core
         public Task Run()
         {
             Debug.Log("Task delay");
-            return Task.Delay(1000);
+            return Task.Delay(1);
         }
     }
 }

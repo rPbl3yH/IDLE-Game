@@ -31,7 +31,7 @@ namespace App.Gameplay.Building
             {
                 _buildingConstructionModelPrefab.BuildingModel = pair.Value.BuildingModel;
                 var buildingModel = _objectResolver.Instantiate(_buildingConstructionModelPrefab, pair.Key);
-                buildingModel.ResourceStorage.StorageConfig = pair.Value.BuildConfig;
+                buildingModel.ResourceStorage.Config = pair.Value.BuildConfig;
                 _resourceStorageModelService.AddStorage(buildingModel);
                 _buildingConstructionService.AddService(buildingModel);
             }
