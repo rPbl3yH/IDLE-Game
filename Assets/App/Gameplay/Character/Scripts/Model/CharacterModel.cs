@@ -35,7 +35,8 @@ namespace App.Gameplay.Character.Scripts.Model
         public AtomicVariable<int> MaxResourceAmount;
         [ShowInInspector, ReadOnly]
         public AtomicVariable<bool> IsFreeSpace;
-
+        public AtomicEvent Transfered;
+        
         [Header("Unload Resources")]
         public AtomicVariable<bool> CanUnloadResources;
         public AtomicVariable<ResourceStorageModel> ResourceStorage;

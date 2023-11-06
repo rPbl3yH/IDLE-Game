@@ -1,4 +1,5 @@
-﻿using App.Gameplay.Character.Scripts.Model;
+﻿using App.Gameplay;
+using App.Gameplay.Character.Scripts.Model;
 using App.Gameplay.Player;
 using Modules.Atomic.Values;
 using UnityEngine;
@@ -14,8 +15,7 @@ namespace Modules.AudioSystem.Content
 
         [Inject] 
         private PlayerSpawner _playerSpawner;
-
-        private IAtomicVariable<int> _resourceAmount;
+        
         private int _amount;
 
         void IInitializable.Initialize()
@@ -27,19 +27,13 @@ namespace Modules.AudioSystem.Content
         {
             _playerSpawner.Spawned -= PlayerSpawnerOnSpawned;
             
-            _resourceAmount = player.CharacterModel.ResourceAmount;
-            _resourceAmount.OnChanged += ResourceAmountOnOnChanged;
+            player.CharacterModel.ResourceLoaded.AddListener(OnTransferred);
+            player.CharacterModel.ResourceUnloaded.AddListener(OnTransferred);
         }
 
-        private void ResourceAmountOnOnChanged(int value)
+        private void OnTransferred(ResourceType resourceType)
         {
-            var difference = Mathf.Abs(_amount - value);
-            
-            if (difference > 0)
-            {
-                _gameSoundManager.PlayAudio(GameSoundType.TransferResource);
-                _amount = value;
-            }
+            _gameSoundManager.PlayAudio(GameSoundType.TransferResource);
         }
     }
 }

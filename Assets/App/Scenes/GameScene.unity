@@ -2606,13 +2606,13 @@ MonoBehaviour:
     TypeName: App.Core.ApplicationLifeScope
   autoRun: 1
   autoInjectGameObjects:
-  - {fileID: 0}
   - {fileID: 451197973}
   - {fileID: 1878193372}
   - {fileID: 898020689}
   - {fileID: 1776656256}
   - {fileID: 1179056540}
   - {fileID: 1671686958}
+  - {fileID: 1904531492}
   _resourceView: {fileID: 2070033593455600028, guid: b9d2bf75e2f1fac4fb402e9b9deb26a8,
     type: 3}
 --- !u!1 &1067270594

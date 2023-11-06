@@ -3,6 +3,7 @@
     public enum GameSoundType
     {
         TransferResource,
-        GatheringResource,
+        GatheringWood,
+        GatheringStone,
     }
 }
