@@ -9,8 +9,13 @@ namespace App.Core
         {
             builder.Register<SceneLoader>(Lifetime.Singleton);
             
+            ConfigureLoadingSystem(builder);
             ConfigureSaveSystem(builder);
+        }
 
+        private void ConfigureLoadingSystem(IContainerBuilder builder)
+        {
+            builder.Register<ILoadingTask, LoadingTask_DelayLoading>(Lifetime.Scoped);
             builder.Register<ILoadingTask, LoadingTask_LoadPlayerData>(Lifetime.Scoped);
             builder.Register<ILoadingTask, LoadingTask_LoadGameScene>(Lifetime.Scoped);
             builder.Register<LoadingPipeline>(Lifetime.Scoped);
