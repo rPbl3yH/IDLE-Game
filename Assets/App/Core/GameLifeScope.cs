@@ -3,6 +3,7 @@ using App.Core.SaveSystem.Mediators.Content;
 using App.GameEngine.AI.Spawner;
 using App.GameEngine.Input.Handlers;
 using App.Gameplay.Building;
+using App.Gameplay.Building.Barn;
 using App.Gameplay.Character.Scripts.Model;
 using App.Gameplay.LevelStorage;
 using App.Gameplay.Resource;

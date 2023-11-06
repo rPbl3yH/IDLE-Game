@@ -6,7 +6,7 @@ namespace Modules.Tutorial
     {
         protected override void SetupFromData(TutorialState service, int data)
         {
-            for (int i = 0; i < data; i++)
+            for (int i = 0; i <= data; i++)
             {
                 service.FinishStep();
             }

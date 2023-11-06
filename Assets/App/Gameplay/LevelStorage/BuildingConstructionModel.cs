@@ -2,6 +2,7 @@
 using App.Core;
 using App.Core.SaveSystem.Mediators.Content;
 using App.Gameplay.Building;
+using App.Gameplay.Building.Barn;
 using App.Gameplay.Resource.Model;
 using Modules.Atomic.Actions;
 using UnityEngine;
