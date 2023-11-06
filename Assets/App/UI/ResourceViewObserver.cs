@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using App.Gameplay;
 using App.Gameplay.LevelStorage;
 using UnityEngine;
+using VContainer;
 
 namespace App.UI
 {
@@ -11,16 +12,15 @@ namespace App.UI
         [SerializeField]
         private ResourceStorageModel _model;
 
-        [SerializeField] 
         private ResourceView _prefab;
-
-        [SerializeField] 
-        private ResourceIconConfig _config;
-        
+        private ResourceIconService _iconService;
         private readonly List<ResourceView> _resourceViews = new();
 
-        private void Awake()
+        [Inject]
+        public void Construct(ResourceView viewPrefab, ResourceIconService service)
         {
+            _prefab = viewPrefab;
+            _iconService = service;
             InitViews();
         }
 
@@ -54,12 +54,7 @@ namespace App.UI
             foreach (var resource in resources)
             {
                 var text = $"{resource.Value.Amount}";
-                Sprite sprite = null;
-                
-                if (_config.Sprites.TryGetValue(resource.Key, out var icon))
-                {
-                    sprite = icon;
-                }
+                var sprite = _iconService.GetIcon(resource.Key);
                 
                 _resourceViews[(int)resource.Key].Show(sprite, text);
             }

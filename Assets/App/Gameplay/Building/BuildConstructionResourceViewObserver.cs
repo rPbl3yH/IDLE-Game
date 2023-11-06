@@ -12,16 +12,18 @@ namespace App.UI
         [SerializeField]
         private ResourceStorageModel _model;
 
-        [SerializeField] 
+        [SerializeField]
         private ResourceView _prefab;
-
-        [Inject] 
+        
         private ResourceIconService _iconService;
 
         private readonly List<ResourceView> _resourceViews = new();
 
-        private void Start()
+        [Inject] 
+        public void Construct(ResourceView prefab, ResourceIconService resourceIconService)
         {
+            _prefab = prefab;
+            _iconService = resourceIconService;
             InitViews();
         }
 

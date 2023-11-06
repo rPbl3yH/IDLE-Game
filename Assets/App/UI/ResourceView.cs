@@ -1,5 +1,4 @@
-﻿using App.UI.UIManager;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 

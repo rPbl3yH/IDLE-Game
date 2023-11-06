@@ -29,13 +29,13 @@ namespace App.Gameplay.Player
         private PlayerLoadResourceAvailableMechanics _playerLoadResourceAvailableMechanics;
 
         [Inject]
-        public void Construct(ResourceStorageModelService resourceStorageModelService, ResourceService resourceService, ResourceIconService resourceIconService)
+        public void Construct(ResourceStorageModelService resourceStorageModelService, ResourceService resourceService)
         {
             ResourceService = resourceService;
             ResourceStorageModelService = resourceStorageModelService;
             
             CharacterModel.Construct(ResourceService);
-            _playerResourceViewObserver.Construct(CharacterModel, resourceIconService);
+            _playerResourceViewObserver.Construct(CharacterModel);
             
             _playerDetectStorageMechanics = new PlayerDetectStorageMechanics(ResourceStorageModelService, CharacterModel.ResourceStorage, CharacterModel.Root);
             _playerDetectionResourceMechanics = new PlayerDetectionResourceMechanics(CharacterModel);

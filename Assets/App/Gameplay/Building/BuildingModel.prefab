@@ -184,11 +184,11 @@ MonoBehaviour:
   IsEnable:
     value: 0
   ResourceStorage:
-    _resourceStorageConfig: {fileID: 11400000, guid: 404e51b594d9df142bcecc6e77fd46c8,
-      type: 2}
+    _resourceConfig: {fileID: 11400000, guid: 404e51b594d9df142bcecc6e77fd46c8, type: 2}
   UnloadingPoint: {fileID: 4551678487685823785}
   SpawnPoint: {fileID: 9043780063963375999}
-  BuildingModel: {fileID: 0}
+  BuildingModel: {fileID: 7941782744118843781, guid: b4044102550362846a6e976a8c5e11db,
+    type: 3}
   ResourceStorageModelService: {fileID: 0}
 --- !u!114 &950471743896617309
 MonoBehaviour:

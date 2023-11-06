@@ -14,16 +14,15 @@ namespace App.UI
         [SerializeField]
         private ResourceView _resourceView;
 
-        //[Inject] 
+        [Inject] 
         private ResourceIconService _iconService;
 
         private PlayerSpawner _playerSpawner;
         private UISpawnService _uiSpawnService;
 
-        public void Construct(CharacterModel characterModel, ResourceIconService resourceIconService)
+        public void Construct(CharacterModel characterModel)
         {
             _characterModel = characterModel;
-            _iconService = resourceIconService;
             
             OnResourceAmountChanged(_characterModel.ResourceAmount.Value);
             _characterModel.ResourceAmount.OnChanged += OnResourceAmountChanged;
