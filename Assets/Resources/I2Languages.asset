@@ -1,0 +1,102 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f0b0c553be8edd4682e9180fdd13e37, type: 3}
+  m_Name: I2Languages
+  m_EditorClassIdentifier: 
+  mSource:
+    UserAgreesToHaveItOnTheScene: 0
+    UserAgreesToHaveItInsideThePluginsFolder: 0
+    GoogleLiveSyncIsUptoDate: 1
+    mTerms:
+    - Term: Tutorial/BuildBarn
+      TermType: 0
+      Description: 
+      Languages:
+      - BuildBarn
+      - "\u041F\u043E\u0441\u0442\u0440\u043E\u0438\u0442\u044C \u0421\u0430\u0440\u0430\u0439"
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Tutorial/BuildHouse
+      TermType: 0
+      Description: 
+      Languages:
+      - BuildHouse
+      - "\u041F\u043E\u0441\u0442\u0440\u043E\u0438\u0442\u044C \u0434\u043E\u043C"
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Tutorial/Congratulation
+      TermType: 0
+      Description: 
+      Languages:
+      - Congratulation
+      - "\u041C\u043E\u043B\u043E\u0434\u0435\u0446, \u0447\u0442\u043E \u043F\u0440\u043E\u0448\u0435\u043B
+        \u0442\u0443\u0442\u043E\u0440\u0438\u0430\u043B"
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Tutorial/GatheringWood
+      TermType: 0
+      Description: 
+      Languages:
+      - GatheringWood
+      - "\u0421\u0431\u043E\u0440 \u0414\u0435\u0440\u0435\u0432\u0430"
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Tutorial/Hou
+      TermType: 0
+      Description: 
+      Languages:
+      - dsf
+      - sdf
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Tutorial/Ok
+      TermType: 0
+      Description: 
+      Languages:
+      - Ok
+      - "\u0425\u043E\u0440\u043E\u0448\u043E"
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Tutorial/Welcome
+      TermType: 0
+      Description: 
+      Languages:
+      - Welcome
+      - "\u0414\u043E\u0431\u0440\u043E \u041F\u043E\u0436\u0430\u043B\u043E\u0432\u0430\u0442\u044C"
+      Flags: 0000
+      Languages_Touch: []
+    CaseInsensitiveTerms: 0
+    OnMissingTranslation: 1
+    mTerm_AppName: 
+    mLanguages:
+    - Name: English
+      Code: en
+      Flags: 0
+    - Name: Russian
+      Code: ru
+      Flags: 0
+    IgnoreDeviceLanguage: 0
+    _AllowUnloadingLanguages: 0
+    Google_WebServiceURL: https://script.google.com/macros/s/AKfycbwDW5uNrIwexKmvlLgMUIpF7gHCqpzmOuqEzJwHdhF-F_gH_b2gTzwUS7bFkld8bxWVPw/exec
+    Google_SpreadsheetKey: 1bJMMkg8A9RZccQj_zbZ03dKEB5lz1P-_IN_Vf4GhW1E
+    Google_SpreadsheetName: IDLE GAME Graduation Work Otus Localization
+    Google_LastUpdatedVersion: 1699270696889
+    Google_Password: change_this
+    GoogleUpdateFrequency: 3
+    GoogleInEditorCheckFrequency: 2
+    GoogleUpdateSynchronization: 1
+    GoogleUpdateDelay: 0
+    Assets: []
+    Spreadsheet_LocalFileName: 
+    Spreadsheet_LocalCSVSeparator: ','
+    Spreadsheet_LocalCSVEncoding: utf-8
+    Spreadsheet_SpecializationAsRows: 1

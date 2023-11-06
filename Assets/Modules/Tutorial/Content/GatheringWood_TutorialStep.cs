@@ -4,14 +4,13 @@ using App.Gameplay.Character.Scripts.Model;
 using App.Gameplay.Player;
 using App.Gameplay.Resource;
 using App.Meta;
+using I2.Loc;
 using VContainer.Unity;
 
 namespace Modules.Tutorial.Content
 {
     public class GatheringWood_TutorialStep : IInitializable
     {
-        private const string HINT_TEXT = "Добудь дерево";
-        
         private readonly TutorialState _tutorialState;
         private readonly ResourceService _resourceService;
         private readonly BuildingConstructionService _buildingConstructionService;
@@ -54,7 +53,8 @@ namespace Modules.Tutorial.Content
             
             _playerModel.CharacterModel.Gathered.AddListener(OnGathered);
             var resource = _resourceService.GetClosetResource(_playerModel.CharacterModel.Root, ResourceType.Wood);
-            _tutorialViewSystem.Show(resource.transform, HINT_TEXT);
+            var text = LocalizationManager.GetTranslation(ScriptTerms.Tutorial.GatheringWood);
+            _tutorialViewSystem.Show(resource.transform, text);
         }
 
         private void TutorialStateOnStepFinished(TutorialStep tutorialStep)

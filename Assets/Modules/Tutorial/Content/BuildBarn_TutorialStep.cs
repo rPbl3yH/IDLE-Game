@@ -3,14 +3,13 @@ using App.Gameplay;
 using App.Gameplay.Building;
 using App.Gameplay.LevelStorage;
 using App.Meta;
+using I2.Loc;
 using VContainer.Unity;
 
 namespace Modules.Tutorial.Content
 {
     public class BuildBarn_TutorialStep : IInitializable
     {
-        private const string HINT_TEXT = "Build barn";
-        
         private readonly BuildingConstructionService _buildingConstructionService;
         private readonly TutorialState _tutorialState;
         private readonly TutorialViewSystem _tutorialViewSystem;
@@ -56,7 +55,8 @@ namespace Modules.Tutorial.Content
             {
                 constructionModel.IsEnable.Value = true;
                 constructionModel.Built.AddListener(OnBuilt);
-                _tutorialViewSystem.Show(constructionModel.UnloadingPoint, HINT_TEXT);
+                var text = LocalizationManager.GetTranslation(ScriptTerms.Tutorial.BuildBarn);
+                _tutorialViewSystem.Show(constructionModel.UnloadingPoint, text);
             }
         }
 

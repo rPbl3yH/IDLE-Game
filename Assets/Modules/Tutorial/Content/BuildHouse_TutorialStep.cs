@@ -4,15 +4,13 @@ using App.Gameplay.Building;
 using App.Gameplay.Building.House;
 using App.Gameplay.Resource;
 using App.Meta;
-using UnityEngine;
+using I2.Loc;
 using VContainer.Unity;
 
 namespace Modules.Tutorial.Content
 {
     public class BuildHouse_TutorialStep : IInitializable
     {
-        private const string HINT_TEXT = "Build house";
-        
         private readonly TutorialState _tutorialState;
         private readonly ResourceService _resourceService;
         private readonly BuildingConstructionService _buildingConstructionService;
@@ -63,8 +61,8 @@ namespace Modules.Tutorial.Content
             {
                 constructionModel.IsEnable.Value = true;
                 constructionModel.Built.AddListener(OnBuilt);
-                
-                _tutorialViewSystem.Show(constructionModel.UnloadingPoint, HINT_TEXT);
+                var text = LocalizationManager.GetTranslation(ScriptTerms.Tutorial.BuildHouse);
+                _tutorialViewSystem.Show(constructionModel.UnloadingPoint, text);
             }
         }
 
