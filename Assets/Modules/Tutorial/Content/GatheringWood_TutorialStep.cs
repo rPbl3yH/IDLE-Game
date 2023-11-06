@@ -14,8 +14,11 @@ namespace Modules.Tutorial.Content
         private readonly ResourceService _resourceService;
         private readonly BuildingConstructionService _buildingConstructionService;
         private readonly PlayerSpawner _playerSpawner;
-        private readonly PlayerArrowController _playerArrowController;
+        private readonly PlayerPointerController _playerPointerController;
+        private readonly ObjectPointerController _objectPointerController;
 
+        private const string HINT_TEXT = "Добудь дерево";
+        
         private PlayerModel _playerModel;
 
         public GatheringWood_TutorialStep(
@@ -23,14 +26,16 @@ namespace Modules.Tutorial.Content
             BuildingConstructionService buildingConstructionService, 
             PlayerSpawner playerSpawner,
             TutorialState tutorialState,
-            PlayerArrowController playerArrowController
+            PlayerPointerController playerPointerController,
+            ObjectPointerController objectPointerController
             )
         {
             _resourceService = resourceService;
             _buildingConstructionService = buildingConstructionService;
             _playerSpawner = playerSpawner;
             _tutorialState = tutorialState;
-            _playerArrowController = playerArrowController;
+            _playerPointerController = playerPointerController;
+            _objectPointerController = objectPointerController;
         }
 
         void IInitializable.Initialize()
@@ -52,7 +57,8 @@ namespace Modules.Tutorial.Content
             
             _playerModel.CharacterModel.Gathered.AddListener(OnGathered);
             var resource = _resourceService.GetClosetResource(_playerModel.CharacterModel.Root, ResourceType.Wood);
-            _playerArrowController.SetTarget(resource.transform);
+            _playerPointerController.SetTarget(resource.transform);
+            _objectPointerController.SetTarget(resource.transform);
         }
 
         private void TutorialStateOnStepFinished(TutorialStep tutorialStep)
@@ -63,7 +69,8 @@ namespace Modules.Tutorial.Content
             }
             
             _playerModel.CharacterModel.Gathered.RemoveListener(OnGathered);
-            _playerArrowController.SetTarget(null);  
+            _playerPointerController.SetTarget(null);  
+            _objectPointerController.SetTarget(null);
         }
 
         private void PlayerSpawnerOnSpawned(PlayerModel player)

@@ -38,9 +38,11 @@ namespace App.Core
             builder.RegisterComponentInHierarchy<PlayerSpawner>();
             builder.RegisterComponentInHierarchy<AICharacterSpawner>();
 
-            builder.RegisterComponentInHierarchy<PlayerArrow>();
-            builder.RegisterEntryPoint<PlayerArrowController>(Lifetime.Scoped).AsSelf();
-
+            builder.RegisterComponentInHierarchy<FloorPointer>();
+            builder.RegisterEntryPoint<PlayerPointerController>(Lifetime.Scoped).AsSelf();
+            builder.RegisterComponentInHierarchy<ObjectPointer>();
+            builder.RegisterEntryPoint<ObjectPointerController>(Lifetime.Scoped).AsSelf();
+            
             ConfigureTutorialStep(builder);
             
             builder.RegisterComponentInHierarchy<GameManager>();

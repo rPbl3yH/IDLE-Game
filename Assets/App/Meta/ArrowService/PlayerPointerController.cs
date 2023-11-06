@@ -6,10 +6,10 @@ using VContainer.Unity;
 
 namespace App.Meta
 {
-    public class PlayerArrowController : IInitializable, ITickable
+    public class PlayerPointerController : IInitializable, ITickable
     {
         [Inject]
-        private PlayerArrow _arrow;
+        private FloorPointer _pointer;
 
         [Inject] 
         private PlayerSpawner _playerSpawner;
@@ -32,20 +32,20 @@ namespace App.Meta
             }
             
             var delta = _targetPosition - _root.position;
-            _arrow.transform.rotation = Quaternion.LookRotation(delta.normalized);
+            _pointer.transform.rotation = Quaternion.LookRotation(delta.normalized);
         }
 
         private void PlayerSpawnerOnSpawned(PlayerModel player)
         {
             _root = player.CharacterModel.Root;
-            _arrow.transform.SetParent(_root);
+            _pointer.transform.SetParent(_root);
         }
 
         public void SetTarget(Transform point)
         {
             if (point == null || _root == null)
             {
-                _arrow.gameObject.SetActive(false);
+                _pointer.gameObject.SetActive(false);
                 _isEnable = false;
                 return;
             }

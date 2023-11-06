@@ -2,7 +2,7 @@
 
 namespace App.Meta
 {
-    public class PlayerArrow : MonoBehaviour
+    public class ObjectPointer : MonoBehaviour
     {
         
     }
