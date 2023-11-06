@@ -8,6 +8,7 @@ using App.Gameplay.Character.Scripts.Model;
 using App.Gameplay.LevelStorage;
 using App.Gameplay.Resource;
 using App.Meta;
+using App.Meta.HintTextService;
 using App.UI;
 using App.UI.UIManager;
 using Modules.Tutorial;
@@ -38,12 +39,8 @@ namespace App.Core
             builder.RegisterComponentInHierarchy<PlayerSpawner>();
             builder.RegisterComponentInHierarchy<AICharacterSpawner>();
 
-            builder.RegisterComponentInHierarchy<FloorPointer>();
-            builder.RegisterEntryPoint<PlayerPointerController>(Lifetime.Scoped).AsSelf();
-            builder.RegisterComponentInHierarchy<ObjectPointer>();
-            builder.RegisterEntryPoint<ObjectPointerController>(Lifetime.Scoped).AsSelf();
-            
-            ConfigureTutorialStep(builder);
+            ConfigureTutorialUtils(builder);
+            ConfigureTutorialSteps(builder);
             
             builder.RegisterComponentInHierarchy<GameManager>();
         }
@@ -64,7 +61,7 @@ namespace App.Core
             builder.RegisterEntryPoint<JoystickInputHandler>().As<IInputHandler>();
         }
 
-        private void ConfigureTutorialStep(IContainerBuilder builder)
+        private void ConfigureTutorialSteps(IContainerBuilder builder)
         {
             builder.Register<TutorialState>(Lifetime.Scoped);
             builder.RegisterEntryPoint<Welcome_TutorialStep>(Lifetime.Scoped);
@@ -72,6 +69,16 @@ namespace App.Core
             builder.RegisterEntryPoint<BuildBarn_TutorialStep>(Lifetime.Scoped);
             builder.RegisterEntryPoint<BuildHouse_TutorialStep>(Lifetime.Scoped);
             builder.RegisterEntryPoint<Congratulation_TutorialStep>(Lifetime.Scoped);
+        }
+        
+        private void ConfigureTutorialUtils(IContainerBuilder builder)
+        {
+            builder.RegisterComponentInHierarchy<FloorPointer>();
+            builder.RegisterEntryPoint<PlayerPointerController>(Lifetime.Scoped).AsSelf();
+            builder.RegisterComponentInHierarchy<ObjectPointer>();
+            builder.RegisterEntryPoint<ObjectPointerController>(Lifetime.Scoped).AsSelf();
+            builder.RegisterComponentInHierarchy<HintTextView>();
+            builder.RegisterEntryPoint<HintTextObserver>(Lifetime.Scoped).AsSelf();
         }
 
         private void ConfigureSaveSystem(IContainerBuilder builder)
