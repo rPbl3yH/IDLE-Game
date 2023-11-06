@@ -41,12 +41,18 @@ namespace App.Core
         {
             _gameRepository.LoadState();
             
+            Debug.Log("Load");
+        }
+
+        [ShowInInspector]
+        public void SetupData()
+        {
             foreach (var gameMediator in _gameMediators)
             {
                 gameMediator.SetupData(_gameRepository);    
             }
             
-            Debug.Log("Load");
+            Debug.Log("Setup data");
         }
     }
 }

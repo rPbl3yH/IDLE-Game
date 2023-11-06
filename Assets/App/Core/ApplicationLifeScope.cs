@@ -8,7 +8,17 @@ namespace App.Core
         protected override void Configure(IContainerBuilder builder)
         {
             builder.Register<SceneLoader>(Lifetime.Singleton);
-            builder.Register<ApplicationLoader>(Lifetime.Singleton);
+            
+            ConfigureSaveSystem(builder);
+
+            builder.Register<ILoadingTask, LoadingTask_LoadPlayerData>(Lifetime.Scoped);
+            builder.Register<ILoadingTask, LoadingTask_LoadGameScene>(Lifetime.Scoped);
+            builder.Register<LoadingPipeline>(Lifetime.Scoped);
+        }
+        
+        private void ConfigureSaveSystem(IContainerBuilder builder)
+        {
+            builder.Register<GameRepository>(Lifetime.Singleton);
         }
 
         private void Start()

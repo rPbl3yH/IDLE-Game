@@ -6,11 +6,11 @@ namespace App.Core
     public class ApplicationBootstrapper : MonoBehaviour
     {
         [Inject] 
-        private ApplicationLoader _applicationLoader;
-
+        private LoadingPipeline _loadingPipeline;
+        
         private void Start()
         {
-            _applicationLoader.Run();
+            _loadingPipeline.Run();
         }
     }
 }

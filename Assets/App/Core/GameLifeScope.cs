@@ -22,19 +22,12 @@ namespace App.Core
     {
         [SerializeField] private ResourceView _resourceView;
 
-        private IContainerBuilder _builder;
-        
         protected override void Configure(IContainerBuilder builder)
         {
-            _builder = builder;
-            builder.Register<PlayerService>(Lifetime.Scoped);
-            builder.Register<BarnService>(Lifetime.Scoped);
-            builder.RegisterComponentInHierarchy<ResourceService>();
-            builder.Register<BuildingConstructionService>(Lifetime.Scoped);
-            builder.Register<BarnModelService>(Lifetime.Scoped);
-            
-            ConfigureSaveSystem();
-            ConfigureUI();
+            ConfigureServices(builder);
+
+            ConfigureSaveSystem(builder);
+            ConfigureUI(builder);
             
             builder.Register<PlayerResourceViewObserver>(Lifetime.Singleton);
             builder.RegisterComponentInHierarchy<BuildingSpawner>();
@@ -44,44 +37,47 @@ namespace App.Core
             builder.RegisterComponentInHierarchy<PlayerSpawner>();
             builder.RegisterComponentInHierarchy<AICharacterSpawner>();
             
-            ConfigureTutorialStep();
+            ConfigureTutorialStep(builder);
             
             builder.RegisterComponentInHierarchy<GameManager>();
-            builder.RegisterBuildCallback(OnRegisterCallback);
         }
 
-        private void OnRegisterCallback(IObjectResolver resolver)
+        private void ConfigureServices(IContainerBuilder builder)
         {
-            //resolver.Inject(_saveController);
+            builder.Register<PlayerService>(Lifetime.Scoped);
+            builder.Register<BarnService>(Lifetime.Scoped);
+            builder.RegisterComponentInHierarchy<ResourceService>();
+            builder.Register<BuildingConstructionService>(Lifetime.Scoped);
+            builder.Register<BarnModelService>(Lifetime.Scoped);
         }
 
-        private void ConfigureUI()
+        private void ConfigureUI(IContainerBuilder builder)
         {
-            _builder.RegisterComponentInHierarchy<UIPanelManager>();
-            _builder.RegisterComponentInHierarchy<Joystick>();
-            _builder.RegisterEntryPoint<JoystickInputHandler>().As<IInputHandler>();
+            builder.RegisterComponentInHierarchy<UIPanelManager>();
+            builder.RegisterComponentInHierarchy<Joystick>();
+            builder.RegisterEntryPoint<JoystickInputHandler>().As<IInputHandler>();
         }
 
-        private void ConfigureTutorialStep()
+        private void ConfigureTutorialStep(IContainerBuilder builder)
         {
-            _builder.Register<TutorialState>(Lifetime.Scoped);
-            _builder.RegisterEntryPoint<Welcome_TutorialStep>(Lifetime.Scoped);
-            _builder.RegisterEntryPoint<GatheringWood_TutorialStep>(Lifetime.Scoped);
-            _builder.RegisterEntryPoint<BuildBarn_TutorialStep>(Lifetime.Scoped);
-            _builder.RegisterEntryPoint<BuildHouse_TutorialStep>(Lifetime.Scoped);
-            _builder.RegisterEntryPoint<Congratulation_TutorialStep>(Lifetime.Scoped);
+            builder.Register<TutorialState>(Lifetime.Scoped);
+            builder.RegisterEntryPoint<Welcome_TutorialStep>(Lifetime.Scoped);
+            builder.RegisterEntryPoint<GatheringWood_TutorialStep>(Lifetime.Scoped);
+            builder.RegisterEntryPoint<BuildBarn_TutorialStep>(Lifetime.Scoped);
+            builder.RegisterEntryPoint<BuildHouse_TutorialStep>(Lifetime.Scoped);
+            builder.RegisterEntryPoint<Congratulation_TutorialStep>(Lifetime.Scoped);
         }
 
-        private void ConfigureSaveSystem()
+        private void ConfigureSaveSystem(IContainerBuilder builder)
         {
-            _builder.Register<GameRepository>(Lifetime.Singleton);
-            _builder.Register<IGameMediator, ResourceMediator>(Lifetime.Singleton);
-            _builder.Register<IGameMediator, BuildingConstructionMediator>(Lifetime.Singleton);
-            _builder.Register<IGameMediator, BarnModelMediator>(Lifetime.Singleton);
-            _builder.Register<IGameMediator, PlayerMediator>(Lifetime.Singleton);
-            _builder.Register<IGameMediator, TutorialSaveMediator>(Lifetime.Scoped);
+            builder.Register<GameRepository>(Lifetime.Singleton);
+            builder.Register<IGameMediator, ResourceMediator>(Lifetime.Singleton);
+            builder.Register<IGameMediator, BuildingConstructionMediator>(Lifetime.Singleton);
+            builder.Register<IGameMediator, BarnModelMediator>(Lifetime.Singleton);
+            builder.Register<IGameMediator, PlayerMediator>(Lifetime.Singleton);
+            builder.Register<IGameMediator, TutorialSaveMediator>(Lifetime.Scoped);
             
-            _builder.Register<GameSaver>(Lifetime.Singleton);
+            builder.Register<GameSaver>(Lifetime.Singleton);
         }
     }
 }
