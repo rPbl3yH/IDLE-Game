@@ -21,6 +21,7 @@ namespace App.Gameplay.Character.Scripts.Visual
         {
             _moveDirection = moveDirection;
             _animator = animator;
+            _animator.Rebind();
             _canGathering = canGathering;
         }
 

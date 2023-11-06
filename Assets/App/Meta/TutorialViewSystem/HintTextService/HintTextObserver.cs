@@ -1,8 +1,11 @@
-﻿using VContainer;
+﻿using DG.Tweening;
+using UnityEngine;
+using VContainer;
+using VContainer.Unity;
 
 namespace App.Meta
 {
-    public class HintTextObserver
+    public class HintTextObserver : IInitializable
     {
         [Inject] 
         private HintTextView _hintTextView;
@@ -15,6 +18,11 @@ namespace App.Meta
         public void Hide()
         {
             _hintTextView.Hide();
+        }
+
+        public void Initialize()
+        {
+            _hintTextView.transform.DOPunchScale(Vector3.one * 0.2f, 1f, 0).SetLoops(-1);
         }
     }
 }
