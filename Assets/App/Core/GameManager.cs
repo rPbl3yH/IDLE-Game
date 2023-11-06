@@ -34,7 +34,7 @@ namespace App.Core
         {
             InitPlayer();
             //InitTutorial();
-            _gameSaver.Load();
+            _gameSaver.SetupData();
         }
     }
 }

@@ -70,7 +70,6 @@ namespace App.Core
 
         private void ConfigureSaveSystem(IContainerBuilder builder)
         {
-            builder.Register<GameRepository>(Lifetime.Singleton);
             builder.Register<IGameMediator, ResourceMediator>(Lifetime.Singleton);
             builder.Register<IGameMediator, BuildingConstructionMediator>(Lifetime.Singleton);
             builder.Register<IGameMediator, BarnModelMediator>(Lifetime.Singleton);

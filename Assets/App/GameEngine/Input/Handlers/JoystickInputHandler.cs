@@ -10,7 +10,7 @@ namespace App.GameEngine.Input.Handlers
     {
         public event Action<Vector2> DirectionChanged;
 
-        public bool IsEnabled { private set; get; }
+        private bool IsEnabled { set; get; } = true;
 
         [Inject]
         private Joystick _joystick;
