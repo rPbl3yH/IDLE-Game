@@ -3,16 +3,20 @@ using System.Linq;
 using App.Gameplay;
 using App.Gameplay.LevelStorage;
 using UnityEngine;
+using VContainer;
 
 namespace App.UI
 {
-    public class BuildingResourceViewObserver : MonoBehaviour
+    public class BuildConstructionResourceViewObserver : MonoBehaviour
     {
         [SerializeField]
         private ResourceStorageModel _model;
 
         [SerializeField] 
         private ResourceView _prefab;
+
+        [Inject] 
+        private ResourceIconService _iconService;
 
         private readonly List<ResourceView> _resourceViews = new();
 
@@ -36,9 +40,12 @@ namespace App.UI
             foreach (var resource in _model.ResourceStorage.Config.Resources)
             {
                 var view = Instantiate(_prefab, transform);
-                var text = $"{resource.Type} {0}/{resource.Count}";
-                _resourceViews.Add(view);  
-                view.Show(text);
+                var text = $"{0}/{resource.Count}";
+                _resourceViews.Add(view);
+
+                var icon = _iconService.GetIcon(resource.Type);
+                
+                view.Show(icon, text);
             }
         }
 
@@ -52,8 +59,10 @@ namespace App.UI
                     return;
                 }
                 var currentResource = resources.FirstOrDefault(pair => pair.Key == resource.Type);
-                var text = $"{resource.Type} {currentResource.Value.Amount}/{resource.Count}";
-                _resourceViews[(int)resource.Type].Show(text);
+                var text = $"{currentResource.Value.Amount}/{resource.Count}";
+                
+                var icon = _iconService.GetIcon(resource.Type);
+                _resourceViews[(int)resource.Type].Show(icon, text);
             }
         }
 

@@ -14,6 +14,9 @@ namespace App.UI
         [SerializeField] 
         private ResourceView _prefab;
 
+        [SerializeField] 
+        private ResourceIconConfig _config;
+        
         private readonly List<ResourceView> _resourceViews = new();
 
         private void Awake()
@@ -50,8 +53,15 @@ namespace App.UI
 
             foreach (var resource in resources)
             {
-                var text = $"{resource.Key} {resource.Value.Amount}";
-                _resourceViews[(int)resource.Key].Show(text);
+                var text = $"{resource.Value.Amount}";
+                Sprite sprite = null;
+                
+                if (_config.Sprites.TryGetValue(resource.Key, out var icon))
+                {
+                    sprite = icon;
+                }
+                
+                _resourceViews[(int)resource.Key].Show(sprite, text);
             }
         }
 

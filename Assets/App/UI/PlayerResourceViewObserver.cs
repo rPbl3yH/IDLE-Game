@@ -2,6 +2,7 @@
 using App.Gameplay.Character.Scripts.Model;
 using App.UI.UIManager;
 using UnityEngine;
+using VContainer;
 
 namespace App.UI
 {
@@ -13,12 +14,16 @@ namespace App.UI
         [SerializeField]
         private ResourceView _resourceView;
 
+        //[Inject] 
+        private ResourceIconService _iconService;
+
         private PlayerSpawner _playerSpawner;
         private UISpawnService _uiSpawnService;
 
-        public void Construct(CharacterModel characterModel)
+        public void Construct(CharacterModel characterModel, ResourceIconService resourceIconService)
         {
             _characterModel = characterModel;
+            _iconService = resourceIconService;
             
             OnResourceAmountChanged(_characterModel.ResourceAmount.Value);
             _characterModel.ResourceAmount.OnChanged += OnResourceAmountChanged;
@@ -29,8 +34,9 @@ namespace App.UI
             if (value > 0)
             {
                 _resourceView.gameObject.SetActive(true);
-                var text = $"{_characterModel.ResourceType.Value} {value}";
-                _resourceView.Show(text);    
+                var text = $"{value}";
+                var icon = _iconService.GetIcon(_characterModel.ResourceType.Value);
+                _resourceView.Show(icon, text);    
             }
             else
             {

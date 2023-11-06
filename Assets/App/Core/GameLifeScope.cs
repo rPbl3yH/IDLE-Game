@@ -24,9 +24,13 @@ namespace App.Core
     public class GameLifeScope : LifetimeScope
     {
         [SerializeField] private ResourceView _resourceView;
-
+        [SerializeField] private ResourceIconConfig _resourceIconConfig;
+        
         protected override void Configure(IContainerBuilder builder)
         {
+            builder.RegisterInstance(_resourceIconConfig);
+            builder.Register<ResourceIconService>(Lifetime.Singleton);
+            
             ConfigureServices(builder);
 
             ConfigureSaveSystem(builder);
