@@ -1,5 +1,7 @@
+using System.Threading.Tasks;
 using UnityEditor;
 using UnityEditor.SceneManagement;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace App.Core
@@ -13,7 +15,7 @@ namespace App.Core
         
         public void LoadGameScene()
         {
-            SceneManager.LoadScene(GAME_SCENE_NAME);
+            SceneManager.LoadSceneAsync(GAME_SCENE_NAME);
         }
 
         [MenuItem("Game/Open Loading Scene")]

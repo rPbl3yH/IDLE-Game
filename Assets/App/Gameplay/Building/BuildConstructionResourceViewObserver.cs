@@ -4,10 +4,11 @@ using App.Gameplay;
 using App.Gameplay.LevelStorage;
 using UnityEngine;
 using VContainer;
+using VContainer.Unity;
 
 namespace App.UI
 {
-    public class BuildConstructionResourceViewObserver : MonoBehaviour
+    public class BuildConstructionResourceViewObserver : MonoBehaviour, IStartable
     {
         [SerializeField]
         private ResourceStorageModel _model;
@@ -24,17 +25,22 @@ namespace App.UI
         {
             _prefab = prefab;
             _iconService = resourceIconService;
-            InitViews();
+            
         }
 
         private void OnEnable()
         {
             _model.ResourceStorage.ResourcesChanged += OnResourcesChanged;
         }
-        
+
         private void OnDisable()
         {
             _model.ResourceStorage.ResourcesChanged -= OnResourcesChanged;
+        }
+
+        public void Start()
+        {
+            InitViews();
         }
 
         private void InitViews()
@@ -75,5 +81,6 @@ namespace App.UI
                 resourceView.Hide();
             }
         }
+
     }
 }
