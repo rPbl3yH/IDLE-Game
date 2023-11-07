@@ -9,8 +9,7 @@ namespace App.Gameplay.LevelStorage
         [SerializeField] 
         private BuildingConstructionModel _model;
 
-        [SerializeField] 
-        private GameObject _view;
+        public GameObject View;
 
         public AtomicVariable<float> ActivateShowTime = new(0.5f);
 
@@ -18,7 +17,7 @@ namespace App.Gameplay.LevelStorage
 
         private void Awake()
         {
-            _activateModelViewMechanics = new ActivateModelViewMechanics(_view, _model.IsEnable, ActivateShowTime);
+            _activateModelViewMechanics = new ActivateModelViewMechanics(View, _model.IsEnable, ActivateShowTime);
         }
 
         private void OnEnable()

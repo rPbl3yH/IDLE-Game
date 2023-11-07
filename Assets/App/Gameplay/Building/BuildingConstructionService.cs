@@ -9,7 +9,7 @@ namespace App.Gameplay.Building
         {
             foreach (var constructionModel in Services)
             {
-                constructionModel.IsEnable.Value = false;
+                constructionModel.Deactivated?.Invoke();
             }
         }
     }

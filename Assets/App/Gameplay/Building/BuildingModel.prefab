@@ -186,6 +186,7 @@ MonoBehaviour:
   ResourceStorage:
     _resourceConfig: {fileID: 11400000, guid: 404e51b594d9df142bcecc6e77fd46c8, type: 2}
   UnloadingPoint: {fileID: 4551678487685823785}
+  ViewModel: {fileID: 950471743896617309}
   SpawnPoint: {fileID: 9043780063963375999}
   BuildingModel: {fileID: 7941782744118843781, guid: b4044102550362846a6e976a8c5e11db,
     type: 3}
@@ -203,7 +204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _model: {fileID: 5565038750525472650}
-  _view: {fileID: 1855648794344976712}
+  View: {fileID: 1855648794344976712}
   ActivateShowTime:
     value: 0.5
 --- !u!1 &8016045980805342448

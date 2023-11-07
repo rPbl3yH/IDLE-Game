@@ -4122,7 +4122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _image: {fileID: 1432116219}
-  _duration: 1.5
+  _duration: 1
 --- !u!114 &1447587109
 MonoBehaviour:
   m_ObjectHideFlags: 0
