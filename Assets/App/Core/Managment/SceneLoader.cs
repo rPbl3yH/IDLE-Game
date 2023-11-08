@@ -13,7 +13,12 @@ namespace App.Core
         
         public void LoadGameScene()
         {
-            SceneManager.LoadSceneAsync(GAME_SCENE_NAME);
+            SceneManager.LoadScene(GAME_SCENE_NAME);
+        }
+
+        public void LoadLoadingScene()
+        {
+            SceneManager.LoadScene(LOADING_SCENE_NAME);
         }
 
         [MenuItem("Game/Open Loading Scene")]

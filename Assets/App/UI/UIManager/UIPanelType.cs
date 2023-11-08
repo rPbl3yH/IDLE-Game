@@ -3,6 +3,7 @@
     public enum UIPanelType
     {
         TutorialWelcome,
-        TutorialEnd
+        TutorialEnd,
+        GameMenu
     }
 }

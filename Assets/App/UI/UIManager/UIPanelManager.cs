@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 
@@ -21,13 +22,11 @@ namespace App.UI.UIManager
         
         public void ShowPanel(UIPanelType uiPanelType)
         {
-            var panel = GetPanel(uiPanelType);
-            if (panel != null)
+            if (_panels.TryGetValue(uiPanelType, out var panel))
             {
                 panel.Show();
             }
         }
-
 
         public void HidePanel(UIPanelType uiPanelType)
         {

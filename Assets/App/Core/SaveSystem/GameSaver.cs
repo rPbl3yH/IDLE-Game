@@ -14,33 +14,24 @@ namespace App.Core
         public GameSaver(IEnumerable<IGameMediator> gameMediators, GameRepository gameRepository)
         {
             _gameMediators = gameMediators;
-            
-            foreach (var gameMediator in _gameMediators)
-            {
-                // Debug.Log(gameMediator.GetType().Name);
-            }
             _gameRepository = gameRepository;
         }
 
         [ShowInInspector]
         public void Save()
         {
-            // Debug.Log("Game mediators = " + _gameMediators.Count());
             foreach (var gameMediator in _gameMediators)
             {
                 gameMediator.SaveData(_gameRepository);
             }
             
             _gameRepository.SaveState();
-            Debug.Log("Save");
         }
 
         [ShowInInspector]
         public void Load()
         {
             _gameRepository.LoadState();
-            
-            Debug.Log("Load");
         }
 
         [ShowInInspector]
@@ -50,8 +41,11 @@ namespace App.Core
             {
                 gameMediator.SetupData(_gameRepository);    
             }
-            
-            Debug.Log("Setup data");
+        }
+
+        public void ClearData()
+        {
+            _gameRepository.ClearState();
         }
     }
 }

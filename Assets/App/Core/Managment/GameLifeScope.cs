@@ -8,6 +8,7 @@ using App.Gameplay.LevelStorage;
 using App.Gameplay.Resource;
 using App.Meta;
 using App.UI;
+using App.UI.Panel;
 using App.UI.UIManager;
 using Modules.AudioSystem;
 using Modules.AudioSystem.Content;
@@ -50,7 +51,7 @@ namespace App.Core
             
             builder.RegisterComponentInHierarchy<GameManager>();
         }
-
+        
         private void ConfigureServices(IContainerBuilder builder)
         {
             builder.Register<PlayerService>(Lifetime.Scoped);
@@ -62,6 +63,9 @@ namespace App.Core
 
         private void ConfigureUI(IContainerBuilder builder)
         {
+            builder.RegisterComponentInHierarchy<GameMenuPanel>();
+            builder.RegisterComponentInHierarchy<GameMenuButton>();
+            builder.RegisterEntryPoint<GameMenuPanelObserver>(Lifetime.Scoped).AsSelf();
             builder.RegisterComponentInHierarchy<UIPanelManager>();
             builder.RegisterComponentInHierarchy<Joystick>();
             builder.RegisterEntryPoint<JoystickInputHandler>().As<IInputHandler>();

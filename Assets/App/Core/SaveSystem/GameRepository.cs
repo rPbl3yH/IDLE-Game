@@ -37,5 +37,13 @@ namespace App.Core
                 _gameState = JsonConvert.DeserializeObject<Dictionary<string, string>>(localJson);
             }
         }
+
+        public void ClearState()
+        {
+            if (ES3.KeyExists(SAVE_KEY))
+            {
+                ES3.DeleteKey(SAVE_KEY);
+            }
+        }
     }
 }
