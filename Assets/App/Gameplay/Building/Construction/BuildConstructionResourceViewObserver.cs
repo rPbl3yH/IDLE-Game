@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using App.Gameplay;
 using App.Gameplay.LevelStorage;
@@ -8,7 +9,7 @@ using VContainer.Unity;
 
 namespace App.UI
 {
-    public class BuildConstructionResourceViewObserver : MonoBehaviour, IStartable
+    public class BuildConstructionResourceViewObserver : MonoBehaviour
     {
         [SerializeField]
         private ResourceStorageModel _model;
@@ -44,13 +45,18 @@ namespace App.UI
 
         private void InitViews()
         {
-            foreach (var resource in _model.ResourceStorage.Config.Resources)
+            foreach (var configResource in _model.ResourceStorage.Config.Resources)
             {
                 var view = Instantiate(_prefab, transform);
-                var text = $"{0}/{resource.Count}";
+                if (_model.ResourceStorage.TryGetResource(configResource.Type, out var resourceCount))
+                {
+                    //TODO: вынести инициализацию
+                    
+                }
+                var text = $"{resourceCount}/{configResource.Count}";
                 _resourceViews.Add(view);
 
-                var icon = _iconService.GetIcon(resource.Type);
+                var icon = _iconService.GetIcon(configResource.Type);
                 
                 view.Show(icon, text);
             }
@@ -80,6 +86,5 @@ namespace App.UI
                 resourceView.Hide();
             }
         }
-
     }
 }

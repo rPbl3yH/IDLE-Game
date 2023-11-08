@@ -30,8 +30,8 @@ namespace App.Gameplay.Building
             foreach (var pair in _buildings)
             {
                 _buildingConstructionModelPrefab.BuildingModel = pair.Value.BuildingModel;
+                _buildingConstructionModelPrefab.ResourceStorage.Config = pair.Value.BuildConfig;
                 var buildingModel = _objectResolver.Instantiate(_buildingConstructionModelPrefab, pair.Key);
-                buildingModel.ResourceStorage.Config = pair.Value.BuildConfig;
                 _resourceStorageModelService.AddStorage(buildingModel);
                 _buildingConstructionService.AddService(buildingModel);
             }
