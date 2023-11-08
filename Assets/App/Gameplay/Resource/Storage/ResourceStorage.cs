@@ -67,7 +67,7 @@ namespace App.Gameplay
 
         public bool IsFull()
         {
-            return _storage.Any(resource => resource.Value.Amount == resource.Value.MaxAmount);
+            return _storage.All(resource => resource.Value.Amount == resource.Value.MaxAmount);
         }
 
         public void Clear()

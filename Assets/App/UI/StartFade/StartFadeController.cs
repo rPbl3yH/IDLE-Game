@@ -12,6 +12,7 @@ namespace App.UI.StartFade
 
         private void Start()
         {
+            _image.gameObject.SetActive(true);
             _image.DOFade(0f, _duration).From(1f).SetEase(Ease.InExpo);
         }
     }
