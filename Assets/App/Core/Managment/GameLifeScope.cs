@@ -65,7 +65,7 @@ namespace App.Core
         {
             builder.RegisterComponentInHierarchy<GameMenuPanel>();
             builder.RegisterComponentInHierarchy<GameMenuButton>();
-            builder.RegisterEntryPoint<GameMenuPanelObserver>(Lifetime.Scoped).AsSelf();
+            builder.RegisterEntryPoint<GameMenuPanelPresenter>(Lifetime.Scoped).AsSelf();
             builder.RegisterComponentInHierarchy<UIPanelManager>();
             builder.RegisterComponentInHierarchy<Joystick>();
             builder.RegisterEntryPoint<JoystickInputHandler>().As<IInputHandler>();

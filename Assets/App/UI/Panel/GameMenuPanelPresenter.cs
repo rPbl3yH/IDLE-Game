@@ -5,14 +5,14 @@ using VContainer.Unity;
 
 namespace App.UI.Panel
 {
-    public class GameMenuPanelObserver : IDisposable, IInitializable
+    public class GameMenuPanelPresenter : IDisposable, IInitializable
     {
         private readonly GameMenuButton _gameMenuButton;
         private readonly GameMenuPanel _gameMenuPanel;
         private readonly SceneLoader _sceneLoader;
         private readonly GameSaver _gameSaver;
         
-        public GameMenuPanelObserver(
+        public GameMenuPanelPresenter(
             GameMenuButton gameMenuButton, 
             GameMenuPanel gameMenuPanel, 
             SceneLoader sceneLoader, 
@@ -52,7 +52,7 @@ namespace App.UI.Panel
         {
             _gameMenuPanel.Hide();
             _gameSaver.ClearData();
-            _sceneLoader.LoadLoadingScene();
+            Application.Quit();
         }
 
         public void Dispose()

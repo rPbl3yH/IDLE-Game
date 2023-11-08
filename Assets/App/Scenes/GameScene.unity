@@ -2026,11 +2026,6 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5709057451580401474, guid: 2dafa3ebea247aa41aeb390ba1ef308b,
-        type: 3}
-      propertyPath: MaxAmount.value
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5709057451580401475, guid: 2dafa3ebea247aa41aeb390ba1ef308b,
         type: 3}
       propertyPath: m_RootOrder

@@ -27,7 +27,7 @@ namespace App.Gameplay.Resource.View
         
         private void OnGathered(int value)
         {
-            _view.DOShakeScale(0.2f, 0.3f, 1);
+            _view.DOShakeScale(0.2f, 0.3f, 1).SetLink(_view.gameObject);
         }
     }
 }

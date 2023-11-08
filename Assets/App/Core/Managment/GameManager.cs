@@ -7,7 +7,7 @@ using VContainer.Unity;
 
 namespace App.Core
 {
-    public class GameManager : MonoBehaviour, IStartable
+    public class GameManager : MonoBehaviour, IInitializable, IStartable
     {
         [Inject] 
         private PlayerSpawner _playerSpawner;
@@ -28,6 +28,16 @@ namespace App.Core
         public void InitTutorial()
         {
             _tutorialState.NextStep();    
+        }
+
+        public void PostStart()
+        {
+            
+        }
+
+        public void Initialize()
+        {
+            
         }
 
         public void Start()

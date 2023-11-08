@@ -67,7 +67,20 @@ namespace App.Gameplay
 
         public bool IsFull()
         {
-            return _storage.All(resource => resource.Value.Amount == resource.Value.MaxAmount);
+            foreach (var configResource in Config.Resources)
+            {
+                if (!_storage.TryGetValue(configResource.Type, out var value))
+                {
+                    return false;
+                }
+
+                if (value.Amount < configResource.Count)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         public void Clear()

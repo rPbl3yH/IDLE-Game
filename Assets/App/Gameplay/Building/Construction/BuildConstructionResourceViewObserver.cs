@@ -25,7 +25,6 @@ namespace App.UI
         {
             _prefab = prefab;
             _iconService = resourceIconService;
-            
         }
 
         private void OnEnable()
@@ -63,8 +62,8 @@ namespace App.UI
             {
                 if (!resources.ContainsKey(resource.Type))
                 {
-                    Debug.LogWarning("No resource in config");
-                    return;
+                    //Debug.LogWarning("No resource in config");
+                    continue;
                 }
                 var currentResource = resources.FirstOrDefault(pair => pair.Key == resource.Type);
                 var text = $"{currentResource.Value.Amount}/{resource.Count}";
