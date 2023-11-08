@@ -9,7 +9,7 @@ namespace App.UI.StartFade
         [SerializeField] private Image _image;
         [SerializeField] private float _duration;
 
-        private void Start()
+        public void Awake()
         {
             _image.gameObject.SetActive(true);
             _image.DOFade(0f, _duration).From(1f).SetEase(Ease.InExpo);
