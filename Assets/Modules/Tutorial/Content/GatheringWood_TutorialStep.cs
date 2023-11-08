@@ -9,7 +9,7 @@ using VContainer.Unity;
 
 namespace Modules.Tutorial.Content
 {
-    public class GatheringWood_TutorialStep : IInitializable
+    public class GatheringWood_TutorialStep : IInitializable, IStartable
     {
         private readonly TutorialState _tutorialState;
         private readonly ResourceService _resourceService;
@@ -39,11 +39,14 @@ namespace Modules.Tutorial.Content
             _playerSpawner.Spawned += PlayerSpawnerOnSpawned;
             _tutorialState.StepStarted += TutorialStateOnStepStarted;
             _tutorialState.StepFinished += TutorialStateOnStepFinished;
-            
+        }
+
+        void IStartable.Start()
+        {
             _buildingConstructionService.HideAllConstruction();
             _resourceService.SetActiveResourceType(ResourceType.Stone, false);
         }
-
+        
         private void TutorialStateOnStepStarted(TutorialStep tutorialStep)
         {
             if (tutorialStep != TutorialStep.GatheringWood)

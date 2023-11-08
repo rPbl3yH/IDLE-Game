@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca9c491ea8fd463daa65508eb0b87dba, type: 3}
+  m_Name: 3_HouseBuildingConfig
+  m_EditorClassIdentifier: 
+  Resources:
+  - rid: 6750036670474092544
+  - rid: 3735078567001194496
+  references:
+    version: 2
+    RefIds:
+    - rid: 3735078567001194496
+      type: {class: ResourceData, ns: App.Gameplay.LevelStorage, asm: Assembly-CSharp}
+      data:
+        _resourceType: 1
+        _count: 10
+    - rid: 6750036670474092544
+      type: {class: ResourceData, ns: App.Gameplay.LevelStorage, asm: Assembly-CSharp}
+      data:
+        _resourceType: 0
+        _count: 15

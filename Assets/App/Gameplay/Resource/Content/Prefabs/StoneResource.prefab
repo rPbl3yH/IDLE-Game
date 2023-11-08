@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7205192333545c496bac305d4ea6c7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _view: {fileID: 7112690495988553938}
+  View: {fileID: 7112690495988553938}
   _gatheringVfx: {fileID: 675059188270093285}
   _resourceModel: {fileID: 5709057451580401474}
   ActivateShowTime:

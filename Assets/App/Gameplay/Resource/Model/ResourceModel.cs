@@ -1,5 +1,7 @@
 ﻿using System;
+using App.Gameplay.LevelStorage;
 using App.Gameplay.Resource.Model.Mechanics;
+using App.Gameplay.Resource.View;
 using Modules.Atomic.Actions;
 using Modules.Atomic.Values;
 using UnityEngine;
@@ -16,7 +18,8 @@ namespace App.Gameplay.Resource.Model
         public AtomicEvent<int> Gathered;
         public AtomicVariable<float> UpdateTime;
         public AtomicVariable<bool> IsEnable;
-
+        public AtomicEvent Deactivated;
+        
         public NavMeshObstacle Obstacle;
 
         private GatheringMechanics _gatheringMechanics;

@@ -5,8 +5,8 @@ namespace App.Gameplay.LevelStorage
 {
     public class DeactivateViewMechanics
     {
-        private AtomicEvent _deactivated;
-        private GameObject _view;
+        private readonly AtomicEvent _deactivated;
+        private readonly GameObject _view;
 
         public DeactivateViewMechanics(AtomicEvent deactivated, GameObject view)
         {

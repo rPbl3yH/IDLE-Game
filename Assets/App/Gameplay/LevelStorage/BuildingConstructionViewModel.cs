@@ -1,6 +1,7 @@
 ﻿using App.Gameplay.Resource.View;
 using Modules.Atomic.Values;
 using UnityEngine;
+using VContainer;
 
 namespace App.Gameplay.LevelStorage
 {
@@ -14,20 +15,22 @@ namespace App.Gameplay.LevelStorage
         public AtomicVariable<float> ActivateShowTime = new(0.5f);
 
         private ActivateModelViewMechanics _activateModelViewMechanics;
+        private DeactivateViewMechanics _deactivateViewMechanics;
 
-        private void Awake()
+        [Inject]
+        private void Construct()
         {
             _activateModelViewMechanics = new ActivateModelViewMechanics(View, _model.IsEnable, ActivateShowTime);
-        }
+            _deactivateViewMechanics = new DeactivateViewMechanics(_model.Deactivated, View);
 
-        private void OnEnable()
-        {
             _activateModelViewMechanics.OnEnable();
+            _deactivateViewMechanics.OnEnable();
         }
 
         private void OnDisable()
         {
-            _activateModelViewMechanics.OnDisable();
+            _activateModelViewMechanics.OnDisable();            
+            _deactivateViewMechanics.OnDisable();
         }
     }
 }

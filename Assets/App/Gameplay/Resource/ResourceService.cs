@@ -61,7 +61,15 @@ namespace App.Gameplay.Resource
             {
                 if (resource.ResourceType == resourceType)
                 {
-                    resource.IsEnable.Value = value;
+                    if (value)
+                    {
+                        resource.IsEnable.Value = true;
+                    }
+                    else
+                    {
+                        resource.IsEnable.Value = false;
+                        resource.Deactivated?.Invoke();
+                    }
                 }
             }
         }

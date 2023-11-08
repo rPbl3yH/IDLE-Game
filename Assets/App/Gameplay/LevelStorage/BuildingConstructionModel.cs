@@ -10,7 +10,6 @@ namespace App.Gameplay.LevelStorage
     public class BuildingConstructionModel : ResourceStorageModel, IDisposable
     {
         public AtomicEvent<BuildingModel> Built = new();
-        public BuildingConstructionViewModel ViewModel;
         public GameObject SpawnPoint;
         public BuildingModel BuildingModel;
         
@@ -28,7 +27,6 @@ namespace App.Gameplay.LevelStorage
             _buildConstructionMechanics = new BuildConstructionMechanics(ResourceStorage, Built, buildingSpawner, BuildingModel, SpawnPoint.transform);
             _buildObserverMechanics = new BuildObserverMechanics(this, Built, ResourceStorageModelService, SpawnPoint);
             _barnRegisterMechanics = new BarnRegisterMechanics(Built, barnModelService);
-            _deactivateViewMechanics = new DeactivateViewMechanics(Deactivated, ViewModel.View);
             
             Built.AddListener(OnBuilt);            
             
@@ -36,7 +34,6 @@ namespace App.Gameplay.LevelStorage
             _buildConstructionMechanics.OnEnable();
             _buildObserverMechanics.OnEnable();
             _barnRegisterMechanics.OnEnable();
-            _deactivateViewMechanics.OnEnable();
         }
 
         private void OnBuilt(BuildingModel obj)
@@ -49,7 +46,6 @@ namespace App.Gameplay.LevelStorage
             _buildConstructionMechanics.OnDisable();
             _buildObserverMechanics.OnDisable();
             _barnRegisterMechanics.OnDisable();
-            _deactivateViewMechanics.OnDisable();
         }
     }
 }

@@ -12,5 +12,13 @@ namespace App.Gameplay.Building
                 constructionModel.Deactivated?.Invoke();
             }
         }
+
+        public void ShowAll()
+        {
+            foreach (var constructionModel in Services)
+            {
+                constructionModel.IsEnable.Value = true;
+            }
+        }
     }
 }
