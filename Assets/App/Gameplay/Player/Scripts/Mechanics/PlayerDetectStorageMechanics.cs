@@ -7,12 +7,12 @@ namespace App.Gameplay.Player
     public class PlayerDetectStorageMechanics
     {
         private readonly ResourceStorageModelService _storagesService;
-        private readonly AtomicVariable<ResourceStorageModel> _resourceStorageModel;
+        private readonly IAtomicVariable<ResourceStorageModel> _resourceStorageModel;
         private readonly Transform _root;
 
         public PlayerDetectStorageMechanics(
             ResourceStorageModelService storagesService, 
-            AtomicVariable<ResourceStorageModel> resourceStorageModel, 
+            IAtomicVariable<ResourceStorageModel> resourceStorageModel, 
             Transform root)
         {
             _storagesService = storagesService;

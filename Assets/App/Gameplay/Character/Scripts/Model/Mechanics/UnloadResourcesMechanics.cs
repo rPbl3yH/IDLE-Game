@@ -6,27 +6,27 @@ namespace App.Gameplay.Character.Scripts.Model.Mechanics
 {
     public class UnloadResourcesMechanics
     {
-        private readonly AtomicVariable<ResourceStorageModel> _storage;
-        private readonly AtomicVariable<bool> _canUnloadResources;
-        private readonly AtomicVariable<float> _delay;
-        private readonly AtomicVariable<ResourceType> _resourceType;
-        private readonly AtomicVariable<int> _amount;
+        private readonly IAtomicValue<ResourceStorageModel> _storage;
+        private readonly IAtomicValue<bool> _canUnloadResources;
+        private readonly IAtomicValue<float> _unloadDelay;
+        private readonly IAtomicValue<ResourceType> _resourceType;
+        private readonly IAtomicVariable<int> _amount;
         private readonly AtomicEvent<ResourceType> _resourceUnloaded;
 
         private float _timer;
         
         public UnloadResourcesMechanics(
             AtomicEvent<ResourceType> resourceUnloaded,
-            AtomicVariable<ResourceStorageModel> storage,
-            AtomicVariable<bool> canUnloadResources,
-            AtomicVariable<float> delay,
-            AtomicVariable<ResourceType> resourceType,
-            AtomicVariable<int> amount)
+            IAtomicValue<ResourceStorageModel> storage,
+            IAtomicValue<bool> canUnloadResources,
+            IAtomicValue<float> unloadDelay,
+            IAtomicValue<ResourceType> resourceType,
+            IAtomicVariable<int> amount)
         {
             _resourceUnloaded = resourceUnloaded;
             _storage = storage;
             _canUnloadResources = canUnloadResources;
-            _delay = delay;
+            _unloadDelay = unloadDelay;
             _resourceType = resourceType;
             _amount = amount;
         }
@@ -35,7 +35,7 @@ namespace App.Gameplay.Character.Scripts.Model.Mechanics
         {
             _storage = characterModel.ResourceStorage;
             _canUnloadResources = characterModel.CanUnloadResources;
-            _delay = characterModel.Delay;
+            _unloadDelay = characterModel.Delay;
             _resourceType = characterModel.ResourceType;
             _amount = characterModel.ResourceAmount;
             _resourceUnloaded = characterModel.ResourceUnloaded;
@@ -50,7 +50,7 @@ namespace App.Gameplay.Character.Scripts.Model.Mechanics
             
             _timer += deltaTime;
             
-            if (_timer >= _delay.Value)
+            if (_timer >= _unloadDelay.Value)
             {
                 ResetTimer();
 

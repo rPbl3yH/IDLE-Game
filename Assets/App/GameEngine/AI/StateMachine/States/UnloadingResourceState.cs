@@ -1,20 +1,17 @@
-﻿using App.GameEngine.AI.StateMachine.Data;
-using App.Gameplay.Character.Scripts.Model;
+﻿using App.Gameplay.Character.Scripts.Model;
 using App.Gameplay.LevelStorage;
-using Modules.Atomic.Actions;
 using Modules.Atomic.Values;
 
-namespace App.GameEngine.AI.StateMachine.States
+namespace App.GameEngine.AI
 {
     public class UnloadingResourceState : StateMachine
     {
-        private readonly AtomicVariable<ResourceStorageModel> _resourceStorageModel;
-        private readonly AtomicVariable<bool> _canUnloadResources;
-        private readonly AtomicVariable<float> _unloadingDistance;
+        private readonly IAtomicVariable<ResourceStorageModel> _resourceStorageModel;
+        private readonly IAtomicVariable<bool> _canUnloadResources;
+        private readonly IAtomicVariable<float> _unloadingDistance;
  
         private readonly MoveToPositionData _moveData;
         private readonly UnloadResourceData _unloadResourceData;
-        private readonly IAtomicFunction<ResourceStorageModel> _detectionBarnAction;
         private readonly IState _moveState;
 
         private float _timer;
@@ -22,7 +19,6 @@ namespace App.GameEngine.AI.StateMachine.States
         public UnloadingResourceState(
             UnloadResourceData unloadResourceData,
             MoveToPositionData moveData,
-            IAtomicFunction<ResourceStorageModel> detectionBarnAction,
             CharacterModel characterModel,
             IState moveState)
         {
@@ -32,7 +28,6 @@ namespace App.GameEngine.AI.StateMachine.States
             _resourceStorageModel = characterModel.ResourceStorage;
             _canUnloadResources = characterModel.CanUnloadResources;
             _unloadingDistance = characterModel.UnloadingDistance;
-            _detectionBarnAction = detectionBarnAction;
         }
 
         public override void Enter()

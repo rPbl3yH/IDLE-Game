@@ -6,9 +6,9 @@ namespace App.Gameplay.Resource.Model.Mechanics
     public class GatheringMechanics
     {
         private readonly AtomicEvent<int> _gathered;
-        private readonly AtomicVariable<int> _amount;
+        private readonly IAtomicVariable<int> _amount;
 
-        public GatheringMechanics(AtomicEvent<int> gathered, AtomicVariable<int> amount)
+        public GatheringMechanics(AtomicEvent<int> gathered, IAtomicVariable<int> amount)
         {
             _gathered = gathered;
             _amount = amount;

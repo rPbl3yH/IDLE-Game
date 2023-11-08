@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace App.GameEngine.AI.StateMachine.Data
+namespace App.GameEngine.AI
 {
     [Serializable]
     public class MoveToPositionData

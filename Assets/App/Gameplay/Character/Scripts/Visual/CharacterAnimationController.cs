@@ -6,18 +6,19 @@ namespace App.Gameplay.Character.Scripts.Visual
     public class CharacterAnimationController
     {
         private static readonly int MainState = Animator.StringToHash("MainState");
+        
         private const int IDLE_STATE = 0;
         private const int RUN_STATE = 1;
         private const int GATHER_STATE = 2;
 
         private readonly Animator _animator;
-        private readonly AtomicVariable<Vector3> _moveDirection;
-        private readonly AtomicVariable<bool> _canGathering;
+        private readonly IAtomicValue<Vector3> _moveDirection;
+        private readonly IAtomicValue<bool> _canGathering;
 
         public CharacterAnimationController(
             Animator animator,
-            AtomicVariable<Vector3> moveDirection,
-            AtomicVariable<bool> canGathering)
+            IAtomicValue<Vector3> moveDirection,
+            IAtomicValue<bool> canGathering)
         {
             _moveDirection = moveDirection;
             _animator = animator;

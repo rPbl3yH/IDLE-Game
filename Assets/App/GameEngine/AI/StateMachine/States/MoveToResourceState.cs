@@ -1,6 +1,6 @@
 ﻿using Modules.Atomic.Actions;
 
-namespace App.GameEngine.AI.StateMachine.States
+namespace App.GameEngine.AI
 {
     public class MoveToResourceState : IState
     {

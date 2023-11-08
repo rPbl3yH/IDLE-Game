@@ -1,27 +1,26 @@
-﻿using App.GameEngine.AI.StateMachine.Data;
-using App.GameEngine.AI.StateMachine.States;
-using App.Gameplay.Character.Scripts.Model;
+﻿using App.Gameplay.Character.Scripts.Model;
 using App.Gameplay.Character.Scripts.Model.Actions;
 using App.Gameplay.LevelStorage;
 using App.Gameplay.Resource;
 using UnityEngine;
 using VContainer;
+using VContainer.Unity;
 
 namespace App.GameEngine.AI
 {
     public class CharacterAIModel : MonoBehaviour
     {
+        [SerializeField] private CharacterModel _characterModel;
+        
         public MoveToPositionData MoveToPositionData;
         public GatheringResourceData GatheringResourceData;
         public UnloadResourceData UnloadResourceData;
 
-        [SerializeField] private CharacterModel _characterModel;
-            
         private DetectionResourceFunction _detectionResourceFunction;
         private MoveToPositionState _moveToPositionState;
         private GatheringResourceState _gatheringResourceState;
         private UnloadingResourceState _unloadingResourceState;
-        private StateMachine.StateMachine _stateMachine;
+        private StateMachine _stateMachine;
         public DetectionBarnFunction DetectionBarnFunction;
 
         [Inject]
@@ -35,7 +34,7 @@ namespace App.GameEngine.AI
         {
             DetectionBarnFunction = new DetectionBarnFunction(UnloadResourceData.BarnService);
 
-            _stateMachine = new StateMachine.StateMachine();
+            _stateMachine = new StateMachine();
 
             _moveToPositionState =
                 new MoveToPositionState(MoveToPositionData, _characterModel.MoveDirection, _characterModel.Root);
@@ -43,11 +42,11 @@ namespace App.GameEngine.AI
             _gatheringResourceState =
                 new GatheringResourceState(GatheringResourceData, MoveToPositionData, _moveToPositionState, _characterModel);
 
-            _unloadingResourceState = new UnloadingResourceState(UnloadResourceData, MoveToPositionData, DetectionBarnFunction, _characterModel, _moveToPositionState);
+            _unloadingResourceState = new UnloadingResourceState(UnloadResourceData, MoveToPositionData, _characterModel, _moveToPositionState);
             
             _stateMachine.SwitchState(_gatheringResourceState);
         }
-
+        
         private void Update()
         {
             if (_characterModel.ResourceAmount.Value == 0)

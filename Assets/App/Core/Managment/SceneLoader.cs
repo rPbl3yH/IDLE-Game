@@ -1,7 +1,5 @@
-using System.Threading.Tasks;
 using UnityEditor;
 using UnityEditor.SceneManagement;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace App.Core

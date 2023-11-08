@@ -5,10 +5,10 @@ namespace App.Gameplay.Character.Scripts.Model.Mechanics
 {
     public class RotateMechanics
     {
-        private readonly AtomicVariable<Vector3> _moveDirection;
+        private readonly IAtomicVariable<Vector3> _moveDirection;
         private readonly Transform _view;
 
-        public RotateMechanics(Transform view, AtomicVariable<Vector3> moveDirection)
+        public RotateMechanics(Transform view, IAtomicVariable<Vector3> moveDirection)
         {
             _view = view;
             _moveDirection = moveDirection;

@@ -11,7 +11,6 @@ namespace App.Core
         public void Construct(TGameService service)
         {
             _service = service;
-            ServiceLocator.AddService(this);
         }
         
         protected virtual string DataKey

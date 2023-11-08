@@ -8,19 +8,19 @@ namespace App.Gameplay.Character.Scripts.Model.Mechanics
     public class GatheringResourceMechanics
     {
         private readonly AtomicEvent _gathered;
-        private readonly AtomicVariable<int> _gatheringCount;
-        private readonly AtomicVariable<ResourceModel> _targetResource;
-        private readonly AtomicVariable<int> _amount;
-        private readonly AtomicVariable<int> _maxAmount;
+        private readonly IAtomicValue<int> _gatheringCount;
+        private readonly IAtomicVariable<ResourceModel> _targetResource;
+        private readonly IAtomicVariable<int> _amount;
+        private readonly IAtomicValue<int> _maxAmount;
 
-        private readonly AtomicVariable<ResourceType> _resourceType;
+        private readonly IAtomicVariable<ResourceType> _resourceType;
 
         public GatheringResourceMechanics(
-            AtomicVariable<ResourceModel> targetResource,
-            AtomicVariable<ResourceType> resourceType,
-            AtomicVariable<int> gatheringCount,
-            AtomicVariable<int> amount,
-            AtomicVariable<int> maxAmount,
+            IAtomicVariable<ResourceModel> targetResource,
+            IAtomicVariable<ResourceType> resourceType,
+            IAtomicValue<int> gatheringCount,
+            IAtomicVariable<int> amount,
+            IAtomicValue<int> maxAmount,
             AtomicEvent gathered)
         {
             _targetResource = targetResource;
@@ -64,7 +64,6 @@ namespace App.Gameplay.Character.Scripts.Model.Mechanics
             _targetResource.Value.Gathered?.Invoke(gatheringCount);
 
             _amount.Value += gatheringCount;
-            //Debug.Log($"Gathered {type} {gatheringCount} in player");
         }
     }
 }

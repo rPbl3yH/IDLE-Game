@@ -1,7 +1,5 @@
 ﻿using App.GameEngine.Input.Handlers;
 using App.UI.UIManager;
-using SimpleInputNamespace;
-using UnityEngine;
 using VContainer.Unity;
 
 namespace Modules.Tutorial.Content

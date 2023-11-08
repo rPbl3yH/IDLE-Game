@@ -7,7 +7,7 @@ namespace App.Gameplay.Player
 {
     public class PlayerLoadResourceAvailableMechanics 
     {
-        private readonly AtomicVariable<bool> _canShowLoadResources;
+        private readonly IAtomicVariable<bool> _canShowLoadResources;
         private readonly IAtomicVariable<ResourceStorageModel> _resourceStorage;
         private readonly IAtomicVariable<bool> _canLoad;
         private readonly IAtomicValue<int> _amount;
@@ -17,8 +17,8 @@ namespace App.Gameplay.Player
         private readonly DistanceSensor _distanceSensor;
 
         public PlayerLoadResourceAvailableMechanics(
-            AtomicVariable<bool> canShowLoadResources,
-            AtomicVariable<float> loadingDistance, 
+            IAtomicVariable<bool> canShowLoadResources,
+            IAtomicValue<float> loadingDistance, 
             IAtomicVariable<ResourceStorageModel> resourceStorage,
             IAtomicVariable<bool> canLoad,
             IAtomicValue<int> amount,

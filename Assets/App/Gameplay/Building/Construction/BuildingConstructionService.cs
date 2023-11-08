@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using App.Gameplay.LevelStorage;
+﻿using App.Gameplay.LevelStorage;
 
 namespace App.Gameplay.Building
 {

@@ -1,8 +1,6 @@
 ﻿using App.Gameplay;
 using App.Gameplay.Character.Scripts.Model;
 using App.Gameplay.Player;
-using Modules.Atomic.Values;
-using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 

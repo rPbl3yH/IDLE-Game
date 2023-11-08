@@ -1,7 +1,4 @@
-﻿using System;
-using App.Gameplay.LevelStorage;
-using App.Gameplay.Resource.Model.Mechanics;
-using App.Gameplay.Resource.View;
+﻿using App.Gameplay.Resource.Model.Mechanics;
 using Modules.Atomic.Actions;
 using Modules.Atomic.Values;
 using UnityEngine;

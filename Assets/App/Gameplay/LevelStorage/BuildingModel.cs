@@ -1,6 +1,4 @@
-﻿using System;
-using App.Gameplay.Resource.View;
-using Modules.Atomic.Actions;
+﻿using Modules.Atomic.Actions;
 using Modules.Atomic.Values;
 using UnityEngine;
 

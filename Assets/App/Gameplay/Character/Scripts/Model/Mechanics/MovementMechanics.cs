@@ -6,16 +6,13 @@ namespace App.Gameplay.Character.Scripts.Model.Mechanics
     public class MovementMechanics
     {
         private readonly Transform _model;
-
-        private readonly AtomicVariable<Vector3> _moveDirection;
-
-        private readonly AtomicVariable<float> _speed;
-        private readonly IAtomicValue<bool> _canMove;
+        private readonly IAtomicValue<Vector3> _moveDirection;
+        private readonly IAtomicValue<float> _speed;
 
         public MovementMechanics(
             Transform model,
-            AtomicVariable<Vector3> moveDirection, 
-            AtomicVariable<float> speed)
+            IAtomicValue<Vector3> moveDirection, 
+            IAtomicValue<float> speed)
         {
             _model = model;
             _moveDirection = moveDirection;

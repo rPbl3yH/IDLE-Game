@@ -1,11 +1,10 @@
-﻿using App.GameEngine.AI.StateMachine.Data;
-using App.Gameplay.Character.Scripts.Model;
+﻿using App.Gameplay.Character.Scripts.Model;
 using App.Gameplay.Resource.Model;
 using Modules.Atomic.Actions;
 using Modules.Atomic.Values;
 using UnityEngine;
 
-namespace App.GameEngine.AI.StateMachine.States
+namespace App.GameEngine.AI
 {
     public class GatheringResourceState : StateMachine
     {
@@ -14,11 +13,11 @@ namespace App.GameEngine.AI.StateMachine.States
         
         private readonly IState _moveState;
         private readonly IAtomicFunction<ResourceModel> _detectResourceFunction;
-        private readonly AtomicVariable<Vector3> _moveDirection;
-        private readonly AtomicVariable<ResourceModel> _targetResource;
-        private readonly AtomicVariable<bool> _canGathering;
-        private readonly AtomicVariable<float> _gatheringDistance;
-        private readonly AtomicVariable<float> _stoppingDistance;
+        private readonly IAtomicVariable<Vector3> _moveDirection;
+        private readonly IAtomicVariable<ResourceModel> _targetResource;
+        private readonly IAtomicVariable<bool> _canGathering;
+        private readonly IAtomicVariable<float> _gatheringDistance;
+        private readonly IAtomicVariable<float> _stoppingDistance;
         private readonly Transform _root;
 
         public GatheringResourceState(

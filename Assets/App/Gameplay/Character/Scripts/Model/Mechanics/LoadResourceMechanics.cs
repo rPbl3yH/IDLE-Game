@@ -8,13 +8,13 @@ namespace App.Gameplay.Character.Scripts.Model.Mechanics
     public class LoadResourceMechanics
     {
         private readonly AtomicEvent<ResourceType> _resourceLoaded;
-        private readonly AtomicVariable<ResourceType> _resourceType;
-        private readonly AtomicVariable<ResourceType> _loadResourceType;
-        private readonly AtomicVariable<bool> _isFreeSpace;
-        private readonly AtomicVariable<int> _amount;
-        private readonly AtomicVariable<bool> _canLoadResources;
-        private readonly AtomicVariable<float> _loadDelay;
-        private readonly AtomicVariable<ResourceStorageModel> _resourceStorage;
+        private readonly IAtomicVariable<ResourceType> _resourceType;
+        private readonly IAtomicValue<ResourceType> _loadResourceType;
+        private readonly IAtomicValue<bool> _isFreeSpace;
+        private readonly IAtomicVariable<int> _amount;
+        private readonly IAtomicVariable<bool> _canLoadResources;
+        private readonly IAtomicValue<float> _loadDelay;
+        private readonly IAtomicValue<ResourceStorageModel> _resourceStorage;
 
         private float _timer;
 
@@ -54,7 +54,6 @@ namespace App.Gameplay.Character.Scripts.Model.Mechanics
                     return;
                 }
                 
-                Debug.Log("Resource loaded");
                 _resourceType.Value = _loadResourceType.Value;
                 _amount.Value++;
                 _resourceLoaded?.Invoke(_loadResourceType.Value);

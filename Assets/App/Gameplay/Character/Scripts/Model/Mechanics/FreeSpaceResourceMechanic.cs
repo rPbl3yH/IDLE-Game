@@ -4,12 +4,12 @@ namespace App.Gameplay.Character.Scripts.Model.Mechanics
 {
     public class FreeSpaceResourceMechanic
     {
-        private readonly AtomicVariable<bool> _isFreeSpace;
-        private readonly AtomicVariable<int> _amount;
+        private readonly IAtomicVariable<bool> _isFreeSpace;
+        private readonly IAtomicVariable<int> _amount;
 
-        private readonly AtomicVariable<int> _maxAmount;
+        private readonly IAtomicValue<int> _maxAmount;
 
-        public FreeSpaceResourceMechanic(AtomicVariable<bool> isFreeSpace, AtomicVariable<int> amount, AtomicVariable<int> maxAmount)
+        public FreeSpaceResourceMechanic(IAtomicVariable<bool> isFreeSpace, IAtomicVariable<int> amount, IAtomicValue<int> maxAmount)
         {
             _isFreeSpace = isFreeSpace;
             _amount = amount;

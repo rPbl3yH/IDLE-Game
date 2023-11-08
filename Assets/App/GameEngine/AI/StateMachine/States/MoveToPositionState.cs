@@ -1,16 +1,15 @@
-﻿using App.GameEngine.AI.StateMachine.Data;
-using Modules.Atomic.Values;
+﻿using Modules.Atomic.Values;
 using UnityEngine;
 
-namespace App.GameEngine.AI.StateMachine.States
+namespace App.GameEngine.AI
 {
     public class MoveToPositionState : IState
     {
         private readonly MoveToPositionData _moveToPositionData;
-        private readonly AtomicVariable<Vector3> _moveDirection;
+        private readonly IAtomicVariable<Vector3> _moveDirection;
         private readonly Transform _root;
 
-        public MoveToPositionState(MoveToPositionData moveToPositionData, AtomicVariable<Vector3> moveDirection, Transform root)
+        public MoveToPositionState(MoveToPositionData moveToPositionData, IAtomicVariable<Vector3> moveDirection, Transform root)
         {
             _moveToPositionData = moveToPositionData;
             _moveDirection = moveDirection;
