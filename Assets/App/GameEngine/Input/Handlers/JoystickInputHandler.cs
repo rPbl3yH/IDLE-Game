@@ -37,12 +37,18 @@ namespace App.GameEngine.Input.Handlers
         {
             IsEnabled = true;
             _joystick.gameObject.SetActive(true);
+            
+            //Для записи на широком экране. Отключение канваса для разблокировки нажатий
+            _joystick.transform.parent.parent.gameObject.SetActive(true);
         }
 
         public void Disable()
         {
             IsEnabled = false;
             _joystick.gameObject.SetActive(false);
+            
+            //Для записи на широком экране. Отключение канваса для разблокировки нажатий
+            _joystick.transform.parent.parent.gameObject.SetActive(false);
         }
     }
 }

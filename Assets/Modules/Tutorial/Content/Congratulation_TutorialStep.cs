@@ -1,4 +1,5 @@
-﻿using App.Gameplay.Building;
+﻿using App.GameEngine.Input.Handlers;
+using App.Gameplay.Building;
 using App.UI.UIManager;
 using VContainer.Unity;
 
@@ -9,15 +10,18 @@ namespace Modules.Tutorial.Content
         private readonly TutorialState _tutorialState;
         private readonly BaseUIView _endPanel;
         private readonly BuildingConstructionService _constructionService;
+        private readonly IInputHandler _inputHandler;
 
         public Congratulation_TutorialStep(
             TutorialState tutorialState, 
             UIPanelManager uiPanelManager,
-            BuildingConstructionService constructionService
+            BuildingConstructionService constructionService,
+            IInputHandler inputHandler
             )
         {
             _tutorialState = tutorialState;
             _constructionService = constructionService;
+            _inputHandler = inputHandler;
             _endPanel = uiPanelManager.GetPanel(UIPanelType.TutorialEnd);
             _endPanel.Hide();
         }
@@ -34,6 +38,8 @@ namespace Modules.Tutorial.Content
             {
                 return;
             }
+
+            _inputHandler.Enable();
             
             _constructionService.ShowAll();
             _endPanel.Hidden -= EndPanelOnHidden;
@@ -46,6 +52,8 @@ namespace Modules.Tutorial.Content
             {
                 return;
             }
+            
+            _inputHandler.Disable();
             
             _endPanel.Show();
             _endPanel.Hidden += EndPanelOnHidden;
