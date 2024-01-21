@@ -1,7 +1,5 @@
 ﻿using App.Gameplay.LevelStorage;
-using Modules.Atomic.Actions;
-using Modules.Atomic.Values;
-using UnityEngine;
+using Atomic.Elements;
 
 namespace App.Gameplay.Character.Scripts.Model.Mechanics
 {

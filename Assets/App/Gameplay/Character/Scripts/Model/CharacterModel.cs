@@ -3,15 +3,15 @@ using App.Gameplay.Character.Scripts.Model.Mechanics;
 using App.Gameplay.LevelStorage;
 using App.Gameplay.Resource;
 using App.Gameplay.Resource.Model;
-using Modules.Atomic.Actions;
-using Modules.Atomic.Values;
+using Atomic.Elements;
+using Atomic.Objects;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace App.Gameplay.Character.Scripts.Model
 {
-    public class CharacterModel : MonoBehaviour
+    public class CharacterModel : AtomicObject
     {
         //Данные
         public Transform Root;

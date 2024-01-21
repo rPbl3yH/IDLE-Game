@@ -1,6 +1,5 @@
 ﻿using App.Gameplay.LevelStorage;
-using Modules.Atomic.Actions;
-using Modules.Atomic.Values;
+using Atomic.Elements;
 using UnityEngine;
 
 namespace App.Gameplay.Player
@@ -8,7 +7,7 @@ namespace App.Gameplay.Player
     public class PlayerLoadResourceAvailableMechanics 
     {
         private readonly IAtomicVariable<bool> _canShowLoadResources;
-        private readonly IAtomicVariable<ResourceStorageModel> _resourceStorage;
+        private readonly AtomicVariable<ResourceStorageModel> _resourceStorage;
         private readonly IAtomicVariable<bool> _canLoad;
         private readonly IAtomicValue<int> _amount;
         private readonly AtomicEvent<ResourceType> _resourceUnloaded;
@@ -19,7 +18,7 @@ namespace App.Gameplay.Player
         public PlayerLoadResourceAvailableMechanics(
             IAtomicVariable<bool> canShowLoadResources,
             IAtomicValue<float> loadingDistance, 
-            IAtomicVariable<ResourceStorageModel> resourceStorage,
+            AtomicVariable<ResourceStorageModel> resourceStorage,
             IAtomicVariable<bool> canLoad,
             IAtomicValue<int> amount,
             Transform root)
@@ -45,16 +44,16 @@ namespace App.Gameplay.Player
 
         public void OnEnable()
         {
-            _resourceUnloaded.AddListener(OnResourceUnloaded);
-            _resourceStorage.OnChanged += ResourceStorageOnChanged;
+            _resourceUnloaded.Subscribe(OnResourceUnloaded);
+            _resourceStorage.Subscribe(ResourceStorageOnChanged);
             _distanceSensor.Entered += DistanceSensorOnEntered;
             _distanceSensor.Exited += DistanceSensorOnExited;
         }
 
         public void OnDisable()
         {
-            _resourceUnloaded.RemoveListener(OnResourceUnloaded);
-            _resourceStorage.OnChanged -= ResourceStorageOnChanged;
+            _resourceUnloaded.Unsubscribe(OnResourceUnloaded);
+            _resourceStorage.Unsubscribe(ResourceStorageOnChanged);
             _distanceSensor.Entered -= DistanceSensorOnEntered;
             _distanceSensor.Exited -= DistanceSensorOnExited;
         }

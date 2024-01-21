@@ -1,8 +1,7 @@
 ﻿using System;
 using App.Gameplay.Resource;
 using App.Gameplay.Resource.Model;
-using Modules.Atomic.Actions;
-using Modules.Atomic.Values;
+using Atomic.Elements;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -27,7 +26,7 @@ namespace App.Gameplay.Character.Scripts.Model.Actions
         }
 
         [Button]
-        public ResourceModel GetResult()
+        public ResourceModel Invoke()
         {
             ResourceModel resource;
             

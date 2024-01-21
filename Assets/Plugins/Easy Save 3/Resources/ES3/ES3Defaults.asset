@@ -32,11 +32,15 @@ MonoBehaviour:
     - Assembly-CSharp
     - Assembly-CSharp-firstpass
     - VContainer
+    - Atomic.Objects
     - SimpleInput.Runtime
     - Declarative
     - Entities
     - VContainer.EnableCodeGen
+    - Atomic.Elements
     - Sirenix.OdinInspector.CompatibilityLayer
+    - Atomic.Behaviours
+    - Atomic.Extensions
     - PPv2URPConverters
     - SimpleInput.Editor
     - Sirenix.OdinInspector.CompatibilityLayer.Editor

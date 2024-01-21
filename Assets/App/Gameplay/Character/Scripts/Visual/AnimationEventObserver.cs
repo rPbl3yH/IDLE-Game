@@ -1,6 +1,6 @@
 ﻿using App.Gameplay.Animation;
 using App.Gameplay.Character.Scripts.Model;
-using Modules.Atomic.Actions;
+using Atomic.Elements;
 
 namespace App.Gameplay.Character.Scripts.Visual
 {

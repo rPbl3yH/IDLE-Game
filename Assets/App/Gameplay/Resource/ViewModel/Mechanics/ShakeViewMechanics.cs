@@ -1,5 +1,5 @@
-﻿using DG.Tweening;
-using Modules.Atomic.Actions;
+﻿using Atomic.Elements;
+using DG.Tweening;
 using UnityEngine;
 
 namespace App.Gameplay.Resource.View
@@ -17,12 +17,12 @@ namespace App.Gameplay.Resource.View
 
         public void OnEnable()
         {
-            _gathered.AddListener(OnGathered);
+            _gathered.Subscribe(OnGathered);
         }
 
         public void OnDisable()
         {
-            _gathered.AddListener(OnGathered);
+            _gathered.Subscribe(OnGathered);
         }
         
         private void OnGathered(int value)

@@ -25,8 +25,8 @@ namespace Modules.AudioSystem.Content
         {
             _playerSpawner.Spawned -= PlayerSpawnerOnSpawned;
             
-            player.CharacterModel.ResourceLoaded.AddListener(OnTransferred);
-            player.CharacterModel.ResourceUnloaded.AddListener(OnTransferred);
+            player.CharacterModel.ResourceLoaded.Subscribe(OnTransferred);
+            player.CharacterModel.ResourceUnloaded.Subscribe(OnTransferred);
         }
 
         private void OnTransferred(ResourceType resourceType)

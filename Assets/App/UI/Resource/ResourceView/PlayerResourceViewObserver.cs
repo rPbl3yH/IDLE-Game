@@ -25,7 +25,7 @@ namespace App.UI
             _characterModel = characterModel;
             
             OnResourceAmountChanged(_characterModel.ResourceAmount.Value);
-            _characterModel.ResourceAmount.OnChanged += OnResourceAmountChanged;
+            _characterModel.ResourceAmount.Subscribe(OnResourceAmountChanged);
         }
 
         private void OnResourceAmountChanged(int value)
@@ -45,7 +45,7 @@ namespace App.UI
 
         public void Dispose()
         {
-            _characterModel.ResourceAmount.OnChanged -= OnResourceAmountChanged;
+            _characterModel.ResourceAmount.Unsubscribe(OnResourceAmountChanged);
         }
     }
 }

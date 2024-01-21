@@ -1,6 +1,5 @@
 ﻿using App.Gameplay.Resource.Model.Mechanics;
-using Modules.Atomic.Actions;
-using Modules.Atomic.Values;
+using Atomic.Elements;
 using UnityEngine;
 using UnityEngine.AI;
 

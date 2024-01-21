@@ -1,6 +1,6 @@
 ﻿using App.Gameplay.Character.Scripts.Model;
 using App.Gameplay.LevelStorage;
-using Modules.Atomic.Values;
+using Atomic.Elements;
 
 namespace App.GameEngine.AI
 {

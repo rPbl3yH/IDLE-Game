@@ -1,5 +1,4 @@
-﻿using Modules.Atomic.Actions;
-using Modules.Atomic.Values;
+﻿using Atomic.Elements;
 using UnityEngine;
 
 namespace App.Gameplay.Player
@@ -7,14 +6,14 @@ namespace App.Gameplay.Player
     public class PlayerLoadResourceMechanics
     {
         private readonly AtomicEvent<ResourceType> _resourceSelected;
-        private readonly IAtomicVariable<bool> _isFreeSpace;
+        private readonly AtomicVariable<bool> _isFreeSpace;
         private readonly IAtomicVariable<bool> _canUnload;
         private readonly IAtomicVariable<ResourceType> _loadResourceType;
         private readonly IAtomicVariable<bool> _canLoad;
 
         public PlayerLoadResourceMechanics(
             AtomicEvent<ResourceType> resourceSelected, 
-            IAtomicVariable<bool> isFreeSpace, 
+            AtomicVariable<bool> isFreeSpace, 
             IAtomicVariable<bool> canUnload, 
             IAtomicVariable<ResourceType> loadResourceType, 
             IAtomicVariable<bool> canLoad)
@@ -36,14 +35,14 @@ namespace App.Gameplay.Player
 
         public void OnEnable()
         {
-            _resourceSelected.AddListener(OnLoadResourceSelected);
-            _isFreeSpace.OnChanged += IsFreeSpaceOnChanged;
+            _resourceSelected.Subscribe(OnLoadResourceSelected);
+            _isFreeSpace.Subscribe(IsFreeSpaceOnChanged);
         }
 
         public void OnDisable()
         {
-            _resourceSelected.RemoveListener(OnLoadResourceSelected);
-            _isFreeSpace.OnChanged -= IsFreeSpaceOnChanged;
+            _resourceSelected.Unsubscribe(OnLoadResourceSelected);
+            _isFreeSpace.Unsubscribe(IsFreeSpaceOnChanged);
         }
         
         private void IsFreeSpaceOnChanged(bool value)

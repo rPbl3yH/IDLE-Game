@@ -60,7 +60,7 @@ namespace Modules.Tutorial.Content
             if (constructionModel != null)
             {
                 constructionModel.IsEnable.Value = true;
-                constructionModel.Built.AddListener(OnBuilt);
+                constructionModel.Built.Subscribe(OnBuilt);
                 var text = LocalizationManager.GetTranslation(ScriptTerms.Tutorial.BuildHouse);
                 _tutorialViewSystem.Show(constructionModel.UnloadingPoint, text);
             }

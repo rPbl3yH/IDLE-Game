@@ -4,7 +4,6 @@ using App.Gameplay.LevelStorage;
 using App.Gameplay.Resource;
 using UnityEngine;
 using VContainer;
-using VContainer.Unity;
 
 namespace App.GameEngine.AI
 {
@@ -55,7 +54,7 @@ namespace App.GameEngine.AI
             }
             else
             {
-                _characterModel.ResourceStorage.Value = DetectionBarnFunction?.GetResult();
+                _characterModel.ResourceStorage.Value = DetectionBarnFunction?.Invoke();
                 
                 if (!_characterModel.IsFreeSpace.Value && _characterModel.ResourceStorage.Value != null)
                 {

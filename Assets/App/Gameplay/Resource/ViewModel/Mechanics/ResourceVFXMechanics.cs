@@ -1,4 +1,4 @@
-﻿using Modules.Atomic.Actions;
+﻿using Atomic.Elements;
 using UnityEngine;
 
 namespace App.Gameplay.Resource.View
@@ -16,7 +16,7 @@ namespace App.Gameplay.Resource.View
 
         public void OnEnable()
         {
-            _gathered.AddListener(OnGathered);
+            _gathered.Subscribe(OnGathered);
         }
 
         private void OnGathered(int value)

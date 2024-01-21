@@ -1,5 +1,5 @@
 ﻿using App.Gameplay.LevelStorage;
-using Modules.Atomic.Values;
+using Atomic.Elements;
 using UnityEngine;
 
 namespace App.Gameplay.Player
@@ -7,14 +7,14 @@ namespace App.Gameplay.Player
     public class PlayerUnloadResourceMechanics
     {
         private readonly IAtomicVariable<bool> _canUnloadResources;
-        private readonly IAtomicVariable<ResourceStorageModel> _resourceStorageModel;
+        private readonly AtomicVariable<ResourceStorageModel> _resourceStorageModel;
         private readonly Transform _root;
         private readonly DistanceSensor _distanceSensor;
 
         public PlayerUnloadResourceMechanics(
             IAtomicValue<float> unloadingDistance, 
             IAtomicVariable<bool> canUnloadResources, 
-            IAtomicVariable<ResourceStorageModel> resourceStorageModel, 
+            AtomicVariable<ResourceStorageModel> resourceStorageModel, 
             Transform root)
         {
             _canUnloadResources = canUnloadResources;
@@ -25,14 +25,14 @@ namespace App.Gameplay.Player
 
         public void OnEnable()
         {
-            _resourceStorageModel.OnChanged += ResourceStorageModelOnChanged;
+            _resourceStorageModel.Subscribe(ResourceStorageModelOnChanged);
             _distanceSensor.Entered += DistanceSensorOnEntered;
             _distanceSensor.Exited += DistanceSensorOnExited;
         }
 
         public void OnDisable()
         {
-            _resourceStorageModel.OnChanged -= ResourceStorageModelOnChanged;
+            _resourceStorageModel.Unsubscribe(ResourceStorageModelOnChanged);
             _distanceSensor.Entered -= DistanceSensorOnEntered;
             _distanceSensor.Exited -= DistanceSensorOnExited;
         }

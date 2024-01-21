@@ -1,13 +1,13 @@
-﻿using Modules.Atomic.Values;
-    
+﻿using Atomic.Elements;
+
 namespace App.Gameplay.Resource.Model
 {
     public class EnableResourceMechanics
     {
         private readonly IAtomicVariable<bool> _isEnabled;
-        private readonly IAtomicVariable<int> _amount;
+        private readonly IAtomicObservable<int> _amount;
 
-        public EnableResourceMechanics(IAtomicVariable<bool> isEnabled, IAtomicVariable<int> amount)
+        public EnableResourceMechanics(IAtomicVariable<bool> isEnabled, IAtomicObservable<int> amount)
         {
             _isEnabled = isEnabled;
             _amount = amount;
@@ -15,12 +15,12 @@ namespace App.Gameplay.Resource.Model
 
         public void OnEnable()
         {
-            _amount.OnChanged += AmountOnChanged; 
+            _amount.Subscribe(AmountOnChanged); 
         }
 
         public void OnDisable()
         {
-            _amount.OnChanged -= AmountOnChanged;
+            _amount.Unsubscribe(AmountOnChanged);
         }
 
         private void AmountOnChanged(int amount)

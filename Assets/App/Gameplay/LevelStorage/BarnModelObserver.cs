@@ -14,7 +14,7 @@ namespace App.Gameplay.LevelStorage
         {
             _playerModel = playerModel;
             _viewController.ResourceSelected += OnResourceSelected;
-            _playerModel.IsShowLoadResources.OnChanged += OnChangedShowLoadResources;
+            _playerModel.IsShowLoadResources.Subscribe(OnChangedShowLoadResources);
         }
 
         private void OnChangedShowLoadResources(bool value)

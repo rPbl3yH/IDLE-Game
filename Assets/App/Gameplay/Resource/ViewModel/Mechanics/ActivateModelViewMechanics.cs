@@ -1,5 +1,5 @@
-﻿using DG.Tweening;
-using Modules.Atomic.Values;
+﻿using Atomic.Elements;
+using DG.Tweening;
 using UnityEngine;
 
 namespace App.Gameplay.Resource.View
@@ -7,12 +7,12 @@ namespace App.Gameplay.Resource.View
     public class ActivateModelViewMechanics
     {
         private readonly GameObject _view;
-        private readonly IAtomicVariable<bool> _isEnabled;
+        private readonly IAtomicObservable<bool> _isEnabled;
         private readonly IAtomicValue<float> _activateShowTime;
 
         private Tween _tween;
 
-        public ActivateModelViewMechanics(GameObject view, IAtomicVariable<bool> isEnabled, IAtomicValue<float> activateShowTime)
+        public ActivateModelViewMechanics(GameObject view, IAtomicObservable<bool> isEnabled, IAtomicValue<float> activateShowTime)
         {
             _view = view;
             _isEnabled = isEnabled;
@@ -21,12 +21,12 @@ namespace App.Gameplay.Resource.View
 
         public void OnEnable()
         {
-            _isEnabled.OnChanged += OnChanged;
+            _isEnabled.Subscribe(OnChanged);
         }
 
         public void OnDisable()
         {
-            _isEnabled.OnChanged -= OnChanged;
+            _isEnabled.Unsubscribe(OnChanged);
         }
         
         private void OnChanged(bool value)

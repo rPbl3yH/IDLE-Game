@@ -1,5 +1,5 @@
 ﻿using App.Gameplay.Character.Scripts.Model;
-using Modules.Atomic.Actions;
+using Atomic.Elements;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using VContainer;

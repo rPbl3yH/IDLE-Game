@@ -20,12 +20,12 @@ namespace Modules.AudioSystem.Content
 
         private void OnEnable()
         {
-            _resourceModel.Gathered.AddListener(OnGathered);
+            _resourceModel.Gathered.Subscribe(OnGathered);
         }
 
         private void OnDisable()
         {
-            _resourceModel.Gathered.RemoveListener(OnGathered);
+            _resourceModel.Gathered.Unsubscribe(OnGathered);
         }
 
         private void OnGathered(int value)

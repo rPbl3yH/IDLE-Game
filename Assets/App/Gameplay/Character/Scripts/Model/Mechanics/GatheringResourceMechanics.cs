@@ -1,7 +1,6 @@
 ﻿using System;
 using App.Gameplay.Resource.Model;
-using Modules.Atomic.Actions;
-using Modules.Atomic.Values;
+using Atomic.Elements;
 
 namespace App.Gameplay.Character.Scripts.Model.Mechanics
 {
@@ -33,12 +32,12 @@ namespace App.Gameplay.Character.Scripts.Model.Mechanics
 
         public void OnEnable()
         {
-            _gathered.AddListener(OnGathered);
+            _gathered.Subscribe(OnGathered);
         }
 
         public void OnDisable()
         {
-            _gathered.RemoveListener(OnGathered);
+            _gathered.Unsubscribe(OnGathered);
         }
 
         private void OnGathered()

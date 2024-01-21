@@ -1,7 +1,6 @@
 ﻿using App.Gameplay.Character.Scripts.Model;
 using App.Gameplay.Resource.Model;
-using Modules.Atomic.Actions;
-using Modules.Atomic.Values;
+using Atomic.Elements;
 using UnityEngine;
 
 namespace App.GameEngine.AI
@@ -96,7 +95,7 @@ namespace App.GameEngine.AI
 
         private void FindResource()
         {
-            _targetResource.Value = _detectResourceFunction.GetResult();
+            _targetResource.Value = _detectResourceFunction.Invoke();
             
             if (_targetResource.Value != null)
             {

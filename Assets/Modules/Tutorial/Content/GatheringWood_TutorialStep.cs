@@ -54,7 +54,7 @@ namespace Modules.Tutorial.Content
                 return;
             }
             
-            _playerModel.CharacterModel.Gathered.AddListener(OnGathered);
+            _playerModel.CharacterModel.Gathered.Subscribe(OnGathered);
             var resource = _resourceService.GetClosetResource(_playerModel.CharacterModel.Root, ResourceType.Wood);
             var text = LocalizationManager.GetTranslation(ScriptTerms.Tutorial.GatheringWood);
             _tutorialViewSystem.Show(resource.transform, text);
@@ -67,7 +67,7 @@ namespace Modules.Tutorial.Content
                 return;
             }
             
-            _playerModel.CharacterModel.Gathered.RemoveListener(OnGathered);
+            _playerModel.CharacterModel.Gathered.Unsubscribe(OnGathered);
             _tutorialViewSystem.Hide();
         }
 

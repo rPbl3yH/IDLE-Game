@@ -1,6 +1,6 @@
 ﻿using System;
 using App.Gameplay.LevelStorage;
-using Modules.Atomic.Actions;
+using Atomic.Elements;
 using Sirenix.OdinInspector;
 
 namespace App.Gameplay.Character.Scripts.Model.Actions
@@ -14,9 +14,9 @@ namespace App.Gameplay.Character.Scripts.Model.Actions
         {
             _resourceService = resourceService;
         }
-
+        
         [Button]
-        public ResourceStorageModel GetResult()
+        public ResourceStorageModel Invoke()
         {
             return _resourceService.GetStorage();
         }

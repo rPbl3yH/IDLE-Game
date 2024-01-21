@@ -1,21 +1,21 @@
-﻿using Modules.Atomic.Values;
+﻿using Atomic.Elements;
 using Modules.Elementary.Time.Base;
 
 namespace App.Gameplay.Resource.Model
 {
     public class ResourceUpdateMechanics
     {
-        private readonly IAtomicVariable<float> _updateTime;
+        private readonly AtomicVariable<float> _updateTime;
         private readonly IAtomicVariable<bool> _isEnable;
-        private readonly IAtomicVariable<int> _amount;
+        private readonly AtomicVariable<int> _amount;
         private readonly IAtomicValue<int> _maxAmount;
 
         private readonly Timer _timer;
         
         public ResourceUpdateMechanics(
             IAtomicValue<int> maxAmount,
-            IAtomicVariable<int> amount,
-            IAtomicVariable<float> updateTime, 
+            AtomicVariable<int> amount,
+            AtomicVariable<float> updateTime, 
             IAtomicVariable<bool> isEnable)
         {
             _maxAmount = maxAmount;
@@ -27,8 +27,8 @@ namespace App.Gameplay.Resource.Model
 
         public void OnEnable()
         {
-            _amount.OnChanged += AmountOnOnChanged;
-            _updateTime.OnChanged += UpdateTimeOnOnChanged;
+            _amount.Subscribe(AmountOnOnChanged);
+            _updateTime.Subscribe(UpdateTimeOnOnChanged);
         }
 
         private void AmountOnOnChanged(int value)
@@ -48,7 +48,7 @@ namespace App.Gameplay.Resource.Model
 
         public void OnDisable()
         {
-            _updateTime.OnChanged -= UpdateTimeOnOnChanged;
+            _updateTime.Unsubscribe(UpdateTimeOnOnChanged);
         }
 
         private void Run()

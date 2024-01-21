@@ -2,8 +2,7 @@
 using App.Gameplay.LevelStorage;
 using App.Gameplay.Resource;
 using App.UI;
-using Modules.Atomic.Actions;
-using Modules.Atomic.Values;
+using Atomic.Elements;
 using UnityEngine;
 using VContainer;
 

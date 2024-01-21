@@ -1,4 +1,4 @@
-﻿using Modules.Atomic.Actions;
+﻿using Atomic.Elements;
 using UnityEngine;
 
 namespace App.Gameplay.LevelStorage
@@ -25,12 +25,12 @@ namespace App.Gameplay.LevelStorage
 
         public void OnEnable()
         {
-            _built.AddListener(OnBuilt);
+            _built.Subscribe(OnBuilt);
         }
 
         public void OnDisable()
         {
-            _built.RemoveListener(OnBuilt);
+            _built.Unsubscribe(OnBuilt);
         }
 
         private void OnBuilt(BuildingModel buildingModel)

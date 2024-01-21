@@ -1,6 +1,6 @@
 ﻿using App.Gameplay.Character.Scripts.Model;
 using App.Gameplay.Resource.Model;
-using Modules.Atomic.Actions;
+using Atomic.Elements;
 
 namespace App.Gameplay.Player
 {
@@ -17,7 +17,7 @@ namespace App.Gameplay.Player
 
         public void Update()
         {
-            _characterModel.TargetResource.Value = _resourceFunction?.GetResult();
+            _characterModel.TargetResource.Value = _resourceFunction?.Invoke();
         }
     }
 }

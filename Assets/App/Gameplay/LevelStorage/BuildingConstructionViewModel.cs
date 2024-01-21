@@ -1,5 +1,5 @@
 ﻿using App.Gameplay.Resource.View;
-using Modules.Atomic.Values;
+using Atomic.Elements;
 using UnityEngine;
 using VContainer;
 

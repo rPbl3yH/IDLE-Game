@@ -1,7 +1,7 @@
 ﻿using System;
 using App.Gameplay.Building;
 using App.Gameplay.Building.Barn;
-using Modules.Atomic.Actions;
+using Atomic.Elements;
 using UnityEngine;
 using VContainer;
 
@@ -28,7 +28,7 @@ namespace App.Gameplay.LevelStorage
             _buildObserverMechanics = new BuildObserverMechanics(this, Built, ResourceStorageModelService, SpawnPoint);
             _barnRegisterMechanics = new BarnRegisterMechanics(Built, barnModelService);
             
-            Built.AddListener(OnBuilt);            
+            Built.Subscribe(OnBuilt);            
             
             //TODO: to initialize method
             _buildConstructionMechanics.OnEnable();

@@ -1,4 +1,4 @@
-﻿using Modules.Atomic.Actions;
+﻿using Atomic.Elements;
 using UnityEngine;
 
 namespace App.Gameplay.LevelStorage
@@ -16,7 +16,7 @@ namespace App.Gameplay.LevelStorage
 
         public void OnEnable()
         {
-            _deactivated.AddListener(OnDeactivated);
+            _deactivated.Subscribe(OnDeactivated);
         }
 
         private void OnDeactivated()
@@ -26,7 +26,7 @@ namespace App.Gameplay.LevelStorage
 
         public void OnDisable()
         {
-            _deactivated.RemoveListener(OnDeactivated);
+            _deactivated.Unsubscribe(OnDeactivated);
         }
     }
 }
