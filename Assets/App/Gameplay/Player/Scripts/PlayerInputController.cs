@@ -1,5 +1,6 @@
 ﻿using App.GameEngine.Input.Handlers;
 using App.Gameplay.Character.Scripts.Model;
+using Atomic.Elements;
 using UnityEngine;
 using VContainer;
 
@@ -9,6 +10,7 @@ namespace App.Gameplay.Player
     {
         private IInputHandler _inputHandler;
         private PlayerSpawner _playerSpawner;
+        private IAtomicVariable<Vector3> _moveDirection;
 
         private PlayerModel _playerModel;
 
@@ -30,12 +32,13 @@ namespace App.Gameplay.Player
             }
 
             var direction = new Vector3(moveDirection.x, 0f, moveDirection.y);
-            _playerModel.CharacterModel.MoveDirection.Value = direction;
+            _moveDirection.Value = direction;
         }
 
         private void PlayerSpawnerOnSpawned(PlayerModel playerModel)
         {
             _playerModel = playerModel;
+            _moveDirection = _playerModel.CharacterModel.Get<IAtomicVariable<Vector3>>("MoveDirection");
         }
     }
 }

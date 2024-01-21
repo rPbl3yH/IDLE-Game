@@ -32,7 +32,7 @@ namespace App.Gameplay.Player
         {
             ResourceService = resourceService;
             ResourceStorageModelService = resourceStorageModelService;
-            
+            CharacterModel.Compose();
             CharacterModel.Construct(ResourceService);
             _playerResourceViewObserver.Construct(CharacterModel);
             

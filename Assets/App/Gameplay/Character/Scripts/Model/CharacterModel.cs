@@ -1,3 +1,4 @@
+using System;
 using App.Gameplay.Character.Scripts.Model.Actions;
 using App.Gameplay.Character.Scripts.Model.Mechanics;
 using App.Gameplay.LevelStorage;
@@ -19,6 +20,7 @@ namespace App.Gameplay.Character.Scripts.Model
         public NavMeshAgent Agent;
         
         [Header("Movement")]
+        [Get("MoveDirection")]
         public AtomicVariable<Vector3> MoveDirection;
         public AtomicVariable<float> Speed;
 
