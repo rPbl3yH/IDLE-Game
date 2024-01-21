@@ -1,0 +1,17 @@
+{
+    "name": "Atomic.Behaviours",
+    "rootNamespace": "",
+    "references": [
+        "GUID:03f3195859d5411fa1ebc0283be314c0",
+        "GUID:cfe53cc8be4089e488908e3a03c4d3ff"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
